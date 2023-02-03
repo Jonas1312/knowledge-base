@@ -296,9 +296,7 @@ Difference between `@decorator` and `@decorator()`:
   - `x.__del__()` is only called when x’s reference count reaches zero. It is called when an object is garbage collected which happens at some point after all references to the object have been deleted.
 - `hasattr(self, attr_name)` to check if `instance.attr_name` exists
 
-### Inheritance
-
-- MRO: Method Resolution Order
+### Inheritance and MRO: Method Resolution Order
 
 ```python
 class A():
@@ -313,6 +311,25 @@ class D(B,C):
   pass
 D().foo()  # prints class C, searches in B first!
 ```
+
+```python
+class A:
+  x = 1
+
+class B(A):
+  pass
+
+class C(A):
+  pass
+
+A.x, B.x, C.x  # (1, 1, 1)
+B.x = 2 # B.x is now 2
+A.x, B.x, C.x  # (1, 2, 1)
+A.x = 3 # A.x is now 3
+A.x, B.x, C.x  # (3, 2, 3) # C.x is now 3 !!!
+```
+
+Since C.x is not defined, it searches in A, and since A.x is now 3, C.x is now 3.
 
 ### ABC: Abstract Base Classes
 
@@ -335,11 +352,6 @@ not bound to an object, but to… a class
 
 ![](./partition_argpartition.png)
 
-## Advanced Python
-
-- `from dis import dis` (disassembler)
-- <https://github.com/satwikkansal/wtfpython>
-
 ### CPython
 
 ![](cpython-interpreter.png)
@@ -360,6 +372,16 @@ not bound to an object, but to… a class
 - You use a lock. A lock is basically a guarantee that the first thread that needs to execute those instructions, will execute them without any other thread touching that dictionary until it's done adding that element.
 - Now the problem moves to how granular you want the lock to be. Clearly, if one thread is acting on one dictionary, and another thread is acting on another dictionary, they don't conflict with each other and they can work in parallel, but then you need to add a lock to every dictionary. The same applies to every list, every mutable structure, external or internal. This is a lot of locks to handle and manage. And each lock occupies memory, and each lock requires time to be grabbed, and time to be released.
 - So a simpler solution is to have One lock (TM). The first thread that grabs it wins, and does whatever it wants until it's done. __Even if the second thread has no intention of touching anything that the first thread is modifying, it will have to wait until the first thread is done.__
+
+## Python ooooopssiieess
+
+- <https://github.com/satwikkansal/wtfpython>
+
+```python
+def foo(bar=[]):  # the default value for a function argument is only evaluated once, at the time that the function is defined. Each time the function is called, the same list is used.
+  bar.append("baz")
+  return bar
+```
 
 ## Timing code
 
@@ -385,29 +407,26 @@ virtualenv --python=c:\Python25\python.exe path/to/new/env/envname
 
 ## Logging
 
-Python doesn’t provide any logging handlers by default, resulting in not seeing anything but an error from the logging package itself… Add a handler to the root logger so we can see the actual errors.:
+```python
+import logging
+
+logging.basicConfig(level=logging.WARNING)  # minimum level that will be logged
+
+logging.debug('')  # won't be logged
+logging.info('')  # won't be logged
+logging.warning('')
+logging.error('')
+logging.critical("")
+```
+
+Python doesn’t provide any logging handlers by default, resulting in not seeing anything but an error from the logging package itself...
+
+Add a handler to the root logger so we can see the actual errors:
 
 ```python
 import logging
-logging.getLogger('').addHandler(logging.StreamHandler())
+
+logger = logging.getLogger('my_super_app')  # you can use another logger name for a module of your app
+logger.setLevel(logging.DEBUG)  # minimum level that will be logged
+logger.addHandler(logging.StreamHandler())  # add a handler to the root logger. StreamHandler() will log to the console. You can use FileHandler() to log to a file.
 ```
-
-## Interview Practice
-
-- <https://www.interviewbit.com/python-interview-questions/>
-- <https://luminousmen.com/post/python-interview-questions-junior>
-- <https://luminousmen.com/post/python-interview-questions-middle>
-- <https://luminousmen.com/post/python-interview-questions-senior>
-- <https://realpython.com/quizzes/>
-- <https://github.com/donnemartin/interactive-coding-challenges>
-- <https://www.toptal.com/python/top-10-mistakes-that-python-programmers-make>
-- <https://store.lerner.co.il/ace-python-interviews>
-- <https://rushter.com/blog/>
-
-## TOSORT
-
-- [Clean Code concepts adapted for Python](https://github.com/zedr/clean-code-python)
-- [Project Layout](https://julien.danjou.info/starting-your-first-python-project/)
-- [Structuring Your Project](https://docs.python-guide.org/writing/structure/)
-- [Python packaging and dependency management made easy: POETRY](https://poetry.eustace.io/)
-- [How not to be afraid of python anymore](https://neilkakkar.com/How-not-to-be-afraid-of-Python-anymore.html)
