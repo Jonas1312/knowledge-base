@@ -33,5 +33,5 @@ jobs:
         run: |
           git fetch --quiet
           git add README.md
-          git commit -m "bot: update README.md"
+          git commit -m "Update README.md tree"
           git push --set-upstream origin master-pub
