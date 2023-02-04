@@ -23,7 +23,7 @@ def get_tree(base_dir: Path, linkify: bool, is_root: bool) -> str:
     level = len(base_dir.parts) - 1
     indent = ""
     if level > 0:
-        indent = "│&nbsp;&nbsp;" + "&nbsp;&nbsp;&nbsp;" * (level - 1)  # &emsp;&nbsp;&nbsp;
+        indent = "├──" + "───" * (level - 1)  # &emsp;&nbsp;&nbsp;
     tree = f"{dir_path_to_str(base_dir, linkify)}<br>\n" if is_root else ""
     for subdir in subdirs:
         sep = "└─ " if subdir == subdirs[-1] else "├─ "
