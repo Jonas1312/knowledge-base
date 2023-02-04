@@ -22,7 +22,7 @@ jobs:
 
       - name: Run script
         run: |
-          python ./scripts/update_readme_tree.py
+          python ./.github/scripts/update_readme_tree.py
 
       - name: Setup git config
         run: |
