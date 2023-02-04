@@ -13,6 +13,11 @@ def dir_path_to_str(path: Path, linkify: bool) -> str:
     If linkify is True, the path will be converted to a markdown link.
     """
     if linkify:
+        # If there is only one markdown file in the directory, link to that file.
+        markdown_files = list(path.glob("*.md"))
+        if len(markdown_files) == 1:
+            return f"[{path.name}](<{markdown_files[0].as_posix()}>)"
+        # Otherwise, link to the directory.
         return f"[{path.name}](<{path.as_posix()}>)"
     return path.name
 

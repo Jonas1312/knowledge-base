@@ -7,7 +7,9 @@
 
 ## Typesetting
 
-<https://fanpu.io/blog/2023/latex-tips/>
+- <https://fanpu.io/blog/2023/latex-tips/>
+- [Advice for writing LaTeX documents](https://github.com/dspinellis/latex-advice)
+- [Tips and Tricks for Writing Scientific Papers](https://github.com/Wookai/paper-tips-and-tricks)
 
 ## Find LaTeX symbols
 
