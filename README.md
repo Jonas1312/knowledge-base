@@ -5,8 +5,8 @@ This is a collection of notes and resources that I have gathered over the years.
 ## Table of Contents
 
 [base](<base>)<br>
-└── [science-tech-maths](<base/science-tech-maths>)<br>
-&emsp; └── [programming](<base/science-tech-maths/programming>)<br>
-&emsp; &emsp; └── [languages](<base/science-tech-maths/programming/languages>)<br>
-&emsp; &emsp; &emsp; ├── [python](<base/science-tech-maths/programming/languages/python>)<br>
-&emsp; &emsp; &emsp; └── [graphql](<base/science-tech-maths/programming/languages/graphql>)<br>
+└─ [science-tech-maths](<base/science-tech-maths>)<br>
+&emsp;&nbsp;&nbsp;└─ [programming](<base/science-tech-maths/programming>)<br>
+&emsp;&nbsp;&nbsp;&emsp;&nbsp;&nbsp;└─ [languages](<base/science-tech-maths/programming/languages>)<br>
+&emsp;&nbsp;&nbsp;&emsp;&nbsp;&nbsp;&emsp;&nbsp;&nbsp;├─ [python](<base/science-tech-maths/programming/languages/python>)<br>
+&emsp;&nbsp;&nbsp;&emsp;&nbsp;&nbsp;&emsp;&nbsp;&nbsp;└─ [graphql](<base/science-tech-maths/programming/languages/graphql>)<br>
