@@ -32,7 +32,9 @@ def get_tree(base_dir: Path, linkify: bool, is_root: bool) -> str:
 
 header_readme = """# Knowledge Base
 
-This is a collection of notes and resources that I have gathered over the years. I hope that they will be useful to you.
+This is a collection of notes and resources that I have gathered over the years.
+
+I hope that they will be useful to you.
 
 ## Table of Contents
 
