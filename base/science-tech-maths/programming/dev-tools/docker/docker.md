@@ -12,6 +12,8 @@ Docker containers scale better.
 
 VMs can run a different kernel than the one of the host OS.
 
+![](docker-vs-vm.png)
+
 ## Tutorials
 
 - [A Beginner-Friendly Introduction to Containers, VMs and Docker](https://www.freecodecamp.org/news/a-beginner-friendly-introduction-to-containers-vms-and-docker-79a9e3e119b/)
