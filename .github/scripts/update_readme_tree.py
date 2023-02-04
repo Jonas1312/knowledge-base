@@ -12,14 +12,25 @@ def dir_path_to_str(path: Path, linkify: bool) -> str:
 
     If linkify is True, the path will be converted to a markdown link.
     """
-    if linkify:
-        # If there is only one markdown file in the directory, link to that file.
-        markdown_files = list(path.glob("*.md"))
-        if len(markdown_files) == 1:
+    if not linkify:
+        return path.name
+
+    # If there is only one markdown file in the directory, link to that file directly.
+    # Only link to the markdown file if other files' names are in the single markdown file.
+    markdown_files = list(path.glob("*.md"))
+    if len(markdown_files) == 1:
+        # Get the names of all the files in the directory, except the markdown file.
+        filenames = [
+            file.name
+            for file in path.iterdir()
+            if file.is_file() and file.name != markdown_files[0].name
+        ]
+        markdown_file_str = markdown_files[0].read_text()
+        if all(filename in markdown_file_str for filename in filenames):
             return f"[{path.name}](<{markdown_files[0].as_posix()}>)"
-        # Otherwise, link to the directory.
-        return f"[{path.name}](<{path.as_posix()}>)"
-    return path.name
+
+    # Otherwise, link to the directory.
+    return f"[{path.name}](<{path.as_posix()}>)"
 
 
 def get_tree(base_dir: Path, linkify: bool, is_root: bool) -> str:
