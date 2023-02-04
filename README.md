@@ -15,6 +15,7 @@ I hope that they will be useful to you.
 ├─ [paperwork](<base/paperwork>)<br>
 ├─ [project-management](<base/project-management>)<br>
 ├─ [science-tech-maths](<base/science-tech-maths>)<br>
+├─├─ [image-processing](<base/science-tech-maths/image-processing>)<br>
 ├─├─ [programming](<base/science-tech-maths/programming>)<br>
 ├─├─└─ [languages](<base/science-tech-maths/programming/languages>)<br>
 ├─├─├─├─ [graphql](<base/science-tech-maths/programming/languages/graphql/graphql.md>)<br>
