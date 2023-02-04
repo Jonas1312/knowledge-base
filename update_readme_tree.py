@@ -22,10 +22,10 @@ def get_tree(base_dir: Path, linkify: bool, is_root: bool) -> str:
     subdirs = [dir_ for dir_ in base_dir.iterdir() if dir_.is_dir()]
     level = len(base_dir.parts) - 1
     indent = "│    " * (level)
-    tree = f"{dir_path_to_str(base_dir, linkify)}\n" if is_root else ""
+    tree = f"{dir_path_to_str(base_dir, linkify)}\n\n" if is_root else ""
     for subdir in subdirs:
         sep = "└───" if subdir == subdirs[-1] else "├───"
-        tree += f"{indent}{sep}{dir_path_to_str(subdir, linkify)}\n"
+        tree += f"{indent}{sep}{dir_path_to_str(subdir, linkify)}\n\n"
         tree += get_tree(subdir, linkify=linkify, is_root=False)
     return tree
 
