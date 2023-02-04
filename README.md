@@ -16,6 +16,8 @@ I hope that they will be useful to you.
 ├─ [project-management](<base/project-management>)<br>
 ├─ [science-tech-maths](<base/science-tech-maths>)<br>
 ├─├─ [image-processing](<base/science-tech-maths/image-processing>)<br>
+├─├─ [maths](<base/science-tech-maths/maths>)<br>
+├─├─└─ [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
 ├─├─ [programming](<base/science-tech-maths/programming>)<br>
 ├─├─├─ [dev-tools](<base/science-tech-maths/programming/dev-tools>)<br>
 ├─├─├─├─ [docker](<base/science-tech-maths/programming/dev-tools/docker/docker.md>)<br>
