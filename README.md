@@ -17,6 +17,11 @@ I hope that they will be useful to you.
 ├─ [science-tech-maths](<base/science-tech-maths>)<br>
 ├─├─ [image-processing](<base/science-tech-maths/image-processing>)<br>
 ├─├─ [programming](<base/science-tech-maths/programming>)<br>
+├─├─├─ [dev-tools](<base/science-tech-maths/programming/dev-tools>)<br>
+├─├─├─├─ [docker](<base/science-tech-maths/programming/dev-tools/docker/docker.md>)<br>
+├─├─├─├─ [ssh](<base/science-tech-maths/programming/dev-tools/ssh/ssh.md>)<br>
+├─├─├─├─ [vscode](<base/science-tech-maths/programming/dev-tools/vscode/vscode.md>)<br>
+├─├─├─└─ [wsl](<base/science-tech-maths/programming/dev-tools/wsl/wsl.md>)<br>
 ├─├─└─ [languages](<base/science-tech-maths/programming/languages>)<br>
 ├─├─├─├─ [graphql](<base/science-tech-maths/programming/languages/graphql/graphql.md>)<br>
 ├─├─├─└─ [python](<base/science-tech-maths/programming/languages/python>)<br>
