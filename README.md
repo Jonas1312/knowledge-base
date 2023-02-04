@@ -19,6 +19,7 @@ I hope that they will be useful to you.
 ├─├─ [programming](<base/science-tech-maths/programming>)<br>
 ├─├─├─ [dev-tools](<base/science-tech-maths/programming/dev-tools>)<br>
 ├─├─├─├─ [docker](<base/science-tech-maths/programming/dev-tools/docker/docker.md>)<br>
+├─├─├─├─ [git](<base/science-tech-maths/programming/dev-tools/git>)<br>
 ├─├─├─├─ [ssh](<base/science-tech-maths/programming/dev-tools/ssh/ssh.md>)<br>
 ├─├─├─├─ [vscode](<base/science-tech-maths/programming/dev-tools/vscode/vscode.md>)<br>
 ├─├─├─└─ [wsl](<base/science-tech-maths/programming/dev-tools/wsl/wsl.md>)<br>
