@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - master-pub
+  workflow_dispatch:
 
 jobs:
   update-readme:
@@ -11,6 +12,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          ref: master-pub
 
       - name: Set up Python
         uses: actions/python@v4
