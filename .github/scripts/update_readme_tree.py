@@ -21,6 +21,7 @@ def get_tree(base_dir: Path, linkify: bool, is_root: bool) -> str:
     """Get the tree of the project directories and subdirectories as a string."""
     subdirs = [dir_ for dir_ in base_dir.iterdir() if dir_.is_dir()]
     level = len(base_dir.parts) - 1
+    indent = ""
     if level > 0:
         indent = "│&nbsp;&nbsp;" + "&nbsp;&nbsp;&nbsp;" * (level - 1)  # &emsp;&nbsp;&nbsp;
     tree = f"{dir_path_to_str(base_dir, linkify)}<br>\n" if is_root else ""
