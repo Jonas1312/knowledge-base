@@ -1,0 +1,78 @@
+// Tasks for C++ files
+// Builds, runs, and deletes .exe file
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"type": "cppbuild",
+			"label": "[CUSTOM] C++: build active file",
+			"command": "C:\\msys64\\mingw64\\bin\\g++.exe",
+			"args": [
+				"-fdiagnostics-color=always",
+				"-g",
+				"${file}",
+				"-o",
+				"${fileDirname}\\${fileBasenameNoExtension}.exe",
+				"-std=c++20",
+				"-Wall",
+			],
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"problemMatcher": [
+				"$gcc"
+			],
+			"group": {
+				"kind": "build",
+				"isDefault": true
+			},
+			"detail": "compiler: C:\\msys64\\mingw64\\bin\\g++.exe",
+			"presentation": {
+				"focus": true
+			},
+		},
+		{
+			"type": "shell",
+			"label": "[CUSTOM] C++: run active file .exe",
+			"command": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"presentation": {
+				"focus": true
+			},
+		},
+		{
+			"type": "shell",
+			"label": "[CUSTOM] C++: delete active file .exe",
+			"command": "del ${fileDirname}\\${fileBasenameNoExtension}.exe",
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"presentation": {
+				"focus": true
+			},
+		},
+		{
+			"type": "shell",
+			"label": "[CUSTOM] C++: build, run, delete active file",
+			"command": "echo [CUSTOM] C++: build, run, delete task finished!",
+			"options": {
+				"cwd": "${fileDirname}"
+			},
+			"group": {
+				"kind": "test",
+				"isDefault": true
+			},
+			"dependsOrder": "sequence",
+			"dependsOn": [
+				"[CUSTOM] C++: build active file",
+				"[CUSTOM] C++: run active file .exe",
+				"[CUSTOM] C++: delete active file .exe",
+			],
+			"presentation": {
+				"focus": true
+			},
+		}
+	]
+}
