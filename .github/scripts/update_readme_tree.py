@@ -26,7 +26,7 @@ def dir_path_to_str(path: Path, linkify: bool) -> str:
             if file.is_file() and file.name != markdown_files[0].name
         ]
         markdown_file_str = markdown_files[0].read_text()
-        if filenames and all(filename in markdown_file_str for filename in filenames):
+        if all(filename in markdown_file_str for filename in filenames):
             return f"[{path.name}](<{markdown_files[0].as_posix()}>)"
 
     # Otherwise, link to the directory.
