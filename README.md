@@ -5,8 +5,14 @@ This is a collection of notes and resources that I have gathered over the years.
 ## Table of Contents
 
 [base](<base>)
+
 └───[science-tech-maths](<base/science-tech-maths>)
+
 │    └───[programming](<base/science-tech-maths/programming>)
+
 │    │    └───[languages](<base/science-tech-maths/programming/languages>)
+
 │    │    │    ├───[python](<base/science-tech-maths/programming/languages/python>)
+
 │    │    │    └───[graphql](<base/science-tech-maths/programming/languages/graphql>)
+
