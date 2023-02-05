@@ -26,8 +26,9 @@ I hope that they will be useful to you.
 ├─├─├─├─ [ssh](<base/science-tech-maths/programming/dev-tools/ssh/ssh.md>)<br>
 ├─├─├─├─ [vscode](<base/science-tech-maths/programming/dev-tools/vscode/vscode.md>)<br>
 ├─├─├─└─ [wsl](<base/science-tech-maths/programming/dev-tools/wsl/wsl.md>)<br>
+├─├─├─ [high-performance-computing](<base/science-tech-maths/programming/high-performance-computing/hpc.md>)<br>
 ├─├─├─ [languages](<base/science-tech-maths/programming/languages>)<br>
-├─├─├─├─ [c++](<base/science-tech-maths/programming/languages/c++/notes.md>)<br>
+├─├─├─├─ [c++](<base/science-tech-maths/programming/languages/c++/c++.md>)<br>
 ├─├─├─├─ [graphql](<base/science-tech-maths/programming/languages/graphql/graphql.md>)<br>
 ├─├─├─├─ [python](<base/science-tech-maths/programming/languages/python>)<br>
 ├─├─├─└─ [rust](<base/science-tech-maths/programming/languages/rust/rust.md>)<br>
