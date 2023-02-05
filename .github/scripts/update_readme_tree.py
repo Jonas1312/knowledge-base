@@ -4,6 +4,7 @@ Script to update the README.md file with the tree of the project.
 Only the folders are shown, not the files.
 """
 
+import urllib
 from pathlib import Path
 
 
@@ -25,8 +26,12 @@ def dir_path_to_str(path: Path, linkify: bool) -> str:
             for file in path.iterdir()
             if file.is_file() and file.name != markdown_files[0].name
         ]
-        markdown_file_str = markdown_files[0].read_text()
-        if all(filename in markdown_file_str for filename in filenames):
+        markdown_file_str = markdown_files[0].read_text(encoding="utf-8")
+        # Check if all the filenames are in the markdown file.
+        if all(
+            (filename in markdown_file_str) or (urllib.parse.quote(filename) in markdown_file_str)
+            for filename in filenames
+        ):
             return f"[{path.name}](<{markdown_files[0].as_posix()}>)"
 
     # Otherwise, link to the directory.
@@ -67,4 +72,5 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    main()
+    # main()
+    dir_path_to_str(Path("./base/science-tech-maths/programming/languages/c++/"), linkify=True)
