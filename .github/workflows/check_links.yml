@@ -22,3 +22,5 @@ jobs:
       - name: Link Checker
         id: lychee
         uses: lycheeverse/lychee-action@ed29d118eda549bc65cbc0ea7323e1606e0c2721
+        with:
+          fail: true
