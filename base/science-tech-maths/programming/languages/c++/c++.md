@@ -2225,7 +2225,7 @@ class Singleton {
 
 ## explicit keyword
 
- Le qualificateur explicit empêche le compilateur d'utiliser des conversions implicites pour invoquer l'appel aux constructeurs ou les operateurs de cast.
+Le qualificateur explicit empêche le compilateur d'utiliser des conversions implicites pour invoquer l'appel aux constructeurs ou les operateurs de cast.
 
 ## Map and Set
 
@@ -2369,12 +2369,12 @@ auto lf = [](int x, int y) { return x + y; };
 
 capture group: Those are not the parameters of the lambda.
 
-- `[]` : aucune variable n'est capturée
+- `[]` : no variable captured
 - `[&]` : by reference
 - `[=]` : by value (copy)
-- `[&aa,=]` : 1er paramètre passé par adresse, second par copie
-- `[this]` : capture this (passage par référence donc) de sorte à ce que la lambda function puisse nommer des attributs
-- `[=, &x, &y]` : capture toutes les variables par valeur, sauf x et y qui, elles, sont capturées par référence.
+- `[&aa,=]` : 1st by reference, 2nd by value
+- `[this]` : capture this (passed by referenced) so that the lambda can access the object's members
+- `[=, &x, &y]` : capture all variables by value, but x and y by reference
 
 ```c++
 class __lambda
