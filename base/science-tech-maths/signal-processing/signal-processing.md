@@ -5,7 +5,7 @@
 - Aliasing
 - Moiré pattern can appear on images
 
-![nyquist shannon](./nyquist-shannon-sampling-theorem.PNG)
+![nyquist shannon](nyquist-shannon-sampling-theorem.PNG)
 
 ## Convolution
 
@@ -40,7 +40,7 @@ With a wider window the opposite is shown in figure (d).
 
 Figure (e) shows a wavelet analysis as described above. Each Heisenberg box has a minimum area of $\frac{1}{4\pi}$.
 
-![Boîtes de Heisenberg pour différentes méthodes d’analyse de signaux](./time-freq-resolution-boxes.png)
+![Boîtes de Heisenberg pour différentes méthodes d’analyse de signaux](time-freq-resolution-boxes.png)
 
 $$\forall t \in \mathbb{R}, \psi_{s,\tau}(t) = \frac{1}{\sqrt{s}} \Psi\left(\frac{t-\tau}{s}\right)$$
 
