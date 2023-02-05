@@ -3,7 +3,10 @@ name: Links
 on:
   workflow_dispatch:
   schedule:
-    - cron: "00 18 * * *"
+    - cron: "00 18 * * *" # 6pm UTC
+  push:
+    branches:
+      - master-pub
 
 permissions: {} # no permissions needed
 

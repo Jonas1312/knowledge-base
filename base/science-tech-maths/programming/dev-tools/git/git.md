@@ -162,7 +162,7 @@ Or:
 - [How to Write a Git Commit Message](https://chris.beams.io/posts/git-commit/)
 - <https://cbea.ms/git-commit/>
 - [Using Git Commit Message Templates to Write Better Commit Messages](https://gist.github.com/lisawolderiksen/a7b99d94c92c6671181611be1641c733)
-- [Write good git commit message](https://juffalow.com/other/write-good-git-commit-message)
+- [Write good git commit message](https://juffalow.com/blog/git/write-good-git-commit-message)
 - [Commit messages guide](https://github.com/RomuloOliveira/commit-messages-guide)
 
 ## Interactive tutorial
@@ -206,5 +206,5 @@ Or:
 - <https://github.com/k88hudson/git-flight-rules>
 - <https://ohshitgit.com/>
 - <https://neilkakkar.com/How-not-to-be-afraid-of-GIT-anymore.html>
-- <https://neilkakkar.com/ow-that-you're-not-afraid-of-GIT-anymore-here's-how-to-leverage-what-you-know.html>
+- <https://www.freecodecamp.org/news/now-that-youre-not-afraid-of-git-anymore-here-s-how-to-leverage-what-you-know-11e710c7f37b/>
 - <https://oyvn.github.io/git-zero-to-rebase>

@@ -30,7 +30,6 @@ VMs can run a different kernel than the one of the host OS.
 - <https://training.play-with-docker.com/>
 - <https://ikhlestov.github.io/pages/tools/docker/>
 - <https://towardsdatascience.com/docker-made-easy-for-data-scientists-b32efbc23165>
-- <https://dinh-hung-tu.github.io/docker/>
 - <https://lbartnicki92.github.io/posts/docker-build-from-dockerfile/>
 
 ## Tools
