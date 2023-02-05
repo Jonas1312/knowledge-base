@@ -1,4 +1,4 @@
-# Signal Processing
+# Signal Processing Notes
 
 ## Nyquist Shannon sampling theorem
 
