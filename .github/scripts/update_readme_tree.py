@@ -72,5 +72,4 @@ def main() -> None:
 
 
 if __name__ == "__main__":
-    # main()
-    dir_path_to_str(Path("./base/science-tech-maths/programming/languages/c++/"), linkify=True)
+    main()
