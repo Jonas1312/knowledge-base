@@ -17,7 +17,8 @@ I hope that they will be useful to you.
 ├─ [science-tech-maths](<base/science-tech-maths>)<br>
 ├─├─ [image-processing](<base/science-tech-maths/image-processing>)<br>
 ├─├─ [maths](<base/science-tech-maths/maths>)<br>
-├─├─└─ [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
+├─├─├─ [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
+├─├─└─ [information-theory](<base/science-tech-maths/maths/information-theory>)<br>
 ├─├─ [programming](<base/science-tech-maths/programming>)<br>
 ├─├─├─ [char-encoding](<base/science-tech-maths/programming/char-encoding/char-encoding.md>)<br>
 ├─├─├─ [dev-tools](<base/science-tech-maths/programming/dev-tools>)<br>
