@@ -31,7 +31,10 @@ jobs:
 
       - name: Commit changes
         run: |
-          git fetch --quiet
-          git add README.md
-          git commit -m "Update README.md tree"
-          git push --set-upstream origin master-pub
+          if [[ `git status --porcelain` ]]; then
+            git add README.md
+            git commit -m "Update README.md tree"
+            git push --set-upstream origin master-pub
+          else
+            echo "No changes to commit"
+          fi
