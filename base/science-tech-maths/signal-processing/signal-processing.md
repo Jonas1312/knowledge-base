@@ -11,7 +11,7 @@
 
 $$(f * g)(t) := \int_{-\infty}^\infty f(\tau) g(t - \tau) \, d\tau$$
 
-$$[f * g](n) = \sum_{m=-\infty}^\infty f[m] g[n - m]$$
+$$\[f * g\]\(n\) = \sum_{m=-\infty}^\infty f[m] g[n - m]$$
 
 ## Fourier
 
