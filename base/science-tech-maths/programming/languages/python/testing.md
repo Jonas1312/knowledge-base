@@ -150,9 +150,10 @@ All useful functions:
 
 When we don't care to know all function parameters or don't care to set them all, we can use ANY as a placeholder.
 
-- from mock import ANY
-- mock_obj.assert_called_once_with(ANY, "Natalia")
-
+```python
+from mock import ANY
+mock_obj.assert_called_once_with(ANY, "Natalia")
+```
 What about when the mocked function is called more than once:
 
 ```python
