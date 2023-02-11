@@ -41,5 +41,6 @@ I hope that they will be useful to you.
 ├─└─ [signal-processing](<base/science-tech-maths/signal-processing/signal-processing.md>)<br>
 ├─ [scientific-research](<base/scientific-research>)<br>
 ├─└─ [latex](<base/scientific-research/latex/latex.md>)<br>
+├─ [soft-skills](<base/soft-skills>)<br>
 ├─ [sports](<base/sports/sports.md>)<br>
 └─ [travel](<base/travel/travel.md>)<br>
