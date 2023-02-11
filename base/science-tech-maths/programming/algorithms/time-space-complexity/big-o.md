@@ -58,17 +58,17 @@ for i in range(N):
     pass
 ```
 
-the first time the inner loops runs for N-1 steps, then N-2, then N-3, etc
+the first time the inner loops runs for $N-1$ steps, then $N-2$, then $N-3$, etc
 
-the total number of steps is: (N-1) + (N-2) + (N-3) + ... + 1
+the total number of steps is: $(N-1) + (N-2) + (N-3) + ... + 1$
 
-that's the sum of 1 through N = $\frac{N(N-1)}{2}$
+that's the sum of $1$ through $N$ = $\frac{N(N-1)}{2}$
 
 so the complexity is $\mathcal{O}(N^2)$
 
 ### Arrays of different sizes
 
-Be careful if your input is two arrays A and B, the complexity can be O(A+B) for example, not O(N)!
+Be careful if your input is two arrays $A$ and $B$, the complexity can be $O(A+B)$ for example, not $O(N)$!
 
 ```python
 for i in A:
