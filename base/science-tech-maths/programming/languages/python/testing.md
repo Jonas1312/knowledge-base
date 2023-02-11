@@ -145,7 +145,7 @@ All useful functions:
 - mock_obj.assert_called_once()
 - mock_obj.assert_called_with(100, "Natalia")
 - mock_obj.assert_called_once_with(100, "Natalia")
-- assert_not_called()
+- mock_obj.assert_not_called()
 - mock_obj.reset_mock()
 
 When we don't care to know all function parameters or don't care to set them all, we can use ANY as a placeholder.
@@ -154,6 +154,7 @@ When we don't care to know all function parameters or don't care to set them all
 from mock import ANY
 mock_obj.assert_called_once_with(ANY, "Natalia")
 ```
+
 What about when the mocked function is called more than once:
 
 ```python
