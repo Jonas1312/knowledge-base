@@ -20,6 +20,9 @@ I hope that they will be useful to you.
 ├─├─├─ [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
 ├─├─└─ [information-theory](<base/science-tech-maths/maths/information-theory>)<br>
 ├─├─ [programming](<base/science-tech-maths/programming>)<br>
+├─├─├─ [algorithms](<base/science-tech-maths/programming/algorithms>)<br>
+├─├─├─├─ [sorting](<base/science-tech-maths/programming/algorithms/sorting/sorting.md>)<br>
+├─├─├─└─ [time-space-complexity](<base/science-tech-maths/programming/algorithms/time-space-complexity/big-o.md>)<br>
 ├─├─├─ [char-encoding](<base/science-tech-maths/programming/char-encoding/char-encoding.md>)<br>
 ├─├─├─ [dev-tools](<base/science-tech-maths/programming/dev-tools>)<br>
 ├─├─├─├─ [docker](<base/science-tech-maths/programming/dev-tools/docker/docker.md>)<br>
