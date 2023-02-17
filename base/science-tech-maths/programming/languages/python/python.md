@@ -467,7 +467,24 @@ Add a handler to the root logger so we can see the actual errors:
 ```python
 import logging
 
-logger = logging.getLogger('my_super_app')  # you can use another logger name for a module of your app
+logger = logging.getLogger('my_app')  # you can use another logger name for a module of your app
 logger.setLevel(logging.DEBUG)  # minimum level that will be logged
 logger.addHandler(logging.StreamHandler())  # add a handler to the root logger. StreamHandler() will log to the console. You can use FileHandler() to log to a file.
+```
+
+To keep a single logger for the whole app:
+
+```python
+LOGGER = None
+
+def get_logger():
+    global LOGGER
+
+    if LOGGER is not None:
+        return LOGGER
+
+    LOGGER = logging.getLogger("my_app")
+    LOGGER.handlers.clear()  # remove all handlers
+    LOGGER.addHandler(logging.StreamHandler())
+    return LOGGER
 ```
