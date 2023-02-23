@@ -12,3 +12,7 @@ GitHub environment variables: <https://docs.github.com/en/actions/learn-github-a
 ## GitHub Profile
 
 <https://towardsdatascience.com/enrich-your-github-profile-with-these-tips-272fa1eafe05>
+
+## Diagrams
+
+https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams
