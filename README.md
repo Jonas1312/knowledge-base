@@ -21,6 +21,7 @@ I hope that they will be useful to you.
 ├─├─├─ [information-theory](<base/science-tech-maths/maths/information-theory>)<br>
 ├─├─└─ [probabilities-statistics](<base/science-tech-maths/maths/probabilities-statistics>)<br>
 ├─├─├─├─ [central-limit-theorem](<base/science-tech-maths/maths/probabilities-statistics/central-limit-theorem/clt.md>)<br>
+├─├─├─├─ [cheatsheets](<base/science-tech-maths/maths/probabilities-statistics/cheatsheets>)<br>
 ├─├─├─└─ [confidence-intervals](<base/science-tech-maths/maths/probabilities-statistics/confidence-intervals/95 CI Confidence Intervals.md>)<br>
 ├─├─ [programming](<base/science-tech-maths/programming>)<br>
 ├─├─├─ [algorithms](<base/science-tech-maths/programming/algorithms>)<br>
