@@ -18,7 +18,9 @@ I hope that they will be useful to you.
 ├─├─ [image-processing](<base/science-tech-maths/image-processing>)<br>
 ├─├─ [maths](<base/science-tech-maths/maths>)<br>
 ├─├─├─ [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
-├─├─└─ [information-theory](<base/science-tech-maths/maths/information-theory>)<br>
+├─├─├─ [information-theory](<base/science-tech-maths/maths/information-theory>)<br>
+├─├─└─ [probabilities-statistics](<base/science-tech-maths/maths/probabilities-statistics>)<br>
+├─├─├─└─ [central-limit-theorem](<base/science-tech-maths/maths/probabilities-statistics/central-limit-theorem>)<br>
 ├─├─ [programming](<base/science-tech-maths/programming>)<br>
 ├─├─├─ [algorithms](<base/science-tech-maths/programming/algorithms>)<br>
 ├─├─├─├─ [data-structures](<base/science-tech-maths/programming/algorithms/data-structures>)<br>
