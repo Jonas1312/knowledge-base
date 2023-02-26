@@ -21,6 +21,8 @@ I hope that they will be useful to you.
 ├─├─└─ [information-theory](<base/science-tech-maths/maths/information-theory>)<br>
 ├─├─ [programming](<base/science-tech-maths/programming>)<br>
 ├─├─├─ [algorithms](<base/science-tech-maths/programming/algorithms>)<br>
+├─├─├─├─ [job-interviews](<base/science-tech-maths/programming/algorithms/job-interviews>)<br>
+├─├─├─├─└─ [snippets](<base/science-tech-maths/programming/algorithms/job-interviews/snippets>)<br>
 ├─├─├─├─ [sorting](<base/science-tech-maths/programming/algorithms/sorting/sorting.md>)<br>
 ├─├─├─└─ [time-space-complexity](<base/science-tech-maths/programming/algorithms/time-space-complexity/big-o.md>)<br>
 ├─├─├─ [char-encoding](<base/science-tech-maths/programming/char-encoding/char-encoding.md>)<br>
