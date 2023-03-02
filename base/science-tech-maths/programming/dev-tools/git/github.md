@@ -4,8 +4,8 @@
 
 Add .patch or .diff after url:
 
-- https://github.com/.../REPO_NAME/pull/1064.diff
-- https://github.com/.../REPO_NAME/pull/1064.patch
+- https://github.com/pytorch/pytorch/pull/20853.diff
+- https://github.com/pytorch/pytorch/pull/20853.patch
 
 ## GitHub Actions
 
