@@ -1,5 +1,12 @@
 # GitHub
 
+## Get PR diff or patch
+
+Add .patch or .diff after url:
+
+- https://github.com/.../REPO_NAME/pull/1064.diff
+- https://github.com/.../REPO_NAME/pull/1064.patch
+
 ## GitHub Actions
 
 - <https://www.actionsbyexample.com/>
@@ -9,7 +16,7 @@
 
 GitHub environment variables: <https://docs.github.com/en/actions/learn-github-actions/variables#default-environment-variables>
 
-## GitHub Profile
+## GitHub README Profile
 
 <https://towardsdatascience.com/enrich-your-github-profile-with-these-tips-272fa1eafe05>
 
