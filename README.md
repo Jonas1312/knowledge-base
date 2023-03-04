@@ -44,7 +44,8 @@ I hope that they will be useful to you.
 ├─├─├─├─ [c++](<base/science-tech-maths/programming/languages/c++/c++.md>)<br>
 ├─├─├─├─ [graphql](<base/science-tech-maths/programming/languages/graphql/graphql.md>)<br>
 ├─├─├─├─ [python](<base/science-tech-maths/programming/languages/python>)<br>
-├─├─├─└─ [rust](<base/science-tech-maths/programming/languages/rust/rust.md>)<br>
+├─├─├─├─ [rust](<base/science-tech-maths/programming/languages/rust/rust.md>)<br>
+├─├─├─└─ [typescript](<base/science-tech-maths/programming/languages/typescript/typescript.md>)<br>
 ├─├─├─ [licenses](<base/science-tech-maths/programming/licenses/licenses.md>)<br>
 ├─├─├─ [regex](<base/science-tech-maths/programming/regex/regex.md>)<br>
 ├─├─├─ [reverse-engineering](<base/science-tech-maths/programming/reverse-engineering/reverse-engineering.md>)<br>
