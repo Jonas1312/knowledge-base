@@ -34,7 +34,8 @@ I hope that they will be useful to you.
 ├─├─├─ [char-encoding](<base/science-tech-maths/programming/char-encoding/char-encoding.md>)<br>
 ├─├─├─ [dev-tools](<base/science-tech-maths/programming/dev-tools>)<br>
 ├─├─├─├─ [docker](<base/science-tech-maths/programming/dev-tools/docker/docker.md>)<br>
-├─├─├─├─ [git](<base/science-tech-maths/programming/dev-tools/git>)<br>
+├─├─├─├─ [git](<base/science-tech-maths/programming/dev-tools/git/git.md>)<br>
+├─├─├─├─ [github](<base/science-tech-maths/programming/dev-tools/github/github.md>)<br>
 ├─├─├─├─ [ssh](<base/science-tech-maths/programming/dev-tools/ssh/ssh.md>)<br>
 ├─├─├─├─ [vscode](<base/science-tech-maths/programming/dev-tools/vscode/vscode.md>)<br>
 ├─├─├─└─ [wsl](<base/science-tech-maths/programming/dev-tools/wsl/wsl.md>)<br>
