@@ -24,6 +24,7 @@
     - [Lists](#lists)
     - [Dicts](#dicts)
     - [Sets](#sets)
+    - [Frozen sets](#frozen-sets)
     - [String](#string)
     - [Data Classes](#data-classes)
       - [Namedtuple](#namedtuple)
@@ -243,6 +244,10 @@ print("Intersection :", A & B)  # set([2, 4])
 print("Difference :", A - B)  # set([8, 0, 6])
 print("Symmetric difference :", A ^ B)  # set([0, 1, 3, 5, 6, 8])
 ```
+
+### Frozen sets
+
+immutables
 
 ### String
 
