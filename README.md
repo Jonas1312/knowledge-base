@@ -19,6 +19,8 @@ I hope that they will be useful to you.
 ├─├─ [maths](<base/science-tech-maths/maths>)<br>
 ├─├─├─ [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
 ├─├─├─ [information-theory](<base/science-tech-maths/maths/information-theory>)<br>
+├─├─├─ [maths](<base/science-tech-maths/maths/maths/maths.md>)<br>
+├─├─├─ [numerical-methods](<base/science-tech-maths/maths/numerical-methods/numerical-methods.md>)<br>
 ├─├─└─ [probabilities-statistics](<base/science-tech-maths/maths/probabilities-statistics>)<br>
 ├─├─├─├─ [central-limit-theorem](<base/science-tech-maths/maths/probabilities-statistics/central-limit-theorem/clt.md>)<br>
 ├─├─├─├─ [cheatsheets](<base/science-tech-maths/maths/probabilities-statistics/cheatsheets>)<br>
