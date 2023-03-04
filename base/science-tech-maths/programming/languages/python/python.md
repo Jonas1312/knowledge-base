@@ -25,7 +25,12 @@
     - [Dicts](#dicts)
     - [Sets](#sets)
     - [String](#string)
-    - [Namedtuple, Typedict, dataclass, pydantic](#namedtuple-typedict-dataclass-pydantic)
+    - [Data Classes](#data-classes)
+      - [Namedtuple](#namedtuple)
+      - [TypedDict](#typeddict)
+      - [attrs](#attrs)
+      - [Dataclasses](#dataclasses)
+      - [Pydantinc](#pydantinc)
   - [Decorators](#decorators)
   - [Context managers (with)](#context-managers-with)
   - [Classes](#classes)
@@ -243,23 +248,40 @@ print("Symmetric difference :", A ^ B)  # set([0, 1, 3, 5, 6, 8])
 
 - `str1.rfind(pattern, begin=0, end=len(str1))`
 
-### Namedtuple, Typedict, dataclass, pydantic
+### Data Classes
 
-Namedtuple:
+#### Namedtuple
 
 - ok for small data structures
 - they can be typed.
+
+  ```python
+  Point = typing.NamedTuple("Point", [('x', int), ('y', int)])
+  # or the class way:
+  class Point(NamedTuple):
+      x: int
+      y: int = 1  # Set default value
+  ```
+
 - hard to add default values
 - are immutable.
 
-TypedDict:
+#### TypedDict
 
 - are a regular dictionary
 - typecheckers will warn you of errors.
 - But at run time no check is performed.
 - no way to customize magic methods (for equality, properties, etc.)
 
-Dataclass:
+#### attrs
+
+- More powerful than dataclasses
+- Attrs supports both ways. The default is to allow positional and keyword arguments like data classes. You can enable kw-only arguments by passing kw_only=True to the class decorator.
+- When you need more features (more control over the generated class or data validation and conversion), you should use attrs.
+
+#### Dataclasses
+
+Inspired by attrs, but smaller feature set. Added to the standard library in Python 3.7.
 
 - TypedDict with attributes...
 - mostly contain data but they can also include methods
@@ -267,6 +289,7 @@ Dataclass:
 - Basic functionality is already implemented (equality, print, etc.).
 - They can be made immutable: `@dataclass(frozen=True)`. But be careful cause attributes can be mutable...
 - no type validation is done at runtime.
+- Data classes support positional as well as keyword arguments.
 
 ```python
 from dataclasses import dataclass
@@ -278,9 +301,15 @@ class DataClassCard:
 
 ```
 
-Pydantinc:
+#### Pydantinc
 
 - gives you a class which gives you both static and runtime type safety.
+- data validation
+- convert data (json, yaml, etc.) to your dataclass in python
+- Pydantic models enforce keyword only arguments when creating new instances.
+- pydantic allows you to use mutable objects like lists or dicts as default values. pydantic deep-copies the default value for each new instance.
+- attrs and data classes are much faster than pydantic when no validation is needed. They also use a lot less memory.
+- If you need extended input validation and data conversion, Pydantic is the tool of choice.
 
 ## Decorators
 
