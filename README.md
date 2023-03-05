@@ -24,7 +24,10 @@ I hope that they will be useful to you.
 ├───├───├───├─── [gaussian-mixtures](<base/science-tech-maths/machine-learning/algorithms/gaussian-mixtures/gmm.md>)<br>
 ├───├───├───├─── [k-means](<base/science-tech-maths/machine-learning/algorithms/k-means/k-means.md>)<br>
 ├───├───├───├─── [k-medians](<base/science-tech-maths/machine-learning/algorithms/k-medians/k-medians.md>)<br>
-├───├───├───└─── [logistic-regression](<base/science-tech-maths/machine-learning/algorithms/logistic-regression/logistic-regression.md>)<br>
+├───├───├───├─── [k-nearest-neighbors](<base/science-tech-maths/machine-learning/algorithms/k-nearest-neighbors/knn.md>)<br>
+├───├───├───├─── [logistic-regression](<base/science-tech-maths/machine-learning/algorithms/logistic-regression/logistic-regression.md>)<br>
+├───├───├───├─── [pca](<base/science-tech-maths/machine-learning/algorithms/pca/pca.md>)<br>
+├───├───├───└─── [svm](<base/science-tech-maths/machine-learning/algorithms/svm/svm.md>)<br>
 ├───├─── [maths](<base/science-tech-maths/maths>)<br>
 ├───├───├─── [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
 ├───├───├─── [information-theory](<base/science-tech-maths/maths/information-theory>)<br>
