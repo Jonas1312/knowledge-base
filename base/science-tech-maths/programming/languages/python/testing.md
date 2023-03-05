@@ -52,10 +52,10 @@ print(book.author.first_name)  # "Tatjana"
 
 book = Mock()
 book.author.first_name = "Evgenij"
-print(book.author.first_name)  # "Tatjana"
+print(book.author.first_name)  # "Evgenij"
 
 book = Mock()
-print(book.author.first_name)  # "Tatjana"
+print(book.author.first_name)  # <Mock name='mock.author.first_name' id='140504918800992'>
 ```
 
 ```python

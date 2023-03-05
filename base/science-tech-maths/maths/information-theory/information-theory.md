@@ -18,7 +18,7 @@ H is maximum when all the $p_i$ are equal. This is the most uncertain, or 'impur
 
 For decision trees, a feature with a lot of different values will be impure. The feature with the highest impurity will be split.
 
-H(X) roughly means the amount of information (in bits) it takes to describe the outcome of X.
+H(X) roughly means the amount of information (in bits) it takes to describe the outcome of X. It is the expected amount of information in an event drawn from that distribution.
 
 Entropy establishes a lower bound for the average bits to encode events with the probability distribution P.
 

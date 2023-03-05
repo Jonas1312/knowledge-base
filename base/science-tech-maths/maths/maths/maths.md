@@ -4,6 +4,10 @@
 
 $$(a+b)^n = \sum_{k=0}^{n} {n \choose k} a^k b^{n-k} $$
 
+## Binomial coefficient
+
+The binomial coefficient tells us "How many ways are there to get k heads after n tosses?"
+
 ## To remember
 
 $$(a+b)^2 = a^2 + 2ab + b^2$$
