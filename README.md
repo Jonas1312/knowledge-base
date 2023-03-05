@@ -22,10 +22,13 @@ I hope that they will be useful to you.
 ├───├───├─── [maths](<base/science-tech-maths/maths/maths/maths.md>)<br>
 ├───├───├─── [numerical-methods](<base/science-tech-maths/maths/numerical-methods/numerical-methods.md>)<br>
 ├───├───└─── [probabilities-statistics](<base/science-tech-maths/maths/probabilities-statistics>)<br>
+├───├───├───├─── [bayes](<base/science-tech-maths/maths/probabilities-statistics/bayes>)<br>
 ├───├───├───├─── [central-limit-theorem](<base/science-tech-maths/maths/probabilities-statistics/central-limit-theorem/clt.md>)<br>
 ├───├───├───├─── [cheatsheets](<base/science-tech-maths/maths/probabilities-statistics/cheatsheets>)<br>
 ├───├───├───├─── [confidence-intervals](<base/science-tech-maths/maths/probabilities-statistics/confidence-intervals/95 CI Confidence Intervals.md>)<br>
-├───├───├───└─── [hypothesis-testing](<base/science-tech-maths/maths/probabilities-statistics/hypothesis-testing/Hypothesis testing.md>)<br>
+├───├───├───├─── [hypothesis-testing](<base/science-tech-maths/maths/probabilities-statistics/hypothesis-testing/Hypothesis testing.md>)<br>
+├───├───├───├─── [mle-map-estimation](<base/science-tech-maths/maths/probabilities-statistics/mle-map-estimation/mle-map.md>)<br>
+├───├───├───└─── [prob-stats](<base/science-tech-maths/maths/probabilities-statistics/prob-stats/probabilities.md>)<br>
 ├───├─── [programming](<base/science-tech-maths/programming>)<br>
 ├───├───├─── [algorithms](<base/science-tech-maths/programming/algorithms>)<br>
 ├───├───├───├─── [data-structures](<base/science-tech-maths/programming/algorithms/data-structures>)<br>
