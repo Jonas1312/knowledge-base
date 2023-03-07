@@ -126,6 +126,7 @@ Global .gitignore: <https://julien.danjou.info/properly-managing-your-gitignore/
 
 - [GitHub Standard Fork & Pull Request Workflow](https://gist.github.com/Chaser324/ce0505fbed06b947d962)
 - [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
+- git flow: https://www.gitkraken.com/blog/gitflow
 
 ## Git Commit Titles and Messages
 
