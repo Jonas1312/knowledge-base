@@ -38,6 +38,8 @@
     - [Inheritance and MRO: Method Resolution Order](#inheritance-and-mro-method-resolution-order)
     - [ABC: Abstract Base Classes](#abc-abstract-base-classes)
     - [Class Decorators](#class-decorators)
+    - [Metaclasses](#metaclasses)
+      - [Example](#example)
   - [Numpy](#numpy)
   - [CPython](#cpython)
   - [GIL](#gil)
@@ -368,9 +370,30 @@ function("foo", "bar")
 
 Difference between `@decorator` and `@decorator()`:
 
-- `@pytest.fixture` is a regular decorator, equivalent to `my_decorated_method = pytest.fixture(my_method)`
-- `@pytest.fixture()` is a method that returns a decorator/callable, equivalent to `my_decorated_method = pytest.fixture()(my_method)`
-- For `pytest.fixture`, there is no difference, you can use both since `pytest.fixture()` without arguments will return the decorator `pytest.fixture`
+- `@pytest.fixture` is a regular decorator, equivalent to `my_decorated_method = pytest.fixture(my_method)`.
+- `@pytest.fixture()` is a method that returns a decorator/callable, equivalent to `my_decorated_method = pytest.fixture()(my_method)`.
+- For `pytest.fixture`, there is no difference, you can use both since `pytest.fixture()` without arguments will return the decorator `pytest.fixture`.
+
+`functools.wraps` is used to preserve the metadata of the decorated function.
+
+```python
+from functools import wraps
+
+def my_decorator(func):
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        # Do something with func
+        return func(*args, **kwargs)
+    return wrapper
+
+@my_decorator
+def example():
+    """Docstring"""
+    pass
+
+print(example.__name__)  # example
+print(example.__doc__)  # Docstring
+```
 
 ## Context managers (with)
 
@@ -437,6 +460,84 @@ not bound to an object, but to… a class
 - property: access or compute property
 
 <https://towardsdatascience.com/why-you-should-wrap-decorators-in-python-5ac3676835f9>
+
+### Metaclasses
+
+Since classes are objects, you can create them on the fly, like any object.
+
+Metaclasses are the "stuff" that creates classes. They are classes that create classes.
+
+Well, metaclasses are what create these objects. They are the classes' classes, you can picture them this way:
+
+```python
+MyClass = MetaClass()
+my_object = MyClass()
+```
+
+`type` is the metaclass Python uses to create all classes behind the scenes.
+
+The `__class__` of any `__class__`  is `type`.
+
+`type` has an ability: it can create classes on the fly. `type` can take the description of a class as parameters, and return a class.
+
+`type` works this way: `type(name: str, bases: tuple, attrs: dict)`
+
+- `name`: name of the class
+- `bases`: tuple of the parent class (used for inheritance, can be left empty)
+- `attrs`: dictionary containing attributes names and values
+
+You can thus create a class with `type`:
+
+```python
+MyClass = type("MyClass", (), {'bar':True})
+my_instance = MyClass()
+# same as
+class MyClass:
+    bar = True
+```
+
+To create a metaclass, you need to subclass `type`:
+
+```python
+class MyMetaClass(type):
+"""Metaclass.
+
+Prints a message every time a class is created.
+
+Also automatically add a 'bar' attribute set to True to every class.
+"""
+    def __new__(cls, name, bases, dct):
+        print("Creating class %s" % name)
+        dct['bar'] = True
+        return super().__new__(cls, name, bases, dct)
+
+class MyClass(metaclass=Meta):  # MyClass is created by Meta
+    pass
+
+my_instance = MyClass()
+print(my_instance.bar)  # True
+```
+
+#### Example
+
+Let's create a singleton metaclass:
+
+```python
+class Singleton(type):
+    _instances = {}
+
+    def __call__(cls, name, bases, attrs):
+        if cls not in cls._instances:
+            cls._instances[cls] = super().__call__(name, bases, attrs)
+        return cls._instances[cls]
+
+class MyClass(metaclass=Singleton):
+    pass
+
+my_instance = MyClass()
+my_instance2 = MyClass()
+print(my_instance is my_instance2)  # True
+```
 
 ## Numpy
 
