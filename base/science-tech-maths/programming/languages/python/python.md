@@ -280,13 +280,13 @@ immutables
 - ok for small data structures
 - they can be typed.
 
-    ```python
-    Point = typing.NamedTuple("Point", [('x', int), ('y', int)])
-    # or the class way:
-    class Point(NamedTuple):
-        x: int
-        y: int = 1  # Set default value
-    ```
+```python
+Point = typing.NamedTuple("Point", [('x', int), ('y', int)])
+# or the class way:
+class Point(NamedTuple):
+    x: int
+    y: int = 1  # Set default value
+```
 
 - hard to add default values
 - are immutable.
