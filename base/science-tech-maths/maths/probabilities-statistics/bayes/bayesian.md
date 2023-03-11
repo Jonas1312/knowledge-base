@@ -89,7 +89,7 @@ In statistics:
 
 ## Naïve bayes
 
-- hypothesis: Features $X_{i}$ are all independent given class Y (too naïve)
+- hypothesis: Features $X_{i}$ are all independent given class Y (too naïve but works sometimes)
 - $P(spam|msg) = \frac{P(msg|spam)P(spam)}{P(msg)}$
 - $P(spam)$ computed from dataset, same for $P(\overline{spam}) = 1-P(spam)$
 - $P(msg|spam)=P(word1|spam)(1-P(word2|spam))P(word3|spam)...$ with word1 and word3 in the message but not word2
