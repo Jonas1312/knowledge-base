@@ -23,9 +23,11 @@ I hope that they will be useful to you.
 ├───├───├───├───└─── [vae](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae/vae/vae.md>)<br>
 ├───├───├───├─── [decision-tree](<base/science-tech-maths/machine-learning/algorithms/decision-tree/decision-trees.md>)<br>
 ├───├───├───├─── [gaussian-mixtures](<base/science-tech-maths/machine-learning/algorithms/gaussian-mixtures/gmm.md>)<br>
+├───├───├───├─── [gaussian-processes-regression](<base/science-tech-maths/machine-learning/algorithms/gaussian-processes-regression/gaussian-process.md>)<br>
 ├───├───├───├─── [k-means](<base/science-tech-maths/machine-learning/algorithms/k-means/k-means.md>)<br>
 ├───├───├───├─── [k-medians](<base/science-tech-maths/machine-learning/algorithms/k-medians/k-medians.md>)<br>
 ├───├───├───├─── [k-nearest-neighbors](<base/science-tech-maths/machine-learning/algorithms/k-nearest-neighbors/knn.md>)<br>
+├───├───├───├─── [lda-gda](<base/science-tech-maths/machine-learning/algorithms/lda-gda/lda-gda.md>)<br>
 ├───├───├───├─── [logistic-regression](<base/science-tech-maths/machine-learning/algorithms/logistic-regression/logistic-regression.md>)<br>
 ├───├───├───├─── [pca](<base/science-tech-maths/machine-learning/algorithms/pca/pca.md>)<br>
 ├───├───├───└─── [svm](<base/science-tech-maths/machine-learning/algorithms/svm/svm.md>)<br>
