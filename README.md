@@ -21,6 +21,7 @@ I hope that they will be useful to you.
 ├───├───├───├─── [autoencoder-vae](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae>)<br>
 ├───├───├───├───├─── [autoencoders](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae/autoencoders/autoencoders.md>)<br>
 ├───├───├───├───└─── [vae](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae/vae/vae.md>)<br>
+├───├───├───├─── [decision-tree](<base/science-tech-maths/machine-learning/algorithms/decision-tree/decision-trees.md>)<br>
 ├───├───├───├─── [gaussian-mixtures](<base/science-tech-maths/machine-learning/algorithms/gaussian-mixtures/gmm.md>)<br>
 ├───├───├───├─── [k-means](<base/science-tech-maths/machine-learning/algorithms/k-means/k-means.md>)<br>
 ├───├───├───├─── [k-medians](<base/science-tech-maths/machine-learning/algorithms/k-medians/k-medians.md>)<br>
