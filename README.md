@@ -30,6 +30,10 @@ I hope that they will be useful to you.
 ├───├───├───├─── [lda-gda](<base/science-tech-maths/machine-learning/algorithms/lda-gda/lda-gda.md>)<br>
 ├───├───├───├─── [linear-regression](<base/science-tech-maths/machine-learning/algorithms/linear-regression>)<br>
 ├───├───├───├─── [logistic-regression](<base/science-tech-maths/machine-learning/algorithms/logistic-regression/logistic-regression.md>)<br>
+├───├───├───├─── [neural-nets](<base/science-tech-maths/machine-learning/algorithms/neural-nets>)<br>
+├───├───├───├───├─── [batchnorm](<base/science-tech-maths/machine-learning/algorithms/neural-nets/batchnorm/batchnorm.md>)<br>
+├───├───├───├───└─── [conv-neural-nets](<base/science-tech-maths/machine-learning/algorithms/neural-nets/conv-neural-nets>)<br>
+├───├───├───├───├───└─── [siamese-contrastive-triplet](<base/science-tech-maths/machine-learning/algorithms/neural-nets/conv-neural-nets/siamese-contrastive-triplet/contrastive-learning.md>)<br>
 ├───├───├───├─── [pca](<base/science-tech-maths/machine-learning/algorithms/pca/pca.md>)<br>
 ├───├───├───├─── [self-organising-maps](<base/science-tech-maths/machine-learning/algorithms/self-organising-maps/self-organising-maps.md>)<br>
 ├───├───├───└─── [svm](<base/science-tech-maths/machine-learning/algorithms/svm/svm.md>)<br>
