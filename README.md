@@ -62,7 +62,7 @@ I hope that they will be useful to you.
 ├───├───├─── [languages](<base/science-tech-maths/programming/languages>)<br>
 ├───├───├───├─── [c++](<base/science-tech-maths/programming/languages/c++/c++.md>)<br>
 ├───├───├───├─── [graphql](<base/science-tech-maths/programming/languages/graphql/graphql.md>)<br>
-├───├───├───├─── [python](<base/science-tech-maths/programming/languages/python>)<br>
+├───├───├───├─── [python](<base/science-tech-maths/programming/languages/python/python.md>)<br>
 ├───├───├───├─── [rust](<base/science-tech-maths/programming/languages/rust/rust.md>)<br>
 ├───├───├───└─── [typescript](<base/science-tech-maths/programming/languages/typescript/typescript.md>)<br>
 ├───├───├─── [licenses](<base/science-tech-maths/programming/licenses/licenses.md>)<br>
