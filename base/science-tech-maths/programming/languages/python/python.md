@@ -18,8 +18,9 @@
   - [Sequences](#sequences)
     - [Filter Map Reduce](#filter-map-reduce)
     - [Comprehension lists/dicts](#comprehension-listsdicts)
-    - [Generators, Iterators](#generators-iterators)
     - [Custom sort](#custom-sort)
+  - [Generators, Iterators](#generators-iterators)
+    - [yield from](#yield-from)
   - [Data structures](#data-structures)
     - [Lists](#lists)
     - [Dicts](#dicts)
@@ -48,6 +49,7 @@
   - [Wheels](#wheels)
   - [Virtualenv](#virtualenv)
   - [Logging](#logging)
+  - [Organize Python code](#organize-python-code)
   - [Python Testing](#python-testing)
     - [Fixtures](#fixtures)
     - [Compare floats](#compare-floats)
@@ -213,23 +215,46 @@ Similarly, `python -m tkinter` runs `tkinter/__main__.py`.
 
 - comprehension list faster than for loop: it doesn't have to look up the list and its append method on every iteration.
 
-### Generators, Iterators
+### Custom sort
+
+- `print(sorted(x, key=functools.cmp_to_key(greater)))`
+
+## Generators, Iterators
 
 - An iterable is anything you’re able to loop over.
 - An iterator is the object that does the actual iterating.
 - iterators are also iterables and their iterator is themselves
 - [Python: range is not an iterator!](https://treyhunner.com/2018/02/python-range-is-not-an-iterator/)
 - 4 ways:
-  1) `yield`
-  2) generator `a_generator = (i for i in range(0))`
-  3) class with `__iter__` and `__next__` (and `__reversed__` if reverse needed)
-  4) class with `__getitem__` and iterate on it (and `__len__` if reverse needed)
+  1. `yield`
+  2. generator `a_generator = (i for i in range(0))`
+  3. class with `__iter__` and `__next__` (and `__reversed__` if reverse needed)
+  4. class with `__getitem__` and iterate on it (and `__len__` if reverse needed)
 - A generator IS an iterator
 - 4 ways have pros and cons: `yield` and `generator` cannot be reversed
 
-### Custom sort
+### yield from
 
-- `print(sorted(x, key=functools.cmp_to_key(greater)))`
+- `yield from` is a way to delegate iteration to a subgenerator. It allows you to write a generator that is a wrapper around another generator.
+
+```python
+def starting_five() -> Generator[int, None, None]:
+    """Generator that returns integers from 1-5"""
+    for n in range(1, 6):
+        yield n
+
+
+def ending_five() -> Generator[int, None, None]:
+    """Generator that returns integers from 6-10"""
+    for n in range(6, 11):
+        yield n
+
+
+def all_ten() -> Generator[int, None, None]:
+    """Generator that relies on other generators"""
+    yield starting_five() # This is broken, we need to use yield from
+    yield ending_five()  # This is broken, we need to use yield from
+```
 
 ## Data structures
 
@@ -643,6 +668,12 @@ def get_logger():
     LOGGER.addHandler(logging.StreamHandler())
     return LOGGER
 ```
+
+More: <https://guicommits.com/how-to-log-in-python-like-a-pro/>
+
+## Organize Python code
+
+- <https://guicommits.com/organize-python-code-like-a-pro/>
 
 ## Python Testing
 

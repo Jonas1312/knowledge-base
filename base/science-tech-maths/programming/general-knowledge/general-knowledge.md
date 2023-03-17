@@ -71,7 +71,7 @@
 
 ## Publish code
 
-### Write README
+### Write a good README
 
 - <https://skerritt.blog/make-popular-open-source-projects/>
 
