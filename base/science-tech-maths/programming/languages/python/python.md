@@ -70,6 +70,11 @@
       - [Patch constant](#patch-constant)
     - [pytest monkeypatch fixture](#pytest-monkeypatch-fixture)
     - [pytest mocker](#pytest-mocker)
+  - [Async await](#async-await)
+    - [Event loop](#event-loop)
+    - [`asyncio.gather()`](#asynciogather)
+    - [`asyncio.create_task()`](#asynciocreate_task)
+    - [`asyncio.as_completed()`](#asyncioas_completed)
 
 ## Cheat Sheets
 
@@ -1093,3 +1098,115 @@ pytest-mock is a pytest plugin thats:
 
 - adds a mocker fixture which uses mock under the hood but with a surface area / api similar to monkeypatch.
 - Basically all of the features of mock, but with the api of monkeypatch.
+
+```python
+def test_blabla(mocker):
+    mocker.patch("sys.argv", ["pytest", "--name", "logfilename.log"])
+    ## Test as usual here
+```
+
+## Async await
+
+Async/await is a feature in Python that allows for asynchronous programming.
+
+Asynchronous programming is a programming model where multiple tasks are executed concurrently, with each task running independently without waiting for the other tasks to finish.
+
+This is in contrast to synchronous programming, where each task runs in sequence and waits for the previous task to complete before starting the next one.
+
+Async functions are functions that can be paused and resumed at a later time. They are defined using the async keyword.
+
+```python
+async def my_function():
+    print("Hello")
+    await asyncio.sleep(1)  # Pause the function for 1 second. This is a coroutine function.
+    print("World")
+
+asyncio.run(my_function())  # Run the function until it is complete.
+```
+
+Await is used to pause the function until the coroutine is complete. The await keyword can only be used inside an async function.
+
+How is it different to threads ?
+
+- Threads can be interrupted by the OS at any time, but async functions yeild control back to the event loop when they are waiting for an IO operation to complete.
+- This is a cooperative multitasking model: the event loop will only switch to another task when the current task yields control back to the event loop.
+- async/await runs in a single thread, so it can be more efficient than threads if you are doing a lot of IO-bound work (reading/writing files, making network requests, etc.).
+- Indeed, when using threads you have to do a lot of context switching between threads, which is expensive.
+- However, async/await is not suitable for CPU-bound work (computing stuff locally), as it will only use a single CPU core. Better to use threads for this.
+
+In general:
+
+- __async/await is a good choice for I/O-bound tasks__, where tasks spend most of their time waiting for I/O operations to complete
+- __threads are a good choice for CPU-bound tasks__, where tasks spend most of their time performing computations.
+
+__Remember__: Async/await is not parallelism, it's concurrency.
+
+- It's a way to write code that looks like it's running in parallel, but it's actually running in a single thread.
+- There is not code being executed in parallel, it's just that the code is being executed in a way that makes it look like it's running in parallel.
+- Everytime we use await, we are yielding control back to the event loop, which can then switch to another task.
+- Python async only optimizes IDLE time
+
+The downside of async is that you need to use libs that support it. For example, requests does not support async, so we need to use aiohttp instead.
+
+### Event loop
+
+The event loop is exactly what it sounds like, there is a queue of events/jobs and a loop that just constantly pulls jobs off the queue and runs them.
+
+These jobs are called coroutines. They are a small set of instructions, including which events to put back on to the queue, if any.
+
+### `asyncio.gather()`
+
+Let's simulate an example of a server request taking some time to answer:
+
+```python
+import asyncio
+import aiohttp  # use this instead of requests
+
+async def query_something(url: str, fake_delay: int = 0):
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            await asyncio.sleep(fake_delay)
+            return await response.text()
+
+async def main():  # main is async since it uses await
+    await asyncio.gather(
+        query_something("https://www.google.com", 1),
+        query_something("https://www.google.com", 2),
+        query_something("https://www.google.com", 3),
+    )
+
+if __name__ == "__main__":
+    asyncio.run(main())  # This will take around 3 seconds (max(1,2,3)) to complete! In a sync world, it would take 6 seconds.
+```
+
+### `asyncio.create_task()`
+
+Is a function that creates a task from a coroutine. It's similar to `asyncio.gather()` but it does not wait for the tasks to complete.
+
+```python
+async def main():
+    task1 = asyncio.create_task(query_something("https://www.google.com", 1))
+    task2 = asyncio.create_task(query_something("https://www.google.com", 2))
+    task3 = asyncio.create_task(query_something("https://www.google.com", 3))
+
+    await task1  # if you don't await here, the task1 will not be executed at all!
+    await task2
+    await task3
+```
+
+### `asyncio.as_completed()`
+
+Is a function that takes an iterable of coroutines and returns a generator that yields the results as they become available.
+
+```python
+async def main():
+    tasks = [
+        asyncio.create_task(query_something("https://www.google.com", 1)),
+        asyncio.create_task(query_something("https://www.google.com", 2)),
+        asyncio.create_task(query_something("https://www.google.com", 3)),
+    ]
+
+    for task in asyncio.as_completed(tasks):
+        result = await task
+        print(result)
+```
