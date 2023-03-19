@@ -41,7 +41,9 @@ $$
 \log \, p(x \vert \hat{x}) \propto \frac{1}{2} \, \Vert \hat{x} - x \Vert_2^2
 $$
 
-we get the same equation as $L_2$ loss. In conclusion, therefore, minimizing $L_2$ loss, or MSE, is the same as maximizing the log-likelihood (MLE) of a Gaussian. Therefore, we assume that our data, $x$ comes from a Gaussian.
+we get the same equation as $L_2$ loss.
+
+In conclusion, minimizing $L_2$ loss, or MSE, is the same as maximizing the log-likelihood (MLE) of a Gaussian. Therefore, we assume that our data, $x$ comes from a Gaussian.
 
 Now we consider the nature of the real distribution of our data. Suppose we want to search image of "car". Inputting this query into Google Image would yield many images of car, and those images are different to each other, be it in term of color, shape, etc. Therefore we know that there are multiple ways to generate images from a single word "car", all equally possible (as in if we look at an image, we would immediately think of "car"). As there are multiple possible way of generating "car" image, we could think that the distribution of "car" images have multiple peaks. In other words, we say that the distribution of images is multimodal.
 
