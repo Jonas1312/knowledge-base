@@ -16,6 +16,10 @@ def dir_path_to_str(path: Path, linkify: bool) -> str:
     if not linkify:
         return path.name
 
+    # If the directory only contains other directories (no files), we don't need to link to it.
+    if all(file.is_dir() for file in path.iterdir()):
+        return path.name
+
     # If there is only one markdown file in the directory, link to that file directly.
     # Only link to the markdown file if other files' names are in the single markdown file.
     markdown_files = list(path.glob("*.md"))
