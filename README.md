@@ -38,7 +38,7 @@ base<br>
 ├───├───├───├─── [logistic-regression](<base/science-tech-maths/machine-learning/algorithms/logistic-regression/logistic-regression.md>)<br>
 ├───├───├───├─── neural-nets<br>
 ├───├───├───├───├─── [batchnorm](<base/science-tech-maths/machine-learning/algorithms/neural-nets/batchnorm/batchnorm.md>)<br>
-├───├───├───├───└─── conv-neural-nets<br>
+├───├───├───├───└─── [conv-neural-nets](<base/science-tech-maths/machine-learning/algorithms/neural-nets/conv-neural-nets/cnn.md>)<br>
 ├───├───├───├───├───└─── [siamese-contrastive-triplet](<base/science-tech-maths/machine-learning/algorithms/neural-nets/conv-neural-nets/siamese-contrastive-triplet/contrastive-learning.md>)<br>
 ├───├───├───├─── [pca](<base/science-tech-maths/machine-learning/algorithms/pca/pca.md>)<br>
 ├───├───├───├─── [self-organising-maps](<base/science-tech-maths/machine-learning/algorithms/self-organising-maps/self-organising-maps.md>)<br>
@@ -85,8 +85,10 @@ base<br>
 ├───├───├─── [software-design-pattern](<base/science-tech-maths/programming/software-design-pattern/design-patterns.md>)<br>
 ├───├───└─── [tests-writing](<base/science-tech-maths/programming/tests-writing/tests.md>)<br>
 ├───└─── [signal-processing](<base/science-tech-maths/signal-processing/signal-processing.md>)<br>
-├─── [scientific-research](<base/scientific-research>)<br>
-├───└─── [latex](<base/scientific-research/latex/latex.md>)<br>
+├─── scientific-research<br>
+├───├─── [latex](<base/scientific-research/latex/latex.md>)<br>
+├───├─── [paper-reviewing](<base/scientific-research/paper-reviewing/paper-reviewing.md>)<br>
+├───└─── [posters](<base/scientific-research/posters/posters.md>)<br>
 ├─── [soft-skills](<base/soft-skills>)<br>
 ├─── [sports](<base/sports/sports.md>)<br>
 └─── [travel](<base/travel/travel.md>)<br>
