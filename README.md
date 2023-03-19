@@ -23,7 +23,7 @@ base<br>
 ├───├───├─── [resampling](<base/science-tech-maths/image-processing/resampling/resampling.md>)<br>
 ├───├───└─── [transformation-matrices](<base/science-tech-maths/image-processing/transformation-matrices/matrices.md>)<br>
 ├───├─── machine-learning<br>
-├───├───├─── algorithms<br>
+├───├───├─── [algorithms](<base/science-tech-maths/machine-learning/algorithms/ml-algorithms.md>)<br>
 ├───├───├───├─── [autoencoder-vae](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae>)<br>
 ├───├───├───├───├─── [autoencoders](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae/autoencoders/autoencoders.md>)<br>
 ├───├───├───├───└─── [vae](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae/vae/vae.md>)<br>
