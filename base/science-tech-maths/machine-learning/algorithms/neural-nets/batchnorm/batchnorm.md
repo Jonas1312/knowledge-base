@@ -6,6 +6,10 @@
 
 ![](./batchnorm-vs-instancenorm.png)
 
+## CNNs and batchnorm
+
+Remember to set the bias to zero when using batchnorm. This is because batchnorm will learn the bias.
+
 ## More
 
 - <https://www.alexirpan.com/public/perils-batch-norm/batch_norm_appendix.html>
