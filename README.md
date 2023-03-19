@@ -46,7 +46,9 @@ base<br>
 ├───├───├───└─── [svm](<base/science-tech-maths/machine-learning/algorithms/svm/svm.md>)<br>
 ├───├───├─── [competitions](<base/science-tech-maths/machine-learning/competitions/competitions.md>)<br>
 ├───├───├─── [datasets](<base/science-tech-maths/machine-learning/datasets/find-datasets.md>)<br>
-├───├───└─── [hardware](<base/science-tech-maths/machine-learning/hardware/gpu-providers.md>)<br>
+├───├───├─── [hardware](<base/science-tech-maths/machine-learning/hardware/gpu-providers.md>)<br>
+├───├───└─── libs-frameworks<br>
+├───├───├───└─── [pytorch](<base/science-tech-maths/machine-learning/libs-frameworks/pytorch/pytorch.md>)<br>
 ├───├─── maths<br>
 ├───├───├─── [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
 ├───├───├─── [information-theory](<base/science-tech-maths/maths/information-theory>)<br>
