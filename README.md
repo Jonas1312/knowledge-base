@@ -15,7 +15,13 @@ I hope that they will be useful to you.
 ├─── [paperwork](<base/paperwork>)<br>
 ├─── [project-management](<base/project-management>)<br>
 ├─── [science-tech-maths](<base/science-tech-maths>)<br>
-├───├─── [image-processing](<base/science-tech-maths/image-processing>)<br>
+├───├─── [image-processing](<base/science-tech-maths/image-processing/terminology.md>)<br>
+├───├───├─── [color-spaces](<base/science-tech-maths/image-processing/color-spaces/color-spaces.md>)<br>
+├───├───├─── [conv-filters](<base/science-tech-maths/image-processing/conv-filters/conv-filters.md>)<br>
+├───├───├─── [image-registration](<base/science-tech-maths/image-processing/image-registration/image-registration.md>)<br>
+├───├───├─── [medical-imaging](<base/science-tech-maths/image-processing/medical-imaging/medical-imaging.md>)<br>
+├───├───├─── [resampling](<base/science-tech-maths/image-processing/resampling/resampling.md>)<br>
+├───├───└─── [transformation-matrices](<base/science-tech-maths/image-processing/transformation-matrices/matrices.md>)<br>
 ├───├─── [machine-learning](<base/science-tech-maths/machine-learning>)<br>
 ├───├───└─── [algorithms](<base/science-tech-maths/machine-learning/algorithms>)<br>
 ├───├───├───├─── [autoencoder-vae](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae>)<br>
