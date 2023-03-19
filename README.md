@@ -6,7 +6,7 @@ I hope that they will be useful to you.
 
 ## Table of Contents
 
-[base](<base>)<br>
+base<br>
 ├─── [email](<base/email/email.md>)<br>
 ├─── [genealogy](<base/genealogy/genealogy.md>)<br>
 ├─── [image-editing](<base/image-editing/image-editing.md>)<br>
@@ -14,7 +14,7 @@ I hope that they will be useful to you.
 ├─── [maps](<base/maps/maps.md>)<br>
 ├─── [paperwork](<base/paperwork>)<br>
 ├─── [project-management](<base/project-management>)<br>
-├─── [science-tech-maths](<base/science-tech-maths>)<br>
+├─── science-tech-maths<br>
 ├───├─── [image-processing](<base/science-tech-maths/image-processing/terminology.md>)<br>
 ├───├───├─── [color-spaces](<base/science-tech-maths/image-processing/color-spaces/color-spaces.md>)<br>
 ├───├───├─── [conv-filters](<base/science-tech-maths/image-processing/conv-filters/conv-filters.md>)<br>
@@ -22,8 +22,8 @@ I hope that they will be useful to you.
 ├───├───├─── [medical-imaging](<base/science-tech-maths/image-processing/medical-imaging/medical-imaging.md>)<br>
 ├───├───├─── [resampling](<base/science-tech-maths/image-processing/resampling/resampling.md>)<br>
 ├───├───└─── [transformation-matrices](<base/science-tech-maths/image-processing/transformation-matrices/matrices.md>)<br>
-├───├─── [machine-learning](<base/science-tech-maths/machine-learning>)<br>
-├───├───└─── [algorithms](<base/science-tech-maths/machine-learning/algorithms>)<br>
+├───├─── machine-learning<br>
+├───├───└─── algorithms<br>
 ├───├───├───├─── [autoencoder-vae](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae>)<br>
 ├───├───├───├───├─── [autoencoders](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae/autoencoders/autoencoders.md>)<br>
 ├───├───├───├───└─── [vae](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae/vae/vae.md>)<br>
@@ -36,19 +36,19 @@ I hope that they will be useful to you.
 ├───├───├───├─── [lda-gda](<base/science-tech-maths/machine-learning/algorithms/lda-gda/lda-gda.md>)<br>
 ├───├───├───├─── [linear-regression](<base/science-tech-maths/machine-learning/algorithms/linear-regression>)<br>
 ├───├───├───├─── [logistic-regression](<base/science-tech-maths/machine-learning/algorithms/logistic-regression/logistic-regression.md>)<br>
-├───├───├───├─── [neural-nets](<base/science-tech-maths/machine-learning/algorithms/neural-nets>)<br>
+├───├───├───├─── neural-nets<br>
 ├───├───├───├───├─── [batchnorm](<base/science-tech-maths/machine-learning/algorithms/neural-nets/batchnorm/batchnorm.md>)<br>
-├───├───├───├───└─── [conv-neural-nets](<base/science-tech-maths/machine-learning/algorithms/neural-nets/conv-neural-nets>)<br>
+├───├───├───├───└─── conv-neural-nets<br>
 ├───├───├───├───├───└─── [siamese-contrastive-triplet](<base/science-tech-maths/machine-learning/algorithms/neural-nets/conv-neural-nets/siamese-contrastive-triplet/contrastive-learning.md>)<br>
 ├───├───├───├─── [pca](<base/science-tech-maths/machine-learning/algorithms/pca/pca.md>)<br>
 ├───├───├───├─── [self-organising-maps](<base/science-tech-maths/machine-learning/algorithms/self-organising-maps/self-organising-maps.md>)<br>
 ├───├───├───└─── [svm](<base/science-tech-maths/machine-learning/algorithms/svm/svm.md>)<br>
-├───├─── [maths](<base/science-tech-maths/maths>)<br>
+├───├─── maths<br>
 ├───├───├─── [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
 ├───├───├─── [information-theory](<base/science-tech-maths/maths/information-theory>)<br>
 ├───├───├─── [maths](<base/science-tech-maths/maths/maths/maths.md>)<br>
 ├───├───├─── [numerical-methods](<base/science-tech-maths/maths/numerical-methods/numerical-methods.md>)<br>
-├───├───└─── [probabilities-statistics](<base/science-tech-maths/maths/probabilities-statistics>)<br>
+├───├───└─── probabilities-statistics<br>
 ├───├───├───├─── [bayes](<base/science-tech-maths/maths/probabilities-statistics/bayes>)<br>
 ├───├───├───├─── [central-limit-theorem](<base/science-tech-maths/maths/probabilities-statistics/central-limit-theorem/clt.md>)<br>
 ├───├───├───├─── [cheatsheets](<base/science-tech-maths/maths/probabilities-statistics/cheatsheets>)<br>
@@ -56,15 +56,15 @@ I hope that they will be useful to you.
 ├───├───├───├─── [hypothesis-testing](<base/science-tech-maths/maths/probabilities-statistics/hypothesis-testing/Hypothesis testing.md>)<br>
 ├───├───├───├─── [mle-map-estimation](<base/science-tech-maths/maths/probabilities-statistics/mle-map-estimation/mle-map.md>)<br>
 ├───├───├───└─── [prob-stats](<base/science-tech-maths/maths/probabilities-statistics/prob-stats/probabilities.md>)<br>
-├───├─── [programming](<base/science-tech-maths/programming>)<br>
-├───├───├─── [algorithms](<base/science-tech-maths/programming/algorithms>)<br>
+├───├─── programming<br>
+├───├───├─── algorithms<br>
 ├───├───├───├─── [data-structures](<base/science-tech-maths/programming/algorithms/data-structures>)<br>
 ├───├───├───├─── [job-interviews](<base/science-tech-maths/programming/algorithms/job-interviews>)<br>
 ├───├───├───├───└─── [snippets](<base/science-tech-maths/programming/algorithms/job-interviews/snippets>)<br>
 ├───├───├───├─── [sorting](<base/science-tech-maths/programming/algorithms/sorting/sorting.md>)<br>
 ├───├───├───└─── [time-space-complexity](<base/science-tech-maths/programming/algorithms/time-space-complexity/big-o.md>)<br>
 ├───├───├─── [char-encoding](<base/science-tech-maths/programming/char-encoding/char-encoding.md>)<br>
-├───├───├─── [dev-tools](<base/science-tech-maths/programming/dev-tools>)<br>
+├───├───├─── dev-tools<br>
 ├───├───├───├─── [docker](<base/science-tech-maths/programming/dev-tools/docker/docker.md>)<br>
 ├───├───├───├─── [git](<base/science-tech-maths/programming/dev-tools/git/git.md>)<br>
 ├───├───├───├─── [github](<base/science-tech-maths/programming/dev-tools/github/github.md>)<br>
@@ -73,7 +73,7 @@ I hope that they will be useful to you.
 ├───├───├───└─── [wsl](<base/science-tech-maths/programming/dev-tools/wsl/wsl.md>)<br>
 ├───├───├─── [general-knowledge](<base/science-tech-maths/programming/general-knowledge/general-knowledge.md>)<br>
 ├───├───├─── [high-performance-computing](<base/science-tech-maths/programming/high-performance-computing/hpc.md>)<br>
-├───├───├─── [languages](<base/science-tech-maths/programming/languages>)<br>
+├───├───├─── languages<br>
 ├───├───├───├─── [c++](<base/science-tech-maths/programming/languages/c++/c++.md>)<br>
 ├───├───├───├─── [graphql](<base/science-tech-maths/programming/languages/graphql/graphql.md>)<br>
 ├───├───├───├─── [python](<base/science-tech-maths/programming/languages/python/python.md>)<br>
