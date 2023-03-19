@@ -1,6 +1,10 @@
 # BatchNorm
 
-[PDF link](./BatchNorm.pdf)
+[PDF link with explanations](./BatchNorm.pdf)
+
+## Batchnorm vs InstanceNorm
+
+![](./batchnorm-vs-instancenorm.png)
 
 ## More
 
