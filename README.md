@@ -38,12 +38,14 @@ base<br>
 ├───├───├───├─── [logistic-regression](<base/science-tech-maths/machine-learning/algorithms/logistic-regression/logistic-regression.md>)<br>
 ├───├───├───├─── neural-nets<br>
 ├───├───├───├───├─── [batchnorm](<base/science-tech-maths/machine-learning/algorithms/neural-nets/batchnorm/batchnorm.md>)<br>
-├───├───├───├───└─── [conv-neural-nets](<base/science-tech-maths/machine-learning/algorithms/neural-nets/conv-neural-nets/cnn.md>)<br>
+├───├───├───├───├─── [conv-neural-nets](<base/science-tech-maths/machine-learning/algorithms/neural-nets/conv-neural-nets/cnn.md>)<br>
 ├───├───├───├───├───└─── [siamese-contrastive-triplet](<base/science-tech-maths/machine-learning/algorithms/neural-nets/conv-neural-nets/siamese-contrastive-triplet/contrastive-learning.md>)<br>
+├───├───├───├───└─── [gans](<base/science-tech-maths/machine-learning/algorithms/neural-nets/gans/gan.md>)<br>
 ├───├───├───├─── [pca](<base/science-tech-maths/machine-learning/algorithms/pca/pca.md>)<br>
 ├───├───├───├─── [self-organising-maps](<base/science-tech-maths/machine-learning/algorithms/self-organising-maps/self-organising-maps.md>)<br>
 ├───├───├───└─── [svm](<base/science-tech-maths/machine-learning/algorithms/svm/svm.md>)<br>
 ├───├───├─── [competitions](<base/science-tech-maths/machine-learning/competitions/competitions.md>)<br>
+├───├───├─── [datasets](<base/science-tech-maths/machine-learning/datasets/find-datasets.md>)<br>
 ├───├───└─── [hardware](<base/science-tech-maths/machine-learning/hardware/gpu-providers.md>)<br>
 ├───├─── maths<br>
 ├───├───├─── [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
