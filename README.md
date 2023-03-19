@@ -23,7 +23,7 @@ base<br>
 ├───├───├─── [resampling](<base/science-tech-maths/image-processing/resampling/resampling.md>)<br>
 ├───├───└─── [transformation-matrices](<base/science-tech-maths/image-processing/transformation-matrices/matrices.md>)<br>
 ├───├─── machine-learning<br>
-├───├───└─── algorithms<br>
+├───├───├─── algorithms<br>
 ├───├───├───├─── [autoencoder-vae](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae>)<br>
 ├───├───├───├───├─── [autoencoders](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae/autoencoders/autoencoders.md>)<br>
 ├───├───├───├───└─── [vae](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae/vae/vae.md>)<br>
@@ -43,6 +43,8 @@ base<br>
 ├───├───├───├─── [pca](<base/science-tech-maths/machine-learning/algorithms/pca/pca.md>)<br>
 ├───├───├───├─── [self-organising-maps](<base/science-tech-maths/machine-learning/algorithms/self-organising-maps/self-organising-maps.md>)<br>
 ├───├───├───└─── [svm](<base/science-tech-maths/machine-learning/algorithms/svm/svm.md>)<br>
+├───├───├─── [competitions](<base/science-tech-maths/machine-learning/competitions/competitions.md>)<br>
+├───├───└─── [hardware](<base/science-tech-maths/machine-learning/hardware/gpu-providers.md>)<br>
 ├───├─── maths<br>
 ├───├───├─── [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
 ├───├───├─── [information-theory](<base/science-tech-maths/maths/information-theory>)<br>
