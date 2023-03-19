@@ -18,6 +18,7 @@ base<br>
 ├───├─── [image-processing](<base/science-tech-maths/image-processing/terminology.md>)<br>
 ├───├───├─── [color-spaces](<base/science-tech-maths/image-processing/color-spaces/color-spaces.md>)<br>
 ├───├───├─── [conv-filters](<base/science-tech-maths/image-processing/conv-filters/conv-filters.md>)<br>
+├───├───├─── [image-losses](<base/science-tech-maths/image-processing/image-losses/image-losses.md>)<br>
 ├───├───├─── [image-registration](<base/science-tech-maths/image-processing/image-registration/image-registration.md>)<br>
 ├───├───├─── [medical-imaging](<base/science-tech-maths/image-processing/medical-imaging/medical-imaging.md>)<br>
 ├───├───├─── [resampling](<base/science-tech-maths/image-processing/resampling/resampling.md>)<br>
