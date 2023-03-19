@@ -8,8 +8,6 @@ You can use/combine multiple metrics to improve the image generation quality ([s
 
 ## Why does L2 reconstruction loss yield blurry images?
 
-It is generally known that L2 reconstruction loss found in generative models yields blurrier images than e.g. adversarial loss. But why?
-
 In generative modeling, especially in vision, it is a well known observation that using $L_2$ loss function yields blurry images. But how can we explain this, not empirically, but intuitively?
 
 We look at the foundation first. $L_2$ loss is defined as:
@@ -58,8 +56,6 @@ During the optimization process, we present two types of samples, originated fro
 The implication is if we sample from our Gaussian, the sample would come from the middle of the two mode in image space, even though that region is in reality has very low probability. Therefore, our sample would be the average of samples that comes from those two modes, hence we get blurry image.
 
 To make this idea more concrete, suppose those two modes represent "sedan" and "suv". If we sample from our Gaussian, what we get is somewhere between those two types of car. Now, imagine this in high dimensional space, with many more modes for all properties of "car". Surely by mixing many properties of different types of cars will not make an image realistic to us, however, in term of $L_2$ metric, this is the best image our model can produce.
-
-Many have proposed to fix this issue by introducing or replacing $L_2$ loss with another loss, e.g. adversarial loss found in GAN. Check out these references below for starting points into this topic.
 
 ## More
 

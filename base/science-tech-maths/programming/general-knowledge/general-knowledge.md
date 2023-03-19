@@ -33,6 +33,16 @@
 
 ![](./processes-threads.jpg)
 
+## Static variables
+
+A static variable is created only once and its value is retained between function calls.
+
+A static variable is created when the program starts and is destroyed when the program ends.
+
+In the case of a static variable inside a function, the variable is initialized only once, when the function is called for the first time, and retains its value between subsequent calls to the function.
+
+In the case of a static variable inside a class, the variable is shared among all objects of that class, and retains its value across all instances of the class.
+
 ## OOP
 
 4 principles:
