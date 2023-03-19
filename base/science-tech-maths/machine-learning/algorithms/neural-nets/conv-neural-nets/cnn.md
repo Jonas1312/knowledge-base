@@ -32,20 +32,6 @@ $\mathcal{O}(HWNK²M)$
 - K x K is the size of the convolution kernel
 - M is the number of output channels
 
-## Losses
-
-You can use/combine multiple metrics to improve the image generation quality:
-
-- MS-SSIM preserves the contrast in high-frequency regions
-- L1 preserves colors and luminance
-- LPIPS for scene understanding
-
-More reading:
-
-- Why L2 is not the best metric for image similarity: [Loss Functions for Neural Networks for Image Processing](https://arxiv.org/abs/1511.08861)
-- [Loss Functions for Medical Image Segmentation: A Taxonomy](https://medium.com/@junma11/loss-functions-for-medical-image-segmentation-a-taxonomy-cefa5292eec0)
-- [Segmentation Loss Odyssey](https://arxiv.org/abs/2005.13449)
-
 ## Architectural priors
 
 Shift invariance vs equivariance property:
