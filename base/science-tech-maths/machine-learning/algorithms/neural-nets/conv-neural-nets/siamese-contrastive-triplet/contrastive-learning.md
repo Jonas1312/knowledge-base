@@ -1,5 +1,7 @@
 # Contrastive learning, Siamese networks, Triplet loss
 
+<https://ankeshanand.com/blog/2020/01/26/contrative-self-supervised-learning.html>
+
 ## Contrastive learning
 
 Contrastive learning is a method of training a neural network to learn a feature representation of the data. It is a semi-supervised learning method that uses pairs of data points to learn a feature representation of the data.
