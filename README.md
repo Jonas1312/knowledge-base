@@ -49,6 +49,7 @@ base<br>
 ├───├───├───└─── [svm](<base/science-tech-maths/machine-learning/algorithms/svm/svm.md>)<br>
 ├───├───├─── [cheatsheets](<base/science-tech-maths/machine-learning/cheatsheets>)<br>
 ├───├───├─── [competitions](<base/science-tech-maths/machine-learning/competitions/competitions.md>)<br>
+├───├───├─── [data-visualisation](<base/science-tech-maths/machine-learning/data-visualisation/data-visualization.md>)<br>
 ├───├───├─── [datasets](<base/science-tech-maths/machine-learning/datasets/find-datasets.md>)<br>
 ├───├───├─── [hardware](<base/science-tech-maths/machine-learning/hardware/gpu-providers.md>)<br>
 ├───├───├─── [implementation-tricks](<base/science-tech-maths/machine-learning/implementation-tricks/implementation-tricks.md>)<br>
