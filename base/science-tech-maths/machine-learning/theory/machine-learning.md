@@ -35,9 +35,11 @@ A machine learning algorithm is an algorithm that is able to learn patterns from
   - [How to sample data](#how-to-sample-data)
   - [Linear separability and the curse of dimensionality](#linear-separability-and-the-curse-of-dimensionality)
   - [Data preprocessing](#data-preprocessing)
+    - [Is it necessary to standardize for linear regression?](#is-it-necessary-to-standardize-for-linear-regression)
+    - [Why standardizing input data is necessary for euclidean distance based algorithms?](#why-standardizing-input-data-is-necessary-for-euclidean-distance-based-algorithms)
+    - [Why standardizing input data is necessary for neural networds?](#why-standardizing-input-data-is-necessary-for-neural-networds)
     - [Numerical](#numerical)
     - [Categorical](#categorical)
-    - [Why standardizing input data is necessary for some algorithms?](#why-standardizing-input-data-is-necessary-for-some-algorithms)
   - [Generative models vs discriminative models](#generative-models-vs-discriminative-models)
   - [Why is the cost function of neural networks non-convex?](#why-is-the-cost-function-of-neural-networks-non-convex)
   - [Ensemble methods](#ensemble-methods)
@@ -345,17 +347,83 @@ More dimensions make your model more discriminative but at the same time they re
 
 ## Data preprocessing
 
-Sometimes the variables do not vary in the same ranges, can be a problem if the ML algorithm uses the euclidean distance.
+Sometimes the variables do not vary in the same ranges, can be a problem if the ML algorithm uses the euclidean distance or gradient descent.
 
-There are also some algorithms that converge faster if data is normalized
+There are also some algorithms that converge faster if data is normalized (neural networks).
 
 Ways to normalize data:
 
 - scale to a range: `[0, 1]` or `[-1, 1]`
-- standardize: substrct $\mu$ and divide by $\sigma$
+- standardize (also called Z-score normalization): substract $\mu$ and divide by $\sigma$
 - normalize: divide by the norm of the vector
 
 All normalization factors must be computed on training set! This is to avoid data leakage.
+
+### Is it necessary to standardize for linear regression?
+
+No, because the coefficients are not affected by the scale of the data.
+
+But, it can be important if using regularization!
+
+It's also recommended to do it to avoid numerical issues.
+
+### Why standardizing input data is necessary for euclidean distance based algorithms?
+
+Let's say we have this design matrix:
+
+|     | X1  | X2  |     |     |
+| --- | --- | --- | --- | --- |
+| A   | 0   | 0   |     |     |
+| B   | 2   | 1   |     |     |
+| C   | 0.5 | 10  |     |     |
+
+We have:
+
+- $d(A, B) = \sqrt{(0-2)^2 + (0-1)^2} = \sqrt{5}$
+- $d(A, C) = \sqrt{(0-0.5)^2 + (0-10)^2} = \sqrt{100.25}$
+- $d(B, C) = \sqrt{(2-0.5)^2 + (1-10)^2} = \sqrt{83.25}$
+
+So a ML algorithm could cluster $A$ and $B$ within the same class and $C$ in another class since $A$ and $B$ are quite close.
+
+The euclidean distance is dominated by the $X_2$ variable.
+
+If $X_2$ is in the range `[0, 10000000]` and $X_1$ is in the range `[0, 2]`, then we can see that $C$ is not that far from $A$!
+
+Let's standardize the data to range `[0, 1]`:
+
+|     | X1   | X2  |     |     |
+| --- | ---- | --- | --- | --- |
+| A   | 0    | 0   |     |     |
+| B   | 1    | ~0  |     |     |
+| C   | 0.25 | ~0  |     |     |
+
+We have:
+
+- $d(A, B) = \sqrt{(0-1)^2 + (0-0)^2} = \sqrt{1}$
+- $d(A, C) = \sqrt{(0-0.25)^2 + (0-0)^2} = \sqrt{0.25}$
+- $d(B, C) = \sqrt{(1-0.25)^2 + (0-0)^2} = \sqrt{0.75}$
+
+We can see that $A$ and $C$ are closer than $A$ and $B$! So the algorithm will cluster $A$ and $C$ in the same class.
+
+### Why standardizing input data is necessary for neural networds?
+
+Some algorithms like decision trees are (almost) not affected by the scale of the data, but this is not the case for neural networks (and most of the other ML algorithms).
+
+The loss landscape is characterized by the parameter values.
+
+Let's say that we have a simple NN with two input neurons $\mathcal{X_1}\in{[0, 1]}$ and $\mathcal{X_2}\in{[0, 0.01]}$:
+
+Thus we have $\mathcal{X_1}\gg\mathcal{X_2}$ (on average).
+
+$$\mathcal{Y}=\mathcal{w_1}\mathcal{X_1}+\mathcal{w_2}\mathcal{X_2}$$
+
+We know that $\mathcal{X_1}$ and $\mathcal{X_2}$ are both equally important to predict $\mathcal{Y}$, thus $\mathcal{w_1}\ll\mathcal{w_2}$.
+
+$$\mathcal{w_1}^{(n+1)}=\mathcal{w_1}^{(n)} - \eta_1*\frac{\partial L}{\partial \mathcal{w_1}}=\mathcal{w_1}^{(n)} - \eta_1*\frac{\partial L}{\partial \mathcal{y}}*\mathcal{X_1}$$
+
+Thus $\eta_1$ must be much smaller than $\eta_2$, which is not really efficient because it requires to set one learning rate for each parameter.
+
+**Solution**: Standardize the input variables and use **one** learning for all parameters.
 
 ### Numerical
 
@@ -391,24 +459,6 @@ All normalization factors must be computed on training set! This is to avoid dat
     - A solution is to use a modified version: Leave-one-out Target encoding; for a particular data point or row, the mean of the target is calculated by considering all rows in the same categorical level except itself. It mitigates data leakage and overfitting to some extent.
   - frequency encoding: ![frequency-encoding](frequency-encoding.webp)
 
-### Why standardizing input data is necessary for some algorithms?
-
-The loss landscape is characterized by the parameter values (in a neural network for example).
-
-Let's say that we have a simple NN with two input neurons $\mathcal{X_1}\in{[0, 1]}$ and $\mathcal{X_2}\in{[0, 0.01]}$:
-
-Thus we have $\mathcal{X_1}\gg\mathcal{X_2}$ (on average).
-
-$$\mathcal{Y}=\mathcal{w_1}\mathcal{X_1}+\mathcal{w_2}\mathcal{X_2}$$
-
-We know that $\mathcal{X_1}$ and $\mathcal{X_2}$ are both equally important to predict $\mathcal{Y}$, thus $\mathcal{w_1}\ll\mathcal{w_2}$.
-
-$$\mathcal{w_1}^{(n+1)}=\mathcal{w_1}^{(n)} - \eta_1*\frac{\partial L}{\partial \mathcal{w_1}}=\mathcal{w_1}^{(n)} - \eta_1*\frac{\partial L}{\partial \mathcal{y}}*\mathcal{X_1}$$
-
-Thus $\eta_1$ must be much smaller than $\eta_2$, which is not really efficient because it requires to set one learning rate for each parameter.
-
-**Solution**: Standardize the input variables and use **one** learning for all parameters.
-
 ## Generative models vs discriminative models
 
 A generative model learns the joint probability distribution $p(x,y)$.
@@ -431,9 +481,22 @@ What makes convex or not convex your network is the problem you’re optimising.
 
 ## Class imbalance
 
-Weighted loss functions vs weighted sampling? Yann LeCun suggests weighted sampling. The rationale behind is that you don't want to trust a single stochastic gradient that gets magnified possibly a lot. Better to recompute it a few times during the entire epoch.
+Some algorithms are more sensitive to class imbalance than others. For example, decision trees are not sensitive to class imbalance, while neural networks are.
 
-As it has been mentioned, I would encourage you to pick the proper metric. Most of the time, just selecting the decision threshold of the model trained over imbalanced data based on the metric of interest is enough.
+Strategies to deal with class imbalance:
+
+- Oversampling: duplicate the minority class
+- Undersampling: remove samples from the majority class
+- Generate synthetic samples: SMOTE, GANs
+- Change the metric (Most of the time, just selecting the decision threshold of the model trained over imbalanced data based on the metric of interest is enough.)
+- penalize the loss during training
+- Use tree based algorithms
+
+Weighted loss functions vs weighted sampling?
+
+- Yann LeCun suggests weighted sampling.
+- The rationale behind is that you don't want to trust a single stochastic gradient that gets magnified possibly a lot.
+- Better to recompute it a few times during the entire epoch.
 
 Many papers use the term long-tail learning to refer to class imbalance in multi-class classification tasks, so you can find lots of relevant research under this keyword
 
