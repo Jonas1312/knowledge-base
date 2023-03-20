@@ -21,6 +21,10 @@
   - We can see MLE as a proxy for fitting our estimate to the real distribution, which cannot be done directly as the real distribution is unknown to us.
   - Minimizing cross-entropy means there's no surprise, we know what to expect
 
+MLE is MSE:
+
+![](./relation-mle-mse.png)
+
 ## MAP
 
 - MAP: maximum a posteriori estimation
