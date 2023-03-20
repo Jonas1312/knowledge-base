@@ -53,8 +53,9 @@ base<br>
 ├───├───├─── [hardware](<base/science-tech-maths/machine-learning/hardware/gpu-providers.md>)<br>
 ├───├───├─── [implementation-tricks](<base/science-tech-maths/machine-learning/implementation-tricks/implementation-tricks.md>)<br>
 ├───├───├─── [interpretability](<base/science-tech-maths/machine-learning/interpretability/interpretability.md>)<br>
-├───├───└─── libs-frameworks<br>
+├───├───├─── libs-frameworks<br>
 ├───├───├───└─── [pytorch](<base/science-tech-maths/machine-learning/libs-frameworks/pytorch/pytorch.md>)<br>
+├───├───└─── [theory](<base/science-tech-maths/machine-learning/theory/machine-learning.md>)<br>
 ├───├─── maths<br>
 ├───├───├─── [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
 ├───├───├─── [information-theory](<base/science-tech-maths/maths/information-theory>)<br>
