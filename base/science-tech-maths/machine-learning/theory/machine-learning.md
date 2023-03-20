@@ -36,6 +36,7 @@ A machine learning algorithm is an algorithm that is able to learn patterns from
   - [Linear separability and the curse of dimensionality](#linear-separability-and-the-curse-of-dimensionality)
   - [Data preprocessing](#data-preprocessing)
     - [Is it necessary to standardize for linear regression?](#is-it-necessary-to-standardize-for-linear-regression)
+    - [Why for PCA?](#why-for-pca)
     - [Why standardizing input data is necessary for euclidean distance based algorithms?](#why-standardizing-input-data-is-necessary-for-euclidean-distance-based-algorithms)
     - [Why standardizing input data is necessary for neural networds?](#why-standardizing-input-data-is-necessary-for-neural-networds)
     - [Numerical](#numerical)
@@ -353,7 +354,7 @@ There are also some algorithms that converge faster if data is normalized (neura
 
 Ways to normalize data:
 
-- scale to a range: `[0, 1]` or `[-1, 1]`
+- scale to a range: `[0, 1]` or `[-1, 1]` using min-max normalization
 - standardize (also called Z-score normalization): substract $\mu$ and divide by $\sigma$
 - normalize: divide by the norm of the vector
 
@@ -366,6 +367,10 @@ No, because the coefficients are not affected by the scale of the data.
 But, it can be important if using regularization!
 
 It's also recommended to do it to avoid numerical issues.
+
+### Why for PCA?
+
+ rincipal Component Analysis (PCA) is an algorithm where standardization is crucial, since it is “analyzing” the variances of the different features.
 
 ### Why standardizing input data is necessary for euclidean distance based algorithms?
 
