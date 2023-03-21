@@ -135,6 +135,7 @@ Global .gitignore: <https://julien.danjou.info/properly-managing-your-gitignore/
 [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/):
 
 - build: Changes that affect the build system or external dependencies (example scopes: gulp, broccoli, npm)
+- chore: Other changes that don't modify src or test files
 - ci: Changes to our CI configuration files and scripts (example scopes: Travis, Circle, BrowserStack, SauceLabs)
 - docs: Documentation only changes
 - feat: A new feature
@@ -143,6 +144,7 @@ Global .gitignore: <https://julien.danjou.info/properly-managing-your-gitignore/
 - refactor: A code change that neither fixes a bug nor adds a feature
 - style: Changes that do not affect the meaning of the code (white-space, formatting, missing semi-colons, etc)
 - test: Adding missing tests or correcting existing tests
+- revert: Reverts a previous commit
 
 Or:
 
