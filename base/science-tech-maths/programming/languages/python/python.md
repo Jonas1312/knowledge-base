@@ -69,7 +69,7 @@
       - [Property mocking](#property-mocking)
       - [Patch constant](#patch-constant)
     - [pytest monkeypatch fixture](#pytest-monkeypatch-fixture)
-    - [pytest mocker](#pytest-mocker)
+    - [pytest mocker fixture](#pytest-mocker-fixture)
   - [Async await](#async-await)
     - [Event loop](#event-loop)
     - [`asyncio.gather()`](#asynciogather)
@@ -684,6 +684,10 @@ More: <https://guicommits.com/how-to-log-in-python-like-a-pro/>
 
 ### Fixtures
 
+Pytest provides some built-in fixtures that can be used in tests:
+
+- `tmp_path`: A temporary directory unique to each test function, as a pathlib.Path object.
+
 Every test function will get the fixture below that sets args:
 
 ```python
@@ -1076,6 +1080,8 @@ def test(mock_square):
 
 ### pytest monkeypatch fixture
 
+pytest monkeypatch is a pytest fixture that allows you to modify objects, dictionaries or os.environ variables, etc. It is a very powerful tool that allows you to modify the environment before running your tests.
+
 monkeypatch is available as a parameter in each test function, and once inside the function we can use monkeypatch.setattr() to patch our command line arguments:
 
 ```python
@@ -1092,7 +1098,7 @@ def mock_sys_args(monkeypatch):
     monkeypatch.setattr("sys.argv", ["pytest", "--name", "logfilename.log"])
 ```
 
-### pytest mocker
+### pytest mocker fixture
 
 pytest-mock is a pytest plugin thats:
 
