@@ -255,6 +255,7 @@ We want to maximise it, but usually we do gradient **descent**, so we just add a
 - it measures the divergence between two probability distribution
 - if the cross entropy is large, it means that the difference between two distribution is large
 - while if the cross entropy is small, it means that two distribution is similar to each other.
+
 $$\mathrm{H}(p, q) = \mathrm{E}_p[-\log q] = \mathrm{H}(p) + D_{\mathrm{KL}}(p \| q)$$
 
 #### Kullback-Leibler
