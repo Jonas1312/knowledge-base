@@ -15,6 +15,7 @@
     - [python -m](#python--m)
     - [`__init__.py`](#__init__py)
     - [`__main__.py`](#__main__py)
+  - [Types](#types)
   - [Sequences](#sequences)
     - [Filter Map Reduce](#filter-map-reduce)
     - [Comprehension lists/dicts](#comprehension-listsdicts)
@@ -206,6 +207,10 @@ You might see `__all__` in some `__init__.py` files. This is a list of names tha
 For instance, `python -m idlelib` at a command line runs `idlelib/__main__.py`, which starts Idle.
 
 Similarly, `python -m tkinter` runs `tkinter/__main__.py`.
+
+## Types
+
+![](./types.svg)
 
 ## Sequences
 
