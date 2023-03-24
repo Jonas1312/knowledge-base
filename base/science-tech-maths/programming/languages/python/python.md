@@ -16,6 +16,9 @@
     - [`__init__.py`](#__init__py)
     - [`__main__.py`](#__main__py)
   - [Types](#types)
+    - [Type hints](#type-hints)
+    - [Typevars](#typevars)
+      - [overload](#overload)
   - [Sequences](#sequences)
     - [Filter Map Reduce](#filter-map-reduce)
     - [Comprehension lists/dicts](#comprehension-listsdicts)
@@ -211,6 +214,41 @@ Similarly, `python -m tkinter` runs `tkinter/__main__.py`.
 ## Types
 
 ![](./types.svg)
+
+### Type hints
+
+### Typevars
+
+`T = TypeVar("T", A, B)` means type variable T has value restrictions of classes A and B, but because it's invariant... it only accepts those two (and not any child classes of A or B).
+
+`T = TypeVar("T", bound=Union[A])` is a type variable with upper bound `Union[A, B]`. It can be substituted for any type that is a subclass of `A`.
+
+#### overload
+
+The `@overload` decorator is used to provide multiple function signatures for the same function. It allows the type checker to understand the different ways a function can be called and to narrow down the type of the result.
+
+Sometimes the types of several variables are related, such as “if x is type A, y is type B, else y is type C”. Basic type hints cannot describe such relationships, making type checking cumbersome or inaccurate. We can instead use `@typing.overload` to represent type relationships properly.
+
+```python
+from typing import overload
+
+@overload
+def double(input_: int) -> int:
+    ...  # ellipsis is a placeholder for the actual implementation
+
+
+@overload
+def double(input_: Sequence[int]) -> list[int]:
+    ...  # ellipsis is a placeholder for the actual implementation
+
+
+def double(input_: int | Sequence[int]) -> int | list[int]:
+    if isinstance(input_, Sequence):
+        return [i * 2 for i in input_]
+    return input_ * 2
+```
+
+All @overload definitions must come before the implementation, and multiple implementations are not allowed.
 
 ## Sequences
 
