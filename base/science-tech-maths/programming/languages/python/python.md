@@ -19,6 +19,7 @@
     - [Type hints](#type-hints)
     - [Typevars](#typevars)
       - [overload](#overload)
+    - [use object instead of Any](#use-object-instead-of-any)
   - [Sequences](#sequences)
     - [Filter Map Reduce](#filter-map-reduce)
     - [Comprehension lists/dicts](#comprehension-listsdicts)
@@ -249,6 +250,22 @@ def double(input_: int | Sequence[int]) -> int | list[int]:
 ```
 
 All @overload definitions must come before the implementation, and multiple implementations are not allowed.
+
+### use object instead of Any
+
+It’s common to overuse `typing.Any`. This is dangerous, since `Any` entirely disables type checking for a variable, allowing any operation.
+
+If you’re using `Any` to mean “this object could be any type, and I don’t care what”, you probably want to use `object` instead. Every object in Python inherits from `object`, which makes it an “opaque” type that only allows operations common to everything. Therefore we could pass, print, or store such variables in a container, but we couldn’t do anything more specific.
+
+```python
+from typing import Any
+
+x: Any = 1
+x.foo()  # No pyright error, but runtime error
+
+x: object = 1
+x.foo()  # Pyright error
+```
 
 ## Sequences
 
