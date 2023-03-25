@@ -42,7 +42,6 @@ A machine learning algorithm is an algorithm that is able to learn patterns from
     - [Numerical](#numerical)
     - [Categorical](#categorical)
   - [Generative models vs discriminative models](#generative-models-vs-discriminative-models)
-  - [Why is the cost function of neural networks non-convex?](#why-is-the-cost-function-of-neural-networks-non-convex)
   - [Ensemble methods](#ensemble-methods)
   - [Class imbalance](#class-imbalance)
   - [Hyperparameters Optimization](#hyperparameters-optimization)
@@ -55,7 +54,7 @@ A machine learning algorithm is an algorithm that is able to learn patterns from
   - [Output of sigmoid is not a probability](#output-of-sigmoid-is-not-a-probability)
   - [No free lunch theorem](#no-free-lunch-theorem)
   - [Problems of AI](#problems-of-ai)
-  - [Positions in ML](#positions-in-ml)
+  - [Jobs in ML](#jobs-in-ml)
 
 ## Tackling a ML problem
 
@@ -471,16 +470,6 @@ A generative model learns the joint probability distribution $p(x,y)$.
 
 A discriminative model learns the conditional probability distribution $p(y|x)$.
 
-## Why is the cost function of neural networks non-convex?
-
-The MSE loss $L(y, \hat{y})=\sum_i (y_i- \hat y_i)^2$ is indeed convex in $\hat y_i$.
-
-But if $\hat y_i = f(x_i ; \theta)$ it **may not be convex in $\theta$**, which is the situation with most non-linear models, and we actually care about convexity in $\theta$ because that's what we're optimizing the cost function over. We derive the loss with respect to $\theta$!
-
-A neural network is just a parametric function. It doesn’t necessary means it’s non-convex. A simple example of such a parametric function, just take any 2nd degree polynomial function. It’s still convex, though it’s parametric. Other answers say it’s not convex because it’s not linear. ReLU is not linear and is completely convex.
-
-What makes convex or not convex your network is the problem you’re optimising. If the problem is convex, your network is convex. Then the question is: are problems using deep learning are convex? If you take a random problem (i.e.: a random function) it’s not convex. Experiments showed it’s highly non-convex so no, if problems are usually not convex then networks are not convex.
-
 ## Ensemble methods
 
 [Notes about ensemble](../ensemble/ensemble.md)
@@ -618,7 +607,7 @@ Implies that assumptions are where the power of your mdoel comes from. This is w
 - AI algorithms often make biased decisions, this is illegal
 - privacy issue (faces, fingerprints, biometrics)
 
-## Positions in ML
+## Jobs in ML
 
 What is a data scientist, ML engineer, ... ?
 

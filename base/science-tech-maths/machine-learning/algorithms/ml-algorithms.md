@@ -50,11 +50,21 @@ The output variable $y$ is a scalar.
   - Unsupervised Data Augmentation or UDA
   - Pi-Model
 
-Learning with not Enough Data:
+### Learning with not Enough Data
 
 - <https://lilianweng.github.io/posts/2021-12-05-semi-supervised/>
 - <https://lilianweng.github.io/posts/2022-02-20-active-learning/>
 - <https://lilianweng.github.io/posts/2022-04-15-data-gen/>
+
+### Pseudo-labeling
+
+Use your model trained on training set to get labels on your unlabelled samples.
+
+Take the predictions (hard targets (one-hot coded) or soft targets (predicted probabilities)) and retrain your model.
+
+Soft targets as can give much better results.
+
+Another important detail is the balance between original data and pseudo-labeled data in the resulting dataset. In some experiments 33% of the minibatch was sampled from the pseudolabeled dataset and 67% from the real training set.
 
 ## Unsupervised learning
 

@@ -42,6 +42,10 @@ Boosting aims at reducing the bias of a large number of "small" models with low 
 
 [PDF doc](./ML_cheatsheets_10.pdf)
 
+## TTA: Test Time Augmentation
+
+For each individual model, compute the predictions across various augmented versions of the input images and average them.
+
 ## More
 
 - <https://stats.stackexchange.com/questions/18891/bagging-boosting-and-stacking-in-machine-learning>

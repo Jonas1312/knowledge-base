@@ -25,6 +25,16 @@ Created from Perceptron (1962):
 
 [PDF file](./Computing%20Neural%20Network%20Gradients.pdf)
 
+## Why is the cost function of neural networks non-convex?
+
+The MSE loss $L(y, \hat{y})=\sum_i (y_i- \hat y_i)^2$ is indeed convex in $\hat y_i$.
+
+But if $\hat y_i = f(x_i ; \theta)$ it **may not be convex in $\theta$**, which is the situation with most non-linear models, and we actually care about convexity in $\theta$ because that's what we're optimizing the cost function over. We derive the loss with respect to $\theta$!
+
+A neural network is just a parametric function. It doesn’t necessary means it’s non-convex. A simple example of such a parametric function, just take any 2nd degree polynomial function. It’s still convex, though it’s parametric. Other answers say it’s not convex because it’s not linear. ReLU is not linear and is completely convex.
+
+What makes convex or not convex your network is the problem you’re optimising. If the problem is convex, your network is convex. Then the question is: are problems using deep learning are convex? If you take a random problem (i.e.: a random function) it’s not convex. Experiments showed it’s highly non-convex so no, if problems are usually not convex then networks are not convex.
+
 ## Activation functions
 
 - tanh/sigmoid: vanishing gradients
@@ -52,3 +62,28 @@ Standardize the activations of every layers to keep the same distribution during
 ## Troubleshooting neural networks
 
 <http://josh-tobin.com/troubleshooting-deep-neural-networks.html>
+
+## Batch size
+
+Set the batch size to maximize the GPU utilization! No need to set it to a power of 2...
+
+Guidelines For Good Performance On Tensor Cores:
+
+- Make sure that the convolution operation is eligible for Tensor Cores by avoiding any combinations of large padding and large filters.
+- Transform the inputs and filters to NHWC, pre-pad channel and batch size to be a multiple of 8.
+
+<https://towardsdatascience.com/discontinuity-in-cnn-training-time-with-increase-batch-size-bd2849129283>
+We can say for sure the values 16, 32, 48, and 64 do not appear as random, they are multiples of 16, which happen to be the same value of PCIe link max width 16x of the GPU.
+
+<https://sebastianraschka.com/blog/2022/batch-size-2.html>
+
+<https://twitter.com/Remi_Coulom/status/1259188988646129665?s=20&t=UTsX1zhhmVhkgvMHzJmY3w>
+
+## Model training
+
+- <https://myrtle.ai/learn/how-to-train-your-resnet/>
+- <https://github.com/mosaicml/composer>
+- <https://www.mosaicml.com/blog/best-practices-dec-2021>
+- <https://old.reddit.com/r/MachineLearning/comments/v8rmtj/r_blazingly_fast_computer_vision_training_with/>
+- <https://pytorch.org/tutorials/intermediate/memory_format_tutorial.html#performance-gains>
+- <https://pytorch.org/blog/how-to-train-state-of-the-art-models-using-torchvision-latest-primitives/>
