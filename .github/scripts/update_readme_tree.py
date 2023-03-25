@@ -2,26 +2,20 @@
 Script to update the README.md file with the tree of the project.
 
 Only the folders are shown, not the files.
-"""
-
-import os
-import sys
-import urllib
-from collections import deque
-from pathlib import Path
-
-"""This module provides RP Tree main module.
 
 Source: https://github.com/realpython/rptree
 """
 
+import urllib
+from collections import deque
+from pathlib import Path
 
 HTML_SPACE = "&nbsp;"
 PIPE = "│"
 ELBOW = "└─"
 TEE = "├─"
 PIPE_PREFIX = "│   "
-SPACE_PREFIX = "    "
+SPACE_PREFIX = "     "
 
 
 def dir_path_to_str(path: Path, linkify: bool) -> str:
