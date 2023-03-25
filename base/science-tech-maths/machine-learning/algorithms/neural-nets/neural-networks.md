@@ -67,23 +67,20 @@ Standardize the activations of every layers to keep the same distribution during
 
 Set the batch size to maximize the GPU utilization! No need to set it to a power of 2...
 
+- <https://sebastianraschka.com/blog/2022/batch-size-2.html>
+- <https://towardsdatascience.com/discontinuity-in-cnn-training-time-with-increase-batch-size-bd2849129283>
+- <https://twitter.com/Remi_Coulom/status/1259188988646129665>
+
 Guidelines For Good Performance On Tensor Cores:
 
 - Make sure that the convolution operation is eligible for Tensor Cores by avoiding any combinations of large padding and large filters.
 - Transform the inputs and filters to NHWC, pre-pad channel and batch size to be a multiple of 8.
 
-<https://towardsdatascience.com/discontinuity-in-cnn-training-time-with-increase-batch-size-bd2849129283>
-We can say for sure the values 16, 32, 48, and 64 do not appear as random, they are multiples of 16, which happen to be the same value of PCIe link max width 16x of the GPU.
-
-<https://sebastianraschka.com/blog/2022/batch-size-2.html>
-
-<https://twitter.com/Remi_Coulom/status/1259188988646129665?s=20&t=UTsX1zhhmVhkgvMHzJmY3w>
-
 ## Model training
 
 - <https://myrtle.ai/learn/how-to-train-your-resnet/>
 - <https://github.com/mosaicml/composer>
-- <https://www.mosaicml.com/blog/best-practices-dec-2021>
+- <https://www.mosaicml.com/blog/5-best-practices-for-efficient-model-training>
 - <https://old.reddit.com/r/MachineLearning/comments/v8rmtj/r_blazingly_fast_computer_vision_training_with/>
 - <https://pytorch.org/tutorials/intermediate/memory_format_tutorial.html#performance-gains>
 - <https://pytorch.org/blog/how-to-train-state-of-the-art-models-using-torchvision-latest-primitives/>

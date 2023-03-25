@@ -30,7 +30,6 @@
     - [Construct tensors directly on GPUs](#construct-tensors-directly-on-gpus)
     - [Avoid CPU to GPU transfers or vice-versa](#avoid-cpu-to-gpu-transfers-or-vice-versa)
     - [Workers in dataloader](#workers-in-dataloader)
-    - [Batch size](#batch-size)
     - [cuddn.benchmark](#cuddnbenchmark)
     - [Use inplace operations](#use-inplace-operations)
     - [Gradient checkpointing](#gradient-checkpointing)
@@ -300,10 +299,6 @@ Good rule of thumb:
 
 - set the number of workers to the number of CPU cores.
 - num_worker = 4 * num_GPU
-
-### Batch size
-
-Max out batch size in your GPU. Read [this](../../training-tricks/batch-size.md).
 
 ### cuddn.benchmark
 

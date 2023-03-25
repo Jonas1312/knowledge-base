@@ -76,6 +76,8 @@ The pooling layers in CNN break the Shannon Nyquist sampling theorem: <https://t
 
 Pytorch uses channel first for historical reasons. It's bad cause  NVIDIA GPUs natively perform convolution operations in NHWC format. The NCHW tensor must be transposed to NHWC before the convolution and transposed back to NCHW after (right).
 
+Use NHWC for Pytorch: <https://pytorch.org/tutorials/intermediate/memory_format_tutorial.html#>
+
 ## Transposed convolutions
 
 It is also called deconvolution or fractionally strided convolution.
