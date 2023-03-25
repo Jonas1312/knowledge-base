@@ -20,8 +20,8 @@ HTML_SPACE = "&nbsp;"
 PIPE = "│"
 ELBOW = "└─"
 TEE = "├─"
-PIPE_PREFIX = f"│  "
-SPACE_PREFIX = f"   "
+PIPE_PREFIX = "│    "
+SPACE_PREFIX = "    "
 
 
 def dir_path_to_str(path: Path, linkify: bool) -> str:
