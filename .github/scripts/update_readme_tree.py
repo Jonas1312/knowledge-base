@@ -108,6 +108,7 @@ def main() -> None:
 
     tree = TreeGenerator(root_dir).tree
     tree = [line for line in tree if not line.endswith("│")]
+    tree = "\n".join(tree)
 
     with open("README.md", "w", encoding="utf-8") as f:
         f.write(header_readme.format(tree=tree))
