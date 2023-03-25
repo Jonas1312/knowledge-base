@@ -23,7 +23,7 @@ base<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [medical-imaging](<base/science-tech-maths/image-processing/medical-imaging/medical-imaging.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [resampling](<base/science-tech-maths/image-processing/resampling/resampling.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [transformation-matrices](<base/science-tech-maths/image-processing/transformation-matrices/matrices.md>)<br>
-│&nbsp;&nbsp;&nbsp;├─ machine-learning<br>
+│&nbsp;&nbsp;&nbsp;├─ [machine-learning](<base/science-tech-maths/machine-learning/machine-learning.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [algorithms](<base/science-tech-maths/machine-learning/algorithms/ml-algorithms.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [autoencoder-vae](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [autoencoders](<base/science-tech-maths/machine-learning/algorithms/autoencoder-vae/autoencoders/autoencoders.md>)<br>
@@ -57,8 +57,7 @@ base<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [interpretability](<base/science-tech-maths/machine-learning/interpretability/interpretability.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ libs-frameworks<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [pytorch](<base/science-tech-maths/machine-learning/libs-frameworks/pytorch/pytorch.md>)<br>
-│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [metrics](<base/science-tech-maths/machine-learning/metrics/metrics.md>)<br>
-│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [theory](<base/science-tech-maths/machine-learning/theory/machine-learning.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [metrics](<base/science-tech-maths/machine-learning/metrics/metrics.md>)<br>
 │&nbsp;&nbsp;&nbsp;├─ maths<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [information-theory](<base/science-tech-maths/maths/information-theory>)<br>
