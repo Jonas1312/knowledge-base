@@ -4,8 +4,23 @@ Script to update the README.md file with the tree of the project.
 Only the folders are shown, not the files.
 """
 
+import os
+import sys
 import urllib
+from collections import deque
 from pathlib import Path
+
+"""This module provides RP Tree main module.
+
+Source: https://github.com/realpython/rptree
+"""
+
+
+PIPE = "│"
+ELBOW = "└──"
+TEE = "├──"
+PIPE_PREFIX = "│   "
+SPACE_PREFIX = "    "
 
 
 def dir_path_to_str(path: Path, linkify: bool) -> str:
@@ -42,19 +57,39 @@ def dir_path_to_str(path: Path, linkify: bool) -> str:
     return f"[{path.name}](<{path.as_posix()}>)"
 
 
-def get_tree(base_dir: Path, linkify: bool, is_root: bool) -> str:
-    """Get the tree of the project directories and subdirectories as a string."""
-    subdirs = sorted([dir_ for dir_ in base_dir.iterdir() if dir_.is_dir()])
-    level = len(base_dir.parts) - 1
-    indent = ""
-    if level > 0:
-        indent = "├───" * level
-    tree = f"{dir_path_to_str(base_dir, linkify)}<br>\n" if is_root else ""
-    for subdir in subdirs:
-        sep = "└─── " if subdir == subdirs[-1] else "├─── "
-        tree += f"{indent}{sep}{dir_path_to_str(subdir, linkify)}<br>\n"
-        tree += get_tree(subdir, linkify=linkify, is_root=False)
-    return tree
+class TreeGenerator:
+    """TreeGenerator class."""
+
+    def __init__(self, root_dir):
+        self._root_dir = Path(root_dir)
+        self.tree = deque()
+
+        self.tree.append(f"{self._root_dir}")  # tree head
+        self._tree_body(self._root_dir)
+
+    def _tree_body(self, directory, prefix=""):
+        entries = self._prepare_entries(directory)
+        last_index = len(entries) - 1
+        for index, entry in enumerate(entries):
+            connector = ELBOW if index == last_index else TEE
+            if entry.is_dir():
+                if index == 0:
+                    self.tree.append(prefix + PIPE)
+                self._add_directory(entry, index, last_index, prefix, connector)
+
+    def _prepare_entries(self, directory):
+        entries = sorted(directory.iterdir())
+        return [entry for entry in entries if entry.is_dir()]
+
+    def _add_directory(self, directory, index, last_index, prefix, connector):
+        self.tree.append(f"{prefix}{connector} {dir_path_to_str(directory, linkify=True)}")
+        if index != last_index:
+            prefix += PIPE_PREFIX
+        else:
+            prefix += SPACE_PREFIX
+        self._tree_body(directory=directory, prefix=prefix)
+        if prefix := prefix.rstrip():
+            self.tree.append(prefix)
 
 
 header_readme = """# Knowledge Base
@@ -69,7 +104,10 @@ I hope that they will be useful to you.
 
 
 def main() -> None:
-    tree = get_tree(base_dir=Path("./base"), linkify=True, is_root=True)
+    root_dir = Path("./base")
+
+    tree = TreeGenerator(root_dir).tree
+    tree = [line for line in tree if not line.endswith("│")]
 
     with open("README.md", "w", encoding="utf-8") as f:
         f.write(header_readme.format(tree=tree))
