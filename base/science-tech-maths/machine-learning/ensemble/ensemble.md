@@ -45,10 +45,9 @@ Boosting aims at reducing the bias of a large number of "small" models with low 
 ## More
 
 - <https://stats.stackexchange.com/questions/18891/bagging-boosting-and-stacking-in-machine-learning>
-- <https://blog.statsbot.co/ensemble-learning-d1dcd548e936>
 - <https://github.com/ujjwalkarn/DataSciencePython#random-forest-with-python>
-- <https://mlwave.com/kaggle-ensembling-guide/>
-- <http://www.overkillanalytics.net/more-is-always-better-the-power-of-simple-ensembles/>
+- <https://web.archive.org/web/20210924023432/https://mlwave.com/kaggle-ensembling-guide/>
+- <https://www.overkillanalytics.com/more-is-always-better-the-power-of-simple-ensembles/>
 - <https://victorzhou.com/blog/intro-to-random-forests/>
 - <http://www.chioka.in/which-is-better-boosting-or-bagging/>
 - <https://towardsdatascience.com/ensemble-methods-bagging-boosting-and-stacking-c9214a10a205>
