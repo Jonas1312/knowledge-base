@@ -16,11 +16,12 @@ Source: https://github.com/realpython/rptree
 """
 
 
+HTML_SPACE = "&nbsp;"
 PIPE = "│"
 ELBOW = "└─"
 TEE = "├─"
-PIPE_PREFIX = "│  "
-SPACE_PREFIX = "   "
+PIPE_PREFIX = f"│{HTML_SPACE * 2}"
+SPACE_PREFIX = f"{HTML_SPACE * 3}"
 
 
 def dir_path_to_str(path: Path, linkify: bool) -> str:
