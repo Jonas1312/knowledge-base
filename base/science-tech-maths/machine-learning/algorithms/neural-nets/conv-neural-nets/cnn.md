@@ -102,3 +102,9 @@ More reading:
 ### Cons of transposed convolutions
 
 Better to upscale and then use conv layer because otherwise one gets those cheeky checkerboard artifacts because some pixels appear multiple times in the output: <https://distill.pub/2016/deconv-checkerboard/>
+
+## Data augmentation techniques
+
+<https://sebastianraschka.com/blog/2023/data-augmentation-pytorch.html>
+
+TrivialAugment gives good results: <https://arxiv.org/abs/2103.10158>

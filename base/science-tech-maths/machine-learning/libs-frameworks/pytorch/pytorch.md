@@ -37,6 +37,8 @@
     - [Use DistributedDataParallel not DataParallel](#use-distributeddataparallel-not-dataparallel)
     - [Profile your code](#profile-your-code)
     - [Use 16-bit precision](#use-16-bit-precision)
+    - [Static graphs](#static-graphs)
+    - [Lightning Fabric](#lightning-fabric)
   - [Torchmetrics](#torchmetrics)
   - [Visualize Layer Activations](#visualize-layer-activations)
   - [MultiGPU](#multigpu)
@@ -345,10 +347,24 @@ Pytorch lightning has a profiler built in.
 
 ### Use 16-bit precision
 
+Forward and backward pass in 16-bit precision, convert gradients to 16-bit and upgrade weights in 32-bit precision.
+
 This is another way to speed up training which we don’t see many people using. In 16-bit training parts of your model and your data go from 32-bit numbers to 16-bit numbers. This has a few advantages:
 
 - You use half the memory (which means you can double batch size and cut training time in half).
 - Certain GPUs (V100, 2080Ti) give you automatic speed-ups (3x-8x faster) because they are optimized for 16-bit computations.
+
+Can make your code run three times faster.
+
+### Static graphs
+
+Pytorch 2.0 added torch.compile()
+
+model = torch.compile(model) # NEW
+
+### Lightning Fabric
+
+Lightning Fabric is a lightweight Pytorch Lightning extension: <https://lightning.ai/docs/fabric/stable/>
 
 ## Torchmetrics
 
