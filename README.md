@@ -51,6 +51,7 @@ base<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [competitions](<base/science-tech-maths/machine-learning/competitions/competitions.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [data-visualisation](<base/science-tech-maths/machine-learning/data-visualisation/data-visualization.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [datasets](<base/science-tech-maths/machine-learning/datasets/find-datasets.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [ensemble](<base/science-tech-maths/machine-learning/ensemble/ensemble.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [hardware](<base/science-tech-maths/machine-learning/hardware/gpu-providers.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [implementation-tricks](<base/science-tech-maths/machine-learning/implementation-tricks/implementation-tricks.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [interpretability](<base/science-tech-maths/machine-learning/interpretability/interpretability.md>)<br>
