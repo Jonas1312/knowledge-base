@@ -64,7 +64,7 @@ class TreeGenerator:
         self._root_dir = Path(root_dir)
         self.tree = deque()
 
-        self.tree.append(f"{self._root_dir}")  # tree head
+        self.tree.append(f"{self._root_dir}<br>")  # tree head
         self._tree_body(self._root_dir)
 
     def _tree_body(self, directory, prefix=""):
