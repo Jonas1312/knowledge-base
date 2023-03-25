@@ -82,7 +82,7 @@ class TreeGenerator:
         return [entry for entry in entries if entry.is_dir()]
 
     def _add_directory(self, directory, index, last_index, prefix, connector):
-        self.tree.append(f"{prefix}{connector} {dir_path_to_str(directory, linkify=True)}")
+        self.tree.append(f"{prefix}{connector} {dir_path_to_str(directory, linkify=True)}<br>")
         if index != last_index:
             prefix += PIPE_PREFIX
         else:
