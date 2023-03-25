@@ -1,4 +1,4 @@
-# Losses used in ML
+# Losses for NNs
 
 ## Composite loss
 
