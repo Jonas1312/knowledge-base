@@ -38,6 +38,5 @@ In general, you do not need to center or standardize your data for regression. H
 - <http://jakevdp.github.io/blog/2015/07/06/model-complexity-myth/>
 - <https://www.hackingnote.com/en/machine-learning/linear-regression>
 - <https://enlight.nyc/projects/linear-regression/>
-- <https://datasciencevision.com/linear-regression/>
 - <https://nbviewer.jupyter.org/github/rasbt/algorithms_in_ipython_notebooks/blob/master/ipython_nbs/statistics/linregr_least_squares_fit.ipynb>
 - <https://wiseodd.github.io/techblog/2017/01/05/bayesian-regression/>

@@ -73,14 +73,13 @@ For each split of the tree building, we compute the best splitting using only a 
 - <https://github.com/ujjwalkarn/DataSciencePython#decision-trees-in-python>
 - <https://chunml.github.io/ChunML.github.io/tutorial/Decision-Tree/>
 - <https://stackoverflow.com/questions/1859554/what-is-entropy-and-information-gain>
-- <https://kldavenport.com/pure-python-decision-trees/>
+- <https://web.archive.org/web/20210414083548/https://kldavenport.com/pure-python-decision-trees/>
 - <https://enlight.nyc/projects/random-forest/>
 - <https://towardsdatascience.com/demystifying-entropy-f2c3221e2550>
 - <https://victorzhou.com/blog/gini-impurity/>
 - <https://stats.stackexchange.com/questions/210829/difference-is-summary-statistics-gini-coefficient-and-standard-deviation>
 - <https://en.wikipedia.org/wiki/Gini_coefficient>
 - <https://victorzhou.com/blog/information-gain/>
-- <https://datasciencevision.com/tree-based-models/>
 - <https://sebastianraschka.com/pdf/lecture-notes/stat479fs18/06_trees_slides.pdf>
 - <https://www.youtube.com/watch?v=g9c66TUylZ4>
 - <https://www.youtube.com/watch?v=7VeUPuFGJHk>

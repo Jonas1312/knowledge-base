@@ -29,7 +29,6 @@ The decision boundary for a logistic classifier is linear. (The classifier needs
 - <https://florianhartl.com/logistic-regression-geometric-intuition.html>
 - <https://chunml.github.io/ChunML.github.io/tutorial/Logistic-Regression/>
 - <https://learningwithdata.wordpress.com/2015/04/30/tutorial-on-logistic-regression-and-optimization-in-python/>
-- <http://blog.yhat.com/posts/logistic-regression-and-python.html>
 - <https://www.hackingnote.com/en/machine-learning/logistic-regression>
 - <https://www.quora.com/Why-is-logistic-regression-considered-a-linear-model>
 - <https://www.countbayesie.com/blog/2019/6/12/logistic-regression-from-bayes-theorem>

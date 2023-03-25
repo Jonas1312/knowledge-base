@@ -51,7 +51,6 @@ More reading:
 
 - <https://distill.pub/2019/computing-receptive-fields/>
 - <https://theaisummer.com/receptive-field/>
-- <https://fomoro.com/research/article/receptive-field-calculator>
 
 ## Implementation of the convolutions
 

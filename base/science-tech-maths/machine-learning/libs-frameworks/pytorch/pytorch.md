@@ -326,7 +326,7 @@ x2 = x.cos().cos() # Read from x in global memory, write to x2
 
 ### Gradient checkpointing
 
-[Deep Learning Memory Usage and Pytorch Optimization Tricks](https://www.sicara.ai/blog/2019-28-10-deep-learning-memory-usage-and-pytorch-optimization-tricks)
+[Deep Learning Memory Usage and Pytorch Optimization Tricks](https://www.sicara.fr/blog-technique/2019-28-10-deep-learning-memory-usage-and-pytorch-optimization-tricks)
 
 ### Pinned Memory
 

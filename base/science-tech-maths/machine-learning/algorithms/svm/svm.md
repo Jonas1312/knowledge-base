@@ -53,7 +53,6 @@ One-Class SVM is similar
 - <https://sebastianraschka.com/faq/docs/num-support-vectors.html>
 - <https://chunml.github.io/ChunML.github.io/tutorial/Support-Vector-Machine/>
 - <http://www.statsoft.com/textbook/support-vector-machines>
-- <https://blog.statsbot.co/support-vector-machines-tutorial-c1618e635e93>
 - <https://www.svm-tutorial.com/2015/06/svm-understanding-math-part-3/>
 - <https://cs.stanford.edu/people/karpathy/svmjs/demo/>
 - <https://dscm.quora.com/The-Kernel-Trick>
@@ -63,5 +62,3 @@ One-Class SVM is similar
 - <https://stats.stackexchange.com/questions/323593/how-does-a-one-class-svm-model-work?rq=1>
 - <https://towardsdatascience.com/support-vector-machines-soft-margin-formulation-and-kernel-trick-4c9729dc8efe>
 - <https://towardsdatascience.com/truly-understanding-the-kernel-trick-1aeb11560769>
-- <https://datasciencevision.com/svmp-python/>
-- <https://datasciencevision.com/svm/>
