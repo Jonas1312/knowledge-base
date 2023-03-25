@@ -63,13 +63,13 @@ base<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [maths](<base/science-tech-maths/maths/maths/maths.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [numerical-methods](<base/science-tech-maths/maths/numerical-methods/numerical-methods.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ probabilities-statistics<br>
-│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [bayes](<base/science-tech-maths/maths/probabilities-statistics/bayes>)<br>
-│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [central-limit-theorem](<base/science-tech-maths/maths/probabilities-statistics/central-limit-theorem/clt.md>)<br>
-│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [cheatsheets](<base/science-tech-maths/maths/probabilities-statistics/cheatsheets>)<br>
-│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [confidence-intervals](<base/science-tech-maths/maths/probabilities-statistics/confidence-intervals/95 CI Confidence Intervals.md>)<br>
-│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [hypothesis-testing](<base/science-tech-maths/maths/probabilities-statistics/hypothesis-testing/Hypothesis testing.md>)<br>
-│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [mle-map-estimation](<base/science-tech-maths/maths/probabilities-statistics/mle-map-estimation/mle-map.md>)<br>
-│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ [prob-stats](<base/science-tech-maths/maths/probabilities-statistics/prob-stats/probabilities.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [bayes](<base/science-tech-maths/maths/probabilities-statistics/bayes>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [central-limit-theorem](<base/science-tech-maths/maths/probabilities-statistics/central-limit-theorem/clt.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [cheatsheets](<base/science-tech-maths/maths/probabilities-statistics/cheatsheets>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [confidence-intervals](<base/science-tech-maths/maths/probabilities-statistics/confidence-intervals/95 CI Confidence Intervals.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [hypothesis-testing](<base/science-tech-maths/maths/probabilities-statistics/hypothesis-testing/Hypothesis testing.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [mle-map-estimation](<base/science-tech-maths/maths/probabilities-statistics/mle-map-estimation/mle-map.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ [prob-stats](<base/science-tech-maths/maths/probabilities-statistics/prob-stats/probabilities.md>)<br>
 │&nbsp;&nbsp;&nbsp;├─ programming<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ algorithms<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [data-structures](<base/science-tech-maths/programming/algorithms/data-structures>)<br>
