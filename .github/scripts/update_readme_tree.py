@@ -20,7 +20,7 @@ HTML_SPACE = "&nbsp;"
 PIPE = "│"
 ELBOW = "└─"
 TEE = "├─"
-PIPE_PREFIX = "│    "
+PIPE_PREFIX = "│   "
 SPACE_PREFIX = "    "
 
 
