@@ -57,6 +57,7 @@ base<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [interpretability](<base/science-tech-maths/machine-learning/interpretability/interpretability.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ libs-frameworks<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [pytorch](<base/science-tech-maths/machine-learning/libs-frameworks/pytorch/pytorch.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [metrics](<base/science-tech-maths/machine-learning/metrics/metrics.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [theory](<base/science-tech-maths/machine-learning/theory/machine-learning.md>)<br>
 │&nbsp;&nbsp;&nbsp;├─ maths<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [geometry](<base/science-tech-maths/maths/geometry/geometry.md>)<br>
