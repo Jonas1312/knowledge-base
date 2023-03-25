@@ -20,8 +20,8 @@ HTML_SPACE = "&nbsp;"
 PIPE = "│"
 ELBOW = "└─"
 TEE = "├─"
-PIPE_PREFIX = f"│{HTML_SPACE * 2}"
-SPACE_PREFIX = f"{HTML_SPACE * 3}"
+PIPE_PREFIX = f"│  "
+SPACE_PREFIX = f"   "
 
 
 def dir_path_to_str(path: Path, linkify: bool) -> str:
@@ -83,7 +83,9 @@ class TreeGenerator:
         return [entry for entry in entries if entry.is_dir()]
 
     def _add_directory(self, directory, index, last_index, prefix, connector):
-        self.tree.append(f"{prefix}{connector} {dir_path_to_str(directory, linkify=True)}<br>")
+        self.tree.append(
+            f'{prefix.replace(" ", HTML_SPACE)}{connector.replace(" ", HTML_SPACE)} {dir_path_to_str(directory, linkify=True)}<br>'
+        )
         if index != last_index:
             prefix += PIPE_PREFIX
         else:
