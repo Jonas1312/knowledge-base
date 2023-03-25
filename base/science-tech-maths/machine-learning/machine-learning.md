@@ -50,7 +50,8 @@ A machine learning algorithm is an algorithm that is able to learn patterns from
     - [Adaptive learning rates](#adaptive-learning-rates)
     - [Why do we need gradient descent?](#why-do-we-need-gradient-descent)
   - [Manifold hypothesis](#manifold-hypothesis)
-  - [Embeddings](#embeddings)
+  - [Embeddings, latent space, representation learning](#embeddings-latent-space-representation-learning)
+    - [Embeddings](#embeddings)
   - [Output of sigmoid is not a probability](#output-of-sigmoid-is-not-a-probability)
   - [No free lunch theorem](#no-free-lunch-theorem)
   - [Problems of AI](#problems-of-ai)
@@ -254,6 +255,7 @@ We want to maximise it, but usually we do gradient **descent**, so we just add a
 - it measures the divergence between two probability distribution
 - if the cross entropy is large, it means that the difference between two distribution is large
 - while if the cross entropy is small, it means that two distribution is similar to each other.
+- it is not a proper distance since it is not symmetric: <https://sebastianraschka.com/faq/docs/proper-metric-cross-entropy.html>
 
 $$\mathrm{H}(p, q) = \mathrm{E}_p[-\log q] = \mathrm{H}(p) + D_{\mathrm{KL}}(p \| q)$$
 
@@ -550,7 +552,13 @@ The mathematical basis for this is that a lot of the dimensions are highly corre
 
 In other words, the extrinsic dimensionality of a dataset often exceeds intrinsic dimensionality of an underlying phenomena.
 
-## Embeddings
+## Embeddings, latent space, representation learning
+
+- representations are encoded versions of the original input: one-hot encoding, embeddings, latent vectors, ...
+- latent vectors are intermediate representations: output of a layer in a neural network, bottleneck of an autoencoder, ...
+- embedding vectors are representations where similar items are close to each other: word2vec, siamese networks, ...
+
+### Embeddings
 
 In domains such as recommender systems, we must transform non-numeric variables (ex. items and users) into numbers and vectors.
 
