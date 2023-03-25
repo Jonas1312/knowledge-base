@@ -78,3 +78,22 @@ The only thing we can do is to describe the distribution.
 4. clustering: k-means, DBSCAN, GMMs.
 5. data visualization: SOMs, t-SNE, PCA.
 6. Data estimation and generation: GMMs, VAEs, GANs.
+
+## Put model in production
+
+### Knowledge distillation
+
+Knowledge distillation is a technique in machine learning where a smaller, more compact model is trained to replicate the behavior of a larger, more complex model, by transferring the knowledge learned by the larger model to the smaller model.
+
+The larger model, also called the teacher model, is typically a deep neural network that has been trained on a large dataset to perform a specific task, such as image classification or natural language processing. The smaller model, also called the student model, is usually a simpler version of the teacher model, such as a shallow neural network or a decision tree.
+
+The process of knowledge distillation involves training the student model to predict the same outputs as the teacher model, while also minimizing the difference between the two models' outputs. This can be achieved by using the teacher model's output probabilities as a soft label for the student model during training, instead of using the hard labels from the dataset.
+
+The benefits of knowledge distillation include reducing the size and complexity of models, which can lead to faster inference times and reduced memory usage, while also maintaining or even improving the accuracy of the model. Additionally, knowledge distillation can be used to transfer knowledge learned from pre-trained models to new, smaller models, allowing for faster and more efficient training of new models.
+
+## More
+
+- <https://github.com/ahkarami/Deep-Learning-in-Production>
+- <https://madewithml.com/>
+- <https://old.reddit.com/r/MachineLearning/comments/sobfvm/p_what_we_learned_by_accelerating_by_5x_hugging/>
+- <https://machinethink.net/blog/how-fast-is-my-model/>
