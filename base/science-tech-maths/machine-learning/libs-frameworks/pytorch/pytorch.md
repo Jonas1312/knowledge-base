@@ -303,7 +303,7 @@ Good rule of thumb:
 
 ### Batch size
 
-Max out batch size in your GPU. Read [this](../../algorithms/neural-nets/batch-size.md).
+Max out batch size in your GPU. Read [this](../../training-tricks/batch-size.md).
 
 ### cuddn.benchmark
 

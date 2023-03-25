@@ -48,3 +48,7 @@ Standardize the activations of every layers to keep the same distribution during
 - Deep learning allows the computer to build complex concepts out of simpler concepts
 - Deep learning may provide state-of-the-art results, but one does not always understand why, and part of our scientist job remains on explaining why things work
 - From a theoretical point of view, deep neural networks are not well understood because of their non-convex properties. Despite many efforts, there are no guarantees of convergence (since we are talking about nonlinear optimization in high-dimensional spaces). Thus, most of the research in this area is experimental and empirical.
+
+## Troubleshooting neural networks
+
+<http://josh-tobin.com/troubleshooting-deep-neural-networks.html>
