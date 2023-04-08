@@ -474,7 +474,7 @@ A discriminative model learns the conditional probability distribution $p(y|x)$.
 
 ## Ensemble methods
 
-[Notes about ensemble](../ensemble/ensemble.md)
+[Notes about ensemble](./ensemble/ensemble.md)
 
 ## Class imbalance
 

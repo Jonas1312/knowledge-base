@@ -120,13 +120,13 @@ If you want to start a disconnected history that records a set of paths that is 
 
 ## gitignore
 
-Global .gitignore: <https://julien.danjou.info/properly-managing-your-gitignore/>
+Global .gitignore: <https://web.archive.org/web/20220928181951/https://julien.danjou.info/properly-managing-your-gitignore/>
 
 ## Workflows
 
 - [GitHub Standard Fork & Pull Request Workflow](https://gist.github.com/Chaser324/ce0505fbed06b947d962)
 - [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
-- git flow: https://www.gitkraken.com/blog/gitflow
+- git flow: <https://www.gitkraken.com/blog/gitflow>
 
 ## Git Commit Titles and Messages
 

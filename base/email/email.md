@@ -6,8 +6,8 @@ To test a spam filter, you can use this string: `XJS*C4JDBQADN1.NSBN3*2IDNEN*GTU
 
 ## Test Pixel Tracking
 
-1) Create account on pastepixel.com  (<https://grabify.link> is also an option)
-2) Go on outlook.com
-3) Add module "insert html" by designmodo
-4) paste html code <img src="https://pastepixel.com/image/....png" alt=""/>
-5) Send email to yourself
+1. Create account on pastepixel.com  (<https://grabify.link> is also an option)
+2. Go on outlook.com
+3. Add module "insert html" by designmodo
+4. paste html code `<img src="https://pastepixel.com/image/....png" alt=""/>`
+5. Send email to yourself
