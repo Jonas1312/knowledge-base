@@ -11,6 +11,8 @@ base<br>
 ├─ [genealogy](<base/genealogy/genealogy.md>)<br>
 ├─ [image-editing](<base/image-editing/image-editing.md>)<br>
 ├─ [language-learning](<base/language-learning/language-learning.md>)<br>
+│&nbsp;&nbsp;&nbsp;├─ [singlish](<base/language-learning/singlish/singlish.md>)<br>
+│&nbsp;&nbsp;&nbsp;└─ [tagalog](<base/language-learning/tagalog/tagalog.md>)<br>
 ├─ [maps](<base/maps/maps.md>)<br>
 ├─ [paperwork](<base/paperwork>)<br>
 ├─ [project-management](<base/project-management>)<br>
