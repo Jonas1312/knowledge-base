@@ -21,6 +21,19 @@ To add diaeresis over a vowel (à, á, ả, ã, ạ) type the following:
 
 ## Pronouns in Vietnamese
 
+If you are a man, refer to yourself as:
+
+- "Tôi" (Me), when speaking to others
+- "Anh" (I), when speaking to a girl
+
+To address someone:
+
+- use "Chị" for a female: "Cám ơn, chị" (Thank you, sister/madam)
+- use "Anh" for a male: "Cám ơn, anh" (Thank you, brother/sir)
+- use "Em" for a female younger  than you:
+  - "Chào em" (Hello, sister)
+  - "Em tên gì?" (What's your name, sister?)
+
 | I   | You | When to use                                   | Example                                                            |
 | --- | --- | --------------------------------------------- | ------------------------------------------------------------------ |
 | Tôi | Bạn | Same age with the person                      | Tôi là Vy (I am Vy)<br>Bạn là Vy (You are Vy)<br>Xin chào Bạn Định |
