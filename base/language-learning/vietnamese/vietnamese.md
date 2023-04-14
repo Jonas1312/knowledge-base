@@ -23,24 +23,24 @@ To add diaeresis over a vowel (à, á, ả, ã, ạ) type the following:
 
 If you are a man, refer to yourself as:
 
-- "Tôi" (Me), when speaking to others
-- "Anh" (I), when speaking to a girl
+- "Anh" (I), only when speaking to a younger girl
+- "Tôi" (I, formal), when speaking to others
 
-To address someone:
+To address someone (still as a man):
 
 - use "Chị" for a female: "Cám ơn, chị" (Thank you, sister/madam)
 - use "Anh" for a male: "Cám ơn, anh" (Thank you, brother/sir)
-- use "Em" for a female younger  than you:
+- use "Em" for a female younger than you:
   - "Chào em" (Hello, sister)
   - "Em tên gì?" (What's your name, sister?)
 
-| I   | You | When to use                                   | Example                                                            |
-| --- | --- | --------------------------------------------- | ------------------------------------------------------------------ |
-| Tôi | Bạn | Same age with the person                      | Tôi là Vy (I am Vy)<br>Bạn là Vy (You are Vy)<br>Xin chào Bạn Định |
-| Em  | Chị | "I" is younger than "you"<br> "You" is female |                                                                    |
-| Chị | Em  | "I" is older than "You"<br>"I" is female      | Xin chào em My (Hello to a younger female)                         |
-| Em  | Anh | ‘I’ is younger than ‘You’<br>‘You’ is male    |
-| Anh | Em  | ‘I’ is older than ‘You’<br>‘I’ is male        |
+| I   | You | When to use                                  | Example                                                            |
+| --- | --- | -------------------------------------------- | ------------------------------------------------------------------ |
+| Tôi | Bạn | Same age with the person                     | Tôi là Vy (I am Vy)<br>Bạn là Vy (You are Vy)<br>Xin chào Bạn Định |
+| Em  | Chị | "I" is younger than "you"<br>"You" is female |                                                                    |
+| Chị | Em  | "I" is older than "You"<br>"I" is female     | Xin chào em My (Hello to a younger female)                         |
+| Em  | Anh | "I" is younger than "You"<br>"You" is male   |
+| Anh | Em  | "I" is older than "You"<br>"I" is male       |
 
 My name is Jonas:
 
@@ -52,13 +52,13 @@ When age difference is significant:
 | I   | You       | When to use                                                                                                        | Example                                                                        |
 | --- | --------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
 | Em  | Cô/Bác/dì | The other person is much older than you,<br>but not very old yet.<br>(looks younger than 70?).<br>"You" is female. | chào dì Định (from Lex)                                                        |
-| Em  | Chú/Bác   | Same as above, but "you" is male.                                                                                  | When you come to a friend’s house<br>you say “cháu chào bác” to the old person |
+| Em  | Chú/Bác   | Same as above, but "you" is male.                                                                                  | When you come to a friend"s house<br>you say “cháu chào bác” to the old person |
 | Con | Bà        | The other person is really much more<br>senior than you<br>(looks older than 70?)                                  |                                                                                |
 | Con | Ông       | Same as above, but for male.                                                                                       |                                                                                |
 
 ### He, She
 
-The word for ‘You’, if you were talking to the person directly + ấy (or ta).
+The word for "You", if you were talking to the person directly + ấy (or ta).
 
 ## Basic phrases
 
