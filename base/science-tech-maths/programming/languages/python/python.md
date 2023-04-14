@@ -1202,7 +1202,7 @@ How is it different to threads ?
 
 In general:
 
-- __async/await is a good choice for I/O-bound tasks__, where tasks spend most of their time waiting for I/O operations to complete
+- __async/await is a good choice for I/O-bound tasks__, where tasks spend most of their time waiting for I/O operations to complete (network, read/write file to disk, etc.).
 - __threads are a good choice for CPU-bound tasks__, where tasks spend most of their time performing computations.
 
 __Remember__: Async/await is not parallelism, it's concurrency.
