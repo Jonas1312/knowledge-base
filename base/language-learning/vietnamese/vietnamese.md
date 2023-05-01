@@ -80,6 +80,7 @@ The word for "You", if you were talking to the person directly + ấy (or ta).
 | Bye bye                            | "Hẹn gặp lại nhé" or "bái bai" (sounds like bye bye)                                                                                                                                                                              |
 | One cup of coffee please           | Cho tôi một cốc cà phê                                                                                                                                                                                                            |
 | One cup of coffee please, take out | Cho tôi một cốc cà phê mang về                                                                                                                                                                                                    |
+| I not can speak Vietnamese         | Tôi không thể nói tiếng Việt                                                                                                                                                                                                      |
 
 ### Ạ, Dạ
 
