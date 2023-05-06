@@ -16,10 +16,9 @@
     - [`__init__.py`](#__init__py)
     - [`__main__.py`](#__main__py)
   - [Types](#types)
-    - [Type hints](#type-hints)
-    - [Typevars](#typevars)
-      - [overload](#overload)
-    - [use object instead of Any](#use-object-instead-of-any)
+    - [overload](#overload)
+    - [Use object instead of Any](#use-object-instead-of-any)
+    - [Generics and TypeVar](#generics-and-typevar)
   - [Sequences](#sequences)
     - [Filter Map Reduce](#filter-map-reduce)
     - [Comprehension lists/dicts](#comprehension-listsdicts)
@@ -216,15 +215,7 @@ Similarly, `python -m tkinter` runs `tkinter/__main__.py`.
 
 ![](./types.svg)
 
-### Type hints
-
-### Typevars
-
-`T = TypeVar("T", A, B)` means type variable T has value restrictions of classes A and B, but because it's invariant... it only accepts those two (and not any child classes of A or B).
-
-`T = TypeVar("T", bound=Union[A])` is a type variable with upper bound `Union[A, B]`. It can be substituted for any type that is a subclass of `A`.
-
-#### overload
+### overload
 
 The `@overload` decorator is used to provide multiple function signatures for the same function. It allows the type checker to understand the different ways a function can be called and to narrow down the type of the result.
 
@@ -251,7 +242,7 @@ def double(input_: int | Sequence[int]) -> int | list[int]:
 
 All @overload definitions must come before the implementation, and multiple implementations are not allowed.
 
-### use object instead of Any
+### Use object instead of Any
 
 It’s common to overuse `typing.Any`. This is dangerous, since `Any` entirely disables type checking for a variable, allowing any operation.
 
@@ -265,6 +256,106 @@ x.foo()  # No pyright error, but runtime error
 
 x: object = 1
 x.foo()  # Pyright error
+```
+
+### Generics and TypeVar
+
+The aim of generics are to:
+
+- Allow functions, methods and classes to work with arguments of any type whilst maintaining the information on the relationships between things, such as arguments and return values.
+- Better define how types can mix
+
+Let's build a method that returns the first element of a sequence:
+
+```python
+def first(container):
+    return container[0]
+```
+
+Let's add type hints:
+
+```python
+from typing import Sequence, TypeVar
+
+T = TypeVar('T')  # generic type
+
+def first(container: Sequence[T]) -> T:
+    return container[0]
+```
+
+Much better! Now we can see that the function takes a sequence of T and returns a T. But what is T? It's a type variable. It's a placeholder for a type that will be provided later.
+
+`T = TypeVar("T", A, B)` means type variable `T` has value restrictions of classes `A` and `B`, but because it's invariant... it only accepts those two (and not any child classes of `A` or `B`).
+
+`T = TypeVar("T", bound=A)` is a type variable with upper bound `A`. It can be substituted for any type that is a subclass of `A`.
+
+`T` and `U` are commonly used names in generics to represent type variables.
+
+Generics are not just used for function and method parameters. They can also be used to define classes that can contain, or work with, multiple types.
+
+In our previous example, we use `Sequence[T]`. `Sequence` is a generic type. It's a type that takes a type variable. It's a generic container type, like `List`, `Tuple`, `Dict`, `Set`, etc. Most container types in the Typing module are generic.
+
+If we did not define a type on instantiation, then it assumes `Any`. That means that `my_list: List = ['a']` and `my_list: List[Any] = ['a']` are the same.
+
+```python
+from typing import TypeVar, Generic
+
+T = TypeVar('T')
+
+class Box(Generic[T]):
+    def __init__(self, content: T) -> None:
+        self.content = content
+
+    def get_content(self) -> T:
+        return self.content
+
+box = Box(1)
+reveal_type(box)  # Revealed type is 'Box[builtins.int]'
+reveal_type(box.get_content())  # Revealed type is 'builtins.int'
+```
+
+Advanced example: we want a class with an attribute `.jobs` that has a different type depending on an input parameter.
+
+```python
+from typing import Generic, Literal, TypeVar, cast, overload, reveal_type
+
+InputType = Literal["TEXT", "IMAGE", "VIDEO"]
+
+# we don't fill the class for this example...
+class TextJob: ...
+class ImageJob: ...
+class VideoJob: ...
+
+T = TypeVar("T", TextJob, ImageJob, VideoJob)
+
+class MyMainClass(Generic[T]):
+    jobs: T  # we don't know the type yet, but we know it will be one of the 3 classes above
+
+    # we use overload to define the different signatures of the __init__ method
+    @overload
+    def __init__(self: "MyMainClass[TextJob]", input_type: Literal["TEXT"]) -> None: ...
+    @overload
+    def __init__(self: "MyMainClass[ImageJob]", input_type: Literal["IMAGE"]) -> None: ...
+    @overload
+    def __init__(self: "MyMainClass[VideoJob]", input_type: Literal["VIDEO"]) -> None: ...
+
+    # we usually start with the "real" implementation and then we define the overload above
+    def __init__(self, input_type: InputType) -> None:
+        # we set the jobs attribute to the correct type depending on the input_type
+        # we also cast the result to the correct type
+        # note that cast(typ, val) does nothing at runtime, it's only for type checking
+        if input_type == "TEXT":
+            self.jobs = cast(T, TextJob())
+        elif input_type == "IMAGE":
+            self.jobs = cast(T, ImageJob())
+        elif input_type == "VIDEO":
+            self.jobs = cast(T, VideoJob())
+
+
+# now we can instantiate the class with the correct type
+my_class = MyMainClass(input_type="TEXT")
+reveal_type(my_class)  # Revealed type is 'MyMainClass[TextJob]'
+reveal_type(my_class.jobs)  # Revealed type is 'TextJob'
 ```
 
 ## Sequences
