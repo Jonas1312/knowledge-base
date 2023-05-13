@@ -43,9 +43,11 @@ Having a 25% percentile means that 25% of the data is below that value.
 - covariance: $Cov(X,Y) = E[(X-E[X])(Y-E[Y])] = E[XY] - E[X]E[Y]$
 - correlation: $Corr(X,Y) = \frac{Cov(X,Y)}{\sigma_X\sigma_Y} = \frac{Cov(X,Y)}{\sqrt{Var(X)Var(Y)}}$
   - having a high correlation doesn't mean that the variables are dependent, it just means that they are related.
-  - also, having a low correlation doesn't mean that the variables are independent, since correlation is a measure of linear dependence. There can be other types of dependence that are not captured by correlation.
+  - also, having a low correlation doesn't mean that the variables are independent, since **correlation is a measure of linear dependence**. There can be other types of dependence that are not captured by correlation.
 
 ## Interview questions
+
+## Estimators of the mean and variance
 
 - estimator of the mean: $E(\bar{X}) = E(\frac{X_1 + ... + X_n}{n}) = \frac{1}{n}[E(X_1) + ... + E(X_n)] = \frac{1}{n}(\mu_1 + ... + \mu_n) = \frac{1}{n}n \mu = \mu$
 - of variance: $Var(\bar{X})=\text{Var}\left(\frac{\sum_{i=1}^n X_i}{n}\right) = \frac{1}{n^2}\text{Var}\left(\sum_{i=1}^n X_i\right) = \frac{1}{n^2}\sum_{i=1}^n\text{Var}\left(X_i\right)  = \frac{1}{n^2} n\sigma^2 = \frac{\sigma^2}{n}$
@@ -69,6 +71,12 @@ Having a 25% percentile means that 25% of the data is below that value.
 - YES, cause you have 1/3 chance to have a car with the first door you picked
 - but 2/3 with the other doors
 - the fact that one door is opened now doesn't change the 2/3 probability
+
+### Dice rolling
+
+If I roll a dice 6 times, what is the probability that a 2 will have been rolled at some point during those 6 rolls?
+
+$$P(\text{at least one 2}) = 1 - P(\text{no 2}) = 1 - (\frac{5}{6})^6 = 0.6651$$
 
 ### Fair coin from unfair coin
 

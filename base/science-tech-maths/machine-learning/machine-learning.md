@@ -56,6 +56,7 @@ A machine learning algorithm is an algorithm that is able to learn patterns from
   - [No free lunch theorem](#no-free-lunch-theorem)
   - [Problems of AI](#problems-of-ai)
   - [Jobs in ML](#jobs-in-ml)
+  - [Advice for ML engineers](#advice-for-ml-engineers)
 
 ## Tackling a ML problem
 
@@ -623,3 +624,8 @@ What is a data scientist, ML engineer, ... ?
 - data engineer (builds the data ingestion pipelines)
 - machine learning engineer (train and iterate models to perform the task)
 - software engineer (aids with integrating machine learning model with the rest of the product)
+
+## Advice for ML engineers
+
+- don't apply the same model to different problems. Instead, try to understand the problem and the data, and then choose the model that best fits the problem.
+- don't choose complex models just because they are complex. Instead, choose the simplest model that solves the problem.
