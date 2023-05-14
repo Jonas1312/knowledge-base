@@ -31,6 +31,7 @@
     - [Sets](#sets)
     - [Frozen sets](#frozen-sets)
     - [String](#string)
+    - [Enum](#enum)
     - [Data Classes](#data-classes)
       - [Namedtuple](#namedtuple)
       - [TypedDict](#typeddict)
@@ -79,6 +80,10 @@
     - [`asyncio.gather()`](#asynciogather)
     - [`asyncio.create_task()`](#asynciocreate_task)
     - [`asyncio.as_completed()`](#asyncioas_completed)
+  - [FastApi](#fastapi)
+    - [HTTP methods](#http-methods)
+    - [Order matters](#order-matters)
+    - [Parameters](#parameters)
 
 ## Cheat Sheets
 
@@ -456,6 +461,32 @@ immutables
 
 - `str1.rfind(pattern, begin=0, end=len(str1))`
 
+### Enum
+
+```python
+from enum import Enum, auto
+
+class Color(Enum):
+    RED = auto()  # auto() assigns a value automatically. Here RED = 1
+    GREEN = auto()
+    BLUE = auto()
+
+print(Color.RED)  # Color.RED
+```
+
+Can also have typed enums:
+
+```python
+from enum import Enum
+
+class Color(Enum):
+    RED: int = 1
+    GREEN: int = 2
+    BLUE: int = 3
+
+print(Color.RED)  # Color.RED
+```
+
 ### Data Classes
 
 #### Namedtuple
@@ -518,6 +549,15 @@ class DataClassCard:
 - pydantic allows you to use mutable objects like lists or dicts as default values. pydantic deep-copies the default value for each new instance.
 - attrs and data classes are much faster than pydantic when no validation is needed. They also use a lot less memory.
 - If you need extended input validation and data conversion, Pydantic is the tool of choice.
+
+```python
+from pydantic import BaseModel, Field
+
+class Item(BaseModel):
+    name: str
+    price: float = Field(gt=0, description="The price must be greater than zero")
+    description: Optional[str] = Field(None, title="Description of the item", max_length=300)
+```
 
 ## Decorators
 
@@ -1281,7 +1321,9 @@ async def my_function():
 asyncio.run(my_function())  # Run the function until it is complete.
 ```
 
-Await is used to pause the function until the coroutine is complete. The await keyword can only be used inside an async function.
+Await is used to pause the function until the coroutine is complete. __The await keyword can only be used inside an async function.__
+
+Await tells Python interpreter to run other code in the meantime, and then return to the await statement later.
 
 How is it different to threads ?
 
@@ -1367,3 +1409,172 @@ async def main():
         result = await task
         print(result)
 ```
+
+## FastApi
+
+FastAPI is a modern, fast (high-performance), web framework for building APIs with Python 3.6+ based on standard Python type hints.
+
+```cmd
+pip install "fastapi[all]"
+```
+
+In FastApi, we define paths operations. A path operation is a function that handles an HTTP request.
+
+In a url like `http://example.com/items/foo`, the path would be `/items/foo`.
+
+```python
+from fastapi import FastAPI
+from typing import Optional
+
+app = FastAPI()  # create an instance of the FastAPI class
+
+@app.get("/")  # decorator to tell FastAPI which path operation this function handles
+def read_root():
+    return {"message": "Hello World"}  # return a dict that will be converted into JSON
+
+@app.get("/items/{item_id}")  # you can define path parameters with {}
+def read_item(item_id: int, q: Optional[str] = None):
+    return {"item_id": item_id, "q": q}
+
+@app.get('/burgers')
+async def read_burgers():  # async function
+    burgers = await get_burgers(2)  # await the async function get_burgers
+    return burgers
+```
+
+Run the server with:
+
+```cmd
+uvicorn main:app --reload
+```
+
+`--reload`: make the server restart after code changes. Only do this for development.
+
+Check it, open your browser at <http://127.0.0.1:8000/items/5?q=somequery>
+
+You will see the json response:
+
+```json
+{
+    "item_id": 5,
+    "q": "somequery"
+}
+```
+
+`q` is an optional query parameter. If you don't provide it, it will be `None`.
+
+Now, to send data to the server, we can use the `POST` method:
+
+```python
+from pydantic import BaseModel
+
+class Item(BaseModel):
+    name: str
+    price: float
+
+@app.post("/items/")  # POST method
+async def create_item(item: Item):
+    return {"message": f"Item {item.name} created!"}
+```
+
+`BaseModel` is a class that allows us to define the fields of our data model. It will also validate the data we send to the server.
+
+Now, we can send a POST request to <http://127.0.0.1:8000/items/> with the following body:
+
+```json
+{
+    "name": "Cheese Burger",
+    "price": 4.99
+}
+```
+
+And we will get the following response:
+
+```json
+{
+    "message": "Item Cheese Burger created!"
+}
+```
+
+### HTTP methods
+
+When building APIs, you normally use these specific HTTP methods to perform a specific action.
+
+Normally you use:
+
+- POST: to create data. `@app.post`
+- GET: to read data.  `@app.get`
+- PUT: to update data.  `@app.put`
+- DELETE: to delete data.  `@app.delete`
+
+In FastApi, the return of methods can be a `dict`, a `list`, a `str`, a `int`, a `float`, a `bool`, or a Pydantic model. Anything that can be converted to JSON.
+
+### Order matters
+
+The order of the path operations matters. If you define a path operation with a path of `/users/me` and another with `/users/{user_id}`, the first will be matched before the second. Because `/users/me` will match `/users/{user_id}`.
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/users/me")
+async def read_user_me():
+    return {"user_id": "the current user"}
+
+
+@app.get("/users/{user_id}")
+async def read_user(user_id: str):
+    return {"user_id": user_id}
+```
+
+The `read_users_1` will always be used since the path matches first:
+
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/users")
+async def read_users_1():
+    return ["Rick", "Morty"]
+
+
+@app.get("/users")
+async def read_users_2():
+    return ["Bean", "Elfo"]
+```
+
+### Parameters
+
+Query parameters are optional parameters that are passed in the url.
+
+```python
+
+@app.get("/items/")
+async def read_item(skip: int = 0, limit: int = 10):
+    return fake_items_db[skip : skip + limit]
+```
+
+You can use those parameters calling this url: <http://127.0.0.1:8000/items/?skip=0&limit=100>
+
+You can also declare optional query parameters with `typing.Optional`.
+
+```python
+@app.get("/items/{item_id}")
+async def read_user_item(
+    item_id: str, needy: str, skip: int = 0, limit: Union[int, None] = None
+):
+    item = {"item_id": item_id, "needy": needy, "skip": skip, "limit": limit}
+    return item
+```
+
+`item_id` is a path parameter.
+
+In this case, there are 3 query parameters:
+
+- needy, a required str.
+- skip, an int with a default value of 0.
+- limit, an optional int.
