@@ -1,6 +1,6 @@
 # Vietnamese
 
-## Accent Marks
+## Accent Marks and Diacritics on Keyboard
 
 To add an accent mark over a vowel (â, ă, ê, ô, ơ, ư), type the following:
 
@@ -28,8 +28,8 @@ If you are a man, refer to yourself as:
 
 To address someone (still as a man):
 
-- use "Chị" for a female: "Cám ơn, chị" (Thank you, sister/madam)
-- use "Anh" for a male: "Cám ơn, anh" (Thank you, brother/sir)
+- use "Chị" for a female: "cảm ơn, chị" (Thank you, sister/madam)
+- use "Anh" for a male: "cảm ơn, anh" (Thank you, brother/sir)
 - use "Em" for a person younger than you:
   - "Chào em" (Hello, younger brother/sister)
   - "Em tên gì?" (What's your name?)
@@ -49,12 +49,12 @@ My name is Jonas:
 
 When age difference is significant:
 
-| I   | You       | When to use                                                                                                        | Example                                                                        |
-| --- | --------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| Em  | Cô/Bác/dì | The other person is much older than you,<br>but not very old yet.<br>(looks younger than 70?).<br>"You" is female. | chào dì Định (from Lex)                                                        |
-| Em  | Chú/Bác   | Same as above, but "you" is male.                                                                                  | When you come to a friend"s house<br>you say “cháu chào bác” to the old person |
-| Con | Bà        | The other person is really much more<br>senior than you<br>(looks older than 70?)                                  |                                                                                |
-| Con | Ông       | Same as above, but for male.                                                                                       |                                                                                |
+| I   | You                                                     | When to use                                                                                                        | Example                                                                        |
+| --- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| Em  | Cháu (Northern) - Con (Southern) + Cô/dì/chú/bác/ông/bà | The other person is much older than you,<br>but not very old yet.<br>(looks younger than 70?).<br>"You" is female. | Con chào dì Định (from little Lex)                                             |
+| Em  | Chú/Bác                                                 | Same as above, but "you" is male.                                                                                  | When you come to a friend"s house<br>you say “cháu chào bác” to the old person |
+| Con | Bà                                                      | The other person is really much more<br>senior than you<br>(looks older than 70?)                                  |                                                                                |
+| Con | Ông                                                     | Same as above, but for male.                                                                                       |                                                                                |
 
 ### He, She
 
@@ -74,13 +74,13 @@ The word for "You", if you were talking to the person directly + ấy (or ta).
 | No                                 | Không                                                                                                                                                                                                                             |
 | My name is ..., what's yours?      | Tôi tên là ..., bạn tên là gì?                                                                                                                                                                                                    |
 | A lot                              | Yêu (to love) anh (you) nhiều (a lot)                                                                                                                                                                                             |
-| Have a nice day                    | Ngày (day) vui (happy/pleasant) vẻ                                                                                                                                                                                                |
 | good morning my friend             | chào buổi sáng bạn ơi                                                                                                                                                                                                             |
 | Hi everyone                        | Chào mọi người                                                                                                                                                                                                                    |
-| Bye bye                            | "Hẹn gặp lại nhé" or "bái bai" (sounds like bye bye)                                                                                                                                                                              |
+| Bye bye                            | "bái bai" (sounds like bye bye)                                                                                                                                                                                                   |
+| See you again                      | Hẹn gặp lại nhé                                                                                                                                                                                                                   |
 | One cup of coffee please           | Cho tôi một cốc cà phê                                                                                                                                                                                                            |
 | One cup of coffee please, take out | Cho tôi một cốc cà phê mang về                                                                                                                                                                                                    |
-| I not can speak Vietnamese         | Tôi không thể nói tiếng Việt                                                                                                                                                                                                      |
+| I can not speak Vietnamese         | Tôi không thể nói tiếng Việt                                                                                                                                                                                                      |
 
 ### Ạ, Dạ
 
