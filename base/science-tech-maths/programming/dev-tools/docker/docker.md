@@ -35,3 +35,11 @@ VMs can run a different kernel than the one of the host OS.
 ## Tools
 
 - [Deepo](https://github.com/ufoym/deepo/): Set up deep learning environment in a single command line
+
+## Docker compose
+
+Docker Compose is a way to create reproducible Docker containers using a config file instead of extremely long Docker commands. By using a structured config file, mistakes are easier to pick up and container interactions are easier to define.
+
+Docker compose is also a tool to run multiple containers at once. It is configured with a YAML file called `docker-compose.yml`.
+
+Tutorial: <https://adamtheautomator.com/docker-compose-tutorial/>

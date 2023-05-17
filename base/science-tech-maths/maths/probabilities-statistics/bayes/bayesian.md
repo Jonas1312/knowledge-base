@@ -55,6 +55,10 @@ The frequentist starts and ends with numbers, the bayesian starts and ends with 
 
 ## Probability vs Likelihood
 
+On your PDF (probability density function):
+
+![](./probability-vs-likelihood-2.png)
+
 ![](./probability-vs-likelihood.png)
 
 - Let's say we have a coin. It's loaded, so that it comes up 75% heads and 25% tails, but we don't know this.
