@@ -44,6 +44,7 @@
     - [Inheritance and MRO: Method Resolution Order](#inheritance-and-mro-method-resolution-order)
     - [ABC: Abstract Base Classes](#abc-abstract-base-classes)
     - [Class Decorators](#class-decorators)
+    - [`__new__`](#__new__)
     - [Metaclasses](#metaclasses)
       - [Example](#example)
   - [Numpy](#numpy)
@@ -672,6 +673,19 @@ Since C.x is not defined, it searches in A, and since A.x is now 3, C.x is now 3
 
 ### ABC: Abstract Base Classes
 
+```python
+from abc import ABC, abstractmethod
+
+class AbstractClass(ABC):
+    @abstractmethod
+    def foo(self):
+        raise NotImplementedError  # or pass or ...
+
+class ConcreteClass(AbstractClass):
+    def foo(self):
+        return "foo"
+```
+
 ### Class Decorators
 
 - staticmethod: code that belongs to a class, but that doesn't use the object itself at all
@@ -681,6 +695,22 @@ not bound to an object, but to… a class
 - property: access or compute property
 
 <https://towardsdatascience.com/why-you-should-wrap-decorators-in-python-5ac3676835f9>
+
+### `__new__`
+
+`__new__` is the first step of instance creation. It's called first, and is responsible for returning a new instance of your class. In contrast, `__init__` doesn't return anything; it's only responsible for initializing the instance after it's been created.
+
+You can use `__new__` to create a singleton class for example:
+
+```python
+class MyClass:
+    _self = None
+
+    def __new__(cls, *args, **kwargs):
+        if not cls._self:
+            cls._self = super().__new__(cls, *args, **kwargs)
+        return cls._self
+```
 
 ### Metaclasses
 
@@ -870,6 +900,7 @@ More: <https://guicommits.com/how-to-log-in-python-like-a-pro/>
 ## Organize Python code
 
 - <https://guicommits.com/organize-python-code-like-a-pro/>
+- <https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure%3E>
 
 ## Python Testing
 
