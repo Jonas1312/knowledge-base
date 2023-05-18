@@ -49,16 +49,21 @@ My name is Jonas:
 
 When age difference is significant:
 
-| I   | You                                                     | When to use                                                                                                        | Example                                                                        |
-| --- | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| Em  | Cháu (Northern) - Con (Southern) + Cô/dì/chú/bác/ông/bà | The other person is much older than you,<br>but not very old yet.<br>(looks younger than 70?).<br>"You" is female. | Con chào dì Định (from little Lex)                                             |
-| Em  | Chú/Bác                                                 | Same as above, but "you" is male.                                                                                  | When you come to a friend"s house<br>you say “cháu chào bác” to the old person |
-| Con | Bà                                                      | The other person is really much more<br>senior than you<br>(looks older than 70?)                                  |                                                                                |
-| Con | Ông                                                     | Same as above, but for male.                                                                                       |                                                                                |
+| I                                            | You         | When to use                                                                                                        | Example                                                                        |
+| -------------------------------------------- | ----------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| Cháu (Northern)<br>Con (southern vietnamese) | Cô, dì, bác | The other person is much older than you,<br>but not very old yet.<br>(looks younger than 70?).<br>"You" is female. | Con chào dì Định (from little Lex)                                             |
+| Cháu (Northern)<br>Con (southern vietnamese) | Chú, Bác    | Same as above, but "you" is male.                                                                                  | When you come to a friend"s house<br>you say “cháu chào bác” to the old person |
+| Cháu (Northern)<br>Con (southern vietnamese) | Bà          | The other person is really much more<br>senior than you<br>(looks older than 70?)                                  | Con chào bà (from younger person, means: Hello grandma)                        |
+| Cháu (Northern)<br>Con (southern vietnamese) | Ông         | Same as above, but for male.                                                                                       | Con chào ông (from younger person, means: Hello grandpa)                       |
 
 ### He, She
 
 The word for "You", if you were talking to the person directly + ấy (or ta).
+
+### We
+
+- Chúng tôi - excluding the listener: If you are in a restaurant and say to the waiter Chúng tôi muốn đặt cơm (we want to order rice). You exclude the waiter from the “we”.
+- Chúng ta - including the listener: If we are with a friend and you ask Chúng ta đi đâu? (Where are we going? or We go where?) you include your friend in the “we”.
 
 ## Basic phrases
 
