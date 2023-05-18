@@ -48,7 +48,7 @@ One-Class SVM is similar
 - <https://pythonmachinelearning.pro/classification-with-support-vector-machines/>
 - <https://github.com/ujjwalkarn/DataSciencePython#support-vector-machine-in-python>
 - <https://www.csie.ntu.edu.tw/~cjlin/papers/guide/guide.pdf>
-- <http://rvlasveld.github.io/blog/2013/07/12/introduction-to-one-class-support-vector-machines/>
+- <https://web.archive.org/web/20230318045102/http://rvlasveld.github.io/blog/2013/07/12/introduction-to-one-class-support-vector-machines/>
 - <http://vxy10.github.io/2016/06/26/lin-svm/>
 - <https://sebastianraschka.com/faq/docs/num-support-vectors.html>
 - <https://chunml.github.io/ChunML.github.io/tutorial/Support-Vector-Machine/>

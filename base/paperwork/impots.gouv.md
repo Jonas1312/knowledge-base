@@ -1,3 +1,3 @@
 # French tax administration
 
-<https://cfsmsp.impots.gouv.fr/secavis/>
+<https://www.impots.gouv.fr/verifavis2-api/front>
