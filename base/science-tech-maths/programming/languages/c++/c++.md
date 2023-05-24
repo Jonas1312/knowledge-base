@@ -769,7 +769,7 @@ uint8_t *paddedArray = new uint8_t[size]{}; // all zeros
 uint8_t *paddedArray = new uint8_t[size]{3, 4}; // 3, 4, 0...
 
 #include <cstdlib>
-numbers = (int *) malloc (40 * sizeof(int));
+numbers = (int *) malloc (40 * sizeof(int));  // C-style. sizeof(int) is 4 = 32 bits = 4 bytes
 free(numbers);
 ```
 
