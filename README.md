@@ -74,7 +74,7 @@ base<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [hypothesis-testing](<base/science-tech-maths/maths/probabilities-statistics/hypothesis-testing/Hypothesis testing.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ [mle-map-estimation](<base/science-tech-maths/maths/probabilities-statistics/mle-map-estimation/mle-map.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ [prob-stats](<base/science-tech-maths/maths/probabilities-statistics/prob-stats/probabilities.md>)<br>
-│&nbsp;&nbsp;&nbsp;├─ programming<br>
+│&nbsp;&nbsp;&nbsp;├─ [programming](<base/science-tech-maths/programming/programming.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [algorithms](<base/science-tech-maths/programming/algorithms/algorithms.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [data-structures](<base/science-tech-maths/programming/algorithms/data-structures>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [job-interviews](<base/science-tech-maths/programming/algorithms/job-interviews>)<br>
