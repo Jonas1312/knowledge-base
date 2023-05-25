@@ -176,10 +176,14 @@ num_params = sum(p.numel() for p in model.parameters()) # Total parameters
 num_trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)  # Trainable parameters
 ```
 
-### No grad decorator
+### No grad and inference_mode decorators
 
 ```python
 @torch.no_grad()
+def eval(model, data):
+  model.eval()
+  
+@torch.inference_mode()
 def eval(model, data):
   model.eval()
 ```
