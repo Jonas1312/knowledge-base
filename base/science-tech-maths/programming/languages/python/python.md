@@ -74,6 +74,7 @@
       - [Patch dictionnaries](#patch-dictionnaries)
       - [Property mocking](#property-mocking)
       - [Patch constant](#patch-constant)
+      - [wraps](#wraps)
     - [pytest monkeypatch fixture](#pytest-monkeypatch-fixture)
     - [pytest mocker fixture](#pytest-mocker-fixture)
   - [Async await](#async-await)
@@ -1298,6 +1299,22 @@ def test(mock_square):
 
 ```python
 @patch("code.MY_CONSTANT", new=3)
+```
+
+#### wraps
+
+`my_method = MagicMock(wraps=my_method)` will return a MagicMock object that wraps the original method. This means that when you call the MagicMock object, the original method will be called.
+
+```python
+from unittest.mock import MagicMock
+
+def my_method():
+    return 1
+
+my_method = MagicMock(wraps=my_method)
+print(my_method())  # 1
+
+my_method.assert_called_once()
 ```
 
 ### pytest monkeypatch fixture
