@@ -15,7 +15,7 @@
     - [Change last layer](#change-last-layer)
     - [Delete last layer](#delete-last-layer)
     - [Get number of parameters](#get-number-of-parameters)
-    - [No grad decorator](#no-grad-decorator)
+    - [No grad and inference\_mode decorators](#no-grad-and-inference_mode-decorators)
     - [Gradient clipping](#gradient-clipping)
     - [Remove bias weight decay](#remove-bias-weight-decay)
     - [Test time augmentation (TTA)](#test-time-augmentation-tta)
@@ -57,7 +57,9 @@
 - [Neural Network Programming - Deep Learning with PyTorch](https://www.youtube.com/playlist?list=PLZbbT5o_s2xrfNyHZsM6ufI0iZENK9xgG)
 - [Understanding PyTorch with an example: a step-by-step tutorial](https://towardsdatascience.com/understanding-pytorch-with-an-example-a-step-by-step-tutorial-81fc5f8c4e8e)
 - <https://towardsdatascience.com/how-to-use-pytorch-hooks-5041d777f904>
-<https://leimao.github.io/blog/PyTorch-Benchmark/>
+- <https://leimao.github.io/blog/PyTorch-Benchmark/>
+- <https://www.learnpytorch.io/#does-this-course-cover-pytorch-20>
+- <https://github.com/srush/Tensor-Puzzles>
 
 ## General Functioning
 
@@ -182,7 +184,7 @@ num_trainable_params = sum(p.numel() for p in model.parameters() if p.requires_g
 @torch.no_grad()
 def eval(model, data):
   model.eval()
-  
+
 @torch.inference_mode()
 def eval(model, data):
   model.eval()
