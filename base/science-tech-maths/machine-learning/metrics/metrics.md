@@ -22,6 +22,16 @@
 - <https://towardsdatascience.com/why-you-should-stop-using-the-roc-curve-a46a9adc728>
 - <https://stats.stackexchange.com/questions/7207/roc-vs-precision-and-recall-curves>
 
+## mAP
+
+So in object detection, we usually say that a predicted box is ok if the IoU of the ground truth box and the predicted box is greater than a threshold (usually 0.5). This is like a binary classification problem.
+
+Different threshold values will give different precision and recall values, and for all threshold values, we can actually draw the precision-recall curve.
+
+The AP is the area under the precision-recall curve.
+
+In object detection, the mAP is the mean of the average precision (AP) accross all classes.
+
 ## MCC
 
 <https://lettier.github.io/posts/2016-08-05-matthews-correlation-coefficient.html>

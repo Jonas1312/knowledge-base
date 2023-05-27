@@ -39,6 +39,7 @@
     - [Use 16-bit precision](#use-16-bit-precision)
     - [Static graphs](#static-graphs)
     - [Lightning Fabric](#lightning-fabric)
+    - [More tips](#more-tips)
   - [Torchmetrics](#torchmetrics)
   - [Visualize Layer Activations](#visualize-layer-activations)
   - [MultiGPU](#multigpu)
@@ -371,6 +372,10 @@ model = torch.compile(model) # NEW
 ### Lightning Fabric
 
 Lightning Fabric is a lightweight Pytorch Lightning extension: <https://lightning.ai/docs/fabric/stable/>
+
+### More tips
+
+- <https://efficientdl.com/faster-deep-learning-in-pytorch-a-guide/>
 
 ## Torchmetrics
 

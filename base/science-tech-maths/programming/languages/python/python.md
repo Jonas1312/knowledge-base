@@ -19,10 +19,13 @@
     - [overload](#overload)
     - [Use object instead of Any](#use-object-instead-of-any)
     - [Generics and TypeVar](#generics-and-typevar)
+    - [Constants](#constants)
   - [Sequences](#sequences)
     - [Filter Map Reduce](#filter-map-reduce)
     - [Comprehension lists/dicts](#comprehension-listsdicts)
     - [Custom sort](#custom-sort)
+    - [Custom max](#custom-max)
+  - [Itertools](#itertools)
   - [Generators, Iterators](#generators-iterators)
     - [yield from](#yield-from)
   - [Data structures](#data-structures)
@@ -365,6 +368,14 @@ reveal_type(my_class)  # Revealed type is 'MyMainClass[TextJob]'
 reveal_type(my_class.jobs)  # Revealed type is 'TextJob'
 ```
 
+### Constants
+
+```python
+from typing import Final
+
+PI: Final = 3.14
+```
+
 ## Sequences
 
 ### Filter Map Reduce
@@ -380,7 +391,23 @@ reveal_type(my_class.jobs)  # Revealed type is 'TextJob'
 
 ### Custom sort
 
-- `print(sorted(x, key=functools.cmp_to_key(greater)))`
+```python
+x = sorted(x, key=functools.cmp_to_key(greater))
+```
+
+### Custom max
+
+```python
+max_len_string = max(list_of_strings, key=len)
+```
+
+## Itertools
+
+- `islice(iterable, N)`: return an iterator of N selected elements from an iterable (`islice('ABCDEFG', 2) --> A B`)
+- `chain(*iterables)`: return an iterator that combines the elements of several iterators into a single sequential iterator (`chain('ABC', 'DEF') --> A B C D E F`)
+- `groupby(iterable, key=None)`: return an iterator that produces sets of values organized by a common key. MAKE SURE TO SORT THE ITERABLE FIRST! (`groupby('AAAABBBCC') --> A B C`)
+- `pairwise(iterable)`: return an iterator that produces pairs of consecutive elements from an iterable (`pairwise('ABCDEFG') --> AB BC CD DE EF FG`)
+- `takewhile(predicate, iterable)`: return an iterator that produces elements from the iterable as long as the predicate is true (`takewhile(lambda x: x<5, [1,4,6,4,1]) --> 1 4`)
 
 ## Generators, Iterators
 
@@ -620,8 +647,23 @@ print(example.__doc__)  # Docstring
 
 ## Context managers (with)
 
-- Use context managers (with...) instead of try + finally.
-- Just need a class with `__enter__` and `__exit__` implemented.
+Use context managers (`with...`) instead of `try` + `finally`!
+
+Just need a class with `__enter__` and `__exit__` implemented.
+
+But, if you still prefer to use `try` + `finally`, you can use `contextlib.contextmanager`:
+
+```python
+from contextlib import contextmanager
+
+@contextmanager
+def my_context_manager():
+    res = get_resource()
+    try:
+        yield res  # might crash here
+    finally:
+        release_resource(res)
+```
 
 ## Classes
 
