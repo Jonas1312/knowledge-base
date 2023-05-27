@@ -78,6 +78,30 @@ If I roll a dice 6 times, what is the probability that a 2 will have been rolled
 
 $$P(\text{at least one 2}) = 1 - P(\text{no 2}) = 1 - (\frac{5}{6})^6 = 0.6651$$
 
+### Find the right coin
+
+We have three biased coins
+
+- coin 1: 0.4 chance of heads: $P_{coin1}(H) = \frac{2}{5}$
+- coin 2: 0.6 chance of heads: $P_{coin2}(H) = \frac{3}{5}$
+- coin 3: 0.8 chance of heads: $P_{coin3}(H) = \frac{4}{5}$
+
+We toss one of the coins 5 times and get 3 heads and 2 tails. Which coin did he use?
+
+Well, $\frac{3}{5}$ seems to indicate that it's coin 2, but we need to take into account that the sample size is small (5 samples).
+
+We need to compute the probability of having this result with each coin.
+
+As a remindar, the binomial law is as follows:
+
+$$P(X=k) = \binom{n}{k}p^k(1-p)^{n-k}$$
+
+- coin 1: $P_{coin1}(3H,2T) = \binom{5}{3}(\frac{2}{5})^3(\frac{3}{5})^2 = 0.2304$
+- coin 2: $P_{coin2}(3H,2T) = \binom{5}{3}(\frac{3}{5})^3(\frac{2}{5})^2 = 0.3456$
+- coin 3: $P_{coin3}(3H,2T) = \binom{5}{3}(\frac{4}{5})^3(\frac{1}{5})^2 = 0.2048$
+
+How can we be sure that it's coin 2? Well, to do so, we need to reject the hypothesis that it's coin 1 or 3. So the probability of having this result with coin 1 or 3 should be less than 5%. It's not the case here, so we can't be sure that it's coin 2.
+
 ### Fair coin from unfair coin
 
 ![](./fair-coin-from-biased-coin.png)

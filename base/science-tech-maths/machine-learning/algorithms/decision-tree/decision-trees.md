@@ -12,11 +12,15 @@ $$H(X) = E[I(X)]=-\sum_{i}^{n}{p(x_i) * log_2(p(x_i))}$$
 
 For decision trees, a feature with a lot of different values will be impure.
 
-We start by taking the feature with the highest impurity and we split it.
+The Gini impurity is the probability of measuring two different classes when picking two items from the same set (for discrete probability distributions). More info here: <https://www.youtube.com/watch?v=u4IxOk2ijSs>
 
-Why? Because we want to find the class the sample belongs to in a limited number of questions (split nodes).
+Gini works only in those scenarios where we have categorical targets. It does not work with continuous targets.
 
-So at each node, we need to find the best question that is going to halve (if possible) the search space (like in a binary search algorithm). So that's why we start with splitting at the node with highest impurity.
+A Decision Tree first splits the nodes on all the available variables and then selects the split which results in the most homogeneous sub-nodes.
+
+We start by taking the feature with the lowest Gini impurity and we split it. In other words, the lower the Gini impurity, the lower the entropy, the more homogeneous the sub-nodes are.
+
+Why? Because we want to find the class the sample belongs to in a limited number of questions (split nodes). So at each node, we need to find the best question that is going to halve (if possible) the search space (like in a binary search algorithm). So that's why we start with splitting at the node with lowest impurity.
 
 ### ID3
 
