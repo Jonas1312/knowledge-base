@@ -38,6 +38,10 @@ One-Class SVM is similar
 - Now think of the "margin" as referring to the outside of the hypersphere
 - so by "the largest possible margin", we mean "the smallest possible hypersphere".
 
+## Get a confidence score
+
+<https://prateekvjoshi.com/2015/12/15/how-to-compute-confidence-measure-for-svm-classifiers/>
+
 ## Infographic
 
 ![](./Support%20Vector%20Machines.jpg)

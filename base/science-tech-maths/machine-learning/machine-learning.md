@@ -240,6 +240,8 @@ Why not use MSE for binary classification? [Answer](https://github.com/Jonas1312
 
 #### SoftMax
 
+The softmax function is an extension of the sigmoid (logistic) function to the multi-class case. In other words, it can be shown that when there are only two classes softmax becomes the sigmoid function.
+
 [The Softmax function and its derivative](https://eli.thegreenplace.net/2016/the-softmax-function-and-its-derivative/)
 
 #### Binary Cross Entropy
@@ -259,6 +261,14 @@ We want to maximise it, but usually we do gradient **descent**, so we just add a
 - it is not a proper distance since it is not symmetric: <https://sebastianraschka.com/faq/docs/proper-metric-cross-entropy.html>
 
 $$\mathrm{H}(p, q) = \mathrm{E}_p[-\log q] = \mathrm{H}(p) + D_{\mathrm{KL}}(p \| q)$$
+
+For a multiclass problem:
+
+$$L_{CE} = -\sum_{i=1}^{n}y_ilog(\hat{y_i}) = -log(\hat{y_k})$$
+
+where $\hat{y_k}$ is the probability that the sample belongs to the ground truth class $k$.
+
+We can show that minimizing the cross entropy is equivalent to maximizing the log likelihood.
 
 #### Kullback-Leibler
 
