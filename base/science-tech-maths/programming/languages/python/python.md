@@ -794,19 +794,22 @@ To create a metaclass, you need to subclass `type`:
 
 ```python
 class MyMetaClass(type):
-"""Metaclass.
+    """Metaclass.
 
-Prints a message every time a class is created.
+    Prints a message every time a class is created.
 
-Also automatically add a 'bar' attribute set to True to every class.
-"""
+    Also automatically add a 'bar' attribute set to True to every class.
+    """
+
     def __new__(cls, name, bases, dct):
         print("Creating class %s" % name)
-        dct['bar'] = True
+        dct["bar"] = True
         return super().__new__(cls, name, bases, dct)
 
-class MyClass(metaclass=Meta):  # MyClass is created by Meta
+
+class MyClass(metaclass=MyMetaClass):  # MyClass is created by Meta
     pass
+
 
 my_instance = MyClass()
 print(my_instance.bar)  # True
@@ -820,9 +823,9 @@ Let's create a singleton metaclass:
 class Singleton(type):
     _instances = {}
 
-    def __call__(cls, *args, **kwargs):
+    def __call__(cls, *args, **kwargs):  # Note that we are using __call__ here, not __new__.
         if cls not in cls._instances:
-            cls._instances[cls] = super().__call__(*args, **kwargs)
+            cls._instances[cls] = super().__call__(*args, **kwargs)  # super().__call__ calls __new__ and __init__
         return cls._instances[cls]
 
 
