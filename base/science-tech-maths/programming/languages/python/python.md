@@ -820,17 +820,20 @@ Let's create a singleton metaclass:
 class Singleton(type):
     _instances = {}
 
-    def __call__(cls, name, bases, attrs):
+    def __call__(cls, *args, **kwargs):
         if cls not in cls._instances:
-            cls._instances[cls] = super().__call__(name, bases, attrs)
+            cls._instances[cls] = super().__call__(*args, **kwargs)
         return cls._instances[cls]
+
 
 class MyClass(metaclass=Singleton):
     pass
 
+
 my_instance = MyClass()
 my_instance2 = MyClass()
 print(my_instance is my_instance2)  # True
+
 ```
 
 ## Numpy
