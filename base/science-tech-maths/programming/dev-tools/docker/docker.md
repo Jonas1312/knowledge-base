@@ -118,6 +118,8 @@ When building, docker will show `removing intermediate container` messages. Thes
 
 The last layer is tagged with the image name and tag.
 
+Use `--no-cache` to not use the cache when building the image.
+
 ## Create a container from the image
 
 ```bash
@@ -148,6 +150,13 @@ docker stop <container-id>  # stop a container
 docker kill <container-id>  # kill a container. It is different from stop because it kills the container immediately, while stop sends a SIGTERM signal to the container, which gives it time to clean up before exiting.
 docker logs <container-id>  # show the logs of a container
 docker rm <container-id>  # remove a container
+
+# To remove all containers and images:
+docker stop $(docker ps -aq) && \  # list and stop all containers
+docker rm $(docker ps -aq) && \  # remove all stopped containers
+docker builder prune -af && \  # remove all dangling build cache
+docker image prune -af && \  # remove all dangling images
+docker system prune -af  # remove all stopped containers, all dangling images, all volumes, all networks
 ```
 
 ## Developing with Docker
@@ -202,7 +211,8 @@ docker compose down  # stop and remove the container
 If you need to rebuild the image, you can use:
 
 ```bash
-docker compose up --build
+docker compose up --build  # build the image
+docker compose build --no-cache  # build the image without using the cache
 ```
 
 During development, you can also map volumes:
