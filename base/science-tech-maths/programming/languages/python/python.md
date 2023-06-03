@@ -79,7 +79,7 @@
       - [Patch constant](#patch-constant)
       - [wraps](#wraps)
     - [pytest monkeypatch fixture](#pytest-monkeypatch-fixture)
-    - [pytest mocker fixture](#pytest-mocker-fixture)
+    - [pytest-mock plugin mocker fixture](#pytest-mock-plugin-mocker-fixture)
   - [Async await](#async-await)
     - [Event loop](#event-loop)
     - [`asyncio.gather()`](#asynciogather)
@@ -1365,6 +1365,8 @@ print(my_method())  # 1
 my_method.assert_called_once()
 ```
 
+You can also use the `spy` feature of `pytest-mock` plugin: <https://pytest-mock.readthedocs.io/en/latest/usage.html#spy>
+
 ### pytest monkeypatch fixture
 
 pytest monkeypatch is a pytest fixture that allows you to modify objects, dictionaries or os.environ variables, etc. It is a very powerful tool that allows you to modify the environment before running your tests.
@@ -1385,7 +1387,7 @@ def mock_sys_args(monkeypatch):
     monkeypatch.setattr("sys.argv", ["pytest", "--name", "logfilename.log"])
 ```
 
-### pytest mocker fixture
+### pytest-mock plugin mocker fixture
 
 pytest-mock is a pytest plugin thats:
 
@@ -1393,7 +1395,9 @@ pytest-mock is a pytest plugin thats:
 - Basically all of the features of mock, but with the api of monkeypatch.
 
 ```python
-def test_blabla(mocker):
+from pytest_mock import MockerFixture
+
+def test_blabla(mocker: MockerFixture):
     mocker.patch("sys.argv", ["pytest", "--name", "logfilename.log"])
     ## Test as usual here
 ```
