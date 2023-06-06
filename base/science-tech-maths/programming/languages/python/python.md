@@ -89,6 +89,14 @@
     - [HTTP methods](#http-methods)
     - [Order matters](#order-matters)
     - [Parameters](#parameters)
+  - [SQLAlchemy](#sqlalchemy)
+    - [Session](#session)
+    - [Expiring objects](#expiring-objects)
+    - [Refreshing objects](#refreshing-objects)
+    - [Expire vs Refresh](#expire-vs-refresh)
+    - [Flusing objects](#flusing-objects)
+    - [Committing objects](#committing-objects)
+    - [Recap](#recap)
 
 ## Cheat Sheets
 
@@ -1678,3 +1686,86 @@ In this case, there are 3 query parameters:
 - needy, a required str.
 - skip, an int with a default value of 0.
 - limit, an optional int.
+
+## SQLAlchemy
+
+SQLAlchemy is an object-relational mapper widely used in the Python. As an ORM, SQLAlchemy enables you to manipulate database records as Python objects.
+
+For example, a row in your users table would be represented as a <User> object, which has attributes, methods, and so on.
+
+### Session
+
+The Session object is the entry point to SQLAlchemy’s ORM API. It represents the ORM’s “handle” to the database, and as such is most commonly used to issue queries via the Query object.
+
+These objects are held in memory and need to be synchronised with its representation in your database at some interval, otherwise the in-memory representation differs from your persistent database record.
+
+Sessions are a scope or context within which you can change these objects. Note that this does not necessarily mean any changes you make to the objects are (yet) synchronised back to the database.
+
+Sessions have a natural lifecyle in which objects are first instantiated from the database record, changes are made to these objects, and then the changes are either persisted back to the database or discarded.
+
+In most web applications, the established pattern is to begin and end the Session with each http request.
+
+### Expiring objects
+
+In a session, objects can expire:
+
+```python
+with Session() as session:
+    user = session.query(User).first()
+    print(user.name)  # "John Doe". This is the in-memory value.
+    user.name = "New name"
+    print(user.name)  # "New name". The change was made to the in-memory object. Not the DB!
+    # session.expire_all()  # expire all objects
+    session.expire(user)  # expire a single object
+    print(user.name)  # "John Doe". The change was discarded, the value was reloaded from the database. This is because the object was expired and the changes were not committed.
+```
+
+So when do you actually need to explicitly expire objects? You do so when you want to force an object to reload its data, because you know its current state is possibly stale.
+
+### Refreshing objects
+
+Refreshing means to expire and then immediately get the latest data for the object from the database. It involves an immediate database query, which you may consider unnecessarily expensive.
+
+### Expire vs Refresh
+
+Expire is a local operation, it does not involve a database query. Refresh is a database query.
+
+- Expire - I persisted some changes for an object to the database. I don't need this updated object anymore in the current method, but I don't want any subsequent methods to accidentally use the wrong attributes.
+- Refresh - I persisted some changes for an object to the database. I need to use this updated object within the same method.
+
+### Flusing objects
+
+Flushing means to push all object changes to the database.
+
+Note that this does not necessarily mean that changes have been made to the database records - you must still call `db.session.commit()` to update the database or `db.session.rollback()` to discard your changes.
+
+If you configured your Session with `autocommit=True`:
+
+- you are essentially requesting SQLAlchemy to call `db.session.commit()` whenever a transaction is not present
+- therefore, `db.session.flush()` will automatically call `db.session.commit()` unless you explicitly started a transaction with `db.session.begin()`.
+
+Without calling `db.session.commit()`, the changes remain in the database transaction buffer and any calls to refresh will get the unchanged values.
+
+### Committing objects
+
+Committing an object does flush it to the database, but it also commits the transaction.
+
+### Recap
+
+Here's how I decide what to use:
+
+- Expire
+  - I've made some changes to an object and don't need it immediately but don't want any subsequent methods to use stale values.
+- Refresh
+  - I've made some changes to an object and need its updated values immediately.
+  - Costs extra database call as it expires and reads from database immediately.
+- Flush
+  - Push changes from memory to your database's transaction buffer. No database statements are issued yet.
+  - If Session has autocommit: False, must still call commit() to persist the changes or rollback() to discard changes.
+  - If Session has autocommit: True and you are not explicitly in a transaction, commit() will be automatically called.
+- Commit
+  - Persist changes in your database's transaction buffer to the database. Database statements are issued.
+  - Automatically expires objects.
+- Merge
+  - Used when you may have more than 1 in-memory objects which map to the same database record with some key.
+  - Merging causes the in-memory objects to be synchronised with each other, does not necessarily persist to the database.
