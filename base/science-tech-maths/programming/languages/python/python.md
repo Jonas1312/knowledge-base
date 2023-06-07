@@ -97,6 +97,7 @@
     - [Flusing objects](#flusing-objects)
     - [Committing objects](#committing-objects)
     - [Recap](#recap)
+    - [Fastapi](#fastapi-1)
 
 ## Cheat Sheets
 
@@ -1769,3 +1770,7 @@ Here's how I decide what to use:
 - Merge
   - Used when you may have more than 1 in-memory objects which map to the same database record with some key.
   - Merging causes the in-memory objects to be synchronised with each other, does not necessarily persist to the database.
+
+### Fastapi
+
+Make sure to use staticpool if you use `:memory:` database: <https://docs.sqlalchemy.org/en/14/dialects/sqlite.html#using-a-memory-database-in-multiple-threads>
