@@ -1,5 +1,6 @@
 # A prime number is a whole number greater than 1 whose only factors are 1 and itself
 
+
 # The time complexity is O(n)
 def is_prime(x):
     if x in (0, 1):

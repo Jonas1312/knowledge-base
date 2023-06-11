@@ -28,7 +28,11 @@ def find_anagram(string, pattern):
 
     for i in range(len(pattern), len(string) + 1):
         if hash_substring == hash_pattern:
-            print("Found match {} at index {}".format(string[i - len(pattern) : i], i - len(pattern)))
+            print(
+                "Found match {} at index {}".format(
+                    string[i - len(pattern) : i], i - len(pattern)
+                )
+            )
         if i == len(string):
             break
         hash_substring //= prime_dict[string[i - len(pattern)]]

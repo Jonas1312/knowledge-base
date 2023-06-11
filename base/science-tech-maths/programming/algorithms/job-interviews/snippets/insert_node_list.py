@@ -15,7 +15,10 @@ def insert_node_singly(linked_list: Node, node_to_insert: Node, position: int):
     for _ in range(1, position):
         node_before = node_before.next_node
 
-    node_before.next_node, node_to_insert.next_node = node_to_insert, node_before.next_node
+    node_before.next_node, node_to_insert.next_node = (
+        node_to_insert,
+        node_before.next_node,
+    )
 
 
 def insert_node_doubly(linked_list: Node, node_to_insert: Node, position: int):
@@ -26,7 +29,12 @@ def insert_node_doubly(linked_list: Node, node_to_insert: Node, position: int):
 
     node_after = node_before.next_node
 
-    node_before.next_node, node_after.prev_node, node_to_insert.prev_node, node_to_insert.next_node = (
+    (
+        node_before.next_node,
+        node_after.prev_node,
+        node_to_insert.prev_node,
+        node_to_insert.next_node,
+    ) = (
         node_to_insert,
         node_to_insert,
         node_before,

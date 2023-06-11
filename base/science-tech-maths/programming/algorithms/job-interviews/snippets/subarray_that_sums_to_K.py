@@ -1,5 +1,6 @@
 # find continous subarray that sums to K
 
+
 # linear in time
 # 1 in space
 # only works for positive integers
@@ -12,7 +13,9 @@ def algo_1(input_array, K):
             sum_ -= input_array[begin]
             begin += 1
         elif sum_ < K:
-            if end == len(input_array):  # if end pointer can't move forward and sum_ too small, we're done
+            if end == len(
+                input_array
+            ):  # if end pointer can't move forward and sum_ too small, we're done
                 break
             sum_ += input_array[end]
             end += 1
@@ -42,7 +45,9 @@ def main():
     print("-" * 50)
     algo_2([2, 6, 0, 9, 7, 3, 1, 4, 1, 10], K=15)  # {6, 0, 9}, {7, 3, 1, 4}, {4, 1, 10}
     print("-" * 50)
-    algo_2([0, 5, -7, 1, -4, 7, 6, 1, 4, 1, 10], K=15)  # {1, -4, 7, 6, 1, 4} or {4, 1, 10}
+    algo_2(
+        [0, 5, -7, 1, -4, 7, 6, 1, 4, 1, 10], K=15
+    )  # {1, -4, 7, 6, 1, 4} or {4, 1, 10}
     print("-" * 50)
     algo_2([0, 5, -7, 1, -4, 7, 6, 1, 4, 1, 10], K=-3)  # {1, -4}
 

@@ -15,7 +15,7 @@ def main():
     b1 = (5, 4)
     b2 = (3, 2)
 
-    dist = abs(C) / (A ** 2 + B ** 2) ** 0.5  # distance origin to the line
+    dist = abs(C) / (A**2 + B**2) ** 0.5  # distance origin to the line
     # d = abs(a*x + b*y + c) / sqrt(a² + b²)
 
     time1 = dist / (b1[0] ** 2 + b1[1] ** 2) ** 0.5

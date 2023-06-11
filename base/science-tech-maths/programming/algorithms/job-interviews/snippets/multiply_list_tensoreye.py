@@ -62,11 +62,15 @@ def implementation_2(A):
 def main():
     print(implementation_1([2, 1, 5, 3]))  # [15, 30, 6, 10]
     print(implementation_1([2, 0, 5, 3]))  # [0, 30, 0,0]
-    print(implementation_1([2, 0, 5, 0, 5, 8, 9, 3, 5, 4, 7, 6]))  # two zeros, so: B = [0]*12
+    print(
+        implementation_1([2, 0, 5, 0, 5, 8, 9, 3, 5, 4, 7, 6])
+    )  # two zeros, so: B = [0]*12
     print("-" * 42)
     print(implementation_2([2, 1, 5, 3]))  # [15, 30, 6, 10]
     print(implementation_2([2, 0, 5, 3]))  # [0, 30, 0,0]
-    print(implementation_2([2, 0, 5, 0, 5, 8, 9, 3, 5, 4, 7, 6]))  # two zeros, so: B = [0]*12
+    print(
+        implementation_2([2, 0, 5, 0, 5, 8, 9, 3, 5, 4, 7, 6])
+    )  # two zeros, so: B = [0]*12
 
 
 if __name__ == "__main__":

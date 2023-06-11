@@ -97,7 +97,8 @@ I hope that they will be useful to you.
 
 ## Table of Contents
 
-{tree}"""
+{tree}
+"""
 
 
 def main() -> None:
