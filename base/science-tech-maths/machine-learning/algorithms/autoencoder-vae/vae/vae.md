@@ -8,7 +8,7 @@
 - Generating new images is now easy: all we need to do is sample a latent vector from the unit gaussian and pass it into the decoder.
 
 ```python
-image_loss = mean((generated_image - real_image)**2)
+image_loss = mean((generated_image - real_image) ** 2)
 latent_loss = kl_divergence(latent_variable, unit_gaussian)
 loss = image_loss + latent_loss
 ```

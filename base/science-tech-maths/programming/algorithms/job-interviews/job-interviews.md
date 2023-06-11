@@ -9,7 +9,7 @@
 
   ```python
   def digit_length(n):
-    return 1 if n == 0 else (math.floor(math.log10(n)) + 1)
+      return 1 if n == 0 else (math.floor(math.log10(n)) + 1)
   ```
 
 ## Bit Tricks

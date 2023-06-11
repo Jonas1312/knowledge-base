@@ -54,8 +54,8 @@ Therefore $X$ insertions take $\mathcal{O}(2X)=\mathcal{O}(X)$, that we divide b
 
 ```python
 for i in range(N):
-  for j in range(i+1, N):
-    pass
+    for j in range(i + 1, N):
+        pass
 ```
 
 the first time the inner loops runs for $N-1$ steps, then $N-2$, then $N-3$, etc
@@ -72,9 +72,9 @@ Be careful if your input is two arrays $A$ and $B$, the complexity can be $O(A+B
 
 ```python
 for i in A:
-  for j in B:
-    for k in range(10000):
-      do work
+    for j in B:
+        for k in range(10000):
+            pass  #  do work
 ```
 
 the complexity is $\mathcal{O}(AB)$
@@ -97,9 +97,9 @@ so the total is $\mathcal{O}(sNlog(N) + Nslog(s))$
 
 ```python
 def sum(node):
-  if node is None:
-    return 0
-  return sum(node.left) + sum(node.right) + value
+    if node is None:
+        return 0
+    return sum(node.left) + sum(node.right) + value
 ```
 
 complexity is $\mathcal{O}(branches^{depth}) = \mathcal{O}(2^{logN}) = \mathcal{O}(N)$
@@ -114,7 +114,7 @@ We have a binary tree (not search), it takes O(N) to find an element in it: $O(2
 
 ```python
 for i in range(N):
-  print(fib(i))  # we use recursive fib here
+    print(fib(i))  # we use recursive fib here
 ```
 
 iterative fib(N) is O(N), recursive is O(2^N) but don't confuse the N!!!

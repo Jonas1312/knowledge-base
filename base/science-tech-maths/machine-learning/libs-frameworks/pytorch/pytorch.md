@@ -123,10 +123,10 @@ non-scalar output.
 optimizer.zero_grad()
 scaled_loss = 0
 for accumulated_step_i in range(N_STEPS):
-  out = model.forward()
-  loss = ...
-  loss.backward()
-  scaled_loss += loss.item()
+    out = model.forward()
+    loss = ...
+    loss.backward()
+    scaled_loss += loss.item()
 optimizer.step()
 actual_loss = scaled_loss / N_STEPS
 ```
@@ -146,10 +146,12 @@ torch.backends.cudnn.benchmark = False
 
 ```python
 for child in model.children():
-  for param in child.parameters():
-    param.requires_grad = False
+    for param in child.parameters():
+        param.requires_grad = False
 
-optimizer = torch.optim.Adam(filter(lambda p: p.requires_grad, model.parameters()), lr=...)
+optimizer = torch.optim.Adam(
+    filter(lambda p: p.requires_grad, model.parameters()), lr=...
+)
 ```
 
 ### Save and load weights
@@ -175,8 +177,10 @@ new_model = nn.Sequential(*list(model.children())[:-1])
 ### Get number of parameters
 
 ```python
-num_params = sum(p.numel() for p in model.parameters()) # Total parameters
-num_trainable_params = sum(p.numel() for p in model.parameters() if p.requires_grad)  # Trainable parameters
+num_params = sum(p.numel() for p in model.parameters())  # Total parameters
+num_trainable_params = sum(
+    p.numel() for p in model.parameters() if p.requires_grad
+)  # Trainable parameters
 ```
 
 ### No grad and inference_mode decorators
@@ -184,17 +188,18 @@ num_trainable_params = sum(p.numel() for p in model.parameters() if p.requires_g
 ```python
 @torch.no_grad()
 def eval(model, data):
-  model.eval()
+    model.eval()
+
 
 @torch.inference_mode()
 def eval(model, data):
-  model.eval()
+    model.eval()
 ```
 
 ### Gradient clipping
 
 ```python
-torch.nn.utils.clip_grad_value_(parameters=model.parameters(), clip_value=1.)
+torch.nn.utils.clip_grad_value_(parameters=model.parameters(), clip_value=1.0)
 torch.nn.utils.clip_grad_norm_(parameters, max_norm, norm_type=2)
 ```
 
@@ -202,15 +207,20 @@ torch.nn.utils.clip_grad_norm_(parameters, max_norm, norm_type=2)
 
 ```python
 def add_weight_decay(net, l2_value, skip_list=()):
-  decay, no_decay = [], []
-  for name, param in net.named_parameters():
-    if not param.requires_grad:
-      continue # frozen weights
-    if len(param.shape) == 1 or name.endswith(".bias") or name in skip_list:
-      no_decay.append(param)
-    else:
-      decay.append(param)
-  return [{'params': no_decay, 'weight_decay': 0.}, {'params': decay, 'weight_decay': l2_value}]
+    decay, no_decay = [], []
+    for name, param in net.named_parameters():
+        if not param.requires_grad:
+            continue  # frozen weights
+        if len(param.shape) == 1 or name.endswith(".bias") or name in skip_list:
+            no_decay.append(param)
+        else:
+            decay.append(param)
+    return [
+        {"params": no_decay, "weight_decay": 0.0},
+        {"params": decay, "weight_decay": l2_value},
+    ]
+
+
 params = add_weight_decay(net, 2e-5)
 sgd = torch.optim.SGD(params, lr=0.1)
 ```
@@ -244,26 +254,29 @@ print(u.grad)
 ### Weight init
 
 ```python
-def init_weights(net, init_type='normal', gain=0.02):
-  def init_func(m):
-    if isinstance(m, (nn.Conv2d, nn.Linear)):
-      if init_type == 'normal':
-        nn.init.normal_(m.weight.data, 0.0, gain)
-      elif init_type == 'xavier':
-        nn.init.xavier_normal_(m.weight.data, gain=gain)
-      elif init_type == 'kaiming':
-        nn.init.kaiming_normal_(m.weight.data, a=0, mode='fan_in')
-      elif init_type == 'orthogonal':
-        nn.init.orthogonal_(m.weight.data, gain=gain)
-      else:
-        raise NotImplementedError('initialization method [%s] is not implemented' % init_type)
-      if hasattr(m, 'bias') and m.bias is not None:
-        nn.init.constant_(m.bias.data, 0.0)
-    elif isinstance(m, nn.BatchNorm2d):
-      nn.init.normal_(m.weight.data, 1.0, gain)
-      nn.init.constant_(m.bias.data, 0.0)
-  print('initialize network with %s' % init_type)
-  net.apply(init_func)
+def init_weights(net, init_type="normal", gain=0.02):
+    def init_func(m):
+        if isinstance(m, (nn.Conv2d, nn.Linear)):
+            if init_type == "normal":
+                nn.init.normal_(m.weight.data, 0.0, gain)
+            elif init_type == "xavier":
+                nn.init.xavier_normal_(m.weight.data, gain=gain)
+            elif init_type == "kaiming":
+                nn.init.kaiming_normal_(m.weight.data, a=0, mode="fan_in")
+            elif init_type == "orthogonal":
+                nn.init.orthogonal_(m.weight.data, gain=gain)
+            else:
+                raise NotImplementedError(
+                    "initialization method [%s] is not implemented" % init_type
+                )
+            if hasattr(m, "bias") and m.bias is not None:
+                nn.init.constant_(m.bias.data, 0.0)
+        elif isinstance(m, nn.BatchNorm2d):
+            nn.init.normal_(m.weight.data, 1.0, gain)
+            nn.init.constant_(m.bias.data, 0.0)
+
+    print("initialize network with %s" % init_type)
+    net.apply(init_func)
 ```
 
 ### Train/test/valid splits
@@ -282,7 +295,7 @@ losses.append(loss.item())  # good
 ### Copy an array
 
 ```python
-a = torch.tensor([1., 2., 3.])
+a = torch.tensor([1.0, 2.0, 3.0])
 b = a  # WRONG: same reference
 b = a.clone()
 ```
@@ -292,8 +305,8 @@ b = a.clone()
 ### Construct tensors directly on GPUs
 
 ```python
-t = tensor.rand(2,2).cuda()  # bad
-t = tensor.rand(2,2, device='cuda')  # good
+t = tensor.rand(2, 2).cuda()  # bad
+t = tensor.rand(2, 2, device="cuda")  # good
 ```
 
 ### Avoid CPU to GPU transfers or vice-versa
@@ -318,14 +331,14 @@ Set `torch.backends.cudnn.benchmark = True` Note that cudnn.benchmark will profi
 For example, if we perform x.cos().cos(), usually we need to perform 4 global reads and writes.
 
 ```python
-x1 = x.cos() # Read from x in global memory, write to x1
-x2 = x1.cos() # Read from x1 in global memory, write to x2
+x1 = x.cos()  # Read from x in global memory, write to x1
+x2 = x1.cos()  # Read from x1 in global memory, write to x2
 ```
 
 But, with operator fusion, we only need 2 global memory reads and writes! So operator fusion will speed it up by 2x.
 
 ```python
-x2 = x.cos().cos() # Read from x in global memory, write to x2
+x2 = x.cos().cos()  # Read from x in global memory, write to x2
 ```
 
 ### Gradient checkpointing

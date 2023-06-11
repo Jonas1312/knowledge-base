@@ -22,7 +22,7 @@ class Client:
         self.service = service
 
     def do_something(self):
-        return self.service.get('http://www.google.com')
+        return self.service.get("http://www.google.com")
 ```
 
 Instead of:
@@ -33,5 +33,5 @@ class Client:
         self.service = Service()
 
     def do_something(self):
-        return self.service.get('http://www.google.com')
+        return self.service.get("http://www.google.com")
 ```

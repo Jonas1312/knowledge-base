@@ -110,18 +110,18 @@
 
 ```python
 a = b = 1
-print('a is b', bool(a is b))  # yes
+print("a is b", bool(a is b))  # yes
 c = d = 999
-print('c is d', bool(c is d))  # false
+print("c is d", bool(c is d))  # false
 ```
 
 ## Shallow and Deep Copy
 
 ```python
-list1 = [1,2]
-list2 = list1        # reference
-list3 = list1[:]     # shallow copy
-list4 = list1.copy() # shallow copy
+list1 = [1, 2]
+list2 = list1  # reference
+list3 = list1[:]  # shallow copy
+list4 = list1.copy()  # shallow copy
 ```
 
 - The difference between shallow and deep copying is only relevant for __compound objects__ (objects that contain other objects, like lists or class instances):
@@ -156,22 +156,22 @@ LEGB scope resolution (Local -> Enclosed -> Global -> Built-in)
 
 ```python
 def transpose_list(list_of_lists):
-  return [list(row) for row in zip(*list_of_lists)]
+    return [list(row) for row in zip(*list_of_lists)]
 ```
 
 ## Error handling
 
 ```python
 try:
-  print('in try:')
-  print('do some stuff')
-  float('abc')
+    print("in try:")
+    print("do some stuff")
+    float("abc")
 except ValueError:
-  print('an error occurred')
+    print("an error occurred")
 else:
-  print('no error occurred')
+    print("no error occurred")
 finally:
-  print('always execute finally')
+    print("always execute finally")
 ```
 
 ## Pass by value or reference?
@@ -180,8 +180,12 @@ finally:
 
 ```python
 a = [1, 2]
+
+
 def f(x):
     x[0] = 5
+
+
 print(a)  # prints [5, 2]
 ```
 
@@ -189,8 +193,12 @@ print(a)  # prints [5, 2]
 
 ```python
 a = 3
+
+
 def f(x):
     x = 5
+
+
 print(a)  # prints 3
 ```
 
@@ -242,6 +250,7 @@ Sometimes the types of several variables are related, such as “if x is type A,
 
 ```python
 from typing import overload
+
 
 @overload
 def double(input_: int) -> int:
@@ -296,7 +305,8 @@ Let's add type hints:
 ```python
 from typing import Sequence, TypeVar
 
-T = TypeVar('T')  # generic type
+T = TypeVar("T")  # generic type
+
 
 def first(container: Sequence[T]) -> T:
     return container[0]
@@ -319,7 +329,8 @@ If we did not define a type on instantiation, then it assumes `Any`. That means 
 ```python
 from typing import TypeVar, Generic
 
-T = TypeVar('T')
+T = TypeVar("T")
+
 
 class Box(Generic[T]):
     def __init__(self, content: T) -> None:
@@ -327,6 +338,7 @@ class Box(Generic[T]):
 
     def get_content(self) -> T:
         return self.content
+
 
 box = Box(1)
 reveal_type(box)  # Revealed type is 'Box[builtins.int]'
@@ -340,23 +352,38 @@ from typing import Generic, Literal, TypeVar, cast, overload, reveal_type
 
 InputType = Literal["TEXT", "IMAGE", "VIDEO"]
 
+
 # we don't fill the class for this example...
-class TextJob: ...
-class ImageJob: ...
-class VideoJob: ...
+class TextJob:
+    ...
+
+
+class ImageJob:
+    ...
+
+
+class VideoJob:
+    ...
+
 
 T = TypeVar("T", TextJob, ImageJob, VideoJob)
+
 
 class MyMainClass(Generic[T]):
     jobs: T  # we don't know the type yet, but we know it will be one of the 3 classes above
 
     # we use overload to define the different signatures of the __init__ method
     @overload
-    def __init__(self: "MyMainClass[TextJob]", input_type: Literal["TEXT"]) -> None: ...
+    def __init__(self: "MyMainClass[TextJob]", input_type: Literal["TEXT"]) -> None:
+        ...
+
     @overload
-    def __init__(self: "MyMainClass[ImageJob]", input_type: Literal["IMAGE"]) -> None: ...
+    def __init__(self: "MyMainClass[ImageJob]", input_type: Literal["IMAGE"]) -> None:
+        ...
+
     @overload
-    def __init__(self: "MyMainClass[VideoJob]", input_type: Literal["VIDEO"]) -> None: ...
+    def __init__(self: "MyMainClass[VideoJob]", input_type: Literal["VIDEO"]) -> None:
+        ...
 
     # we usually start with the "real" implementation and then we define the overload above
     def __init__(self, input_type: InputType) -> None:
@@ -451,7 +478,7 @@ def ending_five() -> Generator[int, None, None]:
 
 def all_ten() -> Generator[int, None, None]:
     """Generator that relies on other generators"""
-    yield starting_five() # This is broken, we need to use yield from
+    yield starting_five()  # This is broken, we need to use yield from
     yield ending_five()  # This is broken, we need to use yield from
 ```
 
@@ -504,10 +531,12 @@ immutables
 ```python
 from enum import Enum, auto
 
+
 class Color(Enum):
     RED = auto()  # auto() assigns a value automatically. Here RED = 1
     GREEN = auto()
     BLUE = auto()
+
 
 print(Color.RED)  # Color.RED
 ```
@@ -517,10 +546,12 @@ Can also have typed enums:
 ```python
 from enum import Enum
 
+
 class Color(Enum):
     RED: int = 1
     GREEN: int = 2
     BLUE: int = 3
+
 
 print(Color.RED)  # Color.RED
 ```
@@ -533,7 +564,9 @@ print(Color.RED)  # Color.RED
 - they can be typed.
 
 ```python
-Point = typing.NamedTuple("Point", [('x', int), ('y', int)])
+Point = typing.NamedTuple("Point", [("x", int), ("y", int)])
+
+
 # or the class way:
 class Point(NamedTuple):
     x: int
@@ -571,11 +604,11 @@ Inspired by attrs, but smaller feature set. Added to the standard library in Pyt
 ```python
 from dataclasses import dataclass
 
+
 @dataclass
 class DataClassCard:
     rank: str
     suit: str = 42
-
 ```
 
 #### Pydantinc
@@ -591,10 +624,13 @@ class DataClassCard:
 ```python
 from pydantic import BaseModel, Field
 
+
 class Item(BaseModel):
     name: str
     price: float = Field(gt=0, description="The price must be greater than zero")
-    description: Optional[str] = Field(None, title="Description of the item", max_length=300)
+    description: Optional[str] = Field(
+        None, title="Description of the item", max_length=300
+    )
 ```
 
 ## Decorators
@@ -606,6 +642,7 @@ def validate_summary(func):
         if len(data["summary"]) > 80:
             raise ValueError("Summary too long")
         return data
+
     return wrapper
 ```
 
@@ -615,14 +652,16 @@ class MyDecorator:
         self.function = function
 
     def __call__(self, *args, **kwargs):
-      # DO STUFF
-      self.function(*args, **kwargs)
-      # DO STUFF
+        # DO STUFF
+        self.function(*args, **kwargs)
+        # DO STUFF
+
 
 # adding class decorator to the function
 @MyDecorator
 def function(arg1, arg2):
     pass
+
 
 function("foo", "bar")
 ```
@@ -638,17 +677,21 @@ Difference between `@decorator` and `@decorator()`:
 ```python
 from functools import wraps
 
+
 def my_decorator(func):
     @wraps(func)
     def wrapper(*args, **kwargs):
         # Do something with func
         return func(*args, **kwargs)
+
     return wrapper
+
 
 @my_decorator
 def example():
     """Docstring"""
     pass
+
 
 print(example.__name__)  # example
 print(example.__doc__)  # Docstring
@@ -664,6 +707,7 @@ But, if you still prefer to use `try` + `finally`, you can use `contextlib.conte
 
 ```python
 from contextlib import contextmanager
+
 
 @contextmanager
 def my_context_manager():
@@ -691,33 +735,44 @@ def my_context_manager():
 ### Inheritance and MRO: Method Resolution Order
 
 ```python
-class A():
-  def foo(self):
-    print("class A")
+class A:
+    def foo(self):
+        print("class A")
+
+
 class B(A):
-  pass
+    pass
+
+
 class C(A):
-  def foo(self):
-    print("class C")
-class D(B,C):
-  pass
+    def foo(self):
+        print("class C")
+
+
+class D(B, C):
+    pass
+
+
 D().foo()  # prints class C, searches in B first!
 ```
 
 ```python
 class A:
-  x = 1
+    x = 1
+
 
 class B(A):
-  pass
+    pass
+
 
 class C(A):
-  pass
+    pass
+
 
 A.x, B.x, C.x  # (1, 1, 1)
-B.x = 2 # B.x is now 2
+B.x = 2  # B.x is now 2
 A.x, B.x, C.x  # (1, 2, 1)
-A.x = 3 # A.x is now 3
+A.x = 3  # A.x is now 3
 A.x, B.x, C.x  # (3, 2, 3) # C.x is now 3 !!!
 ```
 
@@ -728,10 +783,12 @@ Since C.x is not defined, it searches in A, and since A.x is now 3, C.x is now 3
 ```python
 from abc import ABC, abstractmethod
 
+
 class AbstractClass(ABC):
     @abstractmethod
     def foo(self):
         raise NotImplementedError  # or pass or ...
+
 
 class ConcreteClass(AbstractClass):
     def foo(self):
@@ -792,8 +849,10 @@ The `__class__` of any `__class__`  is `type`.
 You can thus create a class with `type`:
 
 ```python
-MyClass = type("MyClass", (), {'bar':True})
+MyClass = type("MyClass", (), {"bar": True})
 my_instance = MyClass()
+
+
 # same as
 class MyClass:
     bar = True
@@ -832,9 +891,13 @@ Let's create a singleton metaclass:
 class Singleton(type):
     _instances = {}
 
-    def __call__(cls, *args, **kwargs):  # Note that we are using __call__ here, not __new__.
+    def __call__(
+        cls, *args, **kwargs
+    ):  # Note that we are using __call__ here, not __new__.
         if cls not in cls._instances:
-            cls._instances[cls] = super().__call__(*args, **kwargs)  # super().__call__ calls __new__ and __init__
+            cls._instances[cls] = super().__call__(
+                *args, **kwargs
+            )  # super().__call__ calls __new__ and __init__
         return cls._instances[cls]
 
 
@@ -845,7 +908,6 @@ class MyClass(metaclass=Singleton):
 my_instance = MyClass()
 my_instance2 = MyClass()
 print(my_instance is my_instance2)  # True
-
 ```
 
 ## Numpy
@@ -883,15 +945,18 @@ print(my_instance is my_instance2)  # True
 - <https://github.com/satwikkansal/wtfpython>
 
 ```python
-def foo(bar=[]):  # the default value for a function argument is only evaluated once, at the time that the function is defined. Each time the function is called, the same list is used.
-  bar.append("baz")
-  return bar
+def foo(
+    bar=[],
+):  # the default value for a function argument is only evaluated once, at the time that the function is defined. Each time the function is called, the same list is used.
+    bar.append("baz")
+    return bar
 ```
 
 ## Timing code
 
 ```python
 import timeit
+
 print(timeit.timeit(my_function, number=100000))
 ```
 
@@ -917,10 +982,10 @@ import logging
 
 logging.basicConfig(level=logging.WARNING)  # minimum level that will be logged
 
-logging.debug('')  # won't be logged
-logging.info('')  # won't be logged
-logging.warning('')
-logging.error('')
+logging.debug("")  # won't be logged
+logging.info("")  # won't be logged
+logging.warning("")
+logging.error("")
 logging.critical("")
 ```
 
@@ -931,15 +996,20 @@ Add a handler to the root logger so we can see the actual errors:
 ```python
 import logging
 
-logger = logging.getLogger('my_app')  # you can use another logger name for a module of your app
+logger = logging.getLogger(
+    "my_app"
+)  # you can use another logger name for a module of your app
 logger.setLevel(logging.DEBUG)  # minimum level that will be logged
-logger.addHandler(logging.StreamHandler())  # add a handler to the root logger. StreamHandler() will log to the console. You can use FileHandler() to log to a file.
+logger.addHandler(
+    logging.StreamHandler()
+)  # add a handler to the root logger. StreamHandler() will log to the console. You can use FileHandler() to log to a file.
 ```
 
 To keep a single logger for the whole app:
 
 ```python
 LOGGER = None
+
 
 def get_logger():
     global LOGGER
@@ -974,7 +1044,7 @@ Every test function will get the fixture below that sets args:
 @pytest.fixture(autouse=True)
 def setup_tests():
     # DO stuff
-    yield or return...
+    yield object  # or return...
     # clean if needed
 ```
 
@@ -985,6 +1055,7 @@ This will block all people from using requests.get in their tests:
 def disable_network_calls(monkeypatch):
     def stunted_get():
         raise RuntimeError("Network access not allowed during testing!")
+
     monkeypatch.setattr(requests, "get", lambda *args, **kwargs: stunted_get())
 ```
 
@@ -1006,7 +1077,7 @@ assert output_value == pytest.approx(expected_value)
 ```python
 mock = Mock()
 mock.__str__ = Mock()
-mock.__str__.return_value = 'fooble'
+mock.__str__.return_value = "fooble"
 str(mock)  # prints 'fooble'
 mock = Mock(return_value=42)
 mock()  # 42
@@ -1021,7 +1092,9 @@ book.author.first_name = "Evgenij"
 print(book.author.first_name)  # "Evgenij"
 
 book = Mock()
-print(book.author.first_name)  # <Mock name='mock.author.first_name' id='140504918800992'>
+print(
+    book.author.first_name
+)  # <Mock name='mock.author.first_name' id='140504918800992'>
 ```
 
 ```python
@@ -1055,10 +1128,13 @@ book.get_review(sort="date", order="desc").reviewer.get_country().short_name  # 
 ```python
 from unittest import mock
 
+
 def test_my_function():
     r = Mock()
     r.content = b'{"success": true}'
-    with mock.patch('requests.get', return_value=r) as get:  # Avoid doing actual GET request
+    with mock.patch(
+        "requests.get", return_value=r
+    ) as get:  # Avoid doing actual GET request
         some_function()  # Function that calls requests.get
         get.assert_called_once()
 ```
@@ -1066,6 +1142,7 @@ def test_my_function():
 ```python
 def some_method(target, value):
     return target.apply(value)
+
 
 def test_method():
     target = mock.Mock()
@@ -1118,6 +1195,7 @@ When we don't care to know all function parameters or don't care to set them all
 
 ```python
 from mock import ANY
+
 mock_obj.assert_called_once_with(ANY, "Natalia")
 ```
 
@@ -1128,27 +1206,30 @@ from mock import call
 
 mock_obj.assert_has_calls(
     [
-        call(None, "Evgenij"),
-        call(100, "Natalia"),
+        call(None, "Evgenij"),
+        call(100, "Natalia"),
     ],
-    any_order=True
+    any_order=True,
 )
 ```
 
 Special attributes:
 
 ```python
->>> # Number of times you called loads():
-... json.loads.call_count
+# Number of times you called loads():
+print(json.loads.call_count)
 1
->>> # The last loads() call:
-... json.loads.call_args
+
+# The last loads() call:
+print(json.loads.call_args)
 call('{"key": "value"}')
->>> # List of loads() calls:
-... json.loads.call_args_list
+
+# List of loads() calls:
+print(json.loads.call_args_list)
 [call('{"key": "value"}')]
->>> # List of calls to json's methods (recursively):
-... json.method_calls
+
+# List of calls to json's methods (recursively):
+print(json.method_calls)
 [call.loads('{"key": "value"}')]
 ```
 
@@ -1159,7 +1240,7 @@ Put simply, it preconfigures mocks to only respond to methods that actually exis
 When configuring a Mock, you can pass an object specification to the `spec` parameter. The `spec` parameter accepts a list of names or another object and defines the mock’s interface. If you attempt to access an attribute that does not belong to the specification, Mock will raise an AttributeError:
 
 ```python
-book = Mock(spec=['is_weekday', 'get_holidays'])
+book = Mock(spec=["is_weekday", "get_holidays"])
 print(item.slug)  # attribute error since "slug" is not in "spec"
 ```
 
@@ -1187,9 +1268,11 @@ MagicMock is a subclass of Mock with default implementations of most of the magi
 
 ```python
 mock = MagicMock()
-mock[3] = 'fish'  # MagicMock already has __getitem__ implemented, this would crash with Mock
-mock.__setitem__.assert_called_with(3, 'fish')  # true
-mock.__getitem__.return_value = 'result'
+mock[
+    3
+] = "fish"  # MagicMock already has __getitem__ implemented, this would crash with Mock
+mock.__setitem__.assert_called_with(3, "fish")  # true
+mock.__getitem__.return_value = "result"
 mock[2]  # 'result'
 ```
 
@@ -1206,15 +1289,15 @@ Generally speaking, the target is constructed like this: `<prefix><suffix><optio
 See level 5 here: <https://www.ines-panker.com/2020/06/01/python-mock.html>
 
 ```python
-@mock.patch('mymodule.os')
+@mock.patch("mymodule.os")
 def test_rm(mock_os):
     rm("any path")  # calls rm (that calls patched os.remove inside)
     mock_os.remove.assert_called_with("any path")  # test parameters match
 ```
 
 ```python
-@mock.patch('mymodule.os.path')
-@mock.patch('mymodule.os')
+@mock.patch("mymodule.os.path")
+@mock.patch("mymodule.os")
 def test_rm(mock_os, mock_path):
     mock_path.isfile.return_value = False  # set up the mock
     rm("any path")  # don't delete file since file doesn't exist
@@ -1227,14 +1310,16 @@ def test_rm(mock_os, mock_path):
 ```python
 from unittest import mock
 
+
 def test_my_function():
-    with mock.patch('module.some_function') as some_function:  # Used as context manager
+    with mock.patch("module.some_function") as some_function:  # Used as context manager
         my_function()  # function that calls `some_function`
 
         some_function.assert_called_once()
-        some_function.assert_called_with(2, 'x')
+        some_function.assert_called_with(2, "x")
 
-@mock.patch('module.func')  # Used as decorator
+
+@mock.patch("module.func")  # Used as decorator
 def test_my_function(some_function):
     module.func(10)  # Calls patched function
     some_function.assert_called_with(10)  # True
@@ -1250,7 +1335,7 @@ A good rule of thumb is to patch() the object where it is looked up.
 import my_calendar
 from unittest.mock import patch
 
-with patch('my_calendar.is_weekday'):  # lookup function in my_calendar module
+with patch("my_calendar.is_weekday"):  # lookup function in my_calendar module
     my_calendar.is_weekday()  # <MagicMock name='is_weekday()' id='4336501256'>
 ```
 
@@ -1258,8 +1343,8 @@ with patch('my_calendar.is_weekday'):  # lookup function in my_calendar module
 from my_calendar import is_weekday  # is_weekday has local scope, it won't be patched
 from unittest.mock import patch
 
-with patch('my_calendar.is_weekday'):
-    is_weekday()   # False!!! It called the real function...
+with patch("my_calendar.is_weekday"):
+    is_weekday()  # False!!! It called the real function...
 ```
 
 Do this instead:
@@ -1268,8 +1353,8 @@ Do this instead:
 from my_calendar import is_weekday
 from unittest.mock import patch
 
-with patch('__main__.is_weekday'):
-    is_weekday()   # <MagicMock name='is_weekday()' id='4502362992'>
+with patch("__main__.is_weekday"):
+    is_weekday()  # <MagicMock name='is_weekday()' id='4502362992'>
 ```
 
 #### @mock.patch pitfall: decorator order
@@ -1277,9 +1362,9 @@ with patch('__main__.is_weekday'):
 When using multiple decorators on your test methods, order is important.
 
 ```python
-@mock.patch('mymodule.sys')
-@mock.patch('mymodule.os')
-@mock.patch('mymodule.os.path')
+@mock.patch("mymodule.sys")
+@mock.patch("mymodule.os")
+@mock.patch("mymodule.os.path")
 def test_something(mock_os_path, mock_os, mock_sys):
     pass
 ```
@@ -1299,7 +1384,7 @@ The only difference is that patch takes a string as the target while patch.objec
 object() takes the same configuration parameters that patch() does. But instead of passing the target’s path, you provide the target object, itself, as the first parameter.
 
 ```python
-@mock.patch.object(facebook.GraphAPI, 'put_object', autospec=True)
+@mock.patch.object(facebook.GraphAPI, "put_object", autospec=True)
 def test_post_message(mock_put_object):  # instance of class GraphAPI
     sf = simple_facebook.SimpleFacebook()
     sf.post_message(message="Hello World!")
@@ -1309,15 +1394,18 @@ def test_post_message(mock_put_object):  # instance of class GraphAPI
 ```python
 from unittest import mock
 
+
 def test_my_function():
-    with mock.patch.object(SomeClass, 'method_of_class', return_value=None) as mock_method:
+    with mock.patch.object(
+        SomeClass, "method_of_class", return_value=None
+    ) as mock_method:
         instance = SomeClass()
-        instance.method_of_class('arg')
-        mock_method.assert_called_with('arg')  # True
+        instance.method_of_class("arg")
+        mock_method.assert_called_with("arg")  # True
 ```
 
 ```python
-@patch.object(requests, 'get', side_effect=requests.exceptions.Timeout)
+@patch.object(requests, "get", side_effect=requests.exceptions.Timeout)
 def test_get_holidays_timeout(mock_requests):
     with pytest.raises(requests.exceptions.Timeout):
         get_holidays()
@@ -1328,18 +1416,18 @@ def test_get_holidays_timeout(mock_requests):
 Besides objects and attributes, you can also patch() dictionaries with patch.dict().
 
 ```python
-with mock.patch.dict('os.environ', {'MY_VAR': 'testing'}):
-    assert os.environ['MY_VAR'] == 'testing'
+with mock.patch.dict("os.environ", {"MY_VAR": "testing"}):
+    assert os.environ["MY_VAR"] == "testing"
 ```
 
 `os.path.dict` does not return a mocker:
 
 ```python
-@mock.patch('os.getcwd', return_value='/home/')
-@mock.patch('worker.print')
-@mock.patch.dict('os.environ', {'MY_VAR': 'testing'})
+@mock.patch("os.getcwd", return_value="/home/")
+@mock.patch("worker.print")
+@mock.patch.dict("os.environ", {"MY_VAR": "testing"})
 def test_patch_builtin_dict_decorators(self, mock_print, mock_getcwd):
-    # do stuff
+    pass  # do stuff
 ```
 
 #### Property mocking
@@ -1347,15 +1435,18 @@ def test_patch_builtin_dict_decorators(self, mock_print, mock_getcwd):
 ```python
 from mock import PropertyMock
 
+
 @patch.object(Square, "area", new_callable=PropertyMock)
 def test(mock_square):
-    # do stuff
+    pass  # do stuff
 ```
 
 #### Patch constant
 
 ```python
 @patch("code.MY_CONSTANT", new=3)
+def test():
+    assert code.MY_CONSTANT == 3
 ```
 
 #### wraps
@@ -1365,8 +1456,10 @@ def test(mock_square):
 ```python
 from unittest.mock import MagicMock
 
+
 def my_method():
     return 1
+
 
 my_method = MagicMock(wraps=my_method)
 print(my_method())  # 1
@@ -1406,6 +1499,7 @@ pytest-mock is a pytest plugin thats:
 ```python
 from pytest_mock import MockerFixture
 
+
 def test_blabla(mocker: MockerFixture):
     mocker.patch("sys.argv", ["pytest", "--name", "logfilename.log"])
     ## Test as usual here
@@ -1424,8 +1518,11 @@ Async functions are functions that can be paused and resumed at a later time. Th
 ```python
 async def my_function():
     print("Hello")
-    await asyncio.sleep(1)  # Pause the function for 1 second. This is a coroutine function.
+    await asyncio.sleep(
+        1
+    )  # Pause the function for 1 second. This is a coroutine function.
     print("World")
+
 
 asyncio.run(my_function())  # Run the function until it is complete.
 ```
@@ -1470,11 +1567,13 @@ Let's simulate an example of a server request taking some time to answer:
 import asyncio
 import aiohttp  # use this instead of requests
 
+
 async def query_something(url: str, fake_delay: int = 0):
     async with aiohttp.ClientSession() as session:
         async with session.get(url) as response:
             await asyncio.sleep(fake_delay)
             return await response.text()
+
 
 async def main():  # main is async since it uses await
     await asyncio.gather(
@@ -1483,8 +1582,11 @@ async def main():  # main is async since it uses await
         query_something("https://www.google.com", 3),
     )
 
+
 if __name__ == "__main__":
-    asyncio.run(main())  # This will take around 3 seconds (max(1,2,3)) to complete! In a sync world, it would take 6 seconds.
+    asyncio.run(
+        main()
+    )  # This will take around 3 seconds (max(1,2,3)) to complete! In a sync world, it would take 6 seconds.
 ```
 
 ### `asyncio.create_task()`
@@ -1537,15 +1639,18 @@ from typing import Optional
 
 app = FastAPI()  # create an instance of the FastAPI class
 
+
 @app.get("/")  # decorator to tell FastAPI which path operation this function handles
 def read_root():
     return {"message": "Hello World"}  # return a dict that will be converted into JSON
+
 
 @app.get("/items/{item_id}")  # you can define path parameters with {}
 def read_item(item_id: int, q: Optional[str] = None):
     return {"item_id": item_id, "q": q}
 
-@app.get('/burgers')
+
+@app.get("/burgers")
 async def read_burgers():  # async function
     burgers = await get_burgers(2)  # await the async function get_burgers
     return burgers
@@ -1577,9 +1682,11 @@ Now, to send data to the server, we can use the `POST` method:
 ```python
 from pydantic import BaseModel
 
+
 class Item(BaseModel):
     name: str
     price: float
+
 
 @app.post("/items/")  # POST method
 async def create_item(item: Item):
@@ -1661,7 +1768,6 @@ async def read_users_2():
 Query parameters are optional parameters that are passed in the url.
 
 ```python
-
 @app.get("/items/")
 async def read_item(skip: int = 0, limit: int = 10):
     return fake_items_db[skip : skip + limit]
@@ -1715,10 +1821,14 @@ with Session() as session:
     user = session.query(User).first()
     print(user.name)  # "John Doe". This is the in-memory value.
     user.name = "New name"
-    print(user.name)  # "New name". The change was made to the in-memory object. Not the DB!
+    print(
+        user.name
+    )  # "New name". The change was made to the in-memory object. Not the DB!
     # session.expire_all()  # expire all objects
     session.expire(user)  # expire a single object
-    print(user.name)  # "John Doe". The change was discarded, the value was reloaded from the database. This is because the object was expired and the changes were not committed.
+    print(
+        user.name
+    )  # "John Doe". The change was discarded, the value was reloaded from the database. This is because the object was expired and the changes were not committed.
 ```
 
 So when do you actually need to explicitly expire objects? You do so when you want to force an object to reload its data, because you know its current state is possibly stale.
