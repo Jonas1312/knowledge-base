@@ -57,6 +57,7 @@
   - [Timing code](#timing-code)
   - [Wheels](#wheels)
   - [Virtualenv](#virtualenv)
+  - [Versioning](#versioning)
   - [Logging](#logging)
   - [Organize Python code](#organize-python-code)
   - [Python Testing](#python-testing)
@@ -97,7 +98,8 @@
     - [Flusing objects](#flusing-objects)
     - [Committing objects](#committing-objects)
     - [Recap](#recap)
-    - [Fastapi](#fastapi-1)
+    - [Pitfalls](#pitfalls)
+    - [Tips](#tips)
 
 ## Cheat Sheets
 
@@ -974,6 +976,10 @@ print(timeit.timeit(my_function, number=100000))
 ```shell
 virtualenv --python=c:\Python25\python.exe path/to/new/env/envname
 ```
+
+## Versioning
+
+<https://www.darius.page/pipdev/>
 
 ## Logging
 
@@ -1881,6 +1887,13 @@ Here's how I decide what to use:
   - Used when you may have more than 1 in-memory objects which map to the same database record with some key.
   - Merging causes the in-memory objects to be synchronised with each other, does not necessarily persist to the database.
 
-### Fastapi
+### Pitfalls
 
-Make sure to use staticpool if you use `:memory:` database: <https://docs.sqlalchemy.org/en/14/dialects/sqlite.html#using-a-memory-database-in-multiple-threads>
+- Fastapi: Make sure to use staticpool if you use `:memory:` database: <https://docs.sqlalchemy.org/en/14/dialects/sqlite.html#using-a-memory-database-in-multiple-threads>
+- Table columns are nullable by default. If you want to make a column not nullable, you need to pass `nullable=False` to the column constructor.
+
+### Tips
+
+- Add `echo=True` to the `create_engine` function to see the SQL statements that are being executed.
+- Add `doc` and `comment` to your tables and columns to document them.
+- When using alembic, put the datetime in the migration file name. This way, the migrations will be applied in the correct order.
