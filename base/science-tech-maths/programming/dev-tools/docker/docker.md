@@ -106,6 +106,9 @@ The `CMD` specifies arguments that will be fed to the ENTRYPOINT.
   RUN apt-get install -y curl  # if we add a new package here, it will use the cached apt-get update.
   ```
 
+- The last instruction in the Dockerfile should be `CMD` or `ENTRYPOINT`. This is because the last instruction is the one that will be executed when the container starts. If you put `RUN` as the last instruction, it will be executed when the image is built, not when the container starts.
+- The last layer should be the app code. This is because the last layer will be the one ran by default.
+
 ## Build the image
 
 ```bash
