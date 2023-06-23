@@ -82,6 +82,7 @@ base<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [sorting](<base/science-tech-maths/programming/algorithms/sorting/sorting.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [time-space-complexity](<base/science-tech-maths/programming/algorithms/time-space-complexity/big-o.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [char-encoding](<base/science-tech-maths/programming/char-encoding/char-encoding.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [databases](<base/science-tech-maths/programming/databases/databases.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ dev-tools<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [docker](<base/science-tech-maths/programming/dev-tools/docker/docker.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [git](<base/science-tech-maths/programming/dev-tools/git/git.md>)<br>
