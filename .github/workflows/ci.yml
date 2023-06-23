@@ -1,5 +1,4 @@
-# Workflow that re-generates the README.md file at every push
-name: Update README.md
+name: CI
 on:
   push:
     branches:
@@ -45,3 +44,18 @@ jobs:
           ref: master-pub
       - uses: actions/setup-python@v4
       - uses: pre-commit/action@v3.0.0
+
+  link-checker:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: master-pub
+
+      - name: Link Checker
+        id: lychee
+        uses: lycheeverse/lychee-action@v1.8.0
+        with:
+          args: --verbose --no-progress './**/*.md' './**/*.html' --insecure --exclude "https://pastepixel.com/image/....png" --exclude "http://eturnbull.ca/pythonlibs/" --exclude "https://twitter.com/*" --exclude-all-private
+          fail: true
