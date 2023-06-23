@@ -168,9 +168,10 @@ Or:
 - [Write good git commit message](https://juffalow.com/blog/git/write-good-git-commit-message)
 - [Commit messages guide](https://github.com/RomuloOliveira/commit-messages-guide)
 
-## Interactive tutorial
+## Interactive tutorials
 
 - <https://learngitbranching.js.org/>
+- <https://ohmygit.org/>
 
 ## Git tools on top of git
 
