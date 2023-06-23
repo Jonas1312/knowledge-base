@@ -23,3 +23,8 @@ repos:
     -   id: blacken-docs
         additional_dependencies:
         - black==23.3.0
+
+  - repo: https://github.com/rhysd/actionlint
+    rev: v1.6.25
+    hooks:
+      - id: actionlint

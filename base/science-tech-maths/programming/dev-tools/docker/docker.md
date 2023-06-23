@@ -18,6 +18,16 @@ VMs can run a different kernel than the one of the host OS.
 
 ![](docker-vs-vm.png)
 
+## Layers
+
+A docker image is a set of layers. Each layer is a set of files and directories. Each layer is read-only.
+
+When you run a container, a new layer is created on top of the image. This layer is read-write. It is called the container layer.
+
+A layer can be used by multiple images using the docker cache.
+
+Each time you run a command in the Dockerfile (COPY, RUN, etc.), a new layer is created.
+
 ## Dockerfile
 
 A Dockerfile is a text file that contains all the commands a user could call on the command line to assemble an image, image that can be run as a container.
@@ -57,6 +67,10 @@ The `WORKDIR` instruction sets the working directory for any `RUN`, `CMD`, `ENTR
 
 The `COPY` instruction copies new files or directories from `<src>` and adds them to the filesystem of the container at the path `<dest>`.
 
+#### ADD
+
+`ADD` is similar to `COPY`, but it can also download files from the internet and extract tar files.
+
 #### EXPOSE
 
 The `EXPOSE` instruction informs Docker that the container listens on the specified network ports at runtime.
@@ -83,9 +97,26 @@ The `ENTRYPOINT` instruction allows you to configure a container that will run a
 
 #### CMD
 
-The `CMD` instruction should be used to run the software contained by your image, along with any arguments. `CMD` should almost always be used in the form of `CMD ["executable", "param1", "param2"]`.
+The `CMD` instruction should be used to run the app(s) that your container should run, along with any arguments. `CMD` should almost always be used in the form of `CMD ["executable", "param1", "param2"]`.
 
 The `CMD` specifies arguments that will be fed to the ENTRYPOINT.
+
+#### ARG
+
+The `ARG` instruction defines a variable that users can pass at build-time to the builder with the docker build command using the `--build-arg <varname>=<value>` flag.
+
+```dockerfile
+ARG VERSION=latest
+FROM busybox:$VERSION
+```
+
+The code above will use the value of the `VERSION` argument as the tag for the `busybox` image.
+
+#### USER
+
+The `USER` instruction sets the user name or UID to use when running the image and for any `RUN`, `CMD` and `ENTRYPOINT` instructions that follow it in the Dockerfile.
+
+It's good practise to define a user with the lowest possible privileges. By default, Docker runs container as root which inside the container is the root user.
 
 ### Dockerfile good practices
 
@@ -106,8 +137,13 @@ The `CMD` specifies arguments that will be fed to the ENTRYPOINT.
   RUN apt-get install -y curl  # if we add a new package here, it will use the cached apt-get update.
   ```
 
+- It's best to put layers that are likely to change often at the bottom of the Dockerfile, and layers that change less frequently at the top. This is because Docker uses a layered file system, and each layer is cached. If you change a layer, all the layers above it will be invalidated.
 - The last instruction in the Dockerfile should be `CMD` or `ENTRYPOINT`. This is because the last instruction is the one that will be executed when the container starts. If you put `RUN` as the last instruction, it will be executed when the image is built, not when the container starts.
 - The last layer should be the app code. This is because the last layer will be the one ran by default.
+- Set a non-root user. This is for security reasons. If you don't set a non-root user, the container will run as root, which is not recommended.
+- Empty the caches in the same layer: pip cache (`--no-cache-dir`), apt cache, apk cache, etc.
+- Disable the virtual environments (poetry, pipenv, etc.). This is because the container is already an isolated environment, so you don't need another isolated environment inside it.
+- Use `.dockerignore` to exclude files and directories from the context.
 
 ## Build the image
 
