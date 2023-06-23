@@ -95,11 +95,17 @@ We use the `RUN` instruction to execute a command in the container. Like `RUN ap
 
 The `ENTRYPOINT` instruction allows you to configure a container that will run as an executable.
 
+Whatever is set in `ENTRYPOINT` will be executed when the container starts.
+
 #### CMD
 
 The `CMD` instruction should be used to run the app(s) that your container should run, along with any arguments. `CMD` should almost always be used in the form of `CMD ["executable", "param1", "param2"]`.
 
 The `CMD` specifies arguments that will be fed to the ENTRYPOINT.
+
+Quite often, you will see `CMD` in the form of `CMD ["executable", "param1", "param2"]`. This is the preferred form of running a command in a container because it's easy to ovverride the command when debugging.
+
+Whatever is set in `CMD` can be overridden by passing arguments to the `docker run` command.
 
 #### ARG
 
