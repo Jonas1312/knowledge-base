@@ -16,6 +16,7 @@ repos:
     hooks:
       - id: isort
         name: isort (python)
+
   - repo: https://github.com/adamchainz/blacken-docs
     rev: "v1.12.1"
     hooks:
