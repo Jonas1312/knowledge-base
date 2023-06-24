@@ -16,6 +16,8 @@ jobs:
 
       - name: Set up Python
         uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
 
       - name: Run script
         run: |
@@ -43,6 +45,8 @@ jobs:
         with:
           ref: master-pub
       - uses: actions/setup-python@v4
+        with:
+          python-version: "3.10"
       - uses: pre-commit/action@v3.0.0
 
   link-checker:
