@@ -36,7 +36,7 @@
     - [Pinned Memory](#pinned-memory)
     - [Use DistributedDataParallel not DataParallel](#use-distributeddataparallel-not-dataparallel)
     - [Profile your code](#profile-your-code)
-    - [Use 16-bit precision](#use-16-bit-precision)
+    - [Use auto mixed precision](#use-auto-mixed-precision)
     - [Static graphs](#static-graphs)
     - [Lightning Fabric](#lightning-fabric)
     - [More tips](#more-tips)
@@ -365,7 +365,9 @@ That’s a lot of GPU transfers which are expensive! Instead, DistributedDataPar
 
 Pytorch lightning has a profiler built in.
 
-### Use 16-bit precision
+<https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html>
+
+### Use auto mixed precision
 
 Forward and backward pass in 16-bit precision, convert gradients to 16-bit and upgrade weights in 32-bit precision.
 
@@ -376,11 +378,17 @@ This is another way to speed up training which we don’t see many people using.
 
 Can make your code run three times faster.
 
+<https://pytorch.org/docs/stable/amp.html>
+
 ### Static graphs
 
 Pytorch 2.0 added torch.compile()
 
-model = torch.compile(model) # NEW
+```python
+model = torch.compile(model)  # NEW
+```
+
+the compile API converts your model into an intermediate computation graph (an FX graph) which it then compiles into low-level compute kernels in a manner that is optimal for the underlying training accelerator, using techniques such as kernel fusion and out-of-order execution (see here for more details).
 
 ### Lightning Fabric
 
