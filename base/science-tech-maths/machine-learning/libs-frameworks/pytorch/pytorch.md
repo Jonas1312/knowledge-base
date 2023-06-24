@@ -44,6 +44,7 @@
   - [Visualize Layer Activations](#visualize-layer-activations)
   - [MultiGPU](#multigpu)
   - [PyTorch internals](#pytorch-internals)
+  - [Debugging](#debugging)
 
 ## Cheat Sheets
 
@@ -367,6 +368,8 @@ Pytorch lightning has a profiler built in.
 
 <https://pytorch.org/tutorials/recipes/recipes/profiler_recipe.html>
 
+<https://zdevito.github.io/2022/12/09/memory-traces.html>
+
 ### Use auto mixed precision
 
 Forward and backward pass in 16-bit precision, convert gradients to 16-bit and upgrade weights in 32-bit precision.
@@ -416,3 +419,7 @@ Remove boilerplate code using torchmetrics to accumulate batch metrics over an e
 
 - [PyTorch internals](http://blog.ezyang.com/2019/05/pytorch-internals/)
 - <http://blog.christianperone.com/2018/03/pytorch-internal-architecture-tour/>
+
+## Debugging
+
+Debugging PyTorch memory use with snapshots: <https://zdevito.github.io/2022/08/16/memory-snapshots.html>
