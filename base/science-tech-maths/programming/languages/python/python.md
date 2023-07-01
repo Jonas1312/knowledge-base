@@ -5,6 +5,7 @@
   - [Identity vs equality](#identity-vs-equality)
   - [Shallow and Deep Copy](#shallow-and-deep-copy)
   - [Name resolution](#name-resolution)
+  - [global, nonlocal](#global-nonlocal)
   - [Operators](#operators)
     - [Division and Modulo](#division-and-modulo)
     - [Short-circuiting](#short-circuiting)
@@ -139,6 +140,29 @@ LEGB scope resolution (Local -> Enclosed -> Global -> Built-in)
 - Enclosed can be its enclosing function, e.g., if a function is wrapped inside another function.
 - Global refers to the uppermost level of the executing script itself
 - Built-in are special names that Python reserves for itself.
+
+## global, nonlocal
+
+`global` and `nonlocal` keywords are used to modify the scope of variables.
+
+- `global` is used to declare that a variable inside the function is global (outside the function).
+- `nonlocal` is used to declare that a variable inside a nested function (function inside a function) is not local to it, meaning it lies in the outer inclosing function.
+
+```python
+x = "global"
+
+
+def outer_function():
+    x = "inner"
+
+    def inner_function_1():
+        nonlocal x
+        print(x)  # prints "inner"
+
+    def inner_function_2():
+        global x
+        print(x)  # prints "global"
+```
 
 ## Operators
 
