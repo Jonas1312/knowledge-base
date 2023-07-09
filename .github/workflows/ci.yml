@@ -5,6 +5,8 @@ on:
       - master-pub
   workflow_dispatch:
 
+permissions: {}
+
 jobs:
   update-readme:
     runs-on: ubuntu-latest
