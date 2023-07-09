@@ -400,6 +400,7 @@ Lightning Fabric is a lightweight Pytorch Lightning extension: <https://lightnin
 ### More tips
 
 - <https://efficientdl.com/faster-deep-learning-in-pytorch-a-guide/>
+- <https://sebastianraschka.com/blog/2023/pytorch-memory-optimization.html>
 
 ## Torchmetrics
 
