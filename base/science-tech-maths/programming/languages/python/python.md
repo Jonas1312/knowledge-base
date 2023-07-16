@@ -61,6 +61,7 @@
   - [Versioning](#versioning)
   - [Logging](#logging)
   - [Organize Python code](#organize-python-code)
+  - [Find unused deps](#find-unused-deps)
   - [Python Testing](#python-testing)
     - [Fixtures](#fixtures)
     - [Compare floats](#compare-floats)
@@ -1059,6 +1060,13 @@ More: <https://guicommits.com/how-to-log-in-python-like-a-pro/>
 
 - <https://guicommits.com/organize-python-code-like-a-pro/>
 - <https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure%3E>
+
+## Find unused deps
+
+- <https://github.com/fpgmaas/deptry>
+- <https://github.com/fredrikaverpil/creosote>
+- <https://github.com/r1chardj0n3s/pip-check-reqs>
+- <https://github.com/tweag/FawltyDeps>
 
 ## Python Testing
 
