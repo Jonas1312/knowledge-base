@@ -1923,9 +1923,50 @@ Here's how I decide what to use:
 
 - Fastapi: Make sure to use staticpool if you use `:memory:` database: <https://docs.sqlalchemy.org/en/14/dialects/sqlite.html#using-a-memory-database-in-multiple-threads>
 - Table columns are nullable by default. If you want to make a column not nullable, you need to pass `nullable=False` to the column constructor.
+- a `Session` is not thread safe. You need to create a new session for each thread.
 
 ### Tips
 
 - Add `echo=True` to the `create_engine` function to see the SQL statements that are being executed.
 - Add `doc` and `comment` to your tables and columns to document them.
 - When using alembic, put the datetime in the migration file name. This way, the migrations will be applied in the correct order.
+- Use `db.session.rollback()` to discard changes.
+- To get a session from the session maker:
+
+```python
+try:
+    db: Session = session_maker()
+    yield db
+    db.commit()  # might not be necessary if autocommit=True in session_maker
+except Exception as e:
+    db.rollback()
+    raise e
+finally:
+    db.close()
+```
+
+- To get a test session maker:
+
+```python
+@pytest.fixture
+def fake_session_maker() -> Generator[Session, None, None]:
+    tf = tempfile.NamedTemporaryFile()  # create a new db for each test
+
+    SQLALCHEMY_DATABASE_URL = f"sqlite:///{tf.name}.db"
+
+    try:
+        engine = create_engine(
+            SQLALCHEMY_DATABASE_URL,
+            connect_args={"check_same_thread": False},
+            echo=True,
+        )
+        test_session_maker = sessionmaker(
+            autocommit=False, autoflush=False, bind=engine
+        )
+        mapper_registry.metadata.create_all(bind=engine)
+
+        yield test_session_maker
+
+    finally:
+        tf.close()
+```
