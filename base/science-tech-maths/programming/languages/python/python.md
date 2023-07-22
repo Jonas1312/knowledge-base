@@ -21,6 +21,7 @@
     - [Use object instead of Any](#use-object-instead-of-any)
     - [Generics and TypeVar](#generics-and-typevar)
     - [Constants](#constants)
+    - [TYPE\_CHECKING](#type_checking)
   - [Sequences](#sequences)
     - [Filter Map Reduce](#filter-map-reduce)
     - [Comprehension lists/dicts](#comprehension-listsdicts)
@@ -32,16 +33,18 @@
   - [Data structures](#data-structures)
     - [Lists](#lists)
     - [Dicts](#dicts)
+    - [TypedDict](#typeddict)
     - [Sets](#sets)
     - [Frozen sets](#frozen-sets)
     - [String](#string)
     - [Enum](#enum)
     - [Data Classes](#data-classes)
       - [Namedtuple](#namedtuple)
-      - [TypedDict](#typeddict)
       - [attrs](#attrs)
       - [Dataclasses](#dataclasses)
+        - [Tips and Tricks](#tips-and-tricks)
       - [Pydantinc](#pydantinc)
+      - [Pydantic vs attrs vs dataclasses](#pydantic-vs-attrs-vs-dataclasses)
   - [Decorators](#decorators)
   - [Context managers (with)](#context-managers-with)
   - [Classes](#classes)
@@ -255,7 +258,7 @@ For instance, `import idlelib` within a program, runs `idlelib/__init__.py`, whi
 
 On the otherhand, `tkinter/__init__.py` contains most of the tkinter code and defines all the widget classes.
 
-You might see `__all__` in some `__init__.py` files. This is a list of names that will be imported when you do `from package import *`. It's not used very often.
+You might see `__all__` in some `__init__.py` files. This is a list of names that will be imported when you do `from package import *`.
 
 ### `__main__.py`
 
@@ -439,6 +442,21 @@ from typing import Final
 PI: Final = 3.14
 ```
 
+### TYPE_CHECKING
+
+`TYPE_CHECKING` is a special constant that is always `False` at runtime, but is `True` when type checking. It can be used to avoid importing modules only needed for type checking.
+
+```python
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import pandas as pd
+
+
+def export_as_df() -> pd.DataFrame:
+    ...
+```
+
 ## Sequences
 
 ### Filter Map Reduce
@@ -534,6 +552,13 @@ print(my_list[899:])  # no error!
 - `car = collections.defaultdict(lambda:"Bronco")`
 - resizing: ![](./dicts-resizing.png)
 
+### TypedDict
+
+- are a regular dictionary
+- typecheckers will warn you of errors.
+- But at run time no check is performed.
+- no way to customize magic methods (for equality, properties, etc.)
+
 ### Sets
 
 ```python
@@ -603,13 +628,6 @@ class Point(NamedTuple):
 - hard to add default values
 - are immutable.
 
-#### TypedDict
-
-- are a regular dictionary
-- typecheckers will warn you of errors.
-- But at run time no check is performed.
-- no way to customize magic methods (for equality, properties, etc.)
-
 #### attrs
 
 - More powerful than dataclasses
@@ -638,6 +656,24 @@ class DataClassCard:
     suit: str = 42
 ```
 
+##### Tips and Tricks
+
+Unfortunately, it's not possible to only set some attributes frozen. But you can bypass the dataclass `__setattr__` method to set the attribute:
+
+```python
+from dataclasses import dataclass, field
+
+
+@dataclass(frozen=True)
+class FrozenClass:
+    attr: str = field(init=False)  # init=False to not set it during init
+
+    def __post_init__(self):
+        object.__setattr__(
+            self, "attr", "some_value"
+        )  # bypass the dataclass __setattr__
+```
+
 #### Pydantinc
 
 - gives you a class which gives you both static and runtime type safety.
@@ -659,6 +695,22 @@ class Item(BaseModel):
         None, title="Description of the item", max_length=300
     )
 ```
+
+#### Pydantic vs attrs vs dataclasses
+
+pydantic:
+
+- runtime checking and data validation
+
+attrs:
+
+- has slots set by default
+- can set some attributes frozen and others not (dataclasses can't)
+
+dataclasses:
+
+- in the standard library: which can be a con since it is not updated as often as attrs and pydantic
+- faster than attrs and pydantic
 
 ## Decorators
 
@@ -781,6 +833,8 @@ class D(B, C):
 
 
 D().foo()  # prints class C, searches in B first!
+
+print([c.__name__ for c in D.__mro__])  # [D, B, C, A, object]
 ```
 
 ```python
@@ -821,6 +875,10 @@ class ConcreteClass(AbstractClass):
     def foo(self):
         return "foo"
 ```
+
+There are many abstract classes in the standard library: <https://docs.python.org/3/library/collections.abc.html#collections-abstract-base-classes>
+
+For example, if you are defining a custom container, you can inherit from `collections.abc.Container` and you will have to implement `__contains__`. This will allow you to use `in` on your custom container.
 
 ### Class Decorators
 
