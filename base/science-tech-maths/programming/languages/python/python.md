@@ -86,6 +86,8 @@
       - [wraps](#wraps)
     - [pytest monkeypatch fixture](#pytest-monkeypatch-fixture)
     - [pytest-mock plugin mocker fixture](#pytest-mock-plugin-mocker-fixture)
+  - [Pandas](#pandas)
+    - [.assign](#assign)
   - [Async await](#async-await)
     - [Event loop](#event-loop)
     - [`asyncio.gather()`](#asynciogather)
@@ -795,6 +797,13 @@ def my_context_manager():
         yield res  # might crash here
     finally:
         release_resource(res)
+```
+
+It is possible to open multiple contexts at once:
+
+```python
+with open("file1.txt") as f1, open("file2.txt") as f2:
+    ...  # do something with f1 and f2
 ```
 
 ## Classes
@@ -1599,6 +1608,19 @@ from pytest_mock import MockerFixture
 def test_blabla(mocker: MockerFixture):
     mocker.patch("sys.argv", ["pytest", "--name", "logfilename.log"])
     ## Test as usual here
+```
+
+## Pandas
+
+### .assign
+
+Use `.assign` to create multiple new columns:
+
+```python
+df.assign(
+    new_column_1=df["temp_c"] * 9 / 5 + 32,
+    new_column_2=lambda x: x["column_1"] - x["column_2"],
+)
 ```
 
 ## Async await
