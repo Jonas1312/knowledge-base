@@ -1079,6 +1079,7 @@ virtualenv --python=c:\Python25\python.exe path/to/new/env/envname
 import logging
 
 logging.basicConfig(level=logging.WARNING)  # minimum level that will be logged
+logger = logging.getLogger(__name__)  # create a logger for the current module
 
 logging.debug("")  # won't be logged
 logging.info("")  # won't be logged
@@ -1094,13 +1095,10 @@ Add a handler to the root logger so we can see the actual errors:
 ```python
 import logging
 
-logger = logging.getLogger(
-    "my_app"
-)  # you can use another logger name for a module of your app
+logger = logging.getLogger(__name__)
 logger.setLevel(logging.DEBUG)  # minimum level that will be logged
-logger.addHandler(
-    logging.StreamHandler()
-)  # add a handler to the root logger. StreamHandler() will log to the console. You can use FileHandler() to log to a file.
+# add a handler to the root logger. StreamHandler() will log to the console. You can use FileHandler() to log to a file.
+logger.addHandler(logging.StreamHandler())
 ```
 
 To keep a single logger for the whole app:
