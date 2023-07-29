@@ -1914,7 +1914,7 @@ In this case, there are 3 query parameters:
 
 SQLAlchemy is an object-relational mapper widely used in the Python. As an ORM, SQLAlchemy enables you to manipulate database records as Python objects.
 
-For example, a row in your users table would be represented as a <User> object, which has attributes, methods, and so on.
+For example, a row in your users table would be represented as a User object, which has attributes, methods, and so on.
 
 ### Session
 
@@ -1937,9 +1937,8 @@ with Session() as session:
     user = session.query(User).first()
     print(user.name)  # "John Doe". This is the in-memory value.
     user.name = "New name"
-    print(
-        user.name
-    )  # "New name". The change was made to the in-memory object. Not the DB!
+    # "New name". The change was made to the in-memory object. Not the DB!
+    print(user.name)
     # session.expire_all()  # expire all objects
     session.expire(user)  # expire a single object
     print(
