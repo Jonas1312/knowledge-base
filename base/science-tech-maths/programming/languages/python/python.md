@@ -89,10 +89,16 @@
   - [Pandas](#pandas)
     - [.assign](#assign)
   - [Async await](#async-await)
+    - [How is it different from threads?](#how-is-it-different-from-threads)
+    - [Coroutines](#coroutines)
+    - [Await expression](#await-expression)
     - [Event loop](#event-loop)
+    - [`asyncio.run()`](#asynciorun)
     - [`asyncio.gather()`](#asynciogather)
     - [`asyncio.create_task()`](#asynciocreate_task)
     - [`asyncio.as_completed()`](#asyncioas_completed)
+    - [asyncio.Queue](#asyncioqueue)
+    - [Async context managers](#async-context-managers)
   - [FastApi](#fastapi)
     - [HTTP methods](#http-methods)
     - [Order matters](#order-matters)
@@ -1629,27 +1635,9 @@ Asynchronous programming is a programming model where multiple tasks are execute
 
 This is in contrast to synchronous programming, where each task runs in sequence and waits for the previous task to complete before starting the next one.
 
-Async functions are functions that can be paused and resumed at a later time. They are defined using the async keyword.
+### How is it different from threads?
 
-```python
-async def my_function():
-    print("Hello")
-    await asyncio.sleep(
-        1
-    )  # Pause the function for 1 second. This is a coroutine function.
-    print("World")
-
-
-asyncio.run(my_function())  # Run the function until it is complete.
-```
-
-Await is used to pause the function until the coroutine is complete. __The await keyword can only be used inside an async function.__
-
-Await tells Python interpreter to run other code in the meantime, and then return to the await statement later.
-
-How is it different to threads ?
-
-- Threads can be interrupted by the OS at any time, but async functions yeild control back to the event loop when they are waiting for an IO operation to complete.
+- Threads can be interrupted by the OS at any time, but async functions yield control back to the event loop when they are waiting for an IO operation to complete.
 - This is a cooperative multitasking model: the event loop will only switch to another task when the current task yields control back to the event loop.
 - async/await runs in a single thread, so it can be more efficient than threads if you are doing a lot of IO-bound work (reading/writing files, making network requests, etc.).
 - Indeed, when using threads you have to do a lot of context switching between threads, which is expensive.
@@ -1665,15 +1653,98 @@ __Remember__: Async/await is not parallelism, it's concurrency.
 - It's a way to write code that looks like it's running in parallel, but it's actually running in a single thread.
 - There is not code being executed in parallel, it's just that the code is being executed in a way that makes it look like it's running in parallel.
 - Everytime we use await, we are yielding control back to the event loop, which can then switch to another task.
-- Python async only optimizes IDLE time
+- Python async only optimizes IDLE time.
 
-The downside of async is that you need to use libs that support it. For example, requests does not support async, so we need to use aiohttp instead.
+The downside of async is that you need to use libs that support it. For example, requests or urllib3 do not support async, so we need to use aiohttp or httpx instead.
+
+### Coroutines
+
+Async functions (also called coroutines) are functions that can be paused and resumed at a later time. They are defined using the async keyword.
+
+```python
+async def my_function():  # this is a coroutine function
+    print("Hello")
+    # Pause the function for 1 second. This is a coroutine function.
+    await asyncio.sleep(1)
+    print("World")
+
+
+asyncio.run(my_function())  # Run the function until it is complete.
+```
+
+An async method (coroutine) has to be awaited for it to run:
+
+```python
+async def my_coroutine():
+    print("Hello")
+
+
+my_coroutine()  # this will not run the coroutine, it will just return a coroutine object
+await my_coroutine()  # this will run the coroutine
+```
+
+### Await expression
+
+Await is used to pause the function until the coroutine is complete. __The await keyword can only be used inside an async function.__
+
+Await tells Python interpreter to run other code in the meantime, and then return to the await statement later.
+
+```python
+async def read_data(db):
+    data = await db.fetch("SELECT ...")
+    ...
+```
+
+`await`, suspends execution of `read_data` coroutine until `db.fetch` awaitable completes and returns the result data.
+
+There are three main types of awaitable objects:
+
+1. coroutines
+
+    ```python
+    async def some_coroutine():
+        ...
+    ```
+
+2. Tasks
+
+    ```python
+    task = asyncio.create_task(some_coroutine())
+    await task
+    ```
+
+3. Futures
+
+   ```python
+   await some_future
+   ```
 
 ### Event loop
 
 The event loop is exactly what it sounds like, there is a queue of events/jobs and a loop that just constantly pulls jobs off the queue and runs them.
 
 These jobs are called coroutines. They are a small set of instructions, including which events to put back on to the queue, if any.
+
+### `asyncio.run()`
+
+`asyncio.run()`, is responsible for getting the event loop, running tasks until they are marked as complete, and then closing the event loop.
+
+`asyncio.run()` is a function that runs the passed coroutine, taking care of managing the asyncio event loop and finalizing asynchronous generators.
+
+```python
+import asyncio
+
+
+async def main(some_var_to_return):  # main is async since it uses await
+    print("Hello")
+    await asyncio.sleep(1)
+    print("World")
+    return some_var_to_return
+
+
+ret = asyncio.run(main("lol"))  # Run the function until it is complete.
+print(ret)  # "lol"
+```
 
 ### `asyncio.gather()`
 
@@ -1700,9 +1771,8 @@ async def main():  # main is async since it uses await
 
 
 if __name__ == "__main__":
-    asyncio.run(
-        main()
-    )  # This will take around 3 seconds (max(1,2,3)) to complete! In a sync world, it would take 6 seconds.
+    # This will take around 3 seconds (max(1,2,3)) to complete! In a sync program, it would take 6 seconds.
+    asyncio.run(main())
 ```
 
 ### `asyncio.create_task()`
@@ -1735,6 +1805,36 @@ async def main():
     for task in asyncio.as_completed(tasks):
         result = await task
         print(result)
+```
+
+### asyncio.Queue
+
+A queue is a data structure that allows you to put items in it and get them out in the same order.
+
+Examples:
+
+- <https://docs.python.org/3/library/asyncio-queue.html#examples>
+- <https://realpython.com/async-io-python/#using-a-queue>
+
+### Async context managers
+
+Async context managers are a new feature in Python 3.7. They are similar to regular context managers, but they are used with the async with statement instead of the regular with statement.
+
+```python
+class AsyncContextManager:
+    async def __aenter__(self):
+        await log("entering context")
+
+    async def __aexit__(self, exc_type, exc, tb):
+        await log("exiting context")
+
+
+async def main():
+    async with AsyncContextManager():
+        await log("inside context")
+
+
+asyncio.run(main())
 ```
 
 ## FastApi
