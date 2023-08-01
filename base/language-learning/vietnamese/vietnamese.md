@@ -28,8 +28,8 @@ If you are a man, refer to yourself as:
 
 To address someone (still as a man):
 
-- use "Chị" for a female: "cảm ơn, chị" (Thank you, sister/madam)
-- use "Anh" for a male: "cảm ơn, anh" (Thank you, brother/sir)
+- use "Chị" for an older female: "cảm ơn, chị" (Thank you, elder sister/madam)
+- use "Anh" or "Ban" for a male: "cảm ơn, anh" (Thank you, brother/sir)
 - use "Em" for a person younger than you:
   - "Chào em" (Hello, younger brother/sister)
   - "Em tên gì?" (What's your name?)
