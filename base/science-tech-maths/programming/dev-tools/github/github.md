@@ -11,6 +11,8 @@ Add .patch or .diff after url:
 
 ### Tips
 
+### Matrix for multistage deployment
+
 To roll out deployments for diff stages (staging, preprod, prod), you can use a matrix job that way:
 
 ```yaml
@@ -26,6 +28,38 @@ jobs:
       - name: Deploy
         run: |
           echo "Deploying to ${{ matrix.stage }}"
+```
+
+### Specifities of `push` event
+
+A workflow can be triggered to run on a push event on certain branches:
+
+```yaml
+on:
+  push:
+    branches:
+      - main
+      - "release/**"
+```
+
+If the workflow is updated on the main branch, but not on the release branch, when you push on the release branch, the workflow will run with the old version of the workflow.
+
+This happens since when a push event triggers the workflow, GitHub takes the commit SHA of the push event, and then looks for the workflow file at that commit SHA.
+
+To always take the workflow from master while still using the on `push` event, one have to use the `uses` keyword to fetch the workflow from the main branch:
+
+```yaml
+on:
+  push:
+    branches:
+      - main
+      - "release/**"
+
+jobs:
+  my_job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: {repo_owner}/{repo}/.github/workflows/{filename}@{ref}  # replace ref by main/master
 ```
 
 ### Env var
