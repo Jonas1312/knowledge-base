@@ -73,6 +73,7 @@
   - [Tests](#tests)
   - [Forward declarations](#forward-declarations)
   - [lambda functions](#lambda-functions)
+  - [Inline](#inline)
   - [TODO](#todo)
 
 ## Hello World
@@ -2399,6 +2400,33 @@ auto lf = [bias](int x, int y) { return x + y + bias; };
 std::function<int (int)> func = [](int i) -> int { return i+4; };
 std::cout << "func: " << func(6) << '\n';
 ```
+
+## Inline
+
+Inline is often misunderstood. It is not a command to the compiler to inline a function. It is a command to the linker to allow multiple definitions of a function.
+
+This is not:
+
+```c++
+
+inline void foo() {
+  // 'do_stuff' instructions
+}
+
+void bar() {
+  foo(); // foo() will NOT be replaced with the 'do_stuff' instructions
+}
+```
+
+`inline` let's you define a function in a header file that is included by multiple other `.cpp` files.
+
+If you don't specify `inline` on that function each `.cpp` file that includes that header will compile the function and put a symbol for it in the generated object file.
+
+When you then link all the multiple object files together to form your executable or library you get the linker error: "multiple definitions of function XXX", because you violated the One Definition Rule.
+
+The linker will need to know which function to call, but if you have multiple functions with the same name it doesn't know they are identical and it can't choose one over the other - thus the error.
+
+Now, if you mark a function inline you tell the linker: "there will be multiple instances of this function, but I swear: they are all identical and you can just link against which ever one of you prefer and throw away the rest".
 
 ## TODO
 
