@@ -270,6 +270,9 @@ where $\hat{y_k}$ is the probability that the sample belongs to the ground truth
 
 We can show that minimizing the cross entropy is equivalent to maximizing the log likelihood.
 
+When training a model, you can have an estime of what's the probability for predicting the right class.
+For example, if you have a cross entropy loss of $4.17$, $H = 4.17 = -\sum_{i=1}^{n}y_ilog(\hat{y_i})$, it means that the probability of predicting the right class is $e^{-4.17} = 0.015 = \frac{1}{65}$. If the number of classes is greather than 65, then the model has learned something.
+
 #### Kullback-Leibler
 
 - <https://www.countbayesie.com/blog/2017/5/9/kullback-leibler-divergence-explained>
