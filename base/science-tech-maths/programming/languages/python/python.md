@@ -704,6 +704,18 @@ class Item(BaseModel):
     )
 ```
 
+You can enable validate-on-assignment mode by setting the validate_assignment class attribute to True:
+
+```python
+class User(BaseModel, validate_assignment=True):
+    name: str
+
+
+user = User(name="Samuel")
+
+user.name = 42  # raises ValidationError
+```
+
 #### Pydantic vs attrs vs dataclasses
 
 pydantic:

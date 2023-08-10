@@ -610,6 +610,8 @@ Most deep networks nowadays are overconfident: <https://arxiv.org/pdf/1706.04599
 
 One can use temperature scaling, a learnable parameter inserted in the softmax: <https://lukesalamone.github.io/posts/what-is-temperature/>.
 
+Uncertainty calibration: <https://pair.withgoogle.com/explorables/uncertainty-calibration/>
+
 ## No free lunch theorem
 
 States that:
