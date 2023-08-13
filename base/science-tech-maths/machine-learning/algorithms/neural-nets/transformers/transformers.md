@@ -9,12 +9,12 @@
       - [Interpretation](#interpretation)
       - [Computation](#computation)
       - [Multi head attention](#multi-head-attention)
+    - [Positional encoding](#positional-encoding)
       - [Self-attention vs global attention](#self-attention-vs-global-attention)
     - [Transformer decoder](#transformer-decoder)
       - [Stacked self-attention layers](#stacked-self-attention-layers)
       - [Masked self-attention](#masked-self-attention)
       - [Cross-attention (seq2seq tasks)](#cross-attention-seq2seq-tasks)
-    - [Positional encoding](#positional-encoding)
       - [Different positional encodings](#different-positional-encodings)
     - [Layers](#layers)
       - [Layer normalization](#layer-normalization)
@@ -76,7 +76,7 @@ Each layer has two sub-layers:
 
 We employ a residual connection around each of the two sub-layers, followed by layer normalization .
 
-That is, the output of each sub-layer is $LayerNorm(x + Sublayer(x))$, where *Sublayer(x)* is the function implemented by the sub-layer itself.
+That is, the output of each sub-layer is $LayerNorm(x + Sublayer(x))$, where $Sublayer(x)$ is the function implemented by the sub-layer itself.
 
 To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimension $dmodel=512$.
 
@@ -114,7 +114,9 @@ $$Attention(Q, K, V) = softmax \left( \frac{QK^T}{\sqrt d_k} \right) V$$
 
 The dimensions of the matrices are:
 
-- $QK^T \in \mathbb{R}^{n \times n}$
+- $QK^T \in \mathbb{R}^{n \times n}$: the dot product matrix
+  - the dot product for every possible pair of queries and keys
+  - Each row represents the attention logits for a specific element to all other elements in the sequence.
 - $S = softmax \left( \frac{QK^T}{\sqrt d_k} \right) \in \mathbb{R}^{n \times n}$: it's the attention weights matrix:
   - The softmax is applied to each row, so the sum of the weights for each row is 1.
   - The i-th row of $S$ is the attention weights for the i-th token with respect to the other tokens.
@@ -128,6 +130,16 @@ Thus, a final weight matrix $W^O \in \mathbb{R}^{d_v \times d}$ can be applied t
 On the image below, we see the self-attention mechanism in action. The query is the word "it".
 
 ![](self-attention.png)
+
+Visually, we can show the attention over a sequence of words as follows (the softmax is not visualized for simplicity):
+
+![](./attention_example.svg)
+
+Each word in the input sequence is a query.
+
+The query is compared to all keys with a score function (in this case the dot product) to determine the weights.
+
+Finally, the value vectors of all words are averaged using the attention weights. We assign the value vectors a higher weight whose corresponding key is most similar to the query.
 
 #### Interpretation
 
@@ -150,7 +162,15 @@ All-to-all comparison: Each layer is $O(n^2)$, where $n$ is the sequence length.
 
 Note that we have only multiplied matrices so far, so the computation is parallelizable using GPUs.
 
-In the softmax, we divide by $\sqrt d_k$. This is to avoid the softmax to be too peaked for large values of $d_k$. If the softmax is too peaked, the gradient might be too small.
+In the softmax, we divide by $\sqrt d_k$. This is to avoid the softmax to be too peaked (saturate to 1 for an output, 0 for the rest) for large values of $d_k$. If the softmax is too peaked, the gradient might be too small.
+
+Mathematical explanation:
+
+$$q_i \sim \mathcal{N}(0,\sigma^2), k_i \sim \mathcal{N}(0,\sigma^2) \to \text{Var}\left(\sum_{i=1}^{d_k} q_i\cdot k_i\right) = \sigma^4\cdot d_k$$
+
+We want the variance $\sigma^2$ to be 1 throughout the whole network, so we divide by $\sqrt d_k$ (remember $\text{Var}(aX) = a^2\text{Var}(X)$):
+
+$$\text{Var}\left(\sum_{i=1}^{d_k} \frac{q_i\cdot k_i}{\sqrt d_k}\right) = \text{Var}\left(\sum_{i=1}^{d_k} q_i\cdot k_i\right) \cdot \frac{1}{d_k} = \frac{\sigma^4\cdot d_k}{d_k} = \sigma^4 = {(\sigma^2)}^2 = 1^2 = 1$$
 
 #### Multi head attention
 
@@ -169,3 +189,9 @@ We then concatenate them to obtain the attention output $O \in \mathbb{R}^{n \ti
 Since the output should be of dimension $d$, we apply a final linear transformation $W^O \in \mathbb{R}^{hd_v \times d}$ to obtain the final output $O' \in \mathbb{R}^{n \times d}$.
 
 $h$, the number of heads, is usually set to 8.
+
+One crucial characteristic of the multi-head attention is that it is permutation-equivariant with respect to its inputs.
+This means that if we switch two input elements in the input sequence, the output is exactly the same besides the elements 1 and 2 switched.
+Hence, the multi-head attention is actually looking at the input not as a sequence, but as a set of elements.
+
+But positions are important for NLP! We need to encode the position of each word in the sequence using positional encoding.
