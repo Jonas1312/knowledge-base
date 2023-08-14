@@ -65,5 +65,5 @@ jobs:
         id: lychee
         uses: lycheeverse/lychee-action@v1.8.0
         with:
-          args: --verbose --no-progress './**/*.md' './**/*.html' --insecure --exclude "https://pastepixel.com/image/....png" --exclude "http://eturnbull.ca/pythonlibs/" --exclude "https://twitter.com/*" --exclude-all-private
+          args: --verbose --no-progress './**/*.md' './**/*.html' --insecure --exclude-all-private
           fail: true
