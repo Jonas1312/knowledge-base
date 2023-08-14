@@ -113,6 +113,7 @@
     - [Recap](#recap)
     - [Pitfalls](#pitfalls)
     - [Tips](#tips)
+  - [Poetry](#poetry)
 
 ## Cheat Sheets
 
@@ -2159,3 +2160,13 @@ def fake_session_maker() -> Generator[Session, None, None]:
     finally:
         tf.close()
 ```
+
+## Poetry
+
+When doing `poetry install`, poetry will detect if it's running in a virtual environment.
+If it is, it will install the dependencies in the virtual environment.
+If it's not, it will create a new virtual environment and install the dependencies in the virtual environment.
+
+You can decide to disable creating a virtual environment by doing `poetry config virtualenvs.create false`. This will install the dependencies in the global python environment, like `pip install`.
+
+Or decide to create the virtual env in the project directory by doing `poetry config virtualenvs.in-project true`.
