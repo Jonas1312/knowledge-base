@@ -9,8 +9,9 @@
       - [Interpretation](#interpretation)
       - [Computation](#computation)
       - [Multi head attention](#multi-head-attention)
-    - [Positional encoding](#positional-encoding)
       - [Self-attention vs global attention](#self-attention-vs-global-attention)
+    - [Feed-forward network](#feed-forward-network)
+    - [Positional encoding](#positional-encoding)
     - [Transformer decoder](#transformer-decoder)
       - [Stacked self-attention layers](#stacked-self-attention-layers)
       - [Masked self-attention](#masked-self-attention)
@@ -104,7 +105,7 @@ to extract feature representations:
 - $K = XW_K \in \mathbb{R}^{n \times d_k}$, the key matrix
 - $V = XW_V \in \mathbb{R}^{n \times d_v}$, the value matrix
 
-$d_k$ and $d_v$ are hyperparameters, but they are often taken as $d_k=d_v=64$.
+$d_q$, $d_k$ and $d_v$ are hyperparameters, but they are often taken as $512$ (for simple attention, not multi-head attention).
 
 Note that the input $X \in \mathbb{R}^{n \times d}$ is a list of tokens, so each $n$ is a token, and each $d$ is the dimension of the token embedding, that is the vector that represents the token in the embedding space.
 
@@ -114,13 +115,13 @@ $$Attention(Q, K, V) = softmax \left( \frac{QK^T}{\sqrt d_k} \right) V$$
 
 The dimensions of the matrices are:
 
-- $QK^T \in \mathbb{R}^{n \times n}$: the dot product matrix
+- $QK^T \in \mathbb{R}^{n \times n}$: the **dot product matrix**
   - the dot product for every possible pair of queries and keys
   - Each row represents the attention logits for a specific element to all other elements in the sequence.
-- $S = softmax \left( \frac{QK^T}{\sqrt d_k} \right) \in \mathbb{R}^{n \times n}$: it's the attention weights matrix:
+- $S = softmax \left( \frac{QK^T}{\sqrt d_k} \right) \in \mathbb{R}^{n \times n}$: it's the **attention weights matrix**:
   - The softmax is applied to each row, so the sum of the weights for each row is 1.
   - The i-th row of $S$ is the attention weights for the i-th token with respect to the other tokens.
-- $O = S V \in \mathbb{R}^{n \times d_v}$: the output matrix:
+- $O = S V \in \mathbb{R}^{n \times d_v}$: the **attention output matrix**:
   - Each row of $O$ is the weighted sum of the values for a token.
 
 Note that the attention outout is $O \in \mathbb{R}^{n \times d_v}$, so it's different from the input $X \in \mathbb{R}^{n \times d}$.
@@ -182,16 +183,29 @@ Each head has different linear transformations, that is different $W_Q$, $W_K$, 
 
 The rational is that different heads can learn different relationships between words.
 
-We thus have $h$ outputs $O_1, \dots, O_h$, where each $O_i \in \mathbb{R}^{n \times d_v}$.
+$h$, the number of heads, is usually set to 8.
+
+We thus have $h$ outputs $O_1, \dots, O_h$ (remember that each $O_i \in \mathbb{R}^{n \times d_v}$).
 
 We then concatenate them to obtain the attention output $O \in \mathbb{R}^{n \times hd_v}$.
 
 Since the output should be of dimension $d$, we apply a final linear transformation $W^O \in \mathbb{R}^{hd_v \times d}$ to obtain the final output $O' \in \mathbb{R}^{n \times d}$.
 
-$h$, the number of heads, is usually set to 8.
+For multi-head attention, GPT-style networks usually set $d_q = d_k = d_v = \frac{d}{h} = \frac{512}{8} = 64 = d_{head}$.
 
 One crucial characteristic of the multi-head attention is that it is permutation-equivariant with respect to its inputs.
 This means that if we switch two input elements in the input sequence, the output is exactly the same besides the elements 1 and 2 switched.
 Hence, the multi-head attention is actually looking at the input not as a sequence, but as a set of elements.
 
-But positions are important for NLP! We need to encode the position of each word in the sequence using positional encoding.
+But positions are important for NLP! We need to encode the position of each word in the sequence using **positional encoding**.
+
+#### Self-attention vs global attention
+
+### Feed-forward network
+
+The feed-forward network is a simple 2-layer fully connected network with activation layer in between.
+
+Thus, this network has two weight matrices:
+
+- $W_1 \in \mathbb{R}^{d \times 4d}$
+- $W_2 \in \mathbb{R}^{4d \times d}$
