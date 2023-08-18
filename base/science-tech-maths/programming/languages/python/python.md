@@ -103,6 +103,7 @@
     - [HTTP methods](#http-methods)
     - [Order matters](#order-matters)
     - [Parameters](#parameters)
+    - [Concurrency](#concurrency)
   - [SQLAlchemy](#sqlalchemy)
     - [Session](#session)
     - [Expiring objects](#expiring-objects)
@@ -2022,6 +2023,46 @@ In this case, there are 3 query parameters:
 - needy, a required str.
 - skip, an int with a default value of 0.
 - limit, an optional int.
+
+### Concurrency
+
+In FastApi, you can declare the routes as async or not.
+
+If your route is async, you can use `await` to wait for the result of another async function.
+
+```python
+@app.get("/burgers")
+async def read_burgers():  # async function
+    burgers = await get_burgers(2)  # await the async function get_burgers
+    return burgers
+```
+
+This is quite efficient since the server can handle other requests while waiting for the result of `get_burgers`.
+
+If you declare the route as a normal `def`, FastApi will run it in a thread pool and wait for the result.
+The answer will be returned only when the function is finished.
+But while the function is running, the server can handle other requests.
+
+```python
+@app.get("/burgers")
+def read_burgers():  # normal function
+    burgers = get_burgers(2)  # get_burgers is a blocking function
+    return burgers
+```
+
+If you want to process the task but return a response immeditaly, use `background tasks` to run a function in the background:
+
+```python
+from fastapi import BackgroundTasks
+
+
+@app.post("/some-route/{q}")
+async def send_notification(q: str, background_tasks: BackgroundTasks):
+    # add the task to the background
+    background_tasks.add_task(some_task_that_takes_some_time, q)
+    # return a response immediately
+    return {"message": "Notification sent in the background"}
+```
 
 ## SQLAlchemy
 
