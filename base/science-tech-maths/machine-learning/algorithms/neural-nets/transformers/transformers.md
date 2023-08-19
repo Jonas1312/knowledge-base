@@ -7,8 +7,10 @@
     - [Attention](#attention)
       - [Scaled dot product attention (or self-attention)](#scaled-dot-product-attention-or-self-attention)
       - [Multi head attention](#multi-head-attention)
+      - [Applications of attention in transformers](#applications-of-attention-in-transformers)
       - [Self-attention vs global attention](#self-attention-vs-global-attention)
       - [Cross attention](#cross-attention)
+    - [Embeddings](#embeddings)
     - [Feed-forward network](#feed-forward-network)
     - [Positional encoding](#positional-encoding)
     - [Transformer decoder](#transformer-decoder)
@@ -78,7 +80,7 @@ We employ a residual connection around each of the two sub-layers, followed by l
 
 That is, the output of each sub-layer is $LayerNorm(x + Sublayer(x))$, where $Sublayer(x)$ is the function implemented by the sub-layer itself.
 
-To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimension $dmodel=512$.
+To facilitate these residual connections, all sub-layers in the model, as well as the embedding layers, produce outputs of dimension $d=512$.
 
 ### Attention
 
@@ -151,19 +153,14 @@ Visually, we can show the attention over a sequence of words as follows (the sof
 ![](./attention_example.svg)
 
 Each word in the input sequence is a query.
-
 The query is compared to all keys with a score function (in this case the dot product) to determine the weights.
-
 Finally, the value vectors of all words are averaged using the attention weights. We assign the value vectors a higher weight whose corresponding key is most similar to the query.
 
 Self-attention is called "self" because we compare each word with all other words in the same sequence.
 
 For sake of simplicity, we assume that the sequence length is one, that is $n=1$.
-
 The query is a vector, for the current word, of dimensions $d_q$.
-
 Key-value is the memory, it's the past, all the words that have been seen so far.
-
 Attention takes the query, find the most similar key(s), and then get the value(s) that correspond to that/those similar key(s).
 
 <img src="attention-as-database-query.png" width="600">
@@ -175,12 +172,11 @@ All-to-all comparison: Each layer is $O(n^2)$, where $n$ is the sequence length.
 Note that we have only multiplied matrices so far, so the computation is parallelizable using GPUs.
 
 In the softmax, we divide by $\sqrt d_k$. This is to avoid the softmax to be too peaked (saturate to 1 for an output, 0 for the rest) for large values of $d_k$. If the softmax is too peaked, the gradient might be too small.
-
 Mathematical explanation:
 
 $$q_i \sim \mathcal{N}(0,\sigma^2), k_i \sim \mathcal{N}(0,\sigma^2) \to \text{Var}\left(\sum_{i=1}^{d_k} q_i\cdot k_i\right) = \sigma^4\cdot d_k$$
 
-We want the variance $\sigma^2$ to be 1 throughout the whole network, so we divide by $\sqrt d_k$ (remember $\text{Var}(aX) = a^2\text{Var}(X)$):
+We want the variance $\sigma^2$ to be 1 throughout the whole network, so we divide by $\sqrt d_k$ (remember that $\text{Var}(aX) = a^2\text{Var}(X)$):
 
 $$\text{Var}\left(\sum_{i=1}^{d_k} \frac{q_i\cdot k_i}{\sqrt d_k}\right) = \text{Var}\left(\sum_{i=1}^{d_k} q_i\cdot k_i\right) \cdot \frac{1}{d_k} = \frac{\sigma^4\cdot d_k}{d_k} = \sigma^4 = {(\sigma^2)}^2 = 1^2 = 1$$
 
@@ -190,7 +186,7 @@ $$\text{Var}\left(\sum_{i=1}^{d_k} \frac{q_i\cdot k_i}{\sqrt d_k}\right) = \text
 
 We perform the self-attention operation multiple times $h$ independently, in parallel, called **heads**.
 
-Each head has different linear transformations, that is different $W_Q$, $W_K$, $W_V$.
+Each head has $h$ different linear transformations, that is different $W_Q$, $W_K$, $W_V$.
 
 The rational is that different heads can learn different relationships between words.
 
@@ -215,8 +211,10 @@ Implementation:
 ```python
 class MultiheadAttention(nn.Module):
     def __init__(
-        self, embed_dim: int = 512, num_heads: int = 8  # embedding dimension, d
-    ):  # number of heads, h
+        self,
+        embed_dim: int = 512,  # number of heads, h
+        num_heads: int = 8,  # embedding dimension, d
+    ):
         super().__init__()
 
         assert (
@@ -259,13 +257,60 @@ class MultiheadAttention(nn.Module):
         return o
 ```
 
+#### Applications of attention in transformers
+
+Attention layers have different uses in the transformer architecture:
+
+- in the encoder, the self-attention layers are used to learn the relationships between words in the input sequence and in the outputs of the previous encoder blocks.
+- in the decoder, the self-attention layers allow each word in the sequence to attend to all the previous words in the sequence, including the current word itself. This is called **masked self-attention**.
+- in the intermediate decoder blocks, the queries are the outputs of the previous decoder block, and the keys and values are the outputs of the encoder blocks. This allows the decoder to attend to all of the input sequence.
+
 #### Self-attention vs global attention
+
+TODO
+
+#### Cross attention
+
+In cross attention, we have two different sequences, for example a sentence in English and a sentence in French.
+
+TODO
+
+### Embeddings
+
+To convert from tokens to embeddings and vice-versa, the transformer uses a weight matrix $W_{emb} \in \mathbb{R}^{vocab \times d}$. This matrix is learned during training. It is used at three different places in the transformer:
+
+- to convert the input tokens into embeddings before the first encoder block
+- to convert the output tokens into embeddings before the first decoder block
+- to convert the output of the decoder into logits for the final softmax layer. For this, we use the transpose of the embedding matrix $W_{emb}^T \in \mathbb{R}^{d \times vocab}$.
+
+For the "tokens-to-embedding" layers, they multiply the weight matrix by a constant $\sqrt{d}$, where $d$ is the embedding dimension. This is done to prevent the variance of the embeddings from being too large.
 
 ### Feed-forward network
 
-The feed-forward network is a simple 2-layer fully connected network with activation layer in between.
+The feed-forward network is a simple 2-layer fully connected network with a RELU activation layer in between.
 
 Thus, this network has two weight matrices:
 
-- $W_1 \in \mathbb{R}^{d \times 4d}$
-- $W_2 \in \mathbb{R}^{4d \times d}$
+- $W_1 \in \mathbb{R}^{d \times dff}$
+- $W_2 \in \mathbb{R}^{dff \times d}$
+
+Where $dff$ is the dimension of the hidden layer, which is usually set to $dff = 2048$.
+
+### Positional encoding
+
+Without position encoding, attention is just bag of words. When you convert a sequence into a set (tokenization), you lose the notion of order.
+
+Positional encoding is a set of small constants, which are added by summation to the word embeddings before the first self-attention layers in the encoder and decoder.
+
+So if the same word appears in a different position, the actual representation will be slightly different, depending on where it appears in the input sentence.
+
+<img src="input-processing-tokenization-embedding.png" width="300">
+
+In the transformer paper, the authors came up with the sinusoidal function for the positional encoding, but the positional encoding can be learned as well.
+
+The formula for the positional encoding is:
+
+$$ PE_{(pos, 2i)} = sin(pos / 10000^{2i / d}) $$
+$$ PE_{(pos, 2i+1)} = cos(pos / 10000^{2i / d}) $$
+
+Where $pos$ is the position of the token in the sequence, $i$ is the dimension of the embedding, and $d$ is the embedding dimension.
