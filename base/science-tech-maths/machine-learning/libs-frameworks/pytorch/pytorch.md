@@ -29,6 +29,7 @@
   - [Maximizing performance](#maximizing-performance)
     - [Construct tensors directly on GPUs](#construct-tensors-directly-on-gpus)
     - [Avoid CPU to GPU transfers or vice-versa](#avoid-cpu-to-gpu-transfers-or-vice-versa)
+    - [Transform your input tensors on the GPU](#transform-your-input-tensors-on-the-gpu)
     - [Workers in dataloader](#workers-in-dataloader)
     - [cuddn.benchmark](#cuddnbenchmark)
     - [Use inplace operations](#use-inplace-operations)
@@ -312,7 +313,20 @@ t = tensor.rand(2, 2, device="cuda")  # good
 
 ### Avoid CPU to GPU transfers or vice-versa
 
-Avoid usage of the .item() or .cpu() or .numpy() calls. This is really bad for performance because every one of these calls transfers data from GPU to CPU and dramatically slows your performance.
+Avoid usage of the `.item()` or `.cpu()` or `.numpy()` calls. This is really bad for performance because every one of these calls transfers data from GPU to CPU and dramatically slows your performance.
+
+### Transform your input tensors on the GPU
+
+Usually, your images are loaded from your drives as uint8 arrays. After normalization, the data is converted to float32. This takes more space as each pixel is now represented by 32 bits instead of 8 bits.
+
+It makes more sense to send the input batches in uint8 to the GPU, and then convert them to float32 on the GPU. This saves a lot of bandwidth between the CPU and the GPU.
+
+```python
+# Bad
+x = torch.tensor(x, dtype=torch.float32).cuda()
+# Good
+x = torch.tensor(x, dtype=torch.uint8).cuda().float()
+```
 
 ### Workers in dataloader
 
@@ -393,6 +407,12 @@ model = torch.compile(model)  # NEW
 
 the compile API converts your model into an intermediate computation graph (an FX graph) which it then compiles into low-level compute kernels in a manner that is optimal for the underlying training accelerator, using techniques such as kernel fusion and out-of-order execution (see here for more details).
 
+You can also compile your losses for example:
+
+```python
+criterion = torch.compile(torch.nn.CrossEntropyLoss().cuda(device))
+```
+
 ### Lightning Fabric
 
 Lightning Fabric is a lightweight Pytorch Lightning extension: <https://lightning.ai/docs/fabric/stable/>
@@ -401,6 +421,10 @@ Lightning Fabric is a lightweight Pytorch Lightning extension: <https://lightnin
 
 - <https://web.archive.org/web/20230127171726/https://efficientdl.com/faster-deep-learning-in-pytorch-a-guide/>
 - <https://sebastianraschka.com/blog/2023/pytorch-memory-optimization.html>
+- PyTorch Model Performance Analysis and Optimization
+  - <https://towardsdatascience.com/pytorch-model-performance-analysis-and-optimization-10c3c5822869>
+  - <https://towardsdatascience.com/pytorch-model-performance-analysis-and-optimization-part-2-3bc241be91>
+  - <https://towardsdatascience.com/pytorch-model-performance-analysis-and-optimization-part-3-1c5876d78fe2>
 
 ## Torchmetrics
 

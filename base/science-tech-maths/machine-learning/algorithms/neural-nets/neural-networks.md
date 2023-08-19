@@ -37,9 +37,13 @@ What makes convex or not convex your network is the problem you’re optimising.
 
 ## Activation functions
 
-- tanh/sigmoid: vanishing gradients
-- relu: dead relu, use LeakyRelu, PRelu, ...
-- exploding gradients: gradient clipping
+- tanh/sigmoid:
+  - can have the problem of vanishing gradients
+  - slow to compute
+- relu:
+  - fast to compute
+  - <https://zinkx.github.io/posts/relu_guide/>
+  - dead relu problem: use LeakyRelu, PRelu, etc.
 
 ## Dropout
 
