@@ -6,10 +6,9 @@
     - [Transformer encoder](#transformer-encoder)
     - [Attention](#attention)
       - [Scaled dot product attention (or self-attention)](#scaled-dot-product-attention-or-self-attention)
-      - [Interpretation](#interpretation)
-      - [Computation](#computation)
       - [Multi head attention](#multi-head-attention)
       - [Self-attention vs global attention](#self-attention-vs-global-attention)
+      - [Cross attention](#cross-attention)
     - [Feed-forward network](#feed-forward-network)
     - [Positional encoding](#positional-encoding)
     - [Transformer decoder](#transformer-decoder)
@@ -43,7 +42,7 @@ Transformers are now SOTA for NLP tasks, since they can capture long-range depen
 
 ## Architecture
 
-![](transformer-arch.png)
+<img src="transformer-arch.png" width="400">
 
 The transformer architecture is based on the encoder-decoder architecture.
 
@@ -53,7 +52,7 @@ of continuous representations $z = (z_1, ..., z_n)$.
 Given $z$, the decoder then generates an output sequence $(y_1, ..., y_m)$ of symbols one element at a time.
 The decoder takes that representation and produces the output.
 
-![](seq2seq.png)
+<img src="seq2seq.png" width="800">
 
 Input elements $x_1, x_2, etc$ are called **tokens**. They can be text representations, pixels, images in case of videos.
 
@@ -68,7 +67,7 @@ entirely.
 
 The encoder is composed of a stack of $N=6$ identical layers.
 
-![](transformer-encoder.png)
+<img src="transformer-encoder.png" width="300">
 
 Each layer has two sub-layers:
 
@@ -91,7 +90,7 @@ The output is computed as a weighted sum of the values, where the weight assigne
 
 #### Scaled dot product attention (or self-attention)
 
-![](./scaled-dot-prod-attention.png)
+<img src="scaled-dot-prod-attention.png" width="300">
 
 An input sequence $X \in \mathbb{R}^{n \times d}$ of $n$ tokens of dimensions $d=512$, is projected using three matrices of weights:
 
@@ -128,6 +127,21 @@ Note that the attention outout is $O \in \mathbb{R}^{n \times d_v}$, so it's dif
 
 Thus, a final weight matrix $W^O \in \mathbb{R}^{d_v \times d}$ can be applied to the output to obtain the final output $O' \in \mathbb{R}^{n \times d}$.
 
+The formula can be implemented this way in PyTorch:
+
+```python
+def scaled_dot_product(q, k, v):
+    d_k = k.size(-1)  # dimension of the key (usually 512, 64 for multi-head attention)
+
+    # (b, n, d_q) x (b, d_k, n) -> (b, n, n)
+    attn_logits = torch.matmul(q, k.transpose(-2, -1))
+    attn_logits = attn_logits / math.sqrt(d_k)  # (b, n, n)
+    attention_weights = F.softmax(attn_logits, dim=-1)  # (b, n, n)
+    # (b, n, n) x (b, n, d_v) -> (b, n, d_v)
+    values = torch.matmul(attention_weights, v)
+    return values
+```
+
 On the image below, we see the self-attention mechanism in action. The query is the word "it".
 
 ![](self-attention.png)
@@ -142,7 +156,7 @@ The query is compared to all keys with a score function (in this case the dot pr
 
 Finally, the value vectors of all words are averaged using the attention weights. We assign the value vectors a higher weight whose corresponding key is most similar to the query.
 
-#### Interpretation
+Self-attention is called "self" because we compare each word with all other words in the same sequence.
 
 For sake of simplicity, we assume that the sequence length is one, that is $n=1$.
 
@@ -152,15 +166,12 @@ Key-value is the memory, it's the past, all the words that have been seen so far
 
 Attention takes the query, find the most similar key(s), and then get the value(s) that correspond to that/those similar key(s).
 
-![](attention-as-database-query.png)
+<img src="attention-as-database-query.png" width="600">
 
 The encoder builds/discovers key-value pairs, it's the memory.
 The decoder builds the queries, it's the question that is asked to the memory.
 
-#### Computation
-
 All-to-all comparison: Each layer is $O(n^2)$, where $n$ is the sequence length.
-
 Note that we have only multiplied matrices so far, so the computation is parallelizable using GPUs.
 
 In the softmax, we divide by $\sqrt d_k$. This is to avoid the softmax to be too peaked (saturate to 1 for an output, 0 for the rest) for large values of $d_k$. If the softmax is too peaked, the gradient might be too small.
@@ -175,7 +186,7 @@ $$\text{Var}\left(\sum_{i=1}^{d_k} \frac{q_i\cdot k_i}{\sqrt d_k}\right) = \text
 
 #### Multi head attention
 
-![](./multi-head-attention.png)
+<img src="multi-head-attention.png" width="300">
 
 We perform the self-attention operation multiple times $h$ independently, in parallel, called **heads**.
 
@@ -197,7 +208,56 @@ One crucial characteristic of the multi-head attention is that it is permutation
 This means that if we switch two input elements in the input sequence, the output is exactly the same besides the elements 1 and 2 switched.
 Hence, the multi-head attention is actually looking at the input not as a sequence, but as a set of elements.
 
-But positions are important for NLP! We need to encode the position of each word in the sequence using **positional encoding**.
+But positions are important for NLP! The solution is to encode the position of each word in the sequence using **positional encoding**.
+
+Implementation:
+
+```python
+class MultiheadAttention(nn.Module):
+    def __init__(
+        self, embed_dim: int = 512, num_heads: int = 8  # embedding dimension, d
+    ):  # number of heads, h
+        super().__init__()
+
+        assert (
+            embed_dim % num_heads == 0
+        ), "Embedding dimension must be 0 modulo number of heads."
+
+        self.embed_dim = embed_dim  # d = 512
+        self.num_heads = num_heads  # h = 8
+        self.head_dim = embed_dim // num_heads  # d_head = 64
+
+        # each head has three weight matrices: Q, K, V
+        # each transforms the embed dim (512) to the head dim (64)
+        # we stack all weight matrices 1...h together for efficiency
+        self.qkv_proj = nn.Linear(embed_dim, self.head_dim * 3 * num_heads)
+
+        # Final output linear layer
+        self.o_proj = nn.Linear(embed_dim, embed_dim)
+
+    def forward(self, x):
+        b, seq_length, embed_dim = x.size()  # (b, 4096, 512)
+        assert embed_dim == self.embed_dim
+
+        qkv = self.qkv_proj(x)  # (b, 4096, 512) -> (b, 4096, 512 * 3)
+
+        # Separate Q, K, V from linear output
+        # (b, 4096, 512 * 3) -> (b, 4096, 8, 64 * 3)
+        qkv = qkv.reshape(b, seq_length, self.num_heads, 3 * self.head_dim)
+        qkv = qkv.permute(0, 2, 1, 3)  # (b, 8, 4096, 64 * 3)
+        # split the last dim into 3 chunks, returns a tuple of tensors
+        q, k, v = qkv.chunk(3, dim=-1)  # (b, 8, 4096, 64 * 3) -> (b, 8, 4096, 64) x 3
+
+        # Determine value outputs
+        # output shape is the same as v: (b, 8, 4096, 64)
+        values = scaled_dot_product(q, k, v)
+        values = values.permute(0, 2, 1, 3)  # (b, 8, 4096, 64) -> (b, 4096, 8, 64)
+        # (b, 4096, 8, 64) -> (b, 4096, 512)
+        values = values.reshape(b, seq_length, embed_dim)
+        o = self.o_proj(values)  # (b, 4096, 512) -> (b, 4096, 512)
+
+        return o
+```
 
 #### Self-attention vs global attention
 
