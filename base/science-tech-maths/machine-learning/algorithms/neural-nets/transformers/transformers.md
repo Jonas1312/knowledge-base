@@ -8,6 +8,7 @@
       - [Scaled dot product attention (or self-attention)](#scaled-dot-product-attention-or-self-attention)
       - [Multi head attention](#multi-head-attention)
       - [Applications of attention in transformers](#applications-of-attention-in-transformers)
+      - [How to assign queries, keys and values](#how-to-assign-queries-keys-and-values)
       - [Self-attention vs global attention](#self-attention-vs-global-attention)
       - [Cross attention](#cross-attention)
     - [Embeddings](#embeddings)
@@ -25,6 +26,7 @@
   - [Training](#training)
     - [Batch size and sequence length](#batch-size-and-sequence-length)
     - [Fixed or variable length?](#fixed-or-variable-length)
+  - [BERT](#bert)
   - [Transformers in NLP](#transformers-in-nlp)
   - [Transformers in computer vision](#transformers-in-computer-vision)
     - [Adapting transformers to CV](#adapting-transformers-to-cv)
@@ -154,6 +156,7 @@ Visually, we can show the attention over a sequence of words as follows (the sof
 
 Each word in the input sequence is a query.
 The query is compared to all keys with a score function (in this case the dot product) to determine the weights.
+The weights are rescaled using the softmax function, so that the sum of the weights is 1.
 Finally, the value vectors of all words are averaged using the attention weights. We assign the value vectors a higher weight whose corresponding key is most similar to the query.
 
 Self-attention is called "self" because we compare each word with all other words in the same sequence.
@@ -265,15 +268,32 @@ Attention layers have different uses in the transformer architecture:
 - in the decoder, the self-attention layers allow each word in the sequence to attend to all the previous words in the sequence, including the current word itself. This is called **masked self-attention**.
 - in the intermediate decoder blocks, the queries are the outputs of the previous decoder block, and the keys and values are the outputs of the encoder blocks. This allows the decoder to attend to all of the input sequence.
 
+#### How to assign queries, keys and values
+
+For unsupervised language model training like GPT, Q, K and V are usually from the same source, so such operation is also called self-attention.
+
+For the machine translation task, it first applies self-attention separately to source and target sequences (French and English sequences for example), then on top of that it applies another attention where Q is from the target sequence and K, V are from the source sequence.
+
+For recommendation systems, Q can be from the target items, K, V can be from the user profile and history.
+
+In the case of text similarity, Q is the first piece of text and V is the second piece of text. K is usually the same tensor as V.
+
 #### Self-attention vs global attention
 
 TODO
 
 #### Cross attention
 
-In cross attention, we have two different sequences, for example a sentence in English and a sentence in French.
+In cross attention, we have two different sequences:
 
-TODO
+- for example a sentence in English as the input, to be translated into French as the output
+- or for GPT networks, we have a sequence of tokens as the input, and we want to predict the next token(s) in the sequence as output.
+
+Cross-attending block transmits knowledge from inputs to outputs. In this case you get K=V from inputs and Q are received from outputs.
+
+<img src="cross-attention.jpg" width="400">
+
+It's pretty logical: you have database of knowledge you derive from the inputs and by asking Queries from the output you extract required knowledge.
 
 ### Embeddings
 
@@ -314,3 +334,15 @@ $$ PE_{(pos, 2i)} = sin(pos / 10000^{2i / d}) $$
 $$ PE_{(pos, 2i+1)} = cos(pos / 10000^{2i / d}) $$
 
 Where $pos$ is the position of the token in the sequence, $i$ is the dimension of the embedding, and $d$ is the embedding dimension.
+
+### Transformer decoder
+
+<img src="transformer-decoder.png" width="200">
+
+The decoder is also composed of a stack of $N = 6$ identical layers.
+
+In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack.
+Similar to the encoder, we employ residual connections around each of the sub-layers, followed by layer normalization.
+
+The self-attention sub-layer in the decoder stack  (masked multi-head attention) is modified to prevent positions from attending to subsequent positions.
+This masking, combined with fact that the output embeddings are offset by one position, ensures that the predictions for position $y_i$ can depend only on the known outputs at positions less than $i$, that is $\{y_1, \dots, y_{i-1}\}$.
