@@ -10,6 +10,7 @@
       - [Applications of attention in transformers](#applications-of-attention-in-transformers)
       - [How to assign queries, keys and values](#how-to-assign-queries-keys-and-values)
       - [Cross attention](#cross-attention)
+      - [Alternative interpretation of attention](#alternative-interpretation-of-attention)
     - [Embeddings](#embeddings)
     - [Feed-forward network](#feed-forward-network)
     - [Encoder block](#encoder-block)
@@ -28,6 +29,7 @@
     - [Batch size and sequence length](#batch-size-and-sequence-length)
     - [Fixed or variable length?](#fixed-or-variable-length)
     - [Softmax is useless](#softmax-is-useless)
+    - [Loss](#loss)
   - [Transformers in NLP](#transformers-in-nlp)
     - [GPT](#gpt)
       - [GPT2](#gpt2)
@@ -91,11 +93,7 @@ To facilitate these residual connections, all sub-layers in the model, as well a
 
 ### Attention
 
-Attention is a mechanism that allows a model to focus on certain parts of the input.
-
-An attention function can be described as mapping **a query** and **a set of key-value pairs** to **an output**. The query, keys, values, and output are all vectors.
-
-The output is computed as a weighted sum of the values, where the weight assigned to each value is computed by a compatibility function of the query with the corresponding key.
+In the context of the Transformer, attention refers to a mechanism that allows the model to weigh the importance of different parts of an input sequence when producing an output sequence. This mechanism enables the model to focus on relevant information while ignoring irrelevant parts of the input.
 
 #### Scaled dot product attention (or self-attention)
 
@@ -304,6 +302,40 @@ Cross-attending block transmits knowledge from inputs to outputs. In this case y
 
 It's pretty logical: you have database of knowledge Keys and Values that you derive from the inputs and by asking Queries from the output you extract required knowledge.
 
+#### Alternative interpretation of attention
+
+Attention is the updated kernel method. Remember nearest neighbors? Say you have 100,000 words. Find every word which is the most similar to each other. To do this, you make a 100,000 * 100,000 matrix of distances right? Then find the argmin for each row in order to find the nearest neighbor of each word.
+
+Well attention is like this! `Q @ K.T` is the matrix size 100,000 * 100,000. The softmax then acts as the argmin (rather argmax since now it's 0/1 probabilities).
+
+The difference is the old kernel method is SYMMETRIC: `similarity(Q, K) == similarity(K, Q)`.
+On the other hand, the key innovation for attention is it's NOT SYMMETRIC: `similarity(Q, K) != similarity(K, Q)`.
+
+The question is HOW do we make a distance measure NON symmetric?
+Well that's where $W_Q$ and $W_K$ come in!
+In old nearest neighbors, you do `X @ X.T`.
+To break symmetry, we project the data into TWO new spaces (imagine a rotation into a new space).
+Then, since the data is in TWO totally irrelevant spaces, computing the dot product for nearest neighbors makes it NON symmetric! That's where the lines `Q = X @ W_Q` and `K = X @ W_K` come into play!
+The projection into a new space ie like a rotation.
+
+Then compute the dot product for distances: `Q @ K.T`.
+
+Now, why SOFTMAX?
+Remember in nearest neighbors we compute the argmin to get the closest word / datapoint.
+Well softmax will make all numbers 0 to 1 with the most similar getting a 1 and least similar a 0! It's like a continuous argmin / argmax!
+
+The issue now is we have a 100,000 * 100,000 of non symmetric distance measures.
+How the heck do we pass this information down the model?
+Clearly a 100,000 column matrix is damn crazy.
+So, we "mix" the signals with a weighted average!
+
+We first project the data again into a NEW space using `V = X @ W_V`, then using the huge 100,000 x 100,000 non symmetric "distance" matrix, we "mix" the signals.
+
+All the weight matrices $W_Q$, $W_K$, $W_V$ are trainable.
+$X$ is trainable, since it's just the embedding matrix.
+
+In summary, attention seems to work because it mimics nearest neighbors EXCEPT it uses a NON SYMMETRIC similarity measure, and cleverly "passes" similarity information downstream using a final mixing projection.
+
 ### Embeddings
 
 To convert from tokens to embeddings and vice-versa, the transformer uses a weight matrix $W_{emb} \in \mathbb{R}^{vocab \times d}$. This matrix is learned during training. It is used at three different places in the transformer:
@@ -336,6 +368,10 @@ Thus, this network has two weight matrices:
 Where $dff$ is the dimension of the hidden layer, which is usually set to $dff = 2048$.
 
 The feed-forward network is position-wise, which means that it is applied to each position in the sequence independently and identically.
+
+![](./feed-forward.png)
+
+Note that the feed-forward network is the same for all positions in the sequence, and it is applied independently to each position.
 
 ### Encoder block
 
@@ -523,6 +559,10 @@ Then during inference, if a sentence is smaller, just pad or go until the stop t
 Softmax is useless because it's a monotonic function. It doesn't change the order of the values. So it doesn't change the order of the probabilities. So it doesn't change the order of the predictions.
 
 During training, we can use the logits directly. During inference, we can use the logits directly or we can use the softmax if we want to sample from the distribution.
+
+### Loss
+
+The loss is usually the cross-entropy loss, but we don't want our model to be too confident. So we can use label smoothing.
 
 ## Transformers in NLP
 
