@@ -283,7 +283,9 @@ Attention layers have different uses in the transformer architecture:
 
 For unsupervised language model training like GPT, Q, K and V are usually from the same source, so such operation is also called self-attention.
 
-For the machine translation task, it first applies self-attention separately to source and target sequences (French and English sequences for example), then on top of that it applies another attention where Q is from the target sequence and K, V are from the source sequence.
+For the machine translation task, it first applies self-attention separately to source and target sequences, then on top of that it applies another attention where Q is from the target sequence and K, V are from the source sequence.
+
+For example, if you translate from English to French, the key is what will map the query in English to the value in French. So the K and V will be learned by the encoder, and the decoder will generate the French sentence (token by token), by querying the English sentence.
 
 For recommendation systems, Q can be from the target items, K, V can be from the user profile and history.
 
@@ -311,6 +313,16 @@ To convert from tokens to embeddings and vice-versa, the transformer uses a weig
 - to convert the output of the decoder into logits for the final softmax layer. For this, we use the transpose of the embedding matrix $W_{emb}^T \in \mathbb{R}^{d \times vocab}$.
 
 For the "tokens-to-embedding" layers, they multiply the weight matrix by a constant $\sqrt{d}$, where $d$ is the embedding dimension. This is done to prevent the variance of the embeddings from being too large.
+
+```python
+class Embedder(nn.Module):
+    def __init__(self, vocab_size: int = 50000, d_model: int = 512):
+        super().__init__()
+        self.embed = nn.Embedding(vocab_size, d_model)  # this will be learned
+
+    def forward(self, x):
+        return self.embed(x)  # (b, 4096) -> (b, 4096, 512)
+```
 
 ### Feed-forward network
 
@@ -354,6 +366,9 @@ Where $pos$ is the position of the token in the sequence, $i$ is the dimension o
 
 ![](./attention-is-all-you-need-positional-encoding.png)
 
+In practise, the embeddings are usually scaled by a factor of $\sqrt{d}$, where $d$ is the embedding dimension.
+This means the original meaning in the embedding vector won’t be lost when we add them together.
+
 ### Transformer decoder
 
 <img src="transformer-decoder.png" width="200">
@@ -373,7 +388,12 @@ Similar to the encoder, they employ residual connections around each of the sub-
 
 #### Masked self-attention
 
-The self-attention sub-layer in the decoder stack  (masked multi-head attention) is modified to prevent positions from attending to subsequent positions.
+Masking plays an important role in the transformer. It serves two purposes:
+
+- In the encoder and decoder: To zero attention outputs wherever there is just padding in the input sentences.
+- In the decoder: To prevent the decoder ‘peaking’ ahead at the rest of the translated sentence when predicting the next word.
+
+The self-attention sub-layer in the decoder stack (masked multi-head attention) is modified to prevent positions from attending to subsequent positions.
 
 This is done by masking future positions (setting them to -inf) before the softmax step in the self-attention calculation.
 
