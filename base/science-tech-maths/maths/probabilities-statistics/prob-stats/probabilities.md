@@ -47,7 +47,21 @@ Having a 25% percentile means that 25% of the data is below that value.
 
 ## Interview questions
 
-## Estimators of the mean and variance
+### Why do we divide by n-1 when calculating the variance?
+
+Usually we don't have access to the population, but rather to a sample of size $N$.
+
+We can prove mathematically that:
+
+$$E\left[\frac{\sum_{i=1}^{N}(x_i-\bar{x})^2}{N}\right] = \frac{N-1}{N}\sigma^2$$
+
+The reason why we divide by $N-1$ is to get an unbiased estimator of the variance.
+
+The rationale behind this is that we are using the sample mean $\bar{x}$ to estimate the population mean $\mu$. This means that we are using one degree of freedom to estimate the mean. Therefore, we only have $N-1$ degrees of freedom left to estimate the variance.
+
+If we know the true mean $\mu$, then we can divide by $N$ instead of $N-1$.
+
+### Estimators of the mean and variance
 
 - estimator of the mean: $E(\bar{X}) = E(\frac{X_1 + ... + X_n}{n}) = \frac{1}{n}[E(X_1) + ... + E(X_n)] = \frac{1}{n}(\mu_1 + ... + \mu_n) = \frac{1}{n}n \mu = \mu$
 - of variance: $Var(\bar{X})=\text{Var}\left(\frac{\sum_{i=1}^n X_i}{n}\right) = \frac{1}{n^2}\text{Var}\left(\sum_{i=1}^n X_i\right) = \frac{1}{n^2}\sum_{i=1}^n\text{Var}\left(X_i\right)  = \frac{1}{n^2} n\sigma^2 = \frac{\sigma^2}{n}$
