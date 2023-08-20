@@ -9,25 +9,25 @@
       - [Multi head attention](#multi-head-attention)
       - [Applications of attention in transformers](#applications-of-attention-in-transformers)
       - [How to assign queries, keys and values](#how-to-assign-queries-keys-and-values)
-      - [Self-attention vs global attention](#self-attention-vs-global-attention)
       - [Cross attention](#cross-attention)
     - [Embeddings](#embeddings)
     - [Feed-forward network](#feed-forward-network)
+    - [Encoder block](#encoder-block)
     - [Positional encoding](#positional-encoding)
     - [Transformer decoder](#transformer-decoder)
       - [Stacked self-attention layers](#stacked-self-attention-layers)
       - [Masked self-attention](#masked-self-attention)
-      - [Cross-attention (seq2seq tasks)](#cross-attention-seq2seq-tasks)
-      - [Different positional encodings](#different-positional-encodings)
-    - [Layers](#layers)
-      - [Layer normalization](#layer-normalization)
-      - [Residual connections](#residual-connections)
+      - [Linear + Softmax](#linear--softmax)
+    - [Residual connections and layer normalization](#residual-connections-and-layer-normalization)
+  - [Inference](#inference)
+  - [Tokenization](#tokenization)
   - [In a nutshell](#in-a-nutshell)
   - [Training](#training)
     - [Batch size and sequence length](#batch-size-and-sequence-length)
     - [Fixed or variable length?](#fixed-or-variable-length)
-  - [BERT](#bert)
   - [Transformers in NLP](#transformers-in-nlp)
+    - [GPT](#gpt)
+    - [BERT](#bert)
   - [Transformers in computer vision](#transformers-in-computer-vision)
     - [Adapting transformers to CV](#adapting-transformers-to-cv)
     - [Patch embeddings and tokenization](#patch-embeddings-and-tokenization)
@@ -155,9 +155,13 @@ Visually, we can show the attention over a sequence of words as follows (the sof
 ![](./attention_example.svg)
 
 Each word in the input sequence is a query.
+We need to score each word of the input sentence against this word to produce scores.
+The score determines how much focus to place on other parts of the input sentence as we encode a word at a certain position.
 The query is compared to all keys with a score function (in this case the dot product) to determine the weights.
+
 The weights are rescaled using the softmax function, so that the sum of the weights is 1.
-Finally, the value vectors of all words are averaged using the attention weights. We assign the value vectors a higher weight whose corresponding key is most similar to the query.
+
+Finally, the we select the relevant value vectors and drown-out the irrelevant ones by scaling them using the attention weights. We assign the value vectors a higher weight whose corresponding key is most similar to the query.
 
 Self-attention is called "self" because we compare each word with all other words in the same sequence.
 
@@ -278,10 +282,6 @@ For recommendation systems, Q can be from the target items, K, V can be from the
 
 In the case of text similarity, Q is the first piece of text and V is the second piece of text. K is usually the same tensor as V.
 
-#### Self-attention vs global attention
-
-TODO
-
 #### Cross attention
 
 In cross attention, we have two different sequences:
@@ -293,7 +293,7 @@ Cross-attending block transmits knowledge from inputs to outputs. In this case y
 
 <img src="cross-attention.jpg" width="400">
 
-It's pretty logical: you have database of knowledge you derive from the inputs and by asking Queries from the output you extract required knowledge.
+It's pretty logical: you have database of knowledge Keys and Values that you derive from the inputs and by asking Queries from the output you extract required knowledge.
 
 ### Embeddings
 
@@ -316,6 +316,14 @@ Thus, this network has two weight matrices:
 
 Where $dff$ is the dimension of the hidden layer, which is usually set to $dff = 2048$.
 
+### Encoder block
+
+<img src="encoder_with_tensors.png" width="500">
+
+The word in each position flows through its own path in the encoder.
+There are dependencies between these paths in the self-attention layer.
+The feed-forward layer does not have those dependencies, however, and thus the various paths can be executed in parallel while flowing through the feed-forward layer.
+
 ### Positional encoding
 
 Without position encoding, attention is just bag of words. When you convert a sequence into a set (tokenization), you lose the notion of order.
@@ -335,14 +343,71 @@ $$ PE_{(pos, 2i+1)} = cos(pos / 10000^{2i / d}) $$
 
 Where $pos$ is the position of the token in the sequence, $i$ is the dimension of the embedding, and $d$ is the embedding dimension.
 
+![](./attention-is-all-you-need-positional-encoding.png)
+
 ### Transformer decoder
 
 <img src="transformer-decoder.png" width="200">
 
+The transformer architecture figure in the paper is not very clear. The important thing is to notice that the last encoder block will send its output to all the decoder blocks:
+
+<img src="The_transformer_encoder_decoder_stack.png" width="500">
+
+#### Stacked self-attention layers
+
 The decoder is also composed of a stack of $N = 6$ identical layers.
 
-In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer, which performs multi-head attention over the output of the encoder stack.
-Similar to the encoder, we employ residual connections around each of the sub-layers, followed by layer normalization.
+In addition to the two sub-layers in each encoder layer, the decoder inserts a third sub-layer in the middle, which performs multi-head attention over the output of the encoder stack.
+This attention layer helps the decoder focus on relevant parts of the input sentence.
+
+Similar to the encoder, they employ residual connections around each of the sub-layers, followed by layer normalization.
+
+#### Masked self-attention
 
 The self-attention sub-layer in the decoder stack  (masked multi-head attention) is modified to prevent positions from attending to subsequent positions.
+
+This is done by masking future positions (setting them to -inf) before the softmax step in the self-attention calculation.
+
 This masking, combined with fact that the output embeddings are offset by one position, ensures that the predictions for position $y_i$ can depend only on the known outputs at positions less than $i$, that is $\{y_1, \dots, y_{i-1}\}$.
+
+#### Linear + Softmax
+
+The output of the last decoder block is a tensor of shape `(batch_size, seq_len, d)`. How do we get the predicted word?
+
+To get the predicted word, we need the token first.
+
+To get the token, we need to convert an embedding to the corresponding token. We need to multiply the embedding by the transpose of the embedding matrix $W_{emb}^T \in \mathbb{R}^{d \times vocab}$.
+
+Note that the vocabulary size is the number of tokens in the vocabulary, which is usually around 30,000 or 50,000.
+
+After this linear layer, we will have a tensor of shape `(batch_size, seq_len, vocab)`.
+
+We can then apply the softmax function to the last dimension to get the probabilities of each token.
+
+We can then pick the token with the highest probability as the predicted token. Or we can sample from the distribution to get a random token, which is useful to generate more diverse text.
+
+### Residual connections and layer normalization
+
+<img src="transformer_resideual_layer_norm_2.png" width="500">
+
+## Inference
+
+![](./transformer_decoding_1.gif)
+
+1. The input sequence is tokenized and converted into embeddings.
+2. Since the encoder has a fixed content length, we pad the input sequence. For example, if the tokens are `[token_1, token_2, token_3]`, we pad it to `[pad_token, pad_token, ..., token_1, token_2, token_3]`.
+3. We add positional encoding to the embeddings.
+4. The embeddings are passed through the encoder stack to produce the encoder output: key, value pairs for each token in the input sequence.
+5. The decoder is initialized with the start-of-sequence token.
+6. Since the decoder has a fixed content length, we pad and mask the output sequence. For example, the first input being fed to the decoder is the start-of-sequence token, so we pad it to `[pad_token, pad_token, ..., start-of-sequence]`. We also mask the padding tokens, so that the decoder doesn’t pay attention to them, `[0, 0, ..., 1]`.
+7. The decoder passes the start-of-sequence token through the decoder stack to produce the first set of predictions, using the encoder output as the key, value pairs for the attention mechanism.
+8. The decoder uses the predictions to find the most likely token, and adds it to the output sequence (which now contains two tokens, the start-of-sequence token and the predicted token).
+9. The output sequence (which is also the input of the decoder), is added positional encoding.
+10. The decoder passes the updated output sequence through the decoder stack to produce the next token.
+11. The steps above are repeated until the end-of-sequence token is produced, or a maximum length is reached.
+
+In the whole process, the encoder is only used once, and the decoder is used $N$ times, where $N$ is the length of the output sequence.
+
+## Tokenization
+
+Tokens are the ML term for the “symbols” I’ve been talking about in this whole article. I wanted to reduce the specialist lingo so I said “symbols,” but really the models take in tokens and spit out tokens.
