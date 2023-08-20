@@ -618,4 +618,8 @@ GPT3 uses sparse attention. It means that the attention is only applied to a sub
 
 The GPT, and some later models like TransformerXL and XLNet are auto-regressive in nature. BERT is not. That is a trade off. In losing auto-regression, BERT gained the ability to incorporate the context on both sides of a word to gain better results.
 
+When BERT models are pretrained, a specified percentage of the words in each batch of text – usually 15% – are randomly removed or “masked” so the model can learn to predict the missing words from the words around them.
+
+That’s why BERT is a “bidirectional” transformer. A model has a better chance of predicting what word should fill in the blank in the phrase “Every good ____ does fine” than it has at predicting the next word in the phrase “Every good____.”
+
 <https://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/>
