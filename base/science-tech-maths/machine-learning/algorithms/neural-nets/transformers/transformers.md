@@ -21,12 +21,17 @@
     - [Residual connections and layer normalization](#residual-connections-and-layer-normalization)
   - [Inference](#inference)
   - [Tokenization](#tokenization)
+  - [Greedy sampling vs stochastic sampling](#greedy-sampling-vs-stochastic-sampling)
+  - [Language modeling head](#language-modeling-head)
   - [In a nutshell](#in-a-nutshell)
   - [Training](#training)
     - [Batch size and sequence length](#batch-size-and-sequence-length)
     - [Fixed or variable length?](#fixed-or-variable-length)
+    - [Softmax is useless](#softmax-is-useless)
   - [Transformers in NLP](#transformers-in-nlp)
     - [GPT](#gpt)
+      - [GPT2](#gpt2)
+      - [GPT3](#gpt3)
     - [BERT](#bert)
   - [Transformers in computer vision](#transformers-in-computer-vision)
     - [Adapting transformers to CV](#adapting-transformers-to-cv)
@@ -175,6 +180,8 @@ Attention takes the query, find the most similar key(s), and then get the value(
 The encoder builds/discovers key-value pairs, it's the memory.
 The decoder builds the queries, it's the question that is asked to the memory.
 
+The transformer paper using dot product attention to compute similarity between the query and the keys. But other similarity functions can be used.
+
 All-to-all comparison: Each layer is $O(n^2)$, where $n$ is the sequence length.
 Note that we have only multiplied matrices so far, so the computation is parallelizable using GPUs.
 
@@ -316,6 +323,8 @@ Thus, this network has two weight matrices:
 
 Where $dff$ is the dimension of the hidden layer, which is usually set to $dff = 2048$.
 
+The feed-forward network is position-wise, which means that it is applied to each position in the sequence independently and identically.
+
 ### Encoder block
 
 <img src="encoder_with_tensors.png" width="500">
@@ -370,6 +379,8 @@ This is done by masking future positions (setting them to -inf) before the softm
 
 This masking, combined with fact that the output embeddings are offset by one position, ensures that the predictions for position $y_i$ can depend only on the known outputs at positions less than $i$, that is $\{y_1, \dots, y_{i-1}\}$.
 
+![](./self-attention-and-masked-self-attention.png)
+
 #### Linear + Softmax
 
 The output of the last decoder block is a tensor of shape `(batch_size, seq_len, d)`. How do we get the predicted word?
@@ -390,16 +401,22 @@ We can then pick the token with the highest probability as the predicted token. 
 
 <img src="transformer_resideual_layer_norm_2.png" width="500">
 
+Normalization used is layer normalization, which is different from batch normalization.
+In batch normalization, we normalize across the batch dimension, while in layer normalization, we normalize across the feature dimension, the last axis.
+Put it differently, with LayerNorm, we normalize each data point separately.
+
 ## Inference
+
+The transformer is autoregressive. This means that it makes predictions one token at a time, and uses its output so far to decide what to do next.
 
 ![](./transformer_decoding_1.gif)
 
 1. The input sequence is tokenized and converted into embeddings.
-2. Since the encoder has a fixed content length, we pad the input sequence. For example, if the tokens are `[token_1, token_2, token_3]`, we pad it to `[pad_token, pad_token, ..., token_1, token_2, token_3]`.
+2. Since the encoder has a fixed content length, we pad the input sequence. For example, if the tokens are `[token_1, token_2, token_3]`, we pad it to `[token_1, token_2, token_3, pad_token, pad_token, ..., pad_token]` until it reaches the maximum length.
 3. We add positional encoding to the embeddings.
 4. The embeddings are passed through the encoder stack to produce the encoder output: key, value pairs for each token in the input sequence.
 5. The decoder is initialized with the start-of-sequence token.
-6. Since the decoder has a fixed content length, we pad and mask the output sequence. For example, the first input being fed to the decoder is the start-of-sequence token, so we pad it to `[pad_token, pad_token, ..., start-of-sequence]`. We also mask the padding tokens, so that the decoder doesn’t pay attention to them, `[0, 0, ..., 1]`.
+6. Since the decoder has a fixed content length, we pad and mask the output sequence. For example, the first input being fed to the decoder is the start-of-sequence token, so we pad it to `[start-of-sequence, pad_token, pad_token, ..., pad_token]` until it reaches the maximum length. We also mask the padded tokens: `[1, 0, 0, ..., 0]`.
 7. The decoder passes the start-of-sequence token through the decoder stack to produce the first set of predictions, using the encoder output as the key, value pairs for the attention mechanism.
 8. The decoder uses the predictions to find the most likely token, and adds it to the output sequence (which now contains two tokens, the start-of-sequence token and the predicted token).
 9. The output sequence (which is also the input of the decoder), is added positional encoding.
@@ -411,3 +428,134 @@ In the whole process, the encoder is only used once, and the decoder is used $N$
 ## Tokenization
 
 Tokens are the ML term for the “symbols” I’ve been talking about in this whole article. I wanted to reduce the specialist lingo so I said “symbols,” but really the models take in tokens and spit out tokens.
+
+Famous techniques are BPE (Byte Pair Encoding) and WordPiece.
+
+The principle is the same:
+
+- The text is split into tokens
+- There is a vocab that maps string tokens to integer indices
+- There is an encode method that converts `str -> list[int]`
+- There is a decode method that converts `list[int] -> str[2]`
+
+## Greedy sampling vs stochastic sampling
+
+Greedy sampling is when you always pick the most likely token.
+
+Stochastic sampling is when you sample from the distribution of the tokens. This is useful to generate more diverse text.
+
+## Language modeling head
+
+The language modeling head is a linear layer that takes in the output of the last decoder block, and outputs a tensor of shape `(batch_size, seq_len, vocab)`.
+
+We can apply a softmax + argmax to get the next most likely token, but we can as well keep the embeddings and use them as input to another model, like a classifier.
+
+## In a nutshell
+
+Good things about transformers:
+
+- all-to-all comparisons can be done fully parallel
+- with RNN/LSTM must be computed in serial per token
+- transfer learning works! Train big expensive models (nvidia, microsoft) and release it freely
+- An attention model differs from a classic sequence-to-sequence model because the encoder passes a lot more data to the decoder. Instead of passing the last hidden state of the encoding stage, the encoder passes all the hidden states to the decoder. This is called the **context**.
+
+Bad things:
+
+- Transformers are O(N²), don't work well with big sequences or infinite ones. Because an output word is affected by more than one input word (each one with different importance). So if you have a sentence of length N, you'll have at least N * N values to interpret each pair of words.
+- the default implementation assumes a maximum sequence length (unlike RNNs). For infinite/very long sequences, a different architecture (Transformer-XL) is needed.
+- data hungry (ViT)
+
+**In a nutshell:**
+
+- **they're position-aware feed forward neural networks.**
+- But the weights are not fixed, they're computed on the fly.
+- The exact inner workings of attention are irrelevant as long as you understand **that attention computes similarity between vectors**.
+- **They "read" the whole sentence at once.**. It's surprising cause we usually prefer to treat sequences sequentially!!! like with RNN.
+- Each word gets represented given it's own position and all the others words in the sentence and their positions.
+
+On the image below, we can see how the model translates the sentence "I arrived at the" into French:
+
+![](./transform20fps.gif)
+
+1. First, the Transformer starts by generating initial representations, or embeddings, for each word
+2. Then, using self-attention, it aggregates information from all of the other words, generating a new representation per word informed by the entire context, represented by the filled balls.
+3. This step is then repeated multiple times in parallel for all words, successively generating new representations.
+4. The decoder then generates the output sentence word by word while consulting the representation generated by the encoder. It attends not only to the other previously generated words, but also to the final representations generated by the encoder.
+
+## Training
+
+The loss is applied to the output of the softmax layer. The loss is usually the cross-entropy loss over the vocabulary.
+
+### Batch size and sequence length
+
+It's usually a good idea to have a batch size of 32 or 64. The sequence length is usually the longest sequence in your dataset. If you have a lot of short sequences, you can pad them to the longest sequence in the batch.
+
+### Fixed or variable length?
+
+It depends.
+
+Once the model is trained, the input length is fixed. But during training, you can fix the length to be the longest document in your dataset. It's your max size (512, 1024, etc.).
+
+Then during inference, if a sentence is smaller, just pad or go until the stop token is generated.
+
+### Softmax is useless
+
+Softmax is useless because it's a monotonic function. It doesn't change the order of the values. So it doesn't change the order of the probabilities. So it doesn't change the order of the predictions.
+
+During training, we can use the logits directly. During inference, we can use the logits directly or we can use the softmax if we want to sample from the distribution.
+
+## Transformers in NLP
+
+### GPT
+
+GPT stands for Generative Pre-trained Transformer:
+
+- generative: it can generate text
+- pre-trained: it was trained on a large corpus of text
+- transformer: it uses the transformer architecture. It's actually a decoder-only transformer.
+
+![](./c4Z6PG8.png)
+
+GPT uses Multi-Head Causal Self Attention. It's a self-attention layer where the attention mask is causal. It means that the attention is only applied to the previous tokens.
+
+We set the entries before the softmax to `-inf` so that the softmax will output 0 for those entries. This is called masking.
+
+In python, that would give this, `mask` being a NxN matrix where the upper right triangle is 0 and the lower left triangle is 1:
+
+```python
+mask = torch.tril(torch.ones((N, N)))
+# we don't use -inf because it can cause nan
+mask = (1 - mask) * -1e9
+
+
+def attention(q, k, v, mask):
+    return softmax((q @ k.T / sqrt(d)) + mask) @ v
+```
+
+#### GPT2
+
+GPT2 does not use the encoder-decoder architecture. It uses a decoder-only transformer. <https://jalammar.github.io/illustrated-gpt2/>
+
+They use GELU activation function instead of ReLU.
+
+In the original transformer, the layer normalization is applied after the residual connection. In GPT2, it's applied before. It's called pre-layer normalization.
+
+#### GPT3
+
+Was trained on 300 billions of tokens.
+
+175 billion parameters.
+
+GPT3 is 2048 tokens wide.
+
+The difference with GPT2 is the alternating dense and sparse self-attention layers.
+
+The embedding size is 12288. That is each token is represented by a vector of size 12288.
+
+GPT3 uses sparse attention. It means that the attention is only applied to a subset of the tokens. It's a way to reduce the complexity of the model.
+
+### BERT
+
+The GPT, and some later models like TransformerXL and XLNet are auto-regressive in nature. BERT is not. That is a trade off. In losing auto-regression, BERT gained the ability to incorporate the context on both sides of a word to gain better results.
+
+<https://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/>
