@@ -34,7 +34,9 @@ chain rule: $P(A,B,C,D)=P(A|B,C,D)P(B|C,D)P(C|D)P(D)$
 
 ## Percentile
 
-Having a 25% percentile means that 25% of the data is below that value.
+The n-th percentile of a set of scores is a value that has n% of scores falling below it.
+
+The 25th percentile is the value for which 25% of the data is below that value.
 
 ## Variance, SD, Covariance and Correlation
 

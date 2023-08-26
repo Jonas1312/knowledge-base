@@ -21,6 +21,7 @@
       - [Linear + Softmax](#linear--softmax)
     - [Residual connections and layer normalization](#residual-connections-and-layer-normalization)
   - [Inference](#inference)
+  - [KV cache](#kv-cache)
   - [Tokenization](#tokenization)
   - [Greedy sampling vs stochastic sampling](#greedy-sampling-vs-stochastic-sampling)
   - [Language modeling head](#language-modeling-head)
@@ -38,6 +39,9 @@
   - [Transformers in computer vision](#transformers-in-computer-vision)
     - [Adapting transformers to CV](#adapting-transformers-to-cv)
     - [Patch embeddings and tokenization](#patch-embeddings-and-tokenization)
+  - [More](#more)
+    - [Alternative to multi-head attention](#alternative-to-multi-head-attention)
+    - [LoRA](#lora)
 
 ## Introduction
 
@@ -94,6 +98,10 @@ To facilitate these residual connections, all sub-layers in the model, as well a
 ### Attention
 
 In the context of the Transformer, attention refers to a mechanism that allows the model to weigh the importance of different parts of an input sequence when producing an output sequence. This mechanism enables the model to focus on relevant information while ignoring irrelevant parts of the input.
+
+At a high level, attention is a mechanism for neural networks to boost portions of an input which are relevant and ignore those which aren’t. In language models, attention is used as a way for the model to learn which portions of a sentence are relevant to each word.
+
+Prior language models leaned heavily on a recurrent approach: To encode a sentence, we start with the first word (w1) and process it to get the first hidden state (h1). Then, we input the second word (w2) with the previous hidden state (h1) to derive the next hidden state (h2). And so on. Unfortunately, this process was sequential and prevented parallelization. Attention tackled this by reading the entire sentence in one go and computing the representation of each word, based on the sentence, in parallel.
 
 #### Scaled dot product attention (or self-attention)
 
@@ -194,6 +202,10 @@ $$\text{Var}\left(\sum_{i=1}^{d_k} \frac{q_i\cdot k_i}{\sqrt d_k}\right) = \text
 
 #### Multi head attention
 
+An complicating consequence of putting a softmax function in attention is that it will tend to focus on a single element. This is a limitation we didn't have before. Sometimes it's useful to keep several of the preceding words in mind when predicting the next, and the softmax just robbed us of that. This is a problem for the model.
+
+The solution is to have several different instances of attention, or heads running at once. This lets the the transformer consider several previous words simultaneously when predicting the next. It brings back the power we had before we pulled the softmax into the picture.
+
 <img src="multi-head-attention.png" width="300">
 
 We perform the self-attention operation multiple times $h$ independently, in parallel, called **heads**.
@@ -278,6 +290,13 @@ Attention layers have different uses in the transformer architecture:
 - in the intermediate decoder blocks, the queries are the outputs of the previous decoder block, and the keys and values are the outputs of the encoder blocks. This allows the decoder to attend to all of the input sequence.
 
 #### How to assign queries, keys and values
+
+Imagine yourself in a library. You have a specific question (query). Books on the shelves have titles on their spines (keys) that suggest their content. You compare your question to these titles to decide how relevant each book is, and how much attention to give each book. Then, you get the information (value) from the relevant books to answer your question.
+
+- the query refers to the word we’re computing attention for. In the case of an encoder, the query vector points to the current input word (aka context). For example, if the context was the first word in the input sentence, it would have a query vector q1.
+- The keys represent the words in the input sentence. The first word has key vector k1, the second word has vector k2, and so on. The key vectors help the model understand how each word relates to the context word. If the first word is the context, we compare the keys to q1.
+- Attention is how much weight the query word (e.g., q1) should give each word in the sentence (e.g., k1, k2, etc). This is computed via a dot product between the query vector and all the key vectors. (A dot product tells us how similar two vectors are.) If the dot product between a query-key pair is high, we pay more attention to it. These dot products then go through a softmax which makes the attention scores (across all keys) sum to 1.
+- Each word is also represented by a value which contains the information of that word. These value vectors are weighed by the attention scores that sum to 1. As a result, each context word is now represented by an attention-based weightage of all the words in the sentence, where the most relevant words have higher weight.
 
 For unsupervised language model training like GPT, Q, K and V are usually from the same source, so such operation is also called self-attention.
 
@@ -405,6 +424,14 @@ Where $pos$ is the position of the token in the sequence, $i$ is the dimension o
 In practise, the embeddings are usually scaled by a factor of $\sqrt{d}$, where $d$ is the embedding dimension.
 This means the original meaning in the embedding vector won’t be lost when we add them together.
 
+There are several ways that position information could be introduced into our embedded represetation of words, but the way it was done in the original transformer was to add a circular wiggle.
+
+![](./positional_encoding.png)
+
+The position of the word in the embedding space acts as the center of a circle. A perturbation is added to it, depending on where it falls in the order of the sequence of words. For each position, the word is moved the same distance but at a different angle, resulting in a circular pattern as you move through the sequence. Words that are close to each other in the sequence have similar perturbations, but words that are far apart are perturbed in different directions.
+
+If the embedding space consists of more than two dimensions (which it almost always does), the circular wiggle is repeated in all the other pairs of dimensions, but with different angular frequency, that is, it sweeps out a different number of rotations in each case.
+
 ### Transformer decoder
 
 <img src="transformer-decoder.png" width="200">
@@ -436,6 +463,8 @@ This is done by masking future positions (setting them to -inf) before the softm
 This masking, combined with fact that the output embeddings are offset by one position, ensures that the predictions for position $y_i$ can depend only on the known outputs at positions less than $i$, that is $\{y_1, \dots, y_{i-1}\}$.
 
 ![](./self-attention-and-masked-self-attention.png)
+
+Self-attention enables the decoder to focus on different parts of the output generated so far; cross-attention (aka encoder-decoder attention) helps it attend to the encoder’s output.
 
 #### Linear + Softmax
 
@@ -471,15 +500,45 @@ The transformer is autoregressive. This means that it makes predictions one toke
 2. Since the encoder has a fixed content length, we pad the input sequence. For example, if the tokens are `[token_1, token_2, token_3]`, we pad it to `[token_1, token_2, token_3, pad_token, pad_token, ..., pad_token]` until it reaches the maximum length.
 3. We add positional encoding to the embeddings.
 4. The embeddings are passed through the encoder stack to produce the encoder output: key, value pairs for each token in the input sequence.
-5. The decoder is initialized with the start-of-sequence token.
-6. Since the decoder has a fixed content length, we pad and mask the output sequence. For example, the first input being fed to the decoder is the start-of-sequence token, so we pad it to `[start-of-sequence, pad_token, pad_token, ..., pad_token]` until it reaches the maximum length. We also mask the padded tokens: `[1, 0, 0, ..., 0]`.
-7. The decoder passes the start-of-sequence token through the decoder stack to produce the first set of predictions, using the encoder output as the key, value pairs for the attention mechanism.
-8. The decoder uses the predictions to find the most likely token, and adds it to the output sequence (which now contains two tokens, the start-of-sequence token and the predicted token).
-9. The output sequence (which is also the input of the decoder), is added positional encoding.
-10. The decoder passes the updated output sequence through the decoder stack to produce the next token.
-11. The steps above are repeated until the end-of-sequence token is produced, or a maximum length is reached.
+5. We cache the encoder output (key, value pairs) for later use.
+6. The decoder is initialized with the start-of-sequence token.
+7. Since the decoder has a fixed content length, we pad and mask the output sequence. For example, the first input being fed to the decoder is the start-of-sequence token, so we pad it to `[start-of-sequence, pad_token, pad_token, ..., pad_token]` until it reaches the maximum length. We also mask the padded tokens: `[1, 0, 0, ..., 0]`.
+8. The decoder passes the start-of-sequence token through the decoder stack to produce the first set of predictions, using the encoder output as the key, value pairs for the attention mechanism.
+9. The decoder uses the predictions to find the most likely token, and adds it to the output sequence (which now contains two tokens, the start-of-sequence token and the predicted token).
+10. The output sequence (which is also the input of the decoder), is added positional encoding.
+11. The decoder passes the updated output sequence through the decoder stack to produce the next token.
+12. The steps above are repeated until the end-of-sequence token is produced, or a maximum length is reached.
 
 In the whole process, the encoder is only used once, and the decoder is used $N$ times, where $N$ is the length of the output sequence.
+
+For GPT, inference can be done this way (for a batch of 3 samples):
+
+![](./attention_mask.png)
+
+If we we pad on the right, the network will probably just predict a lot of padding tokens. So we pad the shorter sequences on the left, and we mask the padding tokens.
+
+`50256` is the padding token:
+
+```python
+{
+    "input_ids": tensor(
+        [
+            [50256, 50256, 50256, 1026, 481, 6290, 287, 262],
+            [40, 765, 284, 4483, 257, 1263, 9396, 286],
+            [50256, 50256, 50256, 50256, 50256, 3666, 3290, 318],
+        ]
+    ),
+    "attention_mask": tensor(
+        [[0, 0, 0, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 1, 1, 1], [0, 0, 0, 0, 0, 1, 1, 1]]
+    ),
+}
+```
+
+## KV cache
+
+The KV cache is a cache of the key-value pairs of the encoder output. It is used to speed up the inference process.
+
+![](./KVCache.jpeg)
 
 ## Tokenization
 
@@ -618,8 +677,12 @@ GPT3 uses sparse attention. It means that the attention is only applied to a sub
 
 The GPT, and some later models like TransformerXL and XLNet are auto-regressive in nature. BERT is not. That is a trade off. In losing auto-regression, BERT gained the ability to incorporate the context on both sides of a word to gain better results.
 
+BERT, contains only Transformer’s encoder.
+
 When BERT models are pretrained, a specified percentage of the words in each batch of text – usually 15% – are randomly removed or “masked” so the model can learn to predict the missing words from the words around them.
 
 That’s why BERT is a “bidirectional” transformer. A model has a better chance of predicting what word should fill in the blank in the phrase “Every good ____ does fine” than it has at predicting the next word in the phrase “Every good____.”
+
+The pretraining of these models usually revolves around somehow corrupting a given sentence (for instance, by masking random words in it) and tasking the model with finding or reconstructing the initial sentence.
 
 <https://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/>

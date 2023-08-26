@@ -1,5 +1,29 @@
 # Information theory
 
+surprisal: how surprised I am when I learn the value of X
+
+  Suprisal(x) = -log p(X=x)
+
+entropy: how surprised I expect to be
+
+  H(p)        = 𝔼_X -log p(X) = ∑_x p(X=x) * -log p(X=x)
+
+cross-entropy: how surprised I expect Bob to be (if Bob's beliefs are q instead of p)
+
+  H(p,q)      = 𝔼_X -log q(X) = ∑_x p(X=x) * -log q(X=x)
+
+KL divergence: how much *more* surprised I expect Bob to be than me
+
+  Dkl(p || q) = H(p,q) - H(p,p) = ∑_x p(X=x) * log p(X=x)/q(X=x)
+
+information gain: how much less surprised I expect Bob to be if he knew that Y=y
+
+  IG(q|Y=y)   = Dkl(q(X|Y=y) || q(X))
+
+mutual information: how much information I expect to gain about X from learning the value of Y
+
+  I(X;Y)      = 𝔼_Y IG(q|Y=y) = 𝔼_Y Dkl(q(X|Y=y) || q(X))
+
 ## Quantity of information
 
 The information content of an event X is a function which increases as the probability $P(X)$  of an event decreases. When $P(X)$ is close to 1, the surprisal of the event is low, but if $P(X)$ is close to 0, the surprisal of the event is high. This relationship is described by the function:
@@ -94,6 +118,18 @@ The first plot holds information about the mutual information shared by X and Y:
 In the second plot, X tells me nothing about Y.
 
 $cov(X, Y) = E[(X-E[X])(Y-E[Y])] = 0$ since $Y-E[Y] = 0$
+
+## KL Divergence
+
+The KL divergence yields a concrete value that tells you how many actual bits of space on disk you will waste if you try to use an encoding table from one ZIP file of data to encode another ZIP file of data. It's not just theoretical, this is exactly the type of task that it's used for.
+
+The closer the folders are to each other in content, the fewer wasted bits. So, we can use this to measure how similar two sets of information are, in a manner of speaking.
+
+These 'wasted bits' are also known as relative entropy, since entropy basically is a measure of how disordered something can be. The more disordered, the more possibilities we have to choose from, thus the more information possible.
+
+Entropy does not guarantee that the information is usable. It only guarantees how much of this quantity we can get, much like pipes serving water. Yes, they will likely serve water, but you can accidentally have sludge come through instead. Still, their capacity is the same.
+
+One thing to note is that with our ZIP files, if you use the encoding tables from one to encode the other, then you will end up with different relative entropy (i.e. our 'wasted bits') numbers than if you did the vice versa. This is because the KL is not what's called symmetric. That is, it can have different meaning based upon which direction it goes.
 
 ## Information, Entropy, Cross-entropy, KL/JS divergence
 
