@@ -22,6 +22,27 @@ Add `"cwd": "${fileDirname}"` in `launch.json`
 }
 ```
 
+## Set justMycode to false for pytest
+
+Set `"purpose": ["debug-test"]`:
+
+```json
+{
+    "version": "0.2.0",
+    "configurations":
+    {
+            "name": "Python: Current File (Integrated Terminal)",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "cwd": "${fileDirname}",
+            "justMyCode": false,
+            "purpose": ["debug-test"]
+    }
+}
+```
+
 ## Unresolved import warnings
 
 - <https://github.com/microsoft/python-language-server/blob/master/TROUBLESHOOTING.md#unresolved-import-warnings>
