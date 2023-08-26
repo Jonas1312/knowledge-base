@@ -47,7 +47,7 @@ base<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [siamese-contrastive-triplet](<base/science-tech-maths/machine-learning/algorithms/neural-nets/conv-neural-nets/siamese-contrastive-triplet/contrastive-learning.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [gans](<base/science-tech-maths/machine-learning/algorithms/neural-nets/gans/gan.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [losses](<base/science-tech-maths/machine-learning/algorithms/neural-nets/losses/losses.md>)<br>
-│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [transformers](<base/science-tech-maths/machine-learning/algorithms/neural-nets/transformers/transformers.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [transformers](<base/science-tech-maths/machine-learning/algorithms/neural-nets/transformers>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [pca](<base/science-tech-maths/machine-learning/algorithms/pca/pca.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [self-organising-maps](<base/science-tech-maths/machine-learning/algorithms/self-organising-maps/self-organising-maps.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [svm](<base/science-tech-maths/machine-learning/algorithms/svm/svm.md>)<br>
