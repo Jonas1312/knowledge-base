@@ -206,6 +206,8 @@ An complicating consequence of putting a softmax function in attention is that i
 
 The solution is to have several different instances of attention, or heads running at once. This lets the the transformer consider several previous words simultaneously when predicting the next. It brings back the power we had before we pulled the softmax into the picture.
 
+Each transformer block has h=8h=8 contextualized representations. Intuitively, you can think of it as the multiple feature maps of a convolution layer that capture different features from the image.
+
 <img src="multi-head-attention.png" width="300">
 
 We perform the self-attention operation multiple times $h$ independently, in parallel, called **heads**.
@@ -400,6 +402,8 @@ The word in each position flows through its own path in the encoder.
 There are dependencies between these paths in the self-attention layer.
 The feed-forward layer does not have those dependencies, however, and thus the various paths can be executed in parallel while flowing through the feed-forward layer.
 
+We put multiple encoder blocks in a stack. With more layers, the model makes more abstract representations. Similar to stacking recurrent or convolution blocks we can stack multiple transformer blocks. The first block associates word-vector pairs, the second pairs of pairs, the third of pairs of pairs of pairs, and so on. In parallel, the multiple heads focus on different segments of the pairs. This is analogous to the receptive field but in terms of pairs of distributed representations.
+
 ### Positional encoding
 
 Without position encoding, attention is just bag of words. When you convert a sequence into a set (tokenization), you lose the notion of order.
@@ -483,6 +487,8 @@ We can then apply the softmax function to the last dimension to get the probabil
 We can then pick the token with the highest probability as the predicted token. Or we can sample from the distribution to get a random token, which is useful to generate more diverse text.
 
 ### Residual connections and layer normalization
+
+Residual connections help combine high and low-level information.
 
 <img src="transformer_resideual_layer_norm_2.png" width="500">
 
@@ -569,6 +575,7 @@ We can apply a softmax + argmax to get the next most likely token, but we can as
 
 Good things about transformers:
 
+- attention is like an MLP that computes its weights on the fly. They are data-dependent dynamic weights because they change dynamically in response to the
 - all-to-all comparisons can be done fully parallel
 - with RNN/LSTM must be computed in serial per token
 - transfer learning works! Train big expensive models (nvidia, microsoft) and release it freely
