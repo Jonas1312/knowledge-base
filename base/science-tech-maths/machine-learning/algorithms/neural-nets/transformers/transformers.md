@@ -22,6 +22,7 @@
     - [Residual connections and layer normalization](#residual-connections-and-layer-normalization)
   - [Inference](#inference)
   - [KV cache](#kv-cache)
+  - [Continuous batching](#continuous-batching)
   - [Tokenization](#tokenization)
   - [Greedy sampling vs stochastic sampling](#greedy-sampling-vs-stochastic-sampling)
   - [Language modeling head](#language-modeling-head)
@@ -176,6 +177,8 @@ Finally, the we select the relevant value vectors and drown-out the irrelevant o
 
 Self-attention is called "self" because we compare each word with all other words in the same sequence.
 
+Self-attention is important because a word meaning depends on its context! You can have the same word, written the same way, but with a completely different meaning. Self-attention helps build the value for this word depending on its context.
+
 For sake of simplicity, we assume that the sequence length is one, that is $n=1$.
 The query is a vector, for the current word, of dimensions $d_q$.
 Key-value is the memory, it's the past, all the words that have been seen so far.
@@ -229,6 +232,8 @@ For multi-head attention, GPT-style networks usually set $d_q = d_k = d_v = \fra
 One crucial characteristic of the multi-head attention is that it is permutation-equivariant with respect to its inputs.
 This means that if we switch two input elements in the input sequence, the output is exactly the same besides the elements 1 and 2 switched.
 Hence, the multi-head attention is actually looking at the input not as a sequence, but as a set of elements.
+
+Multi-head attention can be seen as depth-wise separable convolution(Chollet 2017) in ConvNets. Depth-wise separable convolution is a special type of convolution that splits input tensor into multiple channels, operate on each channel independently, concatenate the individual outputs and and feed the results to a pointwise convolution(1x1 convolution which is equivalent to a linear projection).
 
 But positions are important for NLP! The solution is to encode the position of each word in the sequence using **positional encoding**.
 
@@ -545,6 +550,10 @@ If we we pad on the right, the network will probably just predict a lot of paddi
 The KV cache is a cache of the key-value pairs of the encoder output. It is used to speed up the inference process.
 
 ![](./KVCache.jpeg)
+
+## Continuous batching
+
+<https://www.anyscale.com/blog/continuous-batching-llm-inference>
 
 ## Tokenization
 
