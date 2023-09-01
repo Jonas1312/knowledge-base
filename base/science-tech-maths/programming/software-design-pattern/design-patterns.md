@@ -77,13 +77,39 @@ The `MyService` class depends on the `repository` class, but the `repository` cl
 
 We don’t want anything in an outer circle to impact the inner circles. We don’t want SQL, or HTML, or the database, or the web, or any other mechanism to impact the inner circles. This allows us to keep those mechanisms at arms length from the business rules.
 
-### The Entities
+### Entities, Domain, Business rules
 
 It's the core of the application. It contains the business rules. It is the most abstract layer of the application.
 
-### The Use Cases
+This layer should not depend on anything outside of itself. This layer typically defines the models and data structures that represent the business entities and concepts.
 
-It contains the application specific business rules. It is the layer where the application is interacting with the user. It is the layer where the application is interacting with external systems (databases, web services, etc.). It is the layer where the application is interacting with the entities.
+### Use Cases, Application
+
+This layer contains the application specific business rules.
+It implements all the use cases of the application, it uses the domain classes, but it is isolated from the details and implementation of outer layers, such as databases, adapters, etc.
+This layer just holds interfaces to interact with the outside world.
+
+This layer is dependent on the Domain layer, but not on anything outside of itself. This layer typically defines the application services that implement the use cases of the system.
+
+The Application layer only depends on abstractions, defined in interfaces, and these interfaces are implemented in outer layers. For example, persistence concerns (such as saving an item to a database) are defined only in terms of requirements: the real implementation is done in the outer layers.
+
+As we have seen before, use cases are the user actions, or the user intentions, like fetching an order, creating a product, and so on.
+
+**And each use case must be independent of the other use cases**, to be compliant with the Single Responsibility Principle (the first SOLID principle).
+
+Why can't a use case depend on another use case? Because if it does, then it is not a use case anymore, it is a business rule. And business rules belong to the domain layer.
+
+### Controller, Adapters, Gateways, Data sources, Infrastructure
+
+They communicate with whatever is outside of the application.
+
+### Presentation
+
+The Presentation layer is where the system is interacted with. This might be via a Web API, a GUI, or a CLI.
+
+This layer is dependent on the Application layer (use cases) & the Infrastructure layer.
+
+This layer should not contain any business logic, and should not be dependent on any external items.
 
 ### In Python
 
