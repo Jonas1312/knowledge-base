@@ -79,6 +79,8 @@ In statistics:
 - **Probability describes how likely your sample is, given a known population/density/model**
 - **likelihood describes how likely a particular population is according to your model, given a known sample.**
 
+Note that, for continuous random variables, likelihood is NOT a probability as explained before. But for discrete random variables, likelihood is a probability.
+
 ## Conjugate prior
 
 - when prior and posterior have analog closed form

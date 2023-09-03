@@ -26,7 +26,7 @@ The decision boundary for a logistic classifier is linear. (The classifier needs
 
 - <https://github.com/ujjwalkarn/DataSciencePython#logistic-regression-in-python>
 - <https://www.dataschool.io/guide-to-logistic-regression/>
-- <https://florianhartl.com/logistic-regression-geometric-intuition.html>
+- <https://web.archive.org/web/20230531102205/https://florianhartl.com/logistic-regression-geometric-intuition.html>
 - <https://chunml.github.io/ChunML.github.io/tutorial/Logistic-Regression/>
 - <https://learningwithdata.wordpress.com/2015/04/30/tutorial-on-logistic-regression-and-optimization-in-python/>
 - <https://www.hackingnote.com/en/machine-learning/logistic-regression>
