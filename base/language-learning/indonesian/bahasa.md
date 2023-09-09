@@ -24,3 +24,5 @@ Sampai jumpa: See you later
 
 - sampai: until
 - jumpa: meet
+
+terima kasih : thanks
