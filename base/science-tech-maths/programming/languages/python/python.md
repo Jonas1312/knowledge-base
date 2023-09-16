@@ -1095,6 +1095,8 @@ virtualenv --python=c:\Python25\python.exe path/to/new/env/envname
 
 ## Logging
 
+Note that Loggers should __NEVER__ be instantiated directly, but always through the module-level function: `logging.getLogger(name)`.
+
 ```python
 import logging
 
@@ -2211,3 +2213,11 @@ If it's not, it will create a new virtual environment and install the dependenci
 You can decide to disable creating a virtual environment by doing `poetry config virtualenvs.create false`. This will install the dependencies in the global python environment, like `pip install`.
 
 Or decide to create the virtual env in the project directory by doing `poetry config virtualenvs.in-project true`.
+
+To have the `from PACKAGE_NAME import __version__`, put this in the `__init__.py` root file of the package:
+
+```python
+import importlib.metadata
+
+__version__ = importlib.metadata.version("PACKAGE_NAME")
+```
