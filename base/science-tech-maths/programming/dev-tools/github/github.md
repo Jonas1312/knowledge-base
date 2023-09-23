@@ -9,8 +9,6 @@ Add .patch or .diff after url:
 
 ## GitHub Actions
 
-### Tips
-
 ### Matrix for multistage deployment
 
 To roll out deployments for diff stages (staging, preprod, prod), you can use a matrix job that way:
@@ -110,6 +108,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       ...
+```
+
+### Check if on tag
+
+```yaml
+if: startsWith(github.ref, 'refs/tags/')
 ```
 
 ### Tools
