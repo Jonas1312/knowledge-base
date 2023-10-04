@@ -23,3 +23,9 @@ You come to Canada soon please, Can or not?
 Dis country weather very good one.
 
 We all just talk cock all day long: To talk nonsense.
+
+Zai = capable/skilled/smart
+
+Blur: not knowing/aware of what/how things should be done: I so blur, I left my phone in my toilet also never realise
+
+Tahan: just means to tolerate: Too hot I cannot tahan

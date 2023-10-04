@@ -143,13 +143,54 @@ It's good practise to define a user with the lowest possible privileges. By defa
   RUN apt-get install -y curl  # if we add a new package here, it will use the cached apt-get update.
   ```
 
-- It's best to put layers that are likely to change often at the bottom of the Dockerfile, and layers that change less frequently at the top. This is because Docker uses a layered file system, and each layer is cached. If you change a layer, all the layers above it will be invalidated.
+- It's best to put layers that are likely to change often at the bottom of the Dockerfile, and layers that change less frequently at the top. This is because Docker uses a layered file system, and each layer is cached. If you change a layer, all the layers above it will be invalidated. The dockerfile below is bad, because by changing the code (step 3/4), docker will rebuild the pip install step, which might take a while...
+
+  ```dockerfile
+  FROM python:3.7 # Step 1/4
+  WORKDIR /app # Step 2/4
+  COPY ./src /app # Step 3/4
+  RUN pip install -Ur requirements.txt # Step 4/4
+  ```
+
 - The last instruction in the Dockerfile should be `CMD` or `ENTRYPOINT`. This is because the last instruction is the one that will be executed when the container starts. If you put `RUN` as the last instruction, it will be executed when the image is built, not when the container starts.
 - The last layer should be the app code. This is because the last layer will be the one ran by default.
 - Set a non-root user. This is for security reasons. If you don't set a non-root user, the container will run as root, which is not recommended.
 - Empty the caches in the same layer: pip cache (`--no-cache-dir`), apt cache, apk cache, etc.
 - Disable the virtual environments (poetry, pipenv, etc.). This is because the container is already an isolated environment, so you don't need another isolated environment inside it. `RUN poetry config virtualenvs.create false`
 - Use `.dockerignore` to exclude files and directories from the context.
+
+### Multistage builds
+
+In the dockerfile below, we install some systemp dependencies that are only use for installing pip dependencies. The system dependencies are not needed for running the app. So we can use multistage builds to create a smaller image.
+
+```dockefile
+# Inherit from Linux Alpine with Python3.7 installed.
+FROM python:3.7-alpine AS builder
+
+WORKDIR /app
+
+# Install System dependencies
+RUN apk update && apk add --no-cache jpeg-dev zlib-dev python-dev build-base
+
+# Install Python dependencies
+RUN pip install --prefix=/install -Ur requirements.txt
+
+# Start a new image.
+FROM python:3.7-alpine
+
+WORKDIR /app
+
+# Copy the dependencies
+COPY --from=builder /install /install
+
+# Copy local application into image.
+COPY ./app.py /app/
+```
+
+This is a 2 stage build as you can see separated by the FROM steps written in the Dockerfile.
+
+- Stage 1 install the system dependencies required for us to install our pip dependencies. We use the --prefix option to define a unique path where we want pip to install the packages into.
+- Stage 2 starts from a brand new alpine image and instead of installing any system dependencis, we use the COPY command to copy the pip packages installed in /install from our first builder image, into our newly created image.
 
 ## Build the image
 
