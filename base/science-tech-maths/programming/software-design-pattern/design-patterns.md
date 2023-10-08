@@ -38,6 +38,8 @@ class Client:
 
 ## The clean architecture / Hexagonal architecture / Onion architecture
 
+They all have the same objective, which is the separation of concerns. They all achieve this separation by dividing the software into layers. Each has at least one layer for business rules, and another for interfaces.
+
 The clean architecture is a way to structure your code in a way that it is independent of frameworks, databases, etc. It is a way to make your code more testable, and more maintainable.
 
 The clean architecture is composed of 4 layers.
@@ -47,7 +49,7 @@ The clean architecture is composed of 4 layers.
 Each of these architectures produce systems that are:
 
 - Independent of Frameworks.
-- Testable.
+- Testable. The business rules can be tested without the UI, Database, Web Server, or any other external element.
 - Independent of UI. The UI can change easily, without changing the rest of the system.
 - Independent of Database. You can swap out Oracle or SQL Server, for Mongo, BigTable, CouchDB, or something else. Your business rules are not bound to the database.
 - Independent of any external agency.
@@ -77,11 +79,19 @@ The `MyService` class depends on the `repository` class, but the `repository` cl
 
 We don’t want anything in an outer circle to impact the inner circles. We don’t want SQL, or HTML, or the database, or the web, or any other mechanism to impact the inner circles. This allows us to keep those mechanisms at arms length from the business rules.
 
+![](./dependency-inversion.png)
+
+In the pic above, we see that the HL1 depends on the interface, but the execute flow (runtime) depends on the ML1, which is the implementation of the interface.
+
+![](dependency-inversion-ui-db-example.png)
+
 ### Entities, Domain, Business rules
 
 It's the core of the application. It contains the business rules. It is the most abstract layer of the application.
 
 This layer should not depend on anything outside of itself. This layer typically defines the models and data structures that represent the business entities and concepts.
+
+An entity can be an object with methods, or it can be a set of data structures and functions. It doesn’t matter so long as the entities could be used by many different applications in the enterprise.
 
 ### Use Cases, Application
 
@@ -99,17 +109,17 @@ As we have seen before, use cases are the user actions, or the user intentions, 
 
 Why can't a use case depend on another use case? Because if it does, then it is not a use case anymore, it is a business rule. And business rules belong to the domain layer.
 
+We do not expect this layer to be affected by changes to externalities such as the database, the UI, or any of the common frameworks. This layer is isolated from such concerns.
+
 ### Controller, Adapters, Gateways, Data sources, Infrastructure
 
 They communicate with whatever is outside of the application.
 
-### Presentation
+It is this layer, for example, that will wholly contain the MVC architecture of a GUI. The Presenters, Views, and Controllers all belong in here.
 
 The Presentation layer is where the system is interacted with. This might be via a Web API, a GUI, or a CLI.
 
-This layer is dependent on the Application layer (use cases) & the Infrastructure layer.
-
-This layer should not contain any business logic, and should not be dependent on any external items.
+The models are likely just data structures that are passed from the controllers to the use cases, and then back from the use cases to the presenters and views.
 
 ### In Python
 
