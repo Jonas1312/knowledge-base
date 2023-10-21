@@ -110,6 +110,7 @@
     - [Concurrency](#concurrency)
   - [SQLAlchemy](#sqlalchemy)
     - [Session](#session)
+    - [SQLAlchemy and threads](#sqlalchemy-and-threads)
     - [Expiring objects](#expiring-objects)
     - [Refreshing objects](#refreshing-objects)
     - [Expire vs Refresh](#expire-vs-refresh)
@@ -2178,6 +2179,24 @@ Sessions are a scope or context within which you can change these objects. Note 
 Sessions have a natural lifecyle in which objects are first instantiated from the database record, changes are made to these objects, and then the changes are either persisted back to the database or discarded.
 
 In most web applications, the established pattern is to begin and end the Session with each http request.
+
+### SQLAlchemy and threads
+
+`Session` objects are not thread-safe, but are thread-local. What I recommend using is `sessionmaker` instead of `Session`. `sessionmaker` is a factory for `Session` objects. You can create a new `Session` object for each thread by calling `sessionmaker()`.
+
+```python
+engine = create_engine()
+session_maker = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+
+db: Session = session_maker()
+try:
+    yield db
+except:
+    db.rollback()
+    raise
+finally:
+    db.close()
+```
 
 ### Expiring objects
 
