@@ -22,6 +22,10 @@
     - [Generics and TypeVar](#generics-and-typevar)
     - [Constants](#constants)
     - [TYPE\_CHECKING](#type_checking)
+    - [Covariance and contravariance](#covariance-and-contravariance)
+      - [Covariance: `CovariantType[SubType, ...] <: CovariantType[SuperType, ...]`](#covariance-covarianttypesubtype---covarianttypesupertype-)
+      - [Contravariance: `ContravariantType[SuperType, ...] <: ContravariantType[SubType, ...]`](#contravariance-contravarianttypesupertype---contravarianttypesubtype-)
+      - [Invariant](#invariant)
   - [Sequences](#sequences)
     - [Filter Map Reduce](#filter-map-reduce)
     - [Comprehension lists/dicts](#comprehension-listsdicts)
@@ -362,7 +366,7 @@ Much better! Now we can see that the function takes a sequence of T and returns 
 
 Generics are not just used for function and method parameters. They can also be used to define classes that can contain, or work with, multiple types.
 
-In our previous example, we use `Sequence[T]`. `Sequence` is a generic type. It's a type that takes a type variable. It's a generic container type, like `List`, `Tuple`, `Dict`, `Set`, etc. Most container types in the Typing module are generic.
+In our previous example, we use `Sequence[T]`. The `Sequence` is a generic type. It's a type that takes a type variable. It's a generic container type, like `List`, `Tuple`, `Dict`, `Set`, etc. Most container types in the Typing module are generic.
 
 If we did not define a type on instantiation, then it assumes `Any`. That means that `my_list: List = ['a']` and `my_list: List[Any] = ['a']` are the same.
 
@@ -466,6 +470,95 @@ if TYPE_CHECKING:
 def export_as_df() -> pd.DataFrame:
     ...
 ```
+
+### Covariance and contravariance
+
+#### Covariance: `CovariantType[SubType, ...] <: CovariantType[SuperType, ...]`
+
+```python
+class Animal:
+    ...
+
+
+class Dog(Animal):
+    ...  # Dog <: Animal, "Dog is a subtype of Animal"
+
+
+an_animal = Animal()
+dog_1 = Dog()
+dog_2 = Dog()
+
+animals = (an_animal, dog_1)
+dogs = (dog_1, dog_2)
+
+dogs = animals  # mypy error:
+# Incompatible types in assignment (expression has type
+#   "Tuple[Animal, ...]", variable has type "Tuple[Dog, ...]")
+```
+
+We see in the example above that Tuple is covariant in all its arguments: `Tuple[SubType, ...] <: Tuple[SuperType, ...]`
+
+In python, most containers are covariant:
+
+- tuple
+- frozensets
+- union (It’s safe to use an object of the type `Union[Dog, Meat]` where an object of the type `Union[Animal, Food]` is expected, but not the other way around.)
+- callable (only the return type!)
+
+#### Contravariance: `ContravariantType[SuperType, ...] <: ContravariantType[SubType, ...]`
+
+The definition is almost the same as of “covariance”, but with <: relation switched.
+
+```python
+class Animal:
+    ...
+
+
+class Dog(Animal):
+    ...
+
+
+class Kangaroo(Animal):
+    ...
+
+
+# this function type is `Callable[[Animal], None]`
+def animal_run(animal: Animal) -> None:
+    print("An animal is running!")
+
+
+# this function type is `Callable[[Dog], None]`
+def dog_run(dog: Dog) -> None:
+    print("A dog is running!")
+```
+
+As we see above, Callable is contravariant in its arguments: we can use an argument of the type `Animal` on the function `dog_run` with type `Callable[[Dog], None]`, but not the other way around.
+
+#### Invariant
+
+An invariant type is neither covariant nor contravariant.
+
+`List` is invariant!
+
+Why is `Tuple` covariant but not `List`? It's because lists are mutable, tuples are not.
+
+Consider a class `Employee` with a subclass `Manager`.
+Now, suppose we have a function with an argument annotated `def my_function(arg: List[Employee])`.
+Should we be allowed to call this function with a variable of type `List[Manager]` as its argument?
+Many people would answer “yes, of course” without even considering the consequences.
+But unless we know more about the function, a type checker should reject such a call: the function might append an `Employee` instance to the list, which would violate the variable’s type in the caller:
+
+```python
+def my_function(arg: List[Employee]) -> None:
+    arg.append(Employee())
+
+
+a = [Manager()]
+my_function(a)  # This should be rejected by a type checker!
+# because a is a List[Manager] and not a List[Employee]
+```
+
+Other invariant types are `Set`, `Dict`, and many more mutable containers.
 
 ## Sequences
 
