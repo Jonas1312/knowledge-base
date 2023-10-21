@@ -9,3 +9,7 @@ Multiple keys and repos: <https://blog.touret.info/2018/11/16/gerer-plusieurs-cl
 Cloudflare Tunnel: <https://orth.uk/ssh-over-cloudflare/>
 
 <https://grahamhelton.com/blog/ssh-cheatsheet/>
+
+<https://news.ycombinator.com/item?id=37886049>
+
+<https://nickjanetakis.com/blog/using-a-custom-ssh-key-to-access-a-private-git-repo>

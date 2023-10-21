@@ -1806,6 +1806,8 @@ async def main():
     await task3
 ```
 
+‼ If you don't hold a reference to the task object returned by `create_task` then the task may disappear without warning when Python runs garbage collection. In other words, the code in your task will stop running with no obvious indication why.
+
 ### `asyncio.as_completed()`
 
 Is a function that takes an iterable of coroutines and returns a generator that yields the results as they become available.
