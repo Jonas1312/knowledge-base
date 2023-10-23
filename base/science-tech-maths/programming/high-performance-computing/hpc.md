@@ -22,3 +22,5 @@ All writes to memory go through the data cache3. When a write is made, the cache
 - <https://blog.cr.yp.to/20190430-vectorize.html>
 - <https://gist.github.com/nadavrot/5b35d44e8ba3dd718e595e40184d03f0> High-Performance Matrix Multiplication
 - <https://viralinstruction.com/posts/hardware/>
+<https://codeconfessions.substack.com/p/gpu-computing>
+<https://towardsdatascience.com/matrix-multiplication-on-the-gpu-e920e50207a8>
