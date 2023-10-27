@@ -1,15 +1,15 @@
-def permutations_1(input_string, l=None, r=None):
+def permutations_1(input_string, left=None, right=None):
     if isinstance(input_string, str):
         input_string = list(input_string)
-    if (l or r) is None:
-        l, r = 0, len(input_string)
-    if l == r:
+    if (left or right) is None:
+        left, right = 0, len(input_string)
+    if left == right:
         print("".join(input_string))
     else:
-        for i in range(l, r):
-            input_string[i], input_string[l] = input_string[l], input_string[i]
-            permutations_1(input_string, l=l + 1, r=r)  # type: ignore
-            input_string[i], input_string[l] = input_string[l], input_string[i]
+        for i in range(left, right):
+            input_string[i], input_string[left] = input_string[left], input_string[i]
+            permutations_1(input_string, left=left + 1, right=right)  # type: ignore
+            input_string[i], input_string[left] = input_string[left], input_string[i]
 
 
 # we insert the "prefix" in at every possible point in string
