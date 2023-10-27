@@ -7,6 +7,10 @@ Add .patch or .diff after url:
 - <https://github.com/pytorch/pytorch/pull/20853.diff>
 - <https://github.com/pytorch/pytorch/pull/20853.patch>
 
+## Release
+
+Configuring automatically generated release notes: <https://docs.github.com/en/repositories/releasing-projects-on-github/automatically-generated-release-notes#configuring-automatically-generated-release-notes>
+
 ## GitHub Actions
 
 ### Matrix for multistage deployment
@@ -110,6 +114,12 @@ jobs:
       ...
 ```
 
+```yaml
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref_name }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
+```
+
 ### Check if on tag
 
 ```yaml
@@ -122,6 +132,7 @@ if: startsWith(github.ref, 'refs/tags/')
 - <https://marketplace.visualstudio.com/items?itemName=cschleiden.vscode-github-actions>
 - <https://github-actions-hero.vercel.app/>
 - <https://github.com/rhysd/actionlint>
+- <https://github.com/tj-actions/changed-files>
 
 ## GitHub README Profile
 
