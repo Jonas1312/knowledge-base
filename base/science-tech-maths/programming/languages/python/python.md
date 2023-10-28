@@ -26,6 +26,7 @@
       - [Covariance: `CovariantType[SubType, ...] <: CovariantType[SuperType, ...]`](#covariance-covarianttypesubtype---covarianttypesupertype-)
       - [Contravariance: `ContravariantType[SuperType, ...] <: ContravariantType[SubType, ...]`](#contravariance-contravarianttypesupertype---contravarianttypesubtype-)
       - [Invariant](#invariant)
+    - [None vs Noreturn](#none-vs-noreturn)
   - [Sequences](#sequences)
     - [Filter Map Reduce](#filter-map-reduce)
     - [Comprehension lists/dicts](#comprehension-listsdicts)
@@ -61,7 +62,10 @@
   - [Numpy](#numpy)
   - [CPython](#cpython)
   - [GIL](#gil)
+  - [Thread fork vs spawn](#thread-fork-vs-spawn)
   - [Python ooooopssiieess](#python-ooooopssiieess)
+    - [Mutable default arguments](#mutable-default-arguments)
+    - [lru\_cache or cache on class methods](#lru_cache-or-cache-on-class-methods)
   - [Timing code](#timing-code)
   - [Wheels](#wheels)
   - [Virtualenv](#virtualenv)
@@ -560,6 +564,12 @@ my_function(a)  # This should be rejected by a type checker!
 ```
 
 Other invariant types are `Set`, `Dict`, and many more mutable containers.
+
+### None vs Noreturn
+
+Python will always add an implicit `return None` to the end of any function. This means that a function that doesn’t explicitly return anything will always return `None`.
+
+Use `NoReturn`  to indicate that a function never returns normally. For example, it always raises an exception or has an infinite loop.
 
 ## Sequences
 
@@ -1148,17 +1158,63 @@ print(my_instance is my_instance2)  # True
 - Now the problem moves to how granular you want the lock to be. Clearly, if one thread is acting on one dictionary, and another thread is acting on another dictionary, they don't conflict with each other and they can work in parallel, but then you need to add a lock to every dictionary. The same applies to every list, every mutable structure, external or internal. This is a lot of locks to handle and manage. And each lock occupies memory, and each lock requires time to be grabbed, and time to be released.
 - So a simpler solution is to have One lock (TM). The first thread that grabs it wins, and does whatever it wants until it's done. __Even if the second thread has no intention of touching anything that the first thread is modifying, it will have to wait until the first thread is done.__
 
+## Thread fork vs spawn
+
+A fork process is a shallow copy of the parent process. The forked process will read the memory of the parent process directly. This is recommended if the child process is not going to modify the memory of the parent process.
+
+If the fork process wants to write, the system will deepcopy the memory first. This is called Copy On Write (CoW).
+
+A spawn process is a new process. It will not share the memory of the parent process. This is recommended if the child process is going to modify the memory of the parent process. It is slower.
+
 ## Python ooooopssiieess
 
 - <https://github.com/satwikkansal/wtfpython>
 
+### Mutable default arguments
+
 ```python
-def foo(
-    bar=[],
-):  # the default value for a function argument is only evaluated once, at the time that the function is defined. Each time the function is called, the same list is used.
+# the default value for a function argument is only evaluated once, at the time that the function is defined. Each time the function is called, the same list is used.
+def foo(bar=[]):
     bar.append("baz")
     return bar
 ```
+
+### lru_cache or cache on class methods
+
+Putting a @cache or @lru_cache on a class method with a `self` argument will cache the result for the same `self` argument. This is probably not what you want.
+
+```python
+import time
+from functools import lru_cache
+
+
+class MyClass:
+    def __init__(self, sleep: int) -> None:
+        self._sleep = sleep
+
+    @lru_cache
+    def double(self, arg: int) -> int:
+        time.sleep(self._sleep)
+        return arg * 2
+
+
+a = MyClass(1)
+b = MyClass(1)
+
+a.double(2)
+# CacheInfo(hits=0, misses=1, maxsize=128, currsize=1)
+print(a.double.cache_info(), b.double.cache_info())
+
+a.double(2)
+# CacheInfo(hits=1, misses=1, maxsize=128, currsize=1)
+print(a.double.cache_info(), b.double.cache_info())
+
+b.double(2)
+# CacheInfo(hits=1, misses=2, maxsize=128, currsize=2)  # we would expect 2 hits!
+print(a.double.cache_info(), b.double.cache_info())
+```
+
+@lru_cache decorator is intended for use with pure functions, meaning functions that always return the same output for a given input.
 
 ## Timing code
 
@@ -1171,6 +1227,8 @@ print(timeit.timeit(my_function, number=100000))
 - the `timeit` function requires you to pass only the name of the function (in this case `my_function`)
 - the `%timeit` magic command requires the function call `my_function()` itself. `%timeit sum(range(100))`
 - `python -m cProfile -s tottime your_program.py` ([Profiling and optimizing your Python code](https://toucantoco.com/en/tech-blog/tech/python-performance-optimization))
+
+Don't use `time.time()`! It's not monotonic! Use `time.monotonic_ns()` instead to measure a time difference.
 
 ## Wheels
 

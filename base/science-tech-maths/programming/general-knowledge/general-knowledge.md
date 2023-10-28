@@ -88,3 +88,17 @@ In the case of a static variable inside a class, the variable is shared among al
 ### Documentation
 
 - [What nobody tells you about documentation](https://www.divio.com/blog/documentation/)
+
+## TTY
+
+You can simulate a non-interactive tty by redirecting stdout to a file:
+
+```bash
+python -c 'import sys; print(sys.stdout.isatty())' > tty.txt  # False
+```
+
+Same for stdin:
+
+```bash
+python -c 'import sys; print(sys.stdin.isatty())' < tty.txt  # False
+```

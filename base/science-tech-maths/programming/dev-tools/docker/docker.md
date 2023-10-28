@@ -158,6 +158,7 @@ It's good practise to define a user with the lowest possible privileges. By defa
 - Empty the caches in the same layer: pip cache (`--no-cache-dir`), apt cache, apk cache, etc.
 - Disable the virtual environments (poetry, pipenv, etc.). This is because the container is already an isolated environment, so you don't need another isolated environment inside it. `RUN poetry config virtualenvs.create false`
 - Use `.dockerignore` to exclude files and directories from the context.
+- Use `ENV LANG=C.UTF-8` to set the locale to UTF-8. This tells the environment to use UTF-8 encoding by default.
 
 ### Multistage builds
 
