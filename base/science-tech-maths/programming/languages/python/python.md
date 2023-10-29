@@ -722,6 +722,26 @@ class Color(Enum):
 print(Color.RED)  # Color.RED
 ```
 
+For string enums, you can use `str`:
+
+```python
+from enum import Enum
+
+
+class Color(str, Enum):
+    RED = "red"
+    GREEN = "green"
+    BLUE = "blue"
+```
+
+The advantage of using `str` is that it will be serialized as a string:
+
+```python
+import json
+
+json.dumps({"color": Color.RED})  # '{"color": "red"}'
+```
+
 ### Data Classes
 
 #### Namedtuple

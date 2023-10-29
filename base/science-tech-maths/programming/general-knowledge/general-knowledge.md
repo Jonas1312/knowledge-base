@@ -102,3 +102,27 @@ Same for stdin:
 ```bash
 python -c 'import sys; print(sys.stdin.isatty())' < tty.txt  # False
 ```
+
+## Network
+
+### localhost
+
+Don't use localhost in your code, etc.
+
+This takes an extra time to resolve the localhost to an IP address:
+
+1. The resolver library checks the /etc/hosts file and gets two IP addresses for localhost:
+2. Checks IPv6 address first -> will probably fail
+3. Checks IPv4 address second -> will probably succeed
+4. The resolver library returns the IP address to the application
+5. The application connects to the IP address
+
+All of that can be avoided using the ip (usually 127.0.0.1)
+
+### 127.0.0.1 vs 0.0.0.0
+
+When you provide a service on 0.0.0.0 that means it binds to all interfaces - so if your computer has 2 wired Ethernet cards and one wifi interface, the service will be accessible to any client/device on any of those networks.
+
+When you provide a service on 127.0.0.1 it will only be available to clients running within the same machine it is running on.
+
+In essence, 0.0.0.0 means "anywhere and everywhere", while 127.0.0.1 means "precisely here and nowhere else".

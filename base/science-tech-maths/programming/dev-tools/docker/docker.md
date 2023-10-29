@@ -282,12 +282,13 @@ services:
       - "8000:3000"  # map the container port 3000 to the host port 8000
     environment:
       - PORT=3000  # set the environment variable PORT to 3000
+      - DB_HOST=some_db  # set the environment variable DB_HOST to db (not localhost or 0.0.0.0!)
 
   some_other_service:
     command: python app.py  # run the command "python app.py" when the container starts. This overrides the CMD instruction in the Dockerfile.
     depends_on: db  # wait for the db service to be ready before starting this service
 
-  db:
+  some_db:
     image: mysql
 ```
 
