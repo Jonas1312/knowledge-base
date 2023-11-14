@@ -23,9 +23,7 @@ Requests to a GraphQL server can be:
 
 From the point of view of the client, the most common GraphQL operations are likely to be queries and mutations. If we were to think about them in terms of the create, read, update and delete (CRUD) model, a query would be equivalent to read. All the others (create, update, and delete) are handled by mutations.
 
-## Some general concepts
-
-### GraphQL document
+## GraphQL document
 
 A string written in the GraphQL language that defines one or more operations and fragments.
 
@@ -184,7 +182,7 @@ mutation {
 }
 ```
 
-### Operation
+## Operation
 
 A single query, mutation, or subscription that can be interpreted by a GraphQL execution engine.
 
@@ -199,7 +197,7 @@ A single query, mutation, or subscription that can be interpreted by a GraphQL e
   - Because GraphQL is statically typed, it can actually validate for you that you are passing in the right variables.
   - Variables are passed separately from the query document in a transport-specific way, In today’s GraphQL server implementations, that’s usually JSON.
 
-### Selection set
+## Selection set
 
 ![selection set](selection-set.png)
 
@@ -209,7 +207,7 @@ The selection set:
 - A set of fields requested in an operation, or nested within another field.
 - A GraphQL query must contain a selection set on any field that returns an object type, and selection sets are not allowed on fields that return scalar types, such as Int or String.
 
-### Aliases
+## Aliases
 
 ```graphql
 query MyQuery {
@@ -237,7 +235,7 @@ returns:
 }
 ```
 
-### Fragments
+## Fragments
 
 ![fragments](fragments.png)
 
@@ -248,7 +246,7 @@ Fragment definition:
 - Fragment name: The name of each fragment has to be unique within a GraphQL document.
 - Type condition: GraphQL operations always start at the query, mutation, or subscription type in your schema, but fragments can be used in any selection set.
 
-### GraphQL schema
+## GraphQL schema
 
 On the server, we create a **GraphQL schema** written in SDL (schema definition language) based on the data we need to build our app UIs.
 
@@ -344,7 +342,7 @@ The schema tells the server what queries clients are allowed to make, and how di
 
 That’s what resolve functions are for!
 
-### Resolvers
+## Resolvers
 
 For each type, we write the **resolver functions**, connecting the data to our graph. Perhaps we get the Job data from an external API. And maybe we get the Location data from the Google Maps API.
 
@@ -355,6 +353,48 @@ getAuthor(_, args){
 
 posts(author){
   return request(`https://api.blog.io/by_author/${author.id}`);
+}
+```
+
+## __typename
+
+The `__typename` field is a meta field that returns the name of the object type currently being queried.
+
+```graphql
+{
+  search(text: "an") {
+    __typename
+    ... on Human {
+      name
+    }
+    ... on Droid {
+      name
+    }
+    ... on Starship {
+      name
+    }
+  }
+}
+```
+
+returns:
+
+```json
+{
+  "search": [
+    {
+      "__typename": "Human",
+      "name": "Han Solo"
+    },
+    {
+      "__typename": "Human",
+      "name": "Leia Organa"
+    },
+    {
+      "__typename": "Starship",
+      "name": "TIE Advanced x1"
+    }
+  ]
 }
 ```
 
