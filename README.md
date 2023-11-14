@@ -87,6 +87,7 @@ base<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [char-encoding](<base/science-tech-maths/programming/char-encoding/char-encoding.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [databases](<base/science-tech-maths/programming/databases/databases.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ dev-tools<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [datadog](<base/science-tech-maths/programming/dev-tools/datadog/datadog.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [docker](<base/science-tech-maths/programming/dev-tools/docker/docker.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [git](<base/science-tech-maths/programming/dev-tools/git/git.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [github](<base/science-tech-maths/programming/dev-tools/github/github.md>)<br>
