@@ -112,6 +112,7 @@
     - [Order matters](#order-matters)
     - [Parameters](#parameters)
     - [Concurrency](#concurrency)
+    - [Auto conversion from camelCase to snake\_case](#auto-conversion-from-camelcase-to-snake_case)
   - [SQLAlchemy](#sqlalchemy)
     - [Session](#session)
     - [SQLAlchemy and threads](#sqlalchemy-and-threads)
@@ -2238,6 +2239,25 @@ async def send_notification(q: str, background_tasks: BackgroundTasks):
     background_tasks.add_task(some_task_that_takes_some_time, q)
     # return a response immediately
     return {"message": "Notification sent in the background"}
+```
+
+### Auto conversion from camelCase to snake_case
+
+```python
+from pydantic import BaseModel
+from humps import camelize
+
+
+class CamelModel(BaseModel):
+    class Config:
+        alias_generator = camelize
+        allow_population_by_field_name = True
+
+
+class User(CamelModel):
+    first_name: str
+    last_name: str = None
+    age: int
 ```
 
 ## SQLAlchemy

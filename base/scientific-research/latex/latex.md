@@ -20,7 +20,9 @@ Quickly look up LaTeX symbols!: <https://latex.guide/>
 ### Handwriting to LaTeX
 
 - <http://detexify.kirelabs.org/classify.html>
+- <https://github.com/zoeyfyi/TeX-Match>
 - <https://mathpix.com/>
+- <https://facebookresearch.github.io/nougat/>
 
 ## Tools
 
