@@ -314,6 +314,13 @@ volumes:
   - ./files:/files
 ```
 
+You can easily use pre-existing containers using docker compose:
+
+```bash
+docker compose run --rm --name postgres_test_db_container -p 5432:5432 postgres_test_db  # run the postgres container
+psql postgresql://postgres:postgres@localhost:5432/postgres  # connect to the postgres container
+```
+
 ## Tools
 
 - [Deepo](https://github.com/ufoym/deepo/): Set up deep learning environment in a single command line

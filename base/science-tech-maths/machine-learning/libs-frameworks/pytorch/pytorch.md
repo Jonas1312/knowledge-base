@@ -425,6 +425,7 @@ Lightning Fabric is a lightweight Pytorch Lightning extension: <https://lightnin
   - <https://towardsdatascience.com/pytorch-model-performance-analysis-and-optimization-10c3c5822869>
   - <https://towardsdatascience.com/pytorch-model-performance-analysis-and-optimization-part-2-3bc241be91>
   - <https://towardsdatascience.com/pytorch-model-performance-analysis-and-optimization-part-3-1c5876d78fe2>
+- <https://pytorch.org/blog/accelerating-generative-ai-2/>
 
 ## Torchmetrics
 

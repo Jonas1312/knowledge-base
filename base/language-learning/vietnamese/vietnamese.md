@@ -125,3 +125,7 @@ For example to answer yes or no:
 | 8       | Tám        |
 | 9       | Chín       |
 | 10      | Mười       |
+
+## Funny Expressions
+
+- To be a "young buffalo": to be young and immature
