@@ -17,6 +17,7 @@ base<br>
 │&nbsp;&nbsp;&nbsp;├─ [tagalog](<base/language-learning/tagalog/tagalog.md>)<br>
 │&nbsp;&nbsp;&nbsp;└─ [vietnamese](<base/language-learning/vietnamese/vietnamese.md>)<br>
 ├─ [maps](<base/maps/maps.md>)<br>
+├─ [music](<base/music/music.md>)<br>
 ├─ [paperwork](<base/paperwork>)<br>
 ├─ [project-management](<base/project-management>)<br>
 ├─ science-tech-maths<br>
