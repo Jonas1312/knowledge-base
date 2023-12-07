@@ -129,3 +129,5 @@ For example to answer yes or no:
 ## Funny Expressions
 
 - To be a "young buffalo": to be young and immature
+- tây ngố: a foreigner who is not familiar with Vietnamese culture
+- Soái ca: a gentleman

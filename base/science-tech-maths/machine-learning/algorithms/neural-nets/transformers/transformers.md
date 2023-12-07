@@ -41,6 +41,7 @@
     - [Adapting transformers to CV](#adapting-transformers-to-cv)
     - [Patch embeddings and tokenization](#patch-embeddings-and-tokenization)
   - [More](#more)
+    - [3D viz](#3d-viz)
     - [Alternative to multi-head attention](#alternative-to-multi-head-attention)
     - [LoRA](#lora)
 
