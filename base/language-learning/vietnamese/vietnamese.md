@@ -92,6 +92,7 @@ The word for "You", if you were talking to the person directly + ấy (or ta).
 | I can not speak Vietnamese                            | Tôi không thể nói tiếng Việt                                                                                                                                                                                                      |
 | Have a good day, my friend                            | Ngày mới tốt lành nhé, ban Anh!                                                                                                                                                                                                   |
 | Happy bday                                            | Chúc mừng sinh nhật                                                                                                                                                                                                               |
+| lie                                                   | nói dối (Ban nói dối: you're lying)                                                                                                                                                                                               |
 
 ### Ạ, Dạ
 
@@ -133,3 +134,4 @@ For example to answer yes or no:
 - To be a "young buffalo": to be young and immature
 - tây ngố: a foreigner who is not familiar with Vietnamese culture
 - Soái ca: a gentleman
+- ghê ghê: vietnamese expression that conveys a sense of awe or admiration. It's similar to "wow!" "amazing!". It's often used to describe a person who is very good at something.
