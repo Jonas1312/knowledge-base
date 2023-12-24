@@ -21,6 +21,7 @@ A machine learning algorithm is an algorithm that is able to learn patterns from
     - [Losses](#losses)
       - [L2](#l2)
       - [L1](#l1)
+      - [L0](#l0)
       - [MSE](#mse)
       - [SoftMax](#softmax)
       - [Binary Cross Entropy](#binary-cross-entropy)
@@ -231,6 +232,16 @@ $$\sum{sign(y_i - \beta)}=0$$
 $sign(y_i - \beta)=1$ when $y_i>\beta$, $-1$ for the opposite.
 
 The equation is null only when half of $y_i$ are greater than $\beta$, it's the **median**.
+
+#### L0
+
+L0 is not really a mathematical loss.
+
+L0 norm refers to the number of non-zero elements in a vector.
+
+Using a L0 regularization loss would mean trying to reduce the number of non-zero elements in a vector.
+
+L0 is not computationally tractable, so we use L1 instead, which can provide sparse solutions too.
 
 #### MSE
 

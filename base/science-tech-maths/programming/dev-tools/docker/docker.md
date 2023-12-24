@@ -341,4 +341,5 @@ psql postgresql://postgres:postgres@localhost:5432/postgres  # connect to the po
 - <https://ikhlestov.github.io/pages/tools/docker/>
 - <https://towardsdatascience.com/docker-made-easy-for-data-scientists-b32efbc23165>
 - <https://lbartnicki92.github.io/posts/docker-build-from-dockerfile/>
-Tutorial: <https://adamtheautomator.com/docker-compose-tutorial/>
+- Tutorial: <https://adamtheautomator.com/docker-compose-tutorial/>
+- Debugger in docker: <https://rednafi.com/python/debug_dockerized_apps_in_vscode/>

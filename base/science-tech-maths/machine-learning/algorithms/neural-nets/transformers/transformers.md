@@ -55,7 +55,7 @@ They are based on the attention mechanism. Attention is a mechanism that allows 
 
 The transformer architecture is based on the encoder-decoder architecture. The encoder takes the input and produces a representation of it. The decoder takes that representation and produces the output.
 
-Transformers are now SOTA for NLP tasks, since they can capture long-range dependencies and are parallelizable, unlike RNNs or LSTMs.
+Transformers are now SOTA for NLP tasks, since **they can capture long-range dependencies** and are parallelizable, unlike RNNs or LSTMs.
 
 ## Architecture
 
