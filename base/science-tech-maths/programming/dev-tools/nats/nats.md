@@ -14,6 +14,7 @@
     - [Consuming with JetStream](#consuming-with-jetstream)
       - [Push-based](#push-based)
       - [Pull-based](#pull-based)
+      - [Pull vs Push](#pull-vs-push)
       - [Ephemeral or durable](#ephemeral-or-durable)
       - [ACK](#ack)
   - [FAQ](#faq)
@@ -117,6 +118,14 @@ The server will push messages to the consumer. It's the fastest way to consume m
 #### Pull-based
 
 The consumer will pull messages from the server, by batches if needed, for better performance.
+
+The Fetch batch size is the maximum number of messages you want to handle in a single call. The call only blocks if zero messages are available.
+
+#### Pull vs Push
+
+Pull consumers invert the control of flow by allowing a subscriber to fetch messages rather than having them implicitly pushed.
+
+Scaling pull consumers is implicit, rather than requiring a distinct queue group like with push consumers. Simply create/deploy additional pull subscribers with the same durable name.
 
 #### Ephemeral or durable
 

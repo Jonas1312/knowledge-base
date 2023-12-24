@@ -105,8 +105,11 @@
     - [`asyncio.gather()`](#asynciogather)
     - [`asyncio.create_task()`](#asynciocreate_task)
     - [`asyncio.as_completed()`](#asyncioas_completed)
+    - [`asyncio.wait_for()`](#asynciowait_for)
+    - [`asyncio.wait()`](#asynciowait)
     - [asyncio.Queue](#asyncioqueue)
     - [Async context managers](#async-context-managers)
+    - [Decorators](#decorators-1)
   - [FastApi](#fastapi)
     - [HTTP methods](#http-methods)
     - [Order matters](#order-matters)
@@ -1952,7 +1955,7 @@ async def query_something(url: str, fake_delay: int = 0):
 
 
 async def main():  # main is async since it uses await
-    await asyncio.gather(
+    first, second, third = await asyncio.gather(
         query_something("https://www.google.com", 1),
         query_something("https://www.google.com", 2),
         query_something("https://www.google.com", 3),
@@ -1964,22 +1967,26 @@ if __name__ == "__main__":
     asyncio.run(main())
 ```
 
+Note that the order of the results is the same as the order of the coroutines passed to `gather()`.
+
 ### `asyncio.create_task()`
 
 Is a function that creates a task from a coroutine. It's similar to `asyncio.gather()` but it does not wait for the tasks to complete.
 
 ```python
-async def main():
-    task1 = asyncio.create_task(query_something("https://www.google.com", 1))
-    task2 = asyncio.create_task(query_something("https://www.google.com", 2))
-    task3 = asyncio.create_task(query_something("https://www.google.com", 3))
-
-    await task1  # if you don't await here, the task1 will not be executed at all!
-    await task2
-    await task3
+task1 = asyncio.create_task(query_something("https://www.google.com", 1))
+result = await task1
 ```
 
-‼ If you don't hold a reference to the task object returned by `create_task` then the task may disappear without warning when Python runs garbage collection. In other words, the code in your task will stop running with no obvious indication why.
+❗❗❗ The task is launched as soon as it is created.
+
+❗❗❗ If you don't hold a reference to the task object returned by `create_task` then the task may disappear without warning when Python runs garbage collection. In other words, the code in your task will stop running with no obvious indication why.
+
+You can also cancel a task:
+
+```python
+task1.cancel()
+```
 
 ### `asyncio.as_completed()`
 
@@ -1997,6 +2004,31 @@ async def main():
         result = await task
         print(result)
 ```
+
+### `asyncio.wait_for()`
+
+Wait for an awaitable to complete with a timeout. When the timeout expires, the task is cancelled.
+
+Note that you need to await the result of `wait_for()`!
+
+### `asyncio.wait()`
+
+Like as_completed(), it takes awaitables in an iterable.
+
+It will return two sets:
+
+- the awaitables that are done
+- those that are still pending.
+
+It’s up to you to await them and to determine which result belongs to what.
+
+Since the ones from the `done` bucket are guaranteed to be done, you can also introspect their results using `Task.result()` and `Task.exception()`.
+
+```python
+done, pending = await asyncio.wait([task_f, task_g])
+```
+
+You can tell wait() to not wait until all awaitables are done using the return_when argument. By default it’s set to asyncio.ALL_COMPLETED which does exactly what it sounds like. But you can also set it to asyncio.FIRST_EXCEPTION that also waits for all awaitables to finish, unless one of them raises an exception – then it will make it return immediately. Finally, asyncio.FIRST_COMPLETED returns the moment any of the awaitables finishes.
 
 ### asyncio.Queue
 
@@ -2026,6 +2058,36 @@ async def main():
 
 
 asyncio.run(main())
+```
+
+### Decorators
+
+Sometimes, you might want to decore either sync or async functions.
+
+```python
+import inspect
+
+from collections.abc import Awaitable, Callable
+from functools import wraps
+from typing import Any
+
+
+def decorator(func: Callable) -> Callable:
+    if inspect.iscoroutinefunction(func):
+
+        @wraps(func)
+        async def async_wrapped(*args: Any, **kwargs: Any) -> Awaitable:
+            return await func(*args, **kwargs)
+
+        return async_wrapped
+
+    else:
+
+        @wraps(func)
+        def sync_wrapped(*args: Any, **kwargs: Any) -> Any:
+            return func(*args, **kwargs)
+
+        return sync_wrapped
 ```
 
 ## FastApi
