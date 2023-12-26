@@ -1,0 +1,11 @@
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-include = ["*.ipynb"]
+
+[tool.ruff.pydocstyle]
+convention = "google"
+
+[tool.ruff.format]
+line-ending = "lf"
+docstring-code-format = true

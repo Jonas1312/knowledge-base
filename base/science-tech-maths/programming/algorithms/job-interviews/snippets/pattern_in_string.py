@@ -22,14 +22,10 @@ def find_pattern_in_substring(input_string, pattern):
         if matches == len(pattern):
             r_pointer = i
             while (
-                dic_string[input_string[l_pointer]]
-                > dic_pattern[input_string[l_pointer]]
+                dic_string[input_string[l_pointer]] > dic_pattern[input_string[l_pointer]]
                 or dic_pattern[input_string[l_pointer]] == 0
             ):
-                if (
-                    dic_string[input_string[l_pointer]]
-                    > dic_pattern[input_string[l_pointer]]
-                ):
+                if dic_string[input_string[l_pointer]] > dic_pattern[input_string[l_pointer]]:
                     dic_string[input_string[l_pointer]] -= 1
                 l_pointer += 1
 

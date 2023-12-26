@@ -36,32 +36,11 @@ def main():
         weights_1 -= lr * (x.T @ d_a) / x.shape[0]
         bias_1 -= lr * d_a.mean(axis=0)
 
-    print(
-        sigmoid(
-            ((sigmoid((np.array([[1, 1]]) @ weights_1) + bias_1)) @ weights_2) + bias_2
-        )
-    )
-    print(
-        sigmoid(
-            ((sigmoid((np.array([[1, 0]]) @ weights_1) + bias_1)) @ weights_2) + bias_2
-        )
-    )
-    print(
-        sigmoid(
-            ((sigmoid((np.array([[0, 1]]) @ weights_1) + bias_1)) @ weights_2) + bias_2
-        )
-    )
-    print(
-        sigmoid(
-            ((sigmoid((np.array([[0, 0]]) @ weights_1) + bias_1)) @ weights_2) + bias_2
-        )
-    )
-    print(
-        sigmoid(
-            ((sigmoid((np.array([[0, 0.5]]) @ weights_1) + bias_1)) @ weights_2)
-            + bias_2
-        )
-    )
+    print(sigmoid(((sigmoid((np.array([[1, 1]]) @ weights_1) + bias_1)) @ weights_2) + bias_2))
+    print(sigmoid(((sigmoid((np.array([[1, 0]]) @ weights_1) + bias_1)) @ weights_2) + bias_2))
+    print(sigmoid(((sigmoid((np.array([[0, 1]]) @ weights_1) + bias_1)) @ weights_2) + bias_2))
+    print(sigmoid(((sigmoid((np.array([[0, 0]]) @ weights_1) + bias_1)) @ weights_2) + bias_2))
+    print(sigmoid(((sigmoid((np.array([[0, 0.5]]) @ weights_1) + bias_1)) @ weights_2) + bias_2))
 
 
 if __name__ == "__main__":

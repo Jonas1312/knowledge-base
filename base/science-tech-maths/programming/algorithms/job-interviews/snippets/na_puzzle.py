@@ -81,8 +81,7 @@ def is_valid_config(rooms: list[Room]):  # noqa
         [
             rooms[2].person.name == PersonNames.Quynh,  # a
             any(  # b
-                room.person.name == PersonNames.Linh
-                and room.person.hated_food == Food.SHRIMP_PASTE
+                room.person.name == PersonNames.Linh and room.person.hated_food == Food.SHRIMP_PASTE
                 for room in rooms
             ),
             any(  # c
@@ -93,25 +92,18 @@ def is_valid_config(rooms: list[Room]):  # noqa
                 room.color == RoomColor.BLUE
                 and (
                     ((i - 1 >= 0) and rooms[i - 1].person.name == PersonNames.Han)
-                    or (
-                        (i + 1 < len(rooms))
-                        and rooms[i + 1].person.name == PersonNames.Han
-                    )
+                    or ((i + 1 < len(rooms)) and rooms[i + 1].person.name == PersonNames.Han)
                 )
                 for i, room in enumerate(rooms)
             ),
             any(  # e
-                room.color == RoomColor.PINK
-                and room.person.fav_flower == Flower.ORCHIDS
+                room.color == RoomColor.PINK and room.person.fav_flower == Flower.ORCHIDS
                 for room in rooms
             ),
             any(  # f
                 room.person.fav_flower == Flower.PEACH_BLOSSOM
                 and not (
-                    (
-                        (i - 1 >= 0)
-                        and rooms[i - 1].person.fav_flower == Flower.APRICOT_BLOSSOM
-                    )
+                    ((i - 1 >= 0) and rooms[i - 1].person.fav_flower == Flower.APRICOT_BLOSSOM)
                     or (
                         (i + 1 < len(rooms))
                         and rooms[i + 1].person.fav_flower == Flower.APRICOT_BLOSSOM
@@ -122,13 +114,9 @@ def is_valid_config(rooms: list[Room]):  # noqa
             any(  # g
                 room.person.hated_food == Food.BITTER
                 and not (
-                    (
-                        (i - 1 >= 0)
-                        and rooms[i - 1].person.hated_food == Food.SHRIMP_PASTE
-                    )
+                    ((i - 1 >= 0) and rooms[i - 1].person.hated_food == Food.SHRIMP_PASTE)
                     or (
-                        (i + 1 < len(rooms))
-                        and rooms[i + 1].person.hated_food == Food.SHRIMP_PASTE
+                        (i + 1 < len(rooms)) and rooms[i + 1].person.hated_food == Food.SHRIMP_PASTE
                     )
                 )
                 for i, room in enumerate(rooms)

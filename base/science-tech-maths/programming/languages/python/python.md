@@ -109,7 +109,7 @@
     - [`asyncio.wait()`](#asynciowait)
     - [asyncio.Queue](#asyncioqueue)
     - [Async context managers](#async-context-managers)
-    - [Decorators](#decorators-1)
+    - [Async decorators](#async-decorators)
   - [FastApi](#fastapi)
     - [HTTP methods](#http-methods)
     - [Order matters](#order-matters)
@@ -2060,7 +2060,7 @@ async def main():
 asyncio.run(main())
 ```
 
-### Decorators
+### Async decorators
 
 Sometimes, you might want to decore either sync or async functions.
 

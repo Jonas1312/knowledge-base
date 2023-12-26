@@ -43,8 +43,7 @@ def dir_path_to_str(path: Path, linkify: bool) -> str:
         markdown_file_str = markdown_files[0].read_text(encoding="utf-8")
         # Check if all the filenames are in the markdown file.
         if all(
-            (filename in markdown_file_str)
-            or (urllib.parse.quote(filename) in markdown_file_str)  # type: ignore
+            (filename in markdown_file_str) or (urllib.parse.quote(filename) in markdown_file_str)  # type: ignore
             for filename in filenames
         ):
             return f"[{path.name}](<{markdown_files[0].as_posix()}>)"

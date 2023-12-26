@@ -29,9 +29,7 @@ def find_anagram(string, pattern):
     for i in range(len(pattern), len(string) + 1):
         if hash_substring == hash_pattern:
             print(
-                "Found match {} at index {}".format(
-                    string[i - len(pattern) : i], i - len(pattern)
-                )
+                "Found match {} at index {}".format(string[i - len(pattern) : i], i - len(pattern))
             )
         if i == len(string):
             break
