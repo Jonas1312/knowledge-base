@@ -10,4 +10,7 @@ Here are the reserved fields:
 - Service attributes: service, syslog.appname, dd.service
 - Status attributes: status, severity, level, syslog.severity
 - Trace Id attributes: dd.trace_id, contextMap.dd.trace_id
-- Message attributes: message, msg, logSo for example, if you use { "status": "SUCCESS" } in your JSON log, it will not be indexed because status accepts only log level values such as INFO, DEBUG, etc...
+- Message attributes: message, msg, log
+
+
+So for example, if you use { "status": "SUCCESS" } in your JSON log, it will not be indexed because status accepts only log level values such as INFO, DEBUG, etc...
