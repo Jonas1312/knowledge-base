@@ -71,6 +71,8 @@
   - [Virtualenv](#virtualenv)
   - [Versioning](#versioning)
   - [Logging](#logging)
+    - [stdlib logger](#stdlib-logger)
+    - [Loguru](#loguru)
   - [Organize Python code](#organize-python-code)
   - [Find unused deps](#find-unused-deps)
   - [Python Testing](#python-testing)
@@ -1271,6 +1273,8 @@ virtualenv --python=c:\Python25\python.exe path/to/new/env/envname
 
 ## Logging
 
+### stdlib logger
+
 Note that Loggers should __NEVER__ be instantiated directly, but always through the module-level function: `logging.getLogger(name)`.
 
 ```python
@@ -1318,6 +1322,84 @@ def get_logger():
 ```
 
 More: <https://guicommits.com/how-to-log-in-python-like-a-pro/>
+
+### Loguru
+
+```python
+import dataclasses
+import json
+import sys
+import traceback
+
+from loguru import logger
+from pydantic import BaseModel
+
+
+
+
+_logger_initiated = False
+
+def init_logger() -> None:
+    global _logger_initiated
+    if _logger_initiated:
+        return
+
+    logger.remove()
+    logger.add(sink=_sink_serializer)
+
+def _sink_serializer(message):
+    record = message.record
+
+    # for datadog
+    log_entry = {
+        "timestamp": record["time"].strftime(r"%Y-%m-%dT%H:%M:%S.%fZ"),
+        "level": record["level"].name.upper(),
+        "severity": record["level"].name.upper(),
+        "module": record["module"],
+        "name": record["name"],
+        "message": record["message"],
+    }
+
+    for key, value in record["extra"].items():
+        if key in log_entry:
+            raise ValueError(f"Key {key} already exists in log entry!")
+
+        if isinstance(value, BaseModel):
+            log_entry[key] = value.model_dump()
+
+        elif dataclasses.is_dataclass(value):
+            log_entry[key] = dataclasses.asdict(value)
+
+        else:
+            log_entry[key] = value
+
+    if "exception" in record and record["exception"] is not None:
+        log_entry["exception"] = {
+            "type": record["exception"].type.__name__,
+            "value": str(record["exception"].value),
+            "traceback": "\n".join(traceback.format_tb(record["exception"].traceback)),
+        }
+
+    serialized = json.dumps(log_entry)
+    print(serialized, file=sys.stderr)
+```
+
+Then, in your code:
+
+```python
+
+from loguru import logger
+from my_logger import init_logger
+
+init_logger()
+
+logger.info("Hello world!", param="value")
+
+@logger.catch
+def my_function(x, y, z):
+    # Do something
+    return x/y
+```
 
 ## Organize Python code
 
