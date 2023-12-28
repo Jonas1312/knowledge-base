@@ -1335,9 +1335,8 @@ from loguru import logger
 from pydantic import BaseModel
 
 
-
-
 _logger_initiated = False
+
 
 def init_logger() -> None:
     global _logger_initiated
@@ -1346,6 +1345,7 @@ def init_logger() -> None:
 
     logger.remove()
     logger.add(sink=_sink_serializer)
+
 
 def _sink_serializer(message):
     record = message.record
@@ -1387,7 +1387,6 @@ def _sink_serializer(message):
 Then, in your code:
 
 ```python
-
 from loguru import logger
 from my_logger import init_logger
 
@@ -1395,10 +1394,11 @@ init_logger()
 
 logger.info("Hello world!", param="value")
 
+
 @logger.catch
 def my_function(x, y, z):
     # Do something
-    return x/y
+    return x / y
 ```
 
 ## Organize Python code
