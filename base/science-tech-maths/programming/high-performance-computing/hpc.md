@@ -26,3 +26,4 @@ All writes to memory go through the data cache3. When a write is made, the cache
 <https://towardsdatascience.com/matrix-multiplication-on-the-gpu-e920e50207a8>
 - <https://mcyoung.xyz/2023/11/27/simd-base64/>
 <https://journal.hexmos.com/gpu-survival-toolkit/#using-nvidias-cuda-for-gpu-driven-development>
+- <https://theartofhpc.com/>
