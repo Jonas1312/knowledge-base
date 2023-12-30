@@ -1333,7 +1333,7 @@ import traceback
 
 from loguru import logger
 from pydantic import BaseModel
-
+from fastapi.encoders import jsonable_encoder
 
 _logger_initiated = False
 
@@ -1342,6 +1342,8 @@ def init_logger() -> None:
     global _logger_initiated
     if _logger_initiated:
         return
+
+    _logger_initiated = True
 
     logger.remove()
     logger.add(sink=_sink_serializer)
@@ -1360,18 +1362,12 @@ def _sink_serializer(message):
         "message": record["message"],
     }
 
-    for key, value in record["extra"].items():
+    extra_as_dict = jsonable_encoder(record["extra"])
+
+    for key, value in extra_as_dict.items():
         if key in log_entry:
-            raise ValueError(f"Key {key} already exists in log entry!")
-
-        if isinstance(value, BaseModel):
-            log_entry[key] = value.model_dump()
-
-        elif dataclasses.is_dataclass(value):
-            log_entry[key] = dataclasses.asdict(value)
-
-        else:
-            log_entry[key] = value
+            raise ValueError(f"Key {key} is already in log_entry")
+        log_entry[key] = value
 
     if "exception" in record and record["exception"] is not None:
         log_entry["exception"] = {
