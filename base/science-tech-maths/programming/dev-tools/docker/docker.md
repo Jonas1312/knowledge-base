@@ -126,39 +126,59 @@ It's good practise to define a user with the lowest possible privileges. By defa
 
 ### Dockerfile good practices
 
-- Use a `.dockerignore` file to exclude files and directories from the context. The context is the set of files and directories that are sent to the Docker daemon when building an image.
-- Use `COPY` instead of `ADD` to copy files and directories from the context to the image. `ADD` can also download files from the internet and extract tar files, which is not needed most of the time.
-- Don't abuse `RUN`.
-  - Use `RUN` only when you need to install something. If you need to run a command, use `CMD` or `ENTRYPOINT`. `RUN` creates a new layer in the image, which increases the size of the image. `CMD` and `ENTRYPOINT` don't create new layers.
-  - Each execution of a RUN command creates a temporary container from the last resulting image, executes your commands, and saves the result as a new layer.
-  - Minimizing RUN commands both reduces the amount of overhead from these intermediate containers, but can also dramatically shrink the size of the resulting image.
-  - If, for example, you do 2 run commands, one that downloads 1 gig of data, and a second that deletes that gig of data, your resulting image will exceed one gig even though it's not visible in the running container.
-  - Therefore, when doing large downloads of cached files to do an install or build of an app and you cleanup that build environment when finished, it's a good practice to do that as a single step so the deleted files never make it into any part of the image.
-- Split long or complex `RUN` statements on multiple lines separated with backslashes to make your Dockerfile more readable, understandable, and maintainable.
-- Always combine `RUN` `apt-get update` with `apt-get install` in the same RUN statement. If you don’t do this, Docker will cache the `apt-get update` step and you’ll end up with outdated packages in your container.
+Use a `.dockerignore` file to exclude files and directories from the context. The context is the set of files and directories that are sent to the Docker daemon when building an image.
 
-  ```dockerfile
-  FROM ubuntu:18.04
-  RUN apt-get update  # this will be cached.
-  RUN apt-get install -y curl  # if we add a new package here, it will use the cached apt-get update.
-  ```
+Use `COPY` instead of `ADD` to copy files and directories from the context to the image. `ADD` can also download files from the internet and extract tar files, which is not needed most of the time.
 
-- It's best to put layers that are likely to change often at the bottom of the Dockerfile, and layers that change less frequently at the top. This is because Docker uses a layered file system, and each layer is cached. If you change a layer, all the layers above it will be invalidated. The dockerfile below is bad, because by changing the code (step 3/4), docker will rebuild the pip install step, which might take a while...
+Don't abuse `RUN`:
 
-  ```dockerfile
-  FROM python:3.7 # Step 1/4
-  WORKDIR /app # Step 2/4
-  COPY ./src /app # Step 3/4
-  RUN pip install -Ur requirements.txt # Step 4/4
-  ```
+- Use `RUN` only when you need to install something. If you need to run a command, use `CMD` or `ENTRYPOINT`. `RUN` creates a new layer in the image, which increases the size of the image. `CMD` and `ENTRYPOINT` don't create new layers.
+- Each execution of a RUN command creates a temporary container from the last resulting image, executes your commands, and saves the result as a new layer.
+- Minimizing RUN commands both reduces the amount of overhead from these intermediate containers, but can also dramatically shrink the size of the resulting image.
+- If, for example, you do 2 run commands, one that downloads 1 gig of data, and a second that deletes that gig of data, your resulting image will exceed one gig even though it's not visible in the running container.
+- Therefore, when doing large downloads of cached files to do an install or build of an app and you cleanup that build environment when finished, it's a good practice to do that as a single step so the deleted files never make it into any part of the image.
 
-- The last instruction in the Dockerfile should be `CMD` or `ENTRYPOINT`. This is because the last instruction is the one that will be executed when the container starts. If you put `RUN` as the last instruction, it will be executed when the image is built, not when the container starts.
-- The last layer should be the app code. This is because the last layer will be the one ran by default.
-- Set a non-root user. This is for security reasons. If you don't set a non-root user, the container will run as root, which is not recommended.
-- Empty the caches in the same layer: pip cache (`--no-cache-dir`), apt cache, apk cache, etc.
-- Disable the virtual environments (poetry, pipenv, etc.). This is because the container is already an isolated environment, so you don't need another isolated environment inside it. `RUN poetry config virtualenvs.create false`
-- Use `.dockerignore` to exclude files and directories from the context.
-- Use `ENV LANG=C.UTF-8` to set the locale to UTF-8. This tells the environment to use UTF-8 encoding by default.
+Split long or complex `RUN` statements on multiple lines separated with backslashes to make your Dockerfile more readable, understandable, and maintainable.
+
+Always combine `RUN` `apt-get update` with `apt-get install` in the same RUN statement. If you don’t do this, Docker will cache the `apt-get update` step and you’ll end up with outdated packages in your container.
+
+```dockerfile
+FROM ubuntu:18.04
+RUN apt-get update  # this will be cached.
+RUN apt-get install -y curl  # if we add a new package here, it will use the cached apt-get update. So we might end up with outdated packages.
+```
+
+It's best to put layers that are likely to change often at the bottom of the Dockerfile, and layers that change less frequently at the top. This is because Docker uses a layered file system, and each layer is cached. If you change a layer, all the layers coming after will be invalidated. The dockerfile below is bad, because by changing the code (step 3/4), docker will rebuild the pip install step, which might take a while...
+
+```dockerfile
+FROM python:3.7                      # Step 1/4
+WORKDIR /app                         # Step 2/4
+COPY ./src /app                      # Step 3/4
+RUN pip install -r requirements.txt  # Step 4/4
+```
+
+Instead, we should put the code at the bottom:
+
+```dockerfile
+FROM python:3.7
+WORKDIR /app
+COPY ./requirements.txt /app
+RUN pip install --no-cache-dir -r requirements.txt  # this step takes time, but the requirements.txt file doesn't change often, so it's ok.
+COPY ./src /app  # only this step will be invalidated when changing the code
+CMD ["python", "app.py"]
+```
+
+The last instruction in the Dockerfile should be `CMD` or `ENTRYPOINT`. This is because the last instruction is the one that will be executed when the container starts. If you put `RUN` as the last instruction, it will be executed when the image is built, not when the container starts.
+
+The last layer should be the app code. This is because the last layer will be the one ran by default.
+
+Set a non-root user. This is for security reasons. If you don't set a non-root user, the container will run as root, which is not recommended.
+
+Empty the caches in the same layer: pip cache (`--no-cache-dir`), apt cache, apk cache, etc.
+
+Disable the virtual environments (poetry, pipenv, etc.). This is because the container is already an isolated environment, so you don't need another isolated environment inside it. `RUN poetry config virtualenvs.create false`
+
+Use `ENV LANG=C.UTF-8` to set the locale to UTF-8. This tells the environment to use UTF-8 encoding by default.
 
 ### Multistage builds
 
