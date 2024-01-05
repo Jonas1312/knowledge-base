@@ -42,6 +42,8 @@ They all have the same objective, which is the separation of concerns. They all 
 
 The clean architecture is a way to structure your code in a way that it is independent of frameworks, databases, etc. It is a way to make your code more testable, and more maintainable.
 
+Although some people like to nitpick over the differences, all these are pretty much names for the same thing, and they all boil down to the dependency inversion principle: high-level modules (the domain) should not depend on low-level ones (the infrastructure).
+
 The clean architecture is composed of 4 layers.
 
 ![](CleanArchitecture.jpg)

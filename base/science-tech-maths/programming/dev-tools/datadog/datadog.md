@@ -12,5 +12,6 @@ Here are the reserved fields:
 - Trace Id attributes: dd.trace_id, contextMap.dd.trace_id
 - Message attributes: message, msg, log
 
-
 So for example, if you use { "status": "SUCCESS" } in your JSON log, it will not be indexed because status accepts only log level values such as INFO, DEBUG, etc...
+
+<https://docs.datadoghq.com/logs/log_collection/?tab=host#attributes-and-tags>

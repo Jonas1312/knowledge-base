@@ -45,6 +45,22 @@ $$ \cos(\theta) = \frac{A \cdot B}{\|A\| \|B\|} $$
 - -1 or 1 if vectors are collinear
 - cosine similarity between vectors `[2,0,2]` and `[0,1,0]` is 0.
 
+Cosine similarity looks at the angle between two vectors, euclidian similarity at the distance between two points.
+
+Let's say you are in an e-commerce setting and you want to compare users for product recommendations:
+
+    User 1 bought 1x eggs, 1x flour and 1x sugar.
+    User 2 bought 100x eggs, 100x flour and 100x sugar
+    User 3 bought 1x eggs, 1x Vodka and 1x Red Bull
+
+By cosine similarity, user 1 and user 2 are more similar. By euclidean similarity, user 3 is more similar to user 1.
+
+200 dimensions space is so, so empty. Everything is far from everything else. That's why we use cosine similarity - because everything is far from everything else, so if two vectors are pointing in the same direction, that's already pretty good.
+
+Cosine similarity is generally used as a metric for measuring distance when the magnitude of the vectors does not matter. This happens for example when working with text data represented by word counts. We could assume that when a word (e.g. science) occurs more frequent in document 1 than it does in document 2, that document 1 is more related to the topic of science. However, it could also be the case that we are working with documents of uneven lengths (Wikipedia articles for example). Then, science probably occurred more in document 1 just because it was way longer than document 2. Cosine similarity corrects for this.
+
+Text data is the most typical example for when to use this metric. However, you might also want to apply cosine similarity for other cases where some properties of the instances make so that the weights might be larger without meaning anything different. Sensor values that were captured in various lengths (in time) between instances could be such an example.
+
 ## Confidence Intervals for ML Models
 
 K-cross validation gives a good estimate but no CI...

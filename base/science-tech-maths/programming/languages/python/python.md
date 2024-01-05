@@ -118,6 +118,7 @@
     - [Parameters](#parameters)
     - [Concurrency](#concurrency)
     - [Auto conversion from camelCase to snake\_case](#auto-conversion-from-camelcase-to-snake_case)
+  - [Pydantic](#pydantic)
   - [SQLAlchemy](#sqlalchemy)
     - [Session](#session)
     - [SQLAlchemy and threads](#sqlalchemy-and-threads)
@@ -2399,6 +2400,10 @@ class User(CamelModel):
     last_name: str = None
     age: int
 ```
+
+## Pydantic
+
+To properly convert a model to json, use `.model_dump(mode="json)`.
 
 ## SQLAlchemy
 

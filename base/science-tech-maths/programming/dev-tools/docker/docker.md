@@ -248,7 +248,7 @@ docker build -t <image-name>:<tag> <path-to-dockerfile>  # build an image
 docker images  # list all images
 docker rmi <image-id>  # remove an image
 
-docker run -it --rm -p 8000:3000 --name my_container <image-name>:<tag>  # create a container
+docker run -it --rm -p 8000:3000 --name my_container <image-name>:<tag>  # create a container from an image
 docker ps  # list all running containers
 docker ps -a  # list all containers
 docker exec -it <container-id> bash  # run a bash shell inside a container running. It is useful for debugging.
@@ -340,6 +340,12 @@ You can easily use pre-existing containers using docker compose:
 docker compose run --rm --name postgres_test_db_container -p 5432:5432 postgres_test_db  # run the postgres container
 psql postgresql://postgres:postgres@localhost:5432/postgres  # connect to the postgres container
 ```
+
+### compose up vs compose run
+
+The command passed by `run` overrides the command defined in the service configuration. The second difference is the `docker compose run` command does not create any of the ports specified in the service configuration.
+
+Prefer use `docker compose up` for running the app and `docker compose run` for running one-off commands.
 
 ## Tools
 
