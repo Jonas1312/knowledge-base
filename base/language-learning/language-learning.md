@@ -10,3 +10,4 @@ Talk with AI:
 ## Anki
 
 <https://readbroca.com/anki/ease-hell/>
+<https://github.com/open-spaced-repetition/fsrs4anki/blob/main/docs/tutorial.md>

@@ -67,6 +67,7 @@
     - [Mutable default arguments](#mutable-default-arguments)
     - [lru\_cache or cache on class methods](#lru_cache-or-cache-on-class-methods)
   - [Timing code](#timing-code)
+  - [Modules import time](#modules-import-time)
   - [Wheels](#wheels)
   - [Virtualenv](#virtualenv)
   - [Versioning](#versioning)
@@ -1256,6 +1257,12 @@ print(timeit.timeit(my_function, number=100000))
 - `python -m cProfile -s tottime your_program.py` ([Profiling and optimizing your Python code](https://toucantoco.com/en/tech-blog/tech/python-performance-optimization))
 
 Don't use `time.time()`! It's not monotonic! Use `time.monotonic_ns()` instead to measure a time difference.
+
+## Modules import time
+
+```bash
+python -X importtime -c "import my_module"
+```
 
 ## Wheels
 

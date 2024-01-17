@@ -93,8 +93,6 @@ header_readme = """# Knowledge Base
 
 This is a collection of notes and resources that I have gathered over the years.
 
-I hope that they will be useful to you.
-
 ## Table of Contents
 
 {tree}
