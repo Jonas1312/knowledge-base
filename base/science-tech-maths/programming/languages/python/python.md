@@ -614,9 +614,9 @@ max_len_string = max(list_of_strings, key=len)
 
 ## Generators, Iterators
 
-- An iterable is anything you’re able to loop over.
-- An iterator is the object that does the actual iterating.
-- iterators are also iterables and their iterator is themselves
+- An iterable is anything you’re able to loop over. It’s an object that has an `__iter__` method which returns an iterator.
+- An iterator is the object that does the actual iterating. It has a `__next__` method which returns the next value and raises a `StopIteration` exception when there are no more values.
+- iterators are also iterables and their iterator is themselves.
 - [Python: range is not an iterator!](https://treyhunner.com/2018/02/python-range-is-not-an-iterator/)
 - 4 ways:
   1. `yield`
@@ -1281,6 +1281,8 @@ virtualenv --python=c:\Python25\python.exe path/to/new/env/envname
 
 ## Logging
 
+Please don't log to stdout - that's meant for program output, so you can pipe data from one program to the next. Use stderr instead.
+
 ### stdlib logger
 
 Note that Loggers should __NEVER__ be instantiated directly, but always through the module-level function: `logging.getLogger(name)`.
@@ -1566,6 +1568,16 @@ To mock a method in a class with @patch.object but return a different value each
     ```python
     create_url = Mock(side_effect=substitue_create_url)
     ```
+
+You can also define a list of side effects:
+
+```python
+mock = Mock(side_effect=[1, 2, 3])
+print(mock())  # 1
+print(mock())  # 2
+print(mock())  # 3
+print(mock())  # StopIteration
+```
 
 #### Mock useful functions
 
@@ -2576,7 +2588,22 @@ If it's not, it will create a new virtual environment and install the dependenci
 
 You can decide to disable creating a virtual environment by doing `poetry config virtualenvs.create false`. This will install the dependencies in the global python environment, like `pip install`.
 
-Or decide to create the virtual env in the project directory by doing `poetry config virtualenvs.in-project true`.
+Or decide to create the virtual env in the project directory by doing `poetry config virtualenvs.in-project true`. This can be useful in a CI for caching the virtual environment:
+
+```yaml
+cache:
+  paths:
+    - .venv/
+
+tests:
+  stage: test
+  image: python3.8-slim
+  before_script:
+    - poetry config virtualenvs.in-project true
+    - poetry install
+  script:
+    - poetry run python -m pytest tests
+```
 
 To have the `from PACKAGE_NAME import __version__`, put this in the `__init__.py` root file of the package:
 

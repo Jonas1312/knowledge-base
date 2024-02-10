@@ -19,7 +19,6 @@
       - [ACK](#ack)
   - [FAQ](#faq)
   - [Run a NATS server](#run-a-nats-server)
-  - [Python client](#python-client)
 
 ## Introduction
 
@@ -182,7 +181,3 @@ ports:
     - 8222:8222
     - 4222:4222
 ```
-
-## Python client
-
-<https://github.com/airtai/faststream>

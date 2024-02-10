@@ -135,3 +135,7 @@ For example to answer yes or no:
 - tây ngố: a foreigner who is not familiar with Vietnamese culture
 - Soái ca: a gentleman
 - ghê ghê: vietnamese expression that conveys a sense of awe or admiration. It's similar to "wow!" "amazing!". It's often used to describe a person who is very good at something.
+
+## Interesting Links
+
+<https://vietnamesetypography.com/history/>
