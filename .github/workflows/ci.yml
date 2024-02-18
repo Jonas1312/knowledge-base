@@ -19,7 +19,7 @@ jobs:
           ref: master-pub
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10"
 
@@ -48,7 +48,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           ref: master-pub
-      - uses: actions/setup-python@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: "3.10"
       - uses: pre-commit/action@v3.0.1
