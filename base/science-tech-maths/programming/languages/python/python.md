@@ -119,6 +119,7 @@
     - [Parameters](#parameters)
     - [Concurrency](#concurrency)
     - [Auto conversion from camelCase to snake\_case](#auto-conversion-from-camelcase-to-snake_case)
+    - [Fastapi docker](#fastapi-docker)
   - [Pydantic](#pydantic)
   - [SQLAlchemy](#sqlalchemy)
     - [Session](#session)
@@ -1343,6 +1344,9 @@ import traceback
 
 from loguru import logger
 from pydantic import BaseModel
+
+# or https://docs.pydantic.dev/latest/api/pydantic_core/#pydantic_core.to_jsonable_python
+
 from fastapi.encoders import jsonable_encoder
 
 _logger_initiated = False
@@ -2419,6 +2423,10 @@ class User(CamelModel):
     last_name: str = None
     age: int
 ```
+
+### Fastapi docker
+
+<https://www.mohanwer.com/blog/multistage-docker>
 
 ## Pydantic
 
