@@ -24,6 +24,8 @@
   - [KV cache](#kv-cache)
   - [Continuous batching](#continuous-batching)
   - [Tokenization](#tokenization)
+    - [Naive encoding UTF-8](#naive-encoding-utf-8)
+    - [BPE: Byte Pair Encoding](#bpe-byte-pair-encoding)
   - [Greedy sampling vs stochastic sampling](#greedy-sampling-vs-stochastic-sampling)
   - [Language modeling head](#language-modeling-head)
   - [In a nutshell](#in-a-nutshell)
@@ -442,6 +444,9 @@ The position of the word in the embedding space acts as the center of a circle. 
 
 If the embedding space consists of more than two dimensions (which it almost always does), the circular wiggle is repeated in all the other pairs of dimensions, but with different angular frequency, that is, it sweeps out a different number of rotations in each case.
 
+In GPT2, there are two matrixes called WTE (word token embedding) and WPE (word position embedding).
+WPE is 1024×768. It means that the maximum number of tokens that we can use in a prompt to GPT2 is 1024.
+
 ### Transformer decoder
 
 <img src="transformer-decoder.png" width="200">
@@ -567,7 +572,24 @@ The principle is the same:
 - The text is split into tokens
 - There is a vocab that maps string tokens to integer indices
 - There is an encode method that converts `str -> list[int]`
-- There is a decode method that converts `list[int] -> str[2]`
+- There is a decode method that converts `list[int] -> str`
+
+### Naive encoding UTF-8
+
+We could use the UTF-8 encoding to convert the text into integers. But this is not efficient because the size of the vocabulary would be huge: 150000. In contrast, the size of the vocabulary for BPE is 50000.
+
+### BPE: Byte Pair Encoding
+
+BPE is an efficient way to encode text data.
+
+The algorithm is iterative: it starts with a vocabulary of single characters, and then it iteratively merges the most frequent pair of consecutive symbols. On each step, the BPE algorithm finds the best pair of tokens to merge and merges them.
+This way, the vocabulary grows, and the most frequent pairs of consecutive symbols are merged.
+This ensures that the most frequent pairs of consecutive symbols are represented by a single symbol in the vocabulary, which reduces the size of the encoded text.
+
+This procedure brings down the token space size from Unicode's 150k to 50k, and the number of tokens (in a word of sentence) is also reduced.
+
+In GPT, there are two matrixes called WTE (word token embedding) and WPE (word position embedding).
+The WTE is a matrix of size 50k x 768, so BPE helps to reduce the size of the matrix.
 
 ## Greedy sampling vs stochastic sampling
 
