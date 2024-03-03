@@ -22,6 +22,7 @@
     - [Residual connections and layer normalization](#residual-connections-and-layer-normalization)
   - [Inference](#inference)
   - [KV cache](#kv-cache)
+  - [Speculative decoding](#speculative-decoding)
   - [Continuous batching](#continuous-batching)
   - [Tokenization](#tokenization)
     - [Naive encoding UTF-8](#naive-encoding-utf-8)
@@ -556,6 +557,37 @@ If we we pad on the right, the network will probably just predict a lot of paddi
 The KV cache is a cache of the key-value pairs of the encoder output. It is used to speed up the inference process.
 
 ![](./KVCache.jpeg)
+
+## Speculative decoding
+
+Speculative decoding is a technique used to speed up the inference process.
+
+The hypothesis is that some sequences of tokens are so common, that any models, even the smallest ones can predict them with high confidence.
+For example: "That's one small step for a man, ...", any model knows that the rest is "one giant leap for mankind".
+
+So we can use a small model to predict the K next tokens (x1, x2, x3, x4, x5), and we also keep their probabilities p(x) at each step.
+
+Then, we generate K sequences, with each sequence being the original sequence plus one of the K tokens:
+
+- base_sequence + x1
+- base_sequence + x1 + x2
+- base_sequence + x1 + x2 + x3
+- ...
+
+And we put this batch into a bigger model, which will generate a prediction really fast, since everything is batched, so it does only one inference!
+
+We take the probabilities q(x) of this batch, for each sequence, and we compare it to the probabilities p(x) of the small model.
+
+![](speculative_decoding.png)
+
+On the image above, we keep x1, x2.
+We might keep x3, but x4 can be rejected.
+Etc...
+
+The reason this works in practice is that most of the time the draft tokens get accepted, because they are easy, so even a much smaller draft model gets them.
+
+This works so well because LLMs are not CPU-bound, but rather memory-speed bound.
+So if you can batch a lot of sequences, you can get a lot of speedup.
 
 ## Continuous batching
 
