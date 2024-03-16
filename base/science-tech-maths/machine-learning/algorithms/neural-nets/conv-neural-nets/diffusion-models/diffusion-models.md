@@ -29,3 +29,4 @@ What conditions do diffusion model architectures need to fulfill?
 - <https://www.assemblyai.com/blog/diffusion-models-for-machine-learning-introduction/>
 - <https://benanne.github.io/2022/01/31/diffusion.html>
 - <https://benanne.github.io/2022/05/26/guidance.html>
+- <https://www.chenyang.co/diffusion.html>

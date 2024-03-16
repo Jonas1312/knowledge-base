@@ -552,9 +552,13 @@ If we we pad on the right, the network will probably just predict a lot of paddi
 }
 ```
 
+This pairwise communication means a forward pass is O(n²) time complexity in training (the dreaded quadratic bottleneck) and each new token generated autoregressively takes O(n) time.
+
 ## KV cache
 
 The KV cache is a cache of the key-value pairs of the encoder output. It is used to speed up the inference process.
+
+storing this KV cache requires O(n) space.
 
 ![](./KVCache.jpeg)
 
@@ -599,12 +603,23 @@ Tokens are the ML term for the “symbols” I’ve been talking about in this w
 
 Famous techniques are BPE (Byte Pair Encoding) and WordPiece.
 
+Before language models, we used word2vec and similar models. They can produce vector representations for words in the training data, however fail to generalize for out-of-vocabulary words.
+
 The principle is the same:
 
 - The text is split into tokens
 - There is a vocab that maps string tokens to integer indices
 - There is an encode method that converts `str -> list[int]`
 - There is a decode method that converts `list[int] -> str`
+
+Summary:
+
+- Tokenizing is simply compression. It's done to speed up training and get more data into the context.
+- Each token in the vocabulary adds a row in the embedding vector.
+- Each token in the vocabulary increases the number of dot products necessary to compute the output of the final linear layer.
+- Some tokens may be undertrained on (each individual token has fewer training examples).
+- If there are too few tokens in the vocabulary, there may be too much information squished into a single vector.
+- the too many tokens also unnecessarily fill a model's context window.
 
 ### Naive encoding UTF-8
 
@@ -640,6 +655,7 @@ We can apply a softmax + argmax to get the next most likely token, but we can as
 Good things about transformers:
 
 - attention is like an MLP that computes its weights on the fly. They are data-dependent dynamic weights because they change dynamically in response to the
+- attention is for the communication between tokens. FFN is for the computation within a token.
 - all-to-all comparisons can be done fully parallel
 - with RNN/LSTM must be computed in serial per token
 - transfer learning works! Train big expensive models (nvidia, microsoft) and release it freely
