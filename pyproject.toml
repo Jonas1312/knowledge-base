@@ -3,7 +3,7 @@ line-length = 100
 target-version = "py312"
 extend-include = ["*.ipynb"]
 
-[tool.ruff.pydocstyle]
+[tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.ruff.format]

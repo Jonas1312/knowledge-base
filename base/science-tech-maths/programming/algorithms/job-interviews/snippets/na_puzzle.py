@@ -17,6 +17,7 @@ i) Person in the first room couldn't smell DURIAN
 
 So who likes lotus flowers?"
 """
+
 from dataclasses import dataclass
 from enum import Enum
 from itertools import permutations
