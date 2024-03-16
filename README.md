@@ -19,6 +19,7 @@ base<br>
 ├─ [paperwork](<base/paperwork>)<br>
 ├─ [project-management](<base/project-management>)<br>
 ├─ science-tech-maths<br>
+│&nbsp;&nbsp;&nbsp;├─ [cryptograpy](<base/science-tech-maths/cryptograpy/cryptography.md>)<br>
 │&nbsp;&nbsp;&nbsp;├─ [image-processing](<base/science-tech-maths/image-processing/terminology.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [color-spaces](<base/science-tech-maths/image-processing/color-spaces/color-spaces.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [conv-filters](<base/science-tech-maths/image-processing/conv-filters/conv-filters.md>)<br>
