@@ -152,7 +152,6 @@ JSON.stringify({willStay: null, willBeGone: undefined}); // {"willStay":null}
 
 ## More
 
-
 - <https://www.typescriptlang.org/docs/handbook/typescript-from-scratch.html>
 - <https://exercism.org/tracks/typescript>
 - <https://basarat.gitbook.io/typescript/getting-started/why-typescript>
@@ -165,3 +164,5 @@ JSON.stringify({willStay: null, willBeGone: undefined}); // {"willStay":null}
 <https://www.devoreur2code.com/fr/blog/typescript-types-interfaces-and-classes>
 <https://www.youtube.com/watch?v=i0YfiQlzv6M&list=PL9wyAJMCdd0mL9Vz-vzwPIp9U0hnCSWwe&index=18>
 <https://github.com/type-challenges/type-challenges/>
+<https://www.julienpradet.fr/tutoriels/typescript-types-avances/>
+https://www.julienpradet.fr/tutoriels/typescript-bonnes-pratiques/
