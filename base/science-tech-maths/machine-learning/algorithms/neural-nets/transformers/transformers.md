@@ -35,11 +35,13 @@
     - [Fixed or variable length?](#fixed-or-variable-length)
     - [Softmax is useless](#softmax-is-useless)
     - [Loss](#loss)
+    - [RLHF, PPO, DPO, IPO, KTO](#rlhf-ppo-dpo-ipo-kto)
   - [Transformers in NLP](#transformers-in-nlp)
     - [GPT](#gpt)
       - [GPT2](#gpt2)
       - [GPT3](#gpt3)
     - [BERT](#bert)
+    - [Sentence Embeddings](#sentence-embeddings)
   - [Transformers in computer vision](#transformers-in-computer-vision)
     - [Adapting transformers to CV](#adapting-transformers-to-cv)
     - [Patch embeddings and tokenization](#patch-embeddings-and-tokenization)
@@ -710,6 +712,16 @@ During training, we can use the logits directly. During inference, we can use th
 
 The loss is usually the cross-entropy loss, but we don't want our model to be too confident. So we can use label smoothing.
 
+### RLHF, PPO, DPO, IPO, KTO
+
+After pre-training, we finetune the model to be "instruct" or "chat".
+
+DPO: A type of training which removes the need for a reward model. It simplifies significantly the RLHF-pipeline.
+
+IPO: A change in the DPO objective which is simpler and less prone to overfitting.
+
+KTO: While PPO, DPO, and IPO require pairs of accepted vs rejected generations, KTO just needs a binary label (accepted or rejected), hence allowing to scale to much more data.
+
 ## Transformers in NLP
 
 ### GPT
@@ -773,3 +785,17 @@ That’s why BERT is a “bidirectional” transformer. A model has a better cha
 The pretraining of these models usually revolves around somehow corrupting a given sentence (for instance, by masking random words in it) and tasking the model with finding or reconstructing the initial sentence.
 
 <https://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/>
+
+### Sentence Embeddings
+
+Sometimes, we need a single embedding vector to represent a sentence.
+
+There are usually three ways to do this:
+
+1. mean pooling: we take the mean of the embeddings of the tokens in the sentence
+2. max pooling: we take the max of the embeddings of the tokens in the sentence
+3. Bert CLS token: we take the embedding of the CLS token in the sentence. This token is a special token that is supposed to represent the whole sentence meaning. During training, we train the model to predict if two sentences are consecutive (i.e. from the same document).
+
+To compare two sentences/texts, one can compare the embeddings using cosine similarity (bi-encoder) or use a cross-encoder. Cross-encoder are more powerful but slower.
+
+![](./cross_encoder.png)

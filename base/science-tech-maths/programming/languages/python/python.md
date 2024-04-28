@@ -27,6 +27,7 @@
       - [Contravariance: `ContravariantType[SuperType, ...] <: ContravariantType[SubType, ...]`](#contravariance-contravarianttypesupertype---contravarianttypesubtype-)
       - [Invariant](#invariant)
     - [None vs Noreturn](#none-vs-noreturn)
+    - [TypeGuard, TypeIs](#typeguard-typeis)
   - [Sequences](#sequences)
     - [Filter Map Reduce](#filter-map-reduce)
     - [Comprehension lists/dicts](#comprehension-listsdicts)
@@ -580,6 +581,10 @@ Other invariant types are `Set`, `Dict`, and many more mutable containers.
 Python will always add an implicit `return None` to the end of any function. This means that a function that doesn’t explicitly return anything will always return `None`.
 
 Use `NoReturn`  to indicate that a function never returns normally. For example, it always raises an exception or has an infinite loop.
+
+### TypeGuard, TypeIs
+
+Narrowing types with TypeIs: <https://rednafi.com/python/typeguard_vs_typeis/>
 
 ## Sequences
 
