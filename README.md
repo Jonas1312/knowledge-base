@@ -11,6 +11,7 @@ base<br>
 ├─ [language-learning](<base/language-learning/language-learning.md>)<br>
 │&nbsp;&nbsp;&nbsp;├─ [burmese](<base/language-learning/burmese/burmese.md>)<br>
 │&nbsp;&nbsp;&nbsp;├─ [indonesian](<base/language-learning/indonesian/bahasa.md>)<br>
+│&nbsp;&nbsp;&nbsp;├─ [japanese](<base/language-learning/japanese/japanese.md>)<br>
 │&nbsp;&nbsp;&nbsp;├─ [singlish](<base/language-learning/singlish/singlish.md>)<br>
 │&nbsp;&nbsp;&nbsp;├─ [tagalog](<base/language-learning/tagalog/tagalog.md>)<br>
 │&nbsp;&nbsp;&nbsp;└─ [vietnamese](<base/language-learning/vietnamese/vietnamese.md>)<br>
