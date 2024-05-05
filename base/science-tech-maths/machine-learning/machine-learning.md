@@ -55,6 +55,8 @@ A machine learning algorithm is an algorithm that is able to learn patterns from
     - [Embeddings](#embeddings)
   - [Output of sigmoid is not a probability](#output-of-sigmoid-is-not-a-probability)
   - [No free lunch theorem](#no-free-lunch-theorem)
+  - [NLP](#nlp)
+    - [Grams](#grams)
   - [Problems of AI](#problems-of-ai)
   - [Jobs in ML](#jobs-in-ml)
   - [Advice for ML engineers](#advice-for-ml-engineers)
@@ -632,6 +634,21 @@ States that:
 For every case where an algorithm works, I could construct a situation where it fails terribly.
 
 Implies that assumptions are where the power of your mdoel comes from. This is why it's important to understand the assumptions and inductive priors of your model.
+
+## NLP
+
+### Grams
+
+- unigram: one word
+- bigram: two words
+- trigram: three words
+- n-gram: n words
+
+A bigram is a two-word sequence of words like "How are you doing": "How are", "are you", "you doing".
+
+The items can be phonemes, syllables, letters, words, or base pairs according to the application.
+
+How many $N$-grams in a sentence? If $X$ is the number of words in a given sentence, the number of $N$-grams for sentence would be: $X - (N - 1)$.
 
 ## Problems of AI
 

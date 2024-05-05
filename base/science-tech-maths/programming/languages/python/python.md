@@ -937,6 +937,8 @@ print(example.__name__)  # example
 print(example.__doc__)  # Docstring
 ```
 
+How to properly annotate sync/async function decorators: <https://github.com/microsoft/pyright/issues/2142>
+
 ## Context managers (with)
 
 Use context managers (`with...`) instead of `try` + `finally`!

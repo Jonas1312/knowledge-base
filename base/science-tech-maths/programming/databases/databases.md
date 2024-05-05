@@ -41,3 +41,8 @@ psql postgresql://postgres:some_password@postgres_db:5432/my_db_name
 ### UUID
 
 Use UUIDv7 as primary key: <https://www.cybertec-postgresql.com/en/unexpected-downsides-of-uuid-keys-in-postgresql/>
+
+### Links
+
+- <https://postgres.ai/blog/20230722-10-postgres-tips-for-beginners>
+- <https://postgres.ai/blog/20220525-common-db-schema-change-mistakes>

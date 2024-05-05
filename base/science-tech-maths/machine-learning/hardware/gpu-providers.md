@@ -8,3 +8,4 @@
 - <https://azure.microsoft.com/en-gb/global-infrastructure/services/>
 - <https://azure.microsoft.com/en-gb/pricing/details/virtual-machines/linux/>
 - <https://datalab.sspcloud.fr/catalog/ide>
+- <https://www.gpudeploy.com/>

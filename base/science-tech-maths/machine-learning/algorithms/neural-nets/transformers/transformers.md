@@ -11,6 +11,7 @@
       - [How to assign queries, keys and values](#how-to-assign-queries-keys-and-values)
       - [Cross attention](#cross-attention)
       - [Alternative interpretation of attention](#alternative-interpretation-of-attention)
+      - [Sliding Window Attention (SWA)](#sliding-window-attention-swa)
     - [Embeddings](#embeddings)
     - [Feed-forward network](#feed-forward-network)
     - [Encoder block](#encoder-block)
@@ -367,6 +368,14 @@ All the weight matrices $W_Q$, $W_K$, $W_V$ are trainable.
 $X$ is trainable, since it's just the embedding matrix.
 
 In summary, attention seems to work because it mimics nearest neighbors EXCEPT it uses a NON SYMMETRIC similarity measure, and cleverly "passes" similarity information downstream using a final mixing projection.
+
+#### Sliding Window Attention (SWA)
+
+The number of ops in vanilla attention is quadratic in the sequence length. And the memory increases linearly with the sequence length.
+
+in SWA, each token can attend to at most W tokens from the previous layers. But note that tokens outside the window can still attend to the current token, since attention layers are stacked. This is similar to the receptive field in CNNs. After k layers, information can move forward by up to k*W tokens.
+
+At the last layer, using a window size of W = 4096, we have a theoretical attention span of approximately 131K tokens.
 
 ### Embeddings
 
