@@ -42,6 +42,8 @@
       - [GPT2](#gpt2)
       - [GPT3](#gpt3)
     - [BERT](#bert)
+    - [T5](#t5)
+    - [Encoder, Decoder, or Encoder-Decoder Transformer?](#encoder-decoder-or-encoder-decoder-transformer)
     - [Sentence Embeddings](#sentence-embeddings)
   - [Transformers in computer vision](#transformers-in-computer-vision)
     - [Adapting transformers to CV](#adapting-transformers-to-cv)
@@ -787,6 +789,8 @@ The GPT, and some later models like TransformerXL and XLNet are auto-regressive 
 
 BERT, contains only Transformer’s encoder.
 
+![](./bert-vs-GPT.png)
+
 When BERT models are pretrained, a specified percentage of the words in each batch of text – usually 15% – are randomly removed or “masked” so the model can learn to predict the missing words from the words around them.
 
 That’s why BERT is a “bidirectional” transformer. A model has a better chance of predicting what word should fill in the blank in the phrase “Every good ____ does fine” than it has at predicting the next word in the phrase “Every good____.”
@@ -794,6 +798,18 @@ That’s why BERT is a “bidirectional” transformer. A model has a better cha
 The pretraining of these models usually revolves around somehow corrupting a given sentence (for instance, by masking random words in it) and tasking the model with finding or reconstructing the initial sentence.
 
 <https://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/>
+
+### T5
+
+T5 is encoder and decoder. Input is text and output is the next word (token), which is then appended to the decoder-input. Encoder decoder uses cross-attention to introduce information from the encoder into the decoder.
+
+### Encoder, Decoder, or Encoder-Decoder Transformer?
+
+Perhaps minor consideration could be following:
+
+- encoder-only: vector embeddings for classification, clustering, search
+- decoder-only: strong at text generation tasks (models for prompting, chatting)
+- encoder-decoder: strong for natural language understanding (NLU). For example translation, question answering, summarization.
 
 ### Sentence Embeddings
 
