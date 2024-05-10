@@ -107,7 +107,8 @@ base<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [licenses](<base/science-tech-maths/programming/licenses/licenses.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [regex](<base/science-tech-maths/programming/regex/regex.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [reverse-engineering](<base/science-tech-maths/programming/reverse-engineering/reverse-engineering.md>)<br>
-│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [software-design-pattern](<base/science-tech-maths/programming/software-design-pattern/design-patterns.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [software-design](<base/science-tech-maths/programming/software-design/design-doc.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [patterns](<base/science-tech-maths/programming/software-design/patterns/design-patterns.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [tests-writing](<base/science-tech-maths/programming/tests-writing/tests.md>)<br>
 │&nbsp;&nbsp;&nbsp;└─ [signal-processing](<base/science-tech-maths/signal-processing/signal-processing.md>)<br>
 ├─ scientific-research<br>
