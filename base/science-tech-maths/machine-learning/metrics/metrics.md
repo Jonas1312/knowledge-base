@@ -76,7 +76,7 @@ $$CI = \bar{x} \pm z \frac{s}{\sqrt{n}}$$
 
 Accuracy is the number of correct predictions $X = \sum{(\hat{y} == y)}$, divided by the test set size $n$.
 
-We consider each prediction of the model as a Bernouilli trial, and the number of correct predictions $X$ is a random variable following a binomial law $Bin(n,p)$:
+We consider each prediction of the model as a Bernoulli trial, and the number of correct predictions $X$ is a random variable following a binomial law $Bin(n,p)$:
 
 - $n$ test set size
 - $p$ probability of success, that is prob to have a correct prediction $\hat{y} == y$
@@ -104,3 +104,37 @@ For a 95 CI:
 ci_lower = np.percentile(test_accuracies, 2.5)
 ci_upper = np.percentile(test_accuracies, 97.5)
 ```
+
+## NLP Metrics
+
+### BLEU
+
+Use case: translation
+
+It calculates the **precision** of n-grams (sequences of n words) in the generated text that appear in the reference text, adjusted by a brevity penalty to prevent overly short generations from being overly rewarded.
+
+Captures word-by-word similarity. It is a good metric for comparing translations, but it has limitations, such as not considering synonyms or paraphrases.
+
+### ROUGE
+
+Use case: text summarization
+
+ROUGE tries to compare the overall meaning of the generated text with the reference text.
+
+It calculates the F1 score of n-grams in the generated text that appear in the reference text, with different versions of ROUGE focusing on different n-gram lengths (ROUGE-1, ROUGE-2, etc.) or on word sequences (ROUGE-L).
+
+### METEOR
+
+Use case: translation, text generation
+
+This metric improves upon the shortcomings of BLEU by considering synonyms, stemming, and paraphrasing, which makes it more flexible. It combines precision and recall, and it aligns words between the generated and reference texts using a harmony of exact, stem, synonym, and paraphrase matches.
+
+### BERTScore
+
+Use case: summarization, translation, text similarity
+
+BERTScore computes the similarity of tokens in candidate and reference texts based on their embeddings, capturing deeper semantic similarities that go beyond surface-level exact word matches.
+
+![](./bert.png)
+
+The importance of each token is weighted by the inverse document frequency (IDF) of the token in the reference text, which helps to prioritize rare words that are more informative.

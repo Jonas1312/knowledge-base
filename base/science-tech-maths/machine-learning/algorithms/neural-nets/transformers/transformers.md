@@ -45,7 +45,7 @@
     - [T5](#t5)
     - [Encoder, Decoder, or Encoder-Decoder Transformer?](#encoder-decoder-or-encoder-decoder-transformer)
     - [Sentence Embeddings](#sentence-embeddings)
-  - [Transformers in computer vision](#transformers-in-computer-vision)
+  - [Transformers in CV](#transformers-in-cv)
     - [Adapting transformers to CV](#adapting-transformers-to-cv)
     - [Patch embeddings and tokenization](#patch-embeddings-and-tokenization)
   - [More](#more)
@@ -148,7 +148,7 @@ The dimensions of the matrices are:
 - $O = S V \in \mathbb{R}^{n \times d_v}$: the **attention output matrix**:
   - Each row of $O$ is the weighted sum of the values for a token.
 
-Note that the attention outout is $O \in \mathbb{R}^{n \times d_v}$, so it's different from the input $X \in \mathbb{R}^{n \times d}$.
+Note that the attention output is $O \in \mathbb{R}^{n \times d_v}$, so it's different from the input $X \in \mathbb{R}^{n \times d}$.
 
 Thus, a final weight matrix $W^O \in \mathbb{R}^{d_v \times d}$ can be applied to the output to obtain the final output $O' \in \mathbb{R}^{n \times d}$.
 
