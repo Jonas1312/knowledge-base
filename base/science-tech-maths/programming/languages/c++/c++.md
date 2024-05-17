@@ -170,24 +170,27 @@ CMake is not a build system but rather it generates another system's build files
 - stack :
   - pile LIFO
   - variable locale (int i)
-  - assez petite (1MB) sinon stack overflow.
-  - La taille ne peut pas varier. Très rapide.
+  - assez petite (1MB). C'est petit car c'est pré-alloué, sa taille ne change jamais. Elle est plus ou moins remplie selon le programme qui tourne.
+  - La taille ne peut pas varier. Car c'est pré-alloué. La taille est prédéfinie par l'OS.
+  - Très rapide, car la mémoire est contigue, non fragmentée.
   - La première assiette (tout en bas) c'est la fonction main.
   - Dans la pile on prépare aussi l'appel à une fonction, on stocke les arguments, l'adresse de retour.
   - L'allocation dans la pile est invisible, tout est nettoyé quand on sort d'une fonction.
+  - Chaque thread possède sa propre stack.
+  - Le CPU possède un stack register, qui est un pointeur vers le sommet de la stack.
+  - La stack peut aller vers le bas ou le haut, selon les architectures : <https://www.youtube.com/watch?v=V2h_hJ5MSpY>
+  - Un stack overflow peut apparaitre en cas de récursion infinie par exemple.
 - heap :
   - tas
   - demande en cours d'exécution (new, delete)
   - il faut libérer la mémoire nous même !
   - Savoir gérer les accès multithreadés.
-  - Plus lent que la pile
+  - Plus lent que la pile, car la mémoire est fragmentée. A chaque fois qu'on veut mettre qq chose en mémoire, on doit trouver un espace vide, ou faire un system call pour demander plus de mémoire.
 - data (ou statique) :
   - variable globale
   - stdin
   - stdout
   - stderr
-
-Good interview question: <https://www.youtube.com/watch?v=V2h_hJ5MSpY>
 
 ## Direct, copy, uniform initialization
 
