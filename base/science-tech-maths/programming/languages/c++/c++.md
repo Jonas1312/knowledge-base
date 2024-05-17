@@ -187,6 +187,8 @@ CMake is not a build system but rather it generates another system's build files
   - stdout
   - stderr
 
+Good interview question: <https://www.youtube.com/watch?v=V2h_hJ5MSpY>
+
 ## Direct, copy, uniform initialization
 
 ```c++
@@ -2430,9 +2432,9 @@ Now, if you mark a function inline you tell the linker: "there will be multiple 
 
 ## TODO
 
-<https://fouronnes.github.io/cppiceberg/>
-
-<https://github.com/federico-busato/Modern-CPP-Programming>
+- <https://fouronnes.github.io/cppiceberg/>
+- <https://matt.sh/howto-c>
+- <https://github.com/federico-busato/Modern-CPP-Programming>
 
 <!---
 

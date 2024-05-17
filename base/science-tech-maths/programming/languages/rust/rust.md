@@ -9,3 +9,5 @@
 - <https://github.com/rust-lang/rustlings>
 - <https://google.github.io/comprehensive-rust/>
 - <https://www.youtube.com/watch?v=2hXNd6x9sZs>
+- <https://rust-exercises.com/>
+- <https://geeklaunch.io/blog/rust-pro-tips-collection/>

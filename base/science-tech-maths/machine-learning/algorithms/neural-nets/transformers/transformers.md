@@ -771,7 +771,7 @@ In the original transformer, the layer normalization is applied after the residu
 
 #### GPT3
 
-Was trained on 300 billions of tokens.
+Was trained on 300 billions of tokens. The training was done on 1024 GPUs, took 34 days, and cost $4.6M in compute alone.
 
 175 billion parameters.
 
