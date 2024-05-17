@@ -99,6 +99,7 @@ base<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [wsl](<base/science-tech-maths/programming/dev-tools/wsl/wsl.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [general-knowledge](<base/science-tech-maths/programming/general-knowledge/general-knowledge.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [high-performance-computing](<base/science-tech-maths/programming/high-performance-computing/hpc.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [infrastructure](<base/science-tech-maths/programming/infrastructure/infrastructure.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ languages<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [c++](<base/science-tech-maths/programming/languages/c++/c++.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [graphql](<base/science-tech-maths/programming/languages/graphql/graphql.md>)<br>
