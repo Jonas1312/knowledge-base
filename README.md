@@ -24,6 +24,7 @@ base<br>
 │&nbsp;&nbsp;&nbsp;├─ [image-processing](<base/science-tech-maths/image-processing/terminology.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [color-spaces](<base/science-tech-maths/image-processing/color-spaces/color-spaces.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [conv-filters](<base/science-tech-maths/image-processing/conv-filters/conv-filters.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [dewarping](<base/science-tech-maths/image-processing/dewarping/dewarping.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [image-losses](<base/science-tech-maths/image-processing/image-losses/image-losses.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [image-registration](<base/science-tech-maths/image-processing/image-registration/image-registration.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [medical-imaging](<base/science-tech-maths/image-processing/medical-imaging/medical-imaging.md>)<br>
