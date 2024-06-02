@@ -960,6 +960,14 @@ def my_context_manager():
         release_resource(res)
 ```
 
+Note that with `@contextmanager` your context manager can also be used as a decorator (<https://www.youtube.com/watch?v=_QXlbwRmqgI>, <https://rednafi.com/python/contextmanager/#writing-context-managers-as-decorators>):
+
+```python
+@my_context_manager
+def my_function():
+    ...
+```
+
 It is possible to open multiple contexts at once:
 
 ```python
