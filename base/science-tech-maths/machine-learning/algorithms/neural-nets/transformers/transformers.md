@@ -725,13 +725,15 @@ The loss is usually the cross-entropy loss, but we don't want our model to be to
 
 ### RLHF, PPO, DPO, IPO, KTO
 
-After pre-training, we finetune the model to be "instruct" or "chat".
+RLHF (Reinforcement Learning from Human Feedback) is a broader framework that encompasses various techniques for fine-tuning models using human feedback. Techniques like DPO, PPO, and KTO can be considered methods or variations within the RLHF framework. Here's how they fit:
 
-DPO: A type of training which removes the need for a reward model. It simplifies significantly the RLHF-pipeline.
+- RLHF (Reinforcement Learning from Human Feedback): A framework that involves training models using feedback from humans to align model outputs with human preferences and values. Uses a reward model to provide feedback to the agent.
+- PPO (Proximal Policy Optimization): A specific RL algorithm used within RLHF that optimizes the policy by balancing exploration and exploitation while ensuring updates do not deviate too far from the current policy
+- DPO (Direct Preference Optimization): A training technique within the RLHF framework that simplifies the process by removing the need for a separate reward model.
+- IPO (Improved Preference Optimization): A refinement of the DPO method, aiming to be simpler and less prone to overfitting, also within the RLHF framework.
+- KTO (Keypoint Training Optimization): Another technique within RLHF that requires only binary labels (accepted or rejected) instead of preference pairs, allowing for scaling to larger datasets.
 
-IPO: A change in the DPO objective which is simpler and less prone to overfitting.
-
-KTO: While PPO, DPO, and IPO require pairs of accepted vs rejected generations, KTO just needs a binary label (accepted or rejected), hence allowing to scale to much more data.
+<https://magazine.sebastianraschka.com/i/144110727/is-dpo-superior-to-ppo-for-llm-alignment-a-comprehensive-study>
 
 ## Transformers in NLP
 
