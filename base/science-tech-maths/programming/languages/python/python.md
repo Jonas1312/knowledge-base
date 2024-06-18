@@ -313,13 +313,15 @@ from typing import overload
 
 
 @overload
-def double(input_: int) -> int:
-    ...  # ellipsis is a placeholder for the actual implementation
+def double(
+    input_: int,
+) -> int: ...  # ellipsis is a placeholder for the actual implementation
 
 
 @overload
-def double(input_: Sequence[int]) -> list[int]:
-    ...  # ellipsis is a placeholder for the actual implementation
+def double(
+    input_: Sequence[int],
+) -> list[int]: ...  # ellipsis is a placeholder for the actual implementation
 
 
 def double(input_: int | Sequence[int]) -> int | list[int]:
@@ -414,16 +416,13 @@ InputType = Literal["TEXT", "IMAGE", "VIDEO"]
 
 
 # we don't fill the class for this example...
-class TextJob:
-    ...
+class TextJob: ...
 
 
-class ImageJob:
-    ...
+class ImageJob: ...
 
 
-class VideoJob:
-    ...
+class VideoJob: ...
 
 
 T = TypeVar("T", TextJob, ImageJob, VideoJob)
@@ -434,16 +433,17 @@ class MyMainClass(Generic[T]):
 
     # we use overload to define the different signatures of the __init__ method
     @overload
-    def __init__(self: "MyMainClass[TextJob]", input_type: Literal["TEXT"]) -> None:
-        ...
+    def __init__(self: "MyMainClass[TextJob]", input_type: Literal["TEXT"]) -> None: ...
 
     @overload
-    def __init__(self: "MyMainClass[ImageJob]", input_type: Literal["IMAGE"]) -> None:
-        ...
+    def __init__(
+        self: "MyMainClass[ImageJob]", input_type: Literal["IMAGE"]
+    ) -> None: ...
 
     @overload
-    def __init__(self: "MyMainClass[VideoJob]", input_type: Literal["VIDEO"]) -> None:
-        ...
+    def __init__(
+        self: "MyMainClass[VideoJob]", input_type: Literal["VIDEO"]
+    ) -> None: ...
 
     # we usually start with the "real" implementation and then we define the overload above
     def __init__(self, input_type: InputType) -> None:
@@ -483,8 +483,7 @@ if TYPE_CHECKING:
     import pandas as pd
 
 
-def export_as_df() -> pd.DataFrame:
-    ...
+def export_as_df() -> pd.DataFrame: ...
 ```
 
 ### Covariance and contravariance
@@ -492,12 +491,10 @@ def export_as_df() -> pd.DataFrame:
 #### Covariance: `CovariantType[SubType, ...] <: CovariantType[SuperType, ...]`
 
 ```python
-class Animal:
-    ...
+class Animal: ...
 
 
-class Dog(Animal):
-    ...  # Dog <: Animal, "Dog is a subtype of Animal"
+class Dog(Animal): ...  # Dog <: Animal, "Dog is a subtype of Animal"
 
 
 an_animal = Animal()
@@ -526,16 +523,13 @@ In python, most containers are covariant:
 The definition is almost the same as of “covariance”, but with <: relation switched.
 
 ```python
-class Animal:
-    ...
+class Animal: ...
 
 
-class Dog(Animal):
-    ...
+class Dog(Animal): ...
 
 
-class Kangaroo(Animal):
-    ...
+class Kangaroo(Animal): ...
 
 
 # this function type is `Callable[[Animal], None]`
@@ -964,8 +958,7 @@ Note that with `@contextmanager` your context manager can also be used as a deco
 
 ```python
 @my_context_manager
-def my_function():
-    ...
+def my_function(): ...
 ```
 
 It is possible to open multiple contexts at once:
@@ -1697,9 +1690,9 @@ MagicMock is a subclass of Mock with default implementations of most of the magi
 
 ```python
 mock = MagicMock()
-mock[
-    3
-] = "fish"  # MagicMock already has __getitem__ implemented, this would crash with Mock
+mock[3] = (
+    "fish"  # MagicMock already has __getitem__ implemented, this would crash with Mock
+)
 mock.__setitem__.assert_called_with(3, "fish")  # true
 mock.__getitem__.return_value = "result"
 mock[2]  # 'result'
@@ -2022,8 +2015,7 @@ There are three main types of awaitable objects:
 1. coroutines
 
     ```python
-    async def some_coroutine():
-        ...
+    async def some_coroutine(): ...
     ```
 
 2. Tasks
