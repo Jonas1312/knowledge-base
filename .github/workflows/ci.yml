@@ -63,7 +63,7 @@ jobs:
 
       - name: Link Checker
         id: lychee
-        uses: lycheeverse/lychee-action@v1.9.3
+        uses: lycheeverse/lychee-action@v1.10.0
         with:
           args: --verbose --no-progress './**/*.md' './**/*.html' --insecure --exclude-all-private
           fail: true
