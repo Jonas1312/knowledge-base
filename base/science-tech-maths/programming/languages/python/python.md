@@ -2,6 +2,7 @@
 
 - [Python](#python)
   - [Cheat Sheets](#cheat-sheets)
+  - [Python for Scientists](#python-for-scientists)
   - [Identity vs equality](#identity-vs-equality)
   - [Shallow and Deep Copy](#shallow-and-deep-copy)
   - [Name resolution](#name-resolution)
@@ -93,7 +94,7 @@
       - [Where to patch?](#where-to-patch)
       - [@mock.patch pitfall: decorator order](#mockpatch-pitfall-decorator-order)
       - [@mock.patch.object](#mockpatchobject)
-      - [Patch dictionnaries](#patch-dictionnaries)
+      - [Patch dictionary](#patch-dictionary)
       - [Property mocking](#property-mocking)
       - [Patch constant](#patch-constant)
       - [wraps](#wraps)
@@ -129,7 +130,7 @@
     - [Expiring objects](#expiring-objects)
     - [Refreshing objects](#refreshing-objects)
     - [Expire vs Refresh](#expire-vs-refresh)
-    - [Flusing objects](#flusing-objects)
+    - [Flushing objects](#flushing-objects)
     - [Committing objects](#committing-objects)
     - [Recap](#recap)
     - [Pitfalls](#pitfalls)
@@ -139,6 +140,10 @@
 ## Cheat Sheets
 
 - [Comprehensive Python Cheatsheet](https://gto76.github.io/python-cheatsheet/)
+
+## Python for Scientists
+
+- <https://learn.scientific-python.org/development/>
 
 ## Identity vs equality
 
@@ -1833,7 +1838,7 @@ def test_get_holidays_timeout(mock_requests):
         get_holidays()
 ```
 
-#### Patch dictionnaries
+#### Patch dictionary
 
 Besides objects and attributes, you can also patch() dictionaries with patch.dict().
 
@@ -2517,7 +2522,7 @@ Expire is a local operation, it does not involve a database query. Refresh is a 
 - Expire - I persisted some changes for an object to the database. I don't need this updated object anymore in the current method, but I don't want any subsequent methods to accidentally use the wrong attributes.
 - Refresh - I persisted some changes for an object to the database. I need to use this updated object within the same method.
 
-### Flusing objects
+### Flushing objects
 
 Flushing means to push all object changes to the database.
 
