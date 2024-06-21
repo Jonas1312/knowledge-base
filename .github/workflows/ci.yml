@@ -61,9 +61,24 @@ jobs:
         with:
           ref: master-pub
 
+      - name: Restore lychee cache
+        id: restore-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
       - name: Check links
         id: lychee
         uses: lycheeverse/lychee-action@v1.10.0
         with:
-          args: --verbose --no-progress './**/*.md' './**/*.html' --insecure --exclude-all-private --suggest --archive wayback  --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0" --max-concurrency 5 --retry-wait-time 10
+          args:  --verbose --no-progress  --insecure --exclude-all-private --suggest --archive wayback  --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0" --max-concurrency 5 --retry-wait-time 10 --cache --max-cache-age 7d  './**/*.md' './**/*.html'
           fail: true
+
+      - name: Save lychee cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .lycheecache
+          key: ${{ steps.restore-cache.outputs.cache-primary-key }}

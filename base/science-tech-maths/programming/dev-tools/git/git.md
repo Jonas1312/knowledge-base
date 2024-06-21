@@ -183,7 +183,7 @@ Or:
 
 ## Cheatsheets
 
-- <https://paedubucher.ch/articles/2022-07-26-git-with-multiple-e-mail-addresses.html>
+- <http://web.archive.org/web/20230921095122/https://paedubucher.ch/articles/2022-07-26-git-with-multiple-e-mail-addresses.html>
 - <https://jwiegley.github.io/git-from-the-bottom-up/>
 - <https://xosh.org/explain-git-in-simple-words/>
 - <https://www.biteinteractive.com/picturing-git-conceptions-and-misconceptions/>

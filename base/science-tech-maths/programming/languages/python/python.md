@@ -267,7 +267,7 @@ def f(x):
 print(a)  # prints 3
 ```
 
-- Call by assignment! <https://www.jeffknupp.com/blog/2012/11/13/is-python-callbyvalue-or-callbyreference-neither/>
+- Call by assignment! <http://web.archive.org/web/20240330102609/https://jeffknupp.com/blog/2012/11/13/is-python-callbyvalue-or-callbyreference-neither/>
 <img src="./pyname_pyobject.webp" alt="PyName and PyObject" width="300"/>
 - the parameter passed in is actually a reference to an object (but the reference is passed by value)
 
