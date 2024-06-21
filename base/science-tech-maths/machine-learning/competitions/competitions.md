@@ -12,7 +12,6 @@ Good to read: [AI competitions don’t produce useful models](https://lukeoakden
 - <https://grand-challenge.org/>
 - <https://www.kaggle.com/>
 - <https://www.drivendata.org/>
-- <https://www.crowdanalytix.com/community>
 - <https://challengedata.ens.fr/>
 - <https://competitions.codalab.org/>
 - <https://omdena.com/>

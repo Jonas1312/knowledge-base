@@ -38,5 +38,5 @@ faut imager une fonction sigmoide qui devient de plus en plus "steep"
 - <https://adamdking.com/blog/gaugan/>
 - <https://towardsdatascience.com/zilic-detect-any-disease-with-machine-learning-fdae88664148>
 - <https://towardsdatascience.com/comprehensive-introduction-to-turing-learning-and-gans-part-1-81f6d02e644d>
-- <https://blog.floydhub.com/gans-story-so-far/>
+- <http://web.archive.org/web/20240129185748/https://blog.floydhub.com/gans-story-so-far/>
 - <https://towardsdatascience.com/10-lessons-i-learned-training-generative-adversarial-networks-gans-for-a-year-c9071159628>

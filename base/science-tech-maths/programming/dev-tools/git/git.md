@@ -193,7 +193,6 @@ Or:
 - <https://education.github.com/git-cheat-sheet-education.pdf>
 - <https://ikhlestov.github.io/pages/tools/git/>
 - <http://ndpsoftware.com/git-cheatsheet.html>
-- <https://gitexplorer.com/>
 - <https://gourav.io/blog/git-cheatsheet>
 - <https://mg.readthedocs.io/git.html>
 - <https://frontendmasters.com/courses/git-in-depth/>

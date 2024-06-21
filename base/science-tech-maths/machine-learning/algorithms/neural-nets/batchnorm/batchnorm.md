@@ -17,7 +17,7 @@ Remember to set the bias to zero when using batchnorm. This is because batchnorm
 - <https://www.learnopencv.com/batch-normalization-in-deep-networks/>
 - <https://deepnotes.io/batchnorm>
 - <https://wiseodd.github.io/techblog/2016/07/04/batchnorm/>
-- <http://rohanvarma.me/Batch-Norm/>
+- <http://web.archive.org/web/20230524162122/https://rohanvarma.me/Batch-Norm/>
 - <https://kratzert.github.io/2016/02/12/understanding-the-gradient-flow-through-the-batch-normalization-layer.html>
 - <https://stackoverflow.com/questions/45799926/why-batch-normalization-over-channels-only-in-cnn>
 - <https://blog.janestreet.com/l2-regularization-and-batch-norm/>

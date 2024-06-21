@@ -2,7 +2,7 @@
 
 - <https://github.com/0xZ0F/Z0FCourse_ReverseEngineering>
 - <https://beginners.re/>
-- <https://gamehacking.academy/about>
+- <https://gamehacking.academy/>
 - <https://margin.re/media/an-opinionated-guide-on-how-to-reverse-engineer-software-part-1.aspx>
 - <https://cutter.re/>
 - <https://rizin.re/>

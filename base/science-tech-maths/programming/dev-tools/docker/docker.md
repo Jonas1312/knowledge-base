@@ -366,6 +366,6 @@ Prefer use `docker compose up` for running the app and `docker compose run` for 
 - <https://training.play-with-docker.com/>
 - <https://ikhlestov.github.io/pages/tools/docker/>
 - <https://towardsdatascience.com/docker-made-easy-for-data-scientists-b32efbc23165>
-- <https://lbartnicki92.github.io/posts/docker-build-from-dockerfile/>
+- <http://web.archive.org/web/20201203013356/https://lbartnicki92.github.io/posts/docker-build-from-dockerfile/>
 - Tutorial: <https://adamtheautomator.com/docker-compose-tutorial/>
 - Debugger in docker: <https://rednafi.com/python/debug_dockerized_apps_in_vscode/>
