@@ -65,9 +65,9 @@ In the case of a static variable inside a class, the variable is shared among al
 - should fail nicely, and give a reason why it failed
 - no code duplication
 - readable
-- optimized, but optimization shoudln't impact readability
+- optimized, but optimization shouldn't impact readability
 - commented if needed
-- structured, maintenable
+- structured, maintainable
 
 ## CI CD
 
@@ -85,9 +85,10 @@ In the case of a static variable inside a class, the variable is shared among al
 
 - <https://skerritt.blog/make-popular-open-source-projects/>
 
-### Documentation
+### Technical Documentation Authoring
 
-- [What nobody tells you about documentation](https://www.divio.com/blog/documentation/)
+- <https://diataxis.fr/>
+- <https://www.divio.com/blog/documentation/>
 
 ## TTY
 
