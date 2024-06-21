@@ -443,7 +443,7 @@ Remove boilerplate code using torchmetrics to accumulate batch metrics over an e
 
 ## PyTorch internals
 
-- [PyTorch internals](http://blog.ezyang.com/2019/05/pytorch-internals/)
+- <https://web.archive.org/web/20240222184221/http://blog.ezyang.com/2019/05/pytorch-internals/>
 - <http://blog.christianperone.com/2018/03/pytorch-internal-architecture-tour/>
 
 ## Debugging
