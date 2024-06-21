@@ -21,11 +21,11 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.12"
 
       - name: Run script
         run: |
-          python ./.github/scripts/update_readme_tree.py
+          python ./scripts/update_readme_tree.py
 
       - name: Setup git config
         run: |
@@ -50,7 +50,7 @@ jobs:
           ref: master-pub
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.10"
+          python-version: "3.12"
       - uses: pre-commit/action@v3.0.1
 
   link-checker:
@@ -61,9 +61,23 @@ jobs:
         with:
           ref: master-pub
 
-      - name: Link Checker
+      - name: Restore lychee cache
+        id: restore-cache
+        uses: actions/cache/restore@v4
+        with:
+          path: .lycheecache
+          key: cache-lychee-${{ github.sha }}
+          restore-keys: cache-lychee-
+
+      - name: Check links
         id: lychee
         uses: lycheeverse/lychee-action@v1.10.0
         with:
-          args: --verbose --no-progress './**/*.md' './**/*.html' --insecure --exclude-all-private
-          fail: true
+          args: --verbose --no-progress './**/*.md' './**/*.html' --insecure --exclude-all-private --cache --suggest --archive wayback --github-token ${{ secrets.GITHUB_TOKEN }}  --user-agent "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0"
+
+      - name: Save lychee cache
+        uses: actions/cache/save@v4
+        if: always()
+        with:
+          path: .lycheecache
+          key: ${{ steps.restore-cache.outputs.cache-primary-key }}
