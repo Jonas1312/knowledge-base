@@ -21,7 +21,7 @@ Detaching HEAD just means attaching it to a commit instead of a branch: `git che
 ### Staging Area
 
 - helps split changes in several commits
-- review changes before commiting
+- review changes before committing
 
 ## git push
 
@@ -32,6 +32,12 @@ translates to this in English:
 Go to the branch named "main" in my repository, grab all the commits, and then go to the branch "main" on the remote named "origin". Place whatever commits are missing on that branch and then tell me when you're done.
 
 **The opposite of git-push is not git-pull, it's git-fetch.**
+
+### Push force and push force with lease
+
+`git push --force` will overwrite the remote branch with your local one.
+
+`git push --force-with-lease` will block the push if someone else has pushed to the same branch. It's a safer option.
 
 ## Merge
 
