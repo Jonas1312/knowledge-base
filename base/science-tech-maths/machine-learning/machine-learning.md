@@ -533,6 +533,8 @@ Many papers use the term long-tail learning to refer to class imbalance in multi
 
 ## Gradient descent
 
+The gradient measures the direction and the fastest rate of increase of a function $f$ at a given point.
+
 **Gradient always points in the direction of steepest ascent.**
 
 $$w^{(t+1)}=w^{(t)} - \eta\frac{\partial L}{\partial w}$$

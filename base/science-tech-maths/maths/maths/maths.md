@@ -43,12 +43,13 @@ The second largest eigenvector is always orthogonal to the largest eigenvector, 
 If all eigenvalues of A are:
 
 - positive: the matrix is positive definite.
-- positive or zero: positive semi-deﬁnite.
+- positive or zero: positive semi-definite.
 - negative: the matrix is negative definite.
 
 ## Derivatives
 
-- the gradient of $f$ is the vector containing all of the partial derivatives
+- The gradient of $f$ is the vector containing all of the partial derivatives.
+- The Jacobian is the matrix of all first-order partial derivatives of a vector-valued function (a function that takes a vector as an input and returns a vector as an output).
 - Hessian is the Jacobian of the gradient. Is symmetric.
 
 ### Finite differences
