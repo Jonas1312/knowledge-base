@@ -45,7 +45,7 @@ $$ \cos(\theta) = \frac{A \cdot B}{\|A\| \|B\|} $$
 - -1 or 1 if vectors are collinear
 - cosine similarity between vectors `[2,0,2]` and `[0,1,0]` is 0.
 
-Cosine similarity looks at the angle between two vectors, euclidian similarity at the distance between two points.
+Cosine similarity looks at the angle between two vectors, euclidean similarity at the distance between two points.
 
 Let's say you are in an e-commerce setting and you want to compare users for product recommendations:
 

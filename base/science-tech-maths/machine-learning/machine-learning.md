@@ -39,13 +39,13 @@ A machine learning algorithm is an algorithm that is able to learn patterns from
     - [Is it necessary to standardize for linear regression?](#is-it-necessary-to-standardize-for-linear-regression)
     - [Why for PCA?](#why-for-pca)
     - [Why standardizing input data is necessary for euclidean distance based algorithms?](#why-standardizing-input-data-is-necessary-for-euclidean-distance-based-algorithms)
-    - [Why standardizing input data is necessary for neural networds?](#why-standardizing-input-data-is-necessary-for-neural-networds)
+    - [Why standardizing input data is necessary for neural networks?](#why-standardizing-input-data-is-necessary-for-neural-networks)
     - [Numerical](#numerical)
     - [Categorical](#categorical)
   - [Generative models vs discriminative models](#generative-models-vs-discriminative-models)
   - [Ensemble methods](#ensemble-methods)
   - [Class imbalance](#class-imbalance)
-  - [Hyperparameters Optimization](#hyperparameters-optimization)
+  - [Hyperparameter Optimization](#hyperparameter-optimization)
   - [Gradient descent](#gradient-descent)
     - [Momentum](#momentum)
     - [Adaptive learning rates](#adaptive-learning-rates)
@@ -348,12 +348,12 @@ But sometimes the classes can't be separated with an hyperplane.
 
 The solution is to project the data into a high-dimension space so that the points become linearly separable.
 
-But this can lead to the **curse of dimensionality** if the dimensionnality is too high.
+But this can lead to the **curse of dimensionality** if the dimensionality is too high.
 
 This phenomena occurs when the dimensionality of the data increases, **the sparsity of the data increases**:
 
 - let's say we're in two dims
-- eucl distance between two points: $d(A,B) = \sqrt{(x_A-x_B)^2 + (y_A-y_B)^2}$
+- euclidean distance between two points: $d(A,B) = \sqrt{(x_A-x_B)^2 + (y_A-y_B)^2}$
 - now let's say that A and B lie on the $y=x$ line, that is $x_A=y_A$ and $x_B=y_B$:
 - $d(A,B) = \sqrt{(x_A-x_B)^2 + (x_A-x_B)^2}$
 - $d(A,B) = \sqrt{2(x_A-x_B)^2}$
@@ -371,7 +371,7 @@ As the data’s dimensionality increases the sparsity of the data increases maki
 
 Due to this sparsity, it becomes much more easy to find a separable hyperplane because the likelihood that a training sample lies on the wrong side of the best hyperplane becomes infinitely small when the number of features becomes infinitely large.
 
-The so called curse of dimensionality can be summarized very succinctly as “some algorithms behave badly in many dimensions” like kmeans or knn, because **the more you increase the dimensionnality, the greater the distance between points**.
+The so called curse of dimensionality can be summarized very succinctly as “some algorithms behave badly in many dimensions” like kmeans or knn, because **the more you increase the dimensionality, the greater the distance between points**.
 
 More dimensions make your model more discriminative but at the same time they require more rich data sources and longer time to train.
 
@@ -384,7 +384,7 @@ There are also some algorithms that converge faster if data is normalized (neura
 Ways to normalize data:
 
 - scale to a range: `[0, 1]` or `[-1, 1]` using min-max normalization
-- standardize (also called Z-score normalization): substract $\mu$ and divide by $\sigma$
+- standardize (also called Z-score normalization): subtract $\mu$ and divide by $\sigma$
 - normalize: divide by the norm of the vector
 
 All normalization factors must be computed on training set! This is to avoid data leakage.
@@ -399,7 +399,7 @@ It's also recommended to do it to avoid numerical issues.
 
 ### Why for PCA?
 
- rincipal Component Analysis (PCA) is an algorithm where standardization is crucial, since it is “analyzing” the variances of the different features.
+Principal Component Analysis (PCA) is an algorithm where standardization is crucial, since it is “analyzing” the variances of the different features.
 
 ### Why standardizing input data is necessary for euclidean distance based algorithms?
 
@@ -439,7 +439,7 @@ We have:
 
 We can see that $A$ and $C$ are closer than $A$ and $B$! So the algorithm will cluster $A$ and $C$ in the same class.
 
-### Why standardizing input data is necessary for neural networds?
+### Why standardizing input data is necessary for neural networks?
 
 Some algorithms like decision trees are (almost) not affected by the scale of the data, but this is not the case for neural networks (and most of the other ML algorithms).
 
@@ -524,7 +524,7 @@ Weighted loss functions vs weighted sampling?
 
 Many papers use the term long-tail learning to refer to class imbalance in multi-class classification tasks, so you can find lots of relevant research under this keyword
 
-## Hyperparameters Optimization
+## Hyperparameter Optimization
 
 - Babysitting: trial and error
 - Grid Search: exhaustive search over a grid of hyperparameters
@@ -635,7 +635,7 @@ States that:
 
 For every case where an algorithm works, I could construct a situation where it fails terribly.
 
-Implies that assumptions are where the power of your mdoel comes from. This is why it's important to understand the assumptions and inductive priors of your model.
+Implies that assumptions are where the power of your model comes from. This is why it's important to understand the assumptions and inductive priors of your model.
 
 ## NLP
 
