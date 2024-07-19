@@ -81,6 +81,8 @@ In statistics:
 
 Note that, for continuous random variables, likelihood is NOT a probability as explained before. But for discrete random variables, likelihood is a probability.
 
+<https://www.allendowney.com/blog/2024/07/13/density-and-likelihood/>
+
 ## Conjugate prior
 
 - when prior and posterior have analog closed form
