@@ -9,3 +9,4 @@
 - <https://www.begin.re/>
 - <https://malwareunicorn.org/workshops/re101.html#0>
 - <https://0x44.cc/reversing/2021/07/21/reversing-x86-and-c-code-for-beginners.html>
+- <https://0xinfection.github.io/reversing/>

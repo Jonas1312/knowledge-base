@@ -211,7 +211,7 @@ COPY ./app.py /app/
 This is a 2 stage build as you can see separated by the FROM steps written in the Dockerfile.
 
 - Stage 1 install the system dependencies required for us to install our pip dependencies. We use the --prefix option to define a unique path where we want pip to install the packages into.
-- Stage 2 starts from a brand new alpine image and instead of installing any system dependencis, we use the COPY command to copy the pip packages installed in /install from our first builder image, into our newly created image.
+- Stage 2 starts from a brand new alpine image and instead of installing any system dependencies, we use the COPY command to copy the pip packages installed in /install from our first builder image, into our newly created image.
 
 ## Build the image
 
@@ -290,7 +290,7 @@ Docker Compose is a way to create reproducible Docker containers using a config 
 
 Docker compose is also a tool to run multiple containers at once. It is configured with a YAML file called `docker-compose.yml`.
 
-Bascially, docker compose will do the "create image" and "create container" steps for you.
+Basically, docker compose will do the "create image" and "create container" steps for you.
 
 ```yaml
 version: "3.8"  # version of docker compose
@@ -346,10 +346,6 @@ psql postgresql://postgres:postgres@localhost:5432/postgres  # connect to the po
 The command passed by `run` overrides the command defined in the service configuration. The second difference is the `docker compose run` command does not create any of the ports specified in the service configuration.
 
 Prefer use `docker compose up` for running the app and `docker compose run` for running one-off commands.
-
-## Tools
-
-- [Deepo](https://github.com/ufoym/deepo/): Set up deep learning environment in a single command line
 
 ## More
 
