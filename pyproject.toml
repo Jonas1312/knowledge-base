@@ -6,6 +6,9 @@ extend-include = ["*.ipynb"]
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
+[tool.ruff.lint.isort]
+split-on-trailing-comma = false
+
 [tool.ruff.format]
 line-ending = "lf"
 docstring-code-format = true
