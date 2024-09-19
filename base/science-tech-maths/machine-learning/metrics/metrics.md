@@ -15,8 +15,8 @@
 
 ## Precision-Recall curve vs ROC curve
 
-- Precision: how often the classifier is correct when it predicts positive $PRE = \frac{TP}{TP+FP}$ "Of all the apples I picked from the basket, how many are actually good?"
-- Recall: how often the classifier is correct for all positive instances $REC = \frac{TP}{TP+FN}$ "Of all the good apples available, how many did I actually pick?"
+- Precision: $PRE = \frac{\text{Relevant retrieved instances}}{\text{All retrieved instances}}= \frac{TP}{TP+FP}$ "Of all predicted positive, how many are actually positive?"
+- Recall: $REC = \frac{\text{Relevant retrieved instances}}{\text{All relevant instances}} = \frac{TP}{TP+FN}$ "Of all real positive cases, how many did we predict as positive?"
 - [The Precision-Recall Plot Is More Informative than the ROC Plot When Evaluating Binary Classifiers on Imbalanced Datasets](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0118432)
 - Indeed, ROC is useful when evaluating general-purpose classification, while AUPRC is the superior method when classifying rare events.
 - <https://towardsdatascience.com/why-you-should-stop-using-the-roc-curve-a46a9adc728>

@@ -45,7 +45,7 @@ A machine learning algorithm is an algorithm that is able to learn patterns from
   - [Generative models vs discriminative models](#generative-models-vs-discriminative-models)
   - [Ensemble methods](#ensemble-methods)
   - [Class imbalance](#class-imbalance)
-  - [Hyperparameter Optimization](#hyperparameter-optimization)
+  - [Hyperparameter Tuning and Optimization](#hyperparameter-tuning-and-optimization)
   - [Gradient descent](#gradient-descent)
     - [Momentum](#momentum)
     - [Adaptive learning rates](#adaptive-learning-rates)
@@ -524,7 +524,9 @@ Weighted loss functions vs weighted sampling?
 
 Many papers use the term long-tail learning to refer to class imbalance in multi-class classification tasks, so you can find lots of relevant research under this keyword
 
-## Hyperparameter Optimization
+## Hyperparameter Tuning and Optimization
+
+https://developers.google.com/machine-learning/guides/deep-learning-tuning-playbook
 
 - Babysitting: trial and error
 - Grid Search: exhaustive search over a grid of hyperparameters
