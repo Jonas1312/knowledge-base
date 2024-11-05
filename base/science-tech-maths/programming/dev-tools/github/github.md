@@ -120,6 +120,8 @@ concurrency:
   cancel-in-progress: true
 ```
 
+<https://turso.tech/blog/simple-trick-to-save-environment-and-money-when-using-github-actions>
+
 ### Check if on tag
 
 ```yaml
