@@ -50,3 +50,5 @@ UUID as primary key:
 
 - <https://postgres.ai/blog/20230722-10-postgres-tips-for-beginners>
 - <https://postgres.ai/blog/20220525-common-db-schema-change-mistakes>
+- <https://wiki.postgresql.org/wiki/Don%27t_Do_This#Text_storage>
+- <https://wiki.postgresql.org/wiki/Don%27t_Do_This#Don.27t_use_upper_case_table_or_column_names>
