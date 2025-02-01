@@ -8,6 +8,8 @@
 - margin: distance between the hyperplane and the support vectors $=\frac{2}{||w||}$
 - we want to find $w$ that maximizes $y_{i}(w^{T}x_{i}+b)\ge 1$
 - we want to maximize the margin, that is minimize $||w||$ or $||w||^{2}$ (convex)
+- h(x) is the decision function that determines which side of the hyperplane a point lies on:
+- $h(x)=\sum_{i}^{N}\alpha_{i}y_{i}\vec{x_{i}}.\vec{x} + b$
 - soft margin: maximize $y_{i}(w^{T}x_{i}+b)\ge (1-\xi_{i})$ with $\xi_{i}\ge0$
 - $\xi_{i}$ is a **slack variable**
 - misclassification when $\xi_{i} > 1$, in the margin when $1\ge\xi_{i}\ge0$
@@ -22,12 +24,20 @@
     - tolerates no errors (overfitting)
     - low bias, high variance
 - the support vectors are the vectors that define the separating hyperplanes ($\alpha_{i} \ne 0$)
-- $h(x)=\sum_{i}^{N}\alpha_{i}y_{i}\vec{x_{i}}.\vec{x} + b$
-- $k(x, x') = <\varphi(x) ,\varphi(x')>$
-- The problem with this scalar product is that it is performed in a large dimensional space, which leads to impractical calculations.
-- The kernel trick is therefore to replace a scalar product in a large dimensional space with a kernel function that is easy to calculate. In this way, a linear classifier can easily be transformed into a non-linear classifier. Another advantage of kernel functions is that it is not necessary to specify the transformation φ.
-- $K(\mathbf{x},\mathbf{y})=\exp\left(- \frac{\|\mathbf{x} - \mathbf{y}\|^2}{2 \sigma^2}\right)$
+- The kernel function $K(x, x')$ computes the inner product in feature space:
+- $K(x, x') = <\varphi(x) ,\varphi(x')>$
+- The problem with this scalar product is that it is performed in a large dimensional space, which leads to impractical calculations. For example, if φ maps to a 1-million dimensional space, computing φ(x) would require storing 1 million values for each data point, and computing the dot product would require 1 million multiplications and additions.
+- The kernel trick is therefore to replace a scalar product in a large dimensional space with a kernel function K that is easy to calculate. This means we can compute K(x,x') directly without explicitly computing φ(x) and φ(x'). For example, with the Gaussian (RBF) kernel:
+- $K(x,x')=\exp\left(- \frac{\|x - x'\|^2}{2 \sigma^2}\right)$
 - for a function to be a kernel there must exist a function into a feature space such that the function output the same result as the dot product of the projected vectors.
+- for a function K(x,x') to be a valid kernel, there must exist a feature mapping function φ such that:
+  - φ maps input vectors to some feature space F
+  - $K(x,x') = <\varphi(x),\varphi(x')>$ for all x,x'
+- This is known as Mercer's condition: not every function can be a kernel
+- For example:
+  - Linear kernel: $K(x,x') = x^Tx'$ corresponds to φ(x) = x (identity mapping)
+  - Polynomial kernel: $K(x,x') = (x^Tx' + 1)^2$ corresponds to a φ that maps to all degree-2 polynomial features
+  - RBF kernel: $K(x,x')=\exp\left(- \frac{\|x - x'\|^2}{2 \sigma^2}\right)$ corresponds to φ mapping to an infinite-dimensional space
 
 ## One class SVM
 
