@@ -32,3 +32,4 @@ What conditions do diffusion model architectures need to fulfill?
 - <https://www.chenyang.co/diffusion.html>
 - <https://andrewkchan.dev/posts/diffusion.html>
 - <https://sander.ai/2024/06/14/noise-schedules.html>
+- <https://baincapitalventures.notion.site/Diffusion-Without-Tears-14e1469584c180deb0a9ed9aa6ff7a4c>

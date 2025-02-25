@@ -18,6 +18,12 @@ Binary tree != binary search tree!
 
 ![](./DFS-BFS.jpg)
 
+### Find shortest path in a graph
+
+Use BFS, it will find the shortest path in an unweighted graph.
+
+If the graph is weighted, use Dijkstra's algorithm. Dijkstra's algorithm is a BFS on steroids that handles weighted edges.
+
 ## LRU Cache
 
 ![](./lru-cache.png)

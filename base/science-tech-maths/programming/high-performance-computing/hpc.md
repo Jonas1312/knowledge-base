@@ -29,3 +29,4 @@ All writes to memory go through the data cache3. When a write is made, the cache
 - <https://theartofhpc.com/>
 - <https://thechipletter.substack.com/p/demystifying-gpu-compute-architectures>
 - <https://blog.codingconfessions.com/p/gpu-computing>
+- <https://www.pyspur.dev/blog/introduction_cuda_programming>

@@ -461,6 +461,8 @@ If the embedding space consists of more than two dimensions (which it almost alw
 In GPT2, there are two matrixes called WTE (word token embedding) and WPE (word position embedding).
 WPE is 1024×768. It means that the maximum number of tokens that we can use in a prompt to GPT2 is 1024.
 
+More information about the reasoning behind the positional encoding: <https://fleetwood.dev/posts/you-could-have-designed-SOTA-positional-encoding>
+
 ### Transformer decoder
 
 <img src="transformer-decoder.png" width="200">
@@ -569,9 +571,42 @@ This pairwise communication means a forward pass is O(n²) time complexity in tr
 
 ## KV cache
 
+Imagine you're writing a story, and for each new word you write, you need to re-read the entire story so far to maintain consistency. The longer your story gets, the more time you spend re-reading.
+
+The key insight behind KV caching is that we're doing a lot of redundant work. When generating each new token, we're recomputing things for all previous tokens that we've already processed before.
+
+For each token, we compute and store two things:
+
+- A key (kk): Think of this as an addressing mechanism - it helps determine how relevant this token is to future tokens
+- A value (vv): Think of this as the actual information that gets used when this token is found to be relevant
+
 The KV cache is a cache of the key-value pairs of the encoder output. It is used to speed up the inference process.
 
-storing this KV cache requires O(n) space.
+This is a dramatic improvement over O(n3)! While we still have to do the fundamental work of looking at all previous tokens (O(n2)), we avoid the costly recomputation at each step.
+
+Let's look at the memory cost of KV caching with a concrete example.
+
+For a modern large language model like Llama3 70B with:
+
+- $L=80$ layers
+- $H=64$ attention heads
+- $B=8$ batch size
+- $d_k=128$ key/value dimension
+- $2$ K and V
+- 16-bit precision
+
+For a batch of 8 sequences of 1000 tokens each, the memory required would be:
+
+$L \times H \times B \times n \times d_k \times 2 \times 2$ bytes $= 80 \times 64 \times 8 \times 1000 \times 128 \times 2 \times 2$ bytes $= 20.97$GB
+
+Where:
+
+- $L \times H \times B \times n$ gives us the total number of key-value pairs
+- $d_k$ is the dimension of each key/value vector
+- First $\times 2$ is for storing both keys and values
+- Second $\times 2$ is for 16-bit precision (2 bytes per value)
+
+This shows that while KV caching provides significant speedup by avoiding redundant computations, it comes with substantial memory requirements that grow linearly with sequence length and batch size.
 
 ![](./KVCache.jpeg)
 
