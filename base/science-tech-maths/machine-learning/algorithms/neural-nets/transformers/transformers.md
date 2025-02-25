@@ -688,9 +688,13 @@ The WTE is a matrix of size 50k x 768, so BPE helps to reduce the size of the ma
 
 ## Greedy sampling vs stochastic sampling
 
-Greedy sampling is when you always pick the most likely token.
+Different ways to sample: <https://huggingface.co/blog/how-to-generate>
 
-Stochastic sampling is when you sample from the distribution of the tokens. This is useful to generate more diverse text.
+- Greedy sampling is when you always pick the most likely token.
+- Beam search reduces the risk of missing hidden high probability word sequences by keeping the most likely num_beams of hypotheses at each time step and eventually choosing the hypothesis that has the overall highest probability.
+- Stochastic sampling is when you sample from the distribution of the tokens. This is useful to generate more diverse text.
+
+More: <https://huggingface.co/docs/transformers/generation_strategies#decoding-strategies>
 
 ## Language modeling head
 

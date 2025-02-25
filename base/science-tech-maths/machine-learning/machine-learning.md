@@ -559,6 +559,8 @@ Some optimizers use adaptive learning rates, which means that the learning rate 
 - decrease learning rate if the gradient changes its direction
 - increase learning rate if the gradient stays consistent.
 
+See more here: https://johnchenresearch.github.io/demon/
+
 ### Why do we need gradient descent?
 
 We could just use bisection or newton methods to solve $f(x)=0$?

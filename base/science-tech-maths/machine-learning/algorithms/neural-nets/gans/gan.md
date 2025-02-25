@@ -27,7 +27,7 @@ $$L_{reg} = \left( \frac{\partial D(x)}{x} - 0\right)^2$$
 - The simplest way to achieve this is to penalize the gradient on real data alone
 - when the generator distribution produces the true data distribution and the discriminator is equal to 0 on the data manifold
 
-faut imager une fonction sigmoide qui devient de plus en plus "steep"
+Imagine a sigmoid function that becomes steeper and steeper.
 
 ## More
 
