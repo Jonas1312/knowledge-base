@@ -6,7 +6,7 @@
 - Layered pattern (multiple levels of abstraction)
 - clients / server
 - master slave
-- MVC ![](model-view-controller.jpeg)
+- MVC ![](model-view-controller.jpeg) ![](model-view-controller-03a.png)
 
 <https://github.com/faif/python-patterns>
 

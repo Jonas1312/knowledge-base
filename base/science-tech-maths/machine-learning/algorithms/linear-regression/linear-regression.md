@@ -3,9 +3,9 @@
 There are four assumptions associated with a linear regression model: (**LHIN** to remember)
 
 - **Linearity**: The relationship between X and the mean of Y is linear. $\hat{y} = \beta_0 + \beta_1x$
-- **Homoscedasticity**: The residuals have constant variance (*fitted values minus the actual observed values of Y*). $Var(\epsilon_i) = Var(y_i - \hat{y_i}) = \sigma^2$
+- **Homoscedasticity**: The residuals have constant variance (*observed values minus fitted values of Y*). $Var(\epsilon_i) = Var(y_i - \hat{y_i}) = \sigma^2$
 - **Independence**: The residuals are independent. In particular, there is no correlation between consecutive residuals in time series data. $Cov(\epsilon_i, \epsilon_j) = 0$
-- **Normality**: The residuals of the model are normally distributed. $N(0, \sigma^2)$
+- **Normality**: The residuals of the model are normally distributed. $\epsilon_i \sim N(0, \sigma^2)$
 
 In general, you do not need to center or standardize your data for regression. However, if you are using regularization, you should standardize your data.
 

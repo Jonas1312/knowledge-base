@@ -625,9 +625,20 @@ Neural network embeddings have 3 primary purposes:
 
 Sigmoid/Softmax of neural networks is more of a score than probability estimates. Just adding a softmax activation does not magically turn outputs into probabilities [source](https://jtuckerk.github.io/prediction_probabilities.html).
 
+For example, if we work on a weather/rain forecast, we want to predict the probability of rain.
+Our app is well calibrated if in 2024, all the days where the app predicted 30% chance of rain, 30% of them actually rained.
+
 Most deep networks nowadays are overconfident: <https://arxiv.org/pdf/1706.04599.pdf>
 
-One can use temperature scaling, a learnable parameter inserted in the softmax: <https://lukesalamone.github.io/posts/what-is-temperature/>.
+Same for:
+  - Naive Bayes pushes probabilities to extremes due to feature independence assumptions
+  - Random Forests have difficulty predicting near 0 or 1 due to ensemble variance
+  - SVMs show sigmoid-shaped calibration curves due to their focus on boundary cases
+
+Solutions:
+- One can use temperature scaling, a learnable parameter inserted in the softmax: <https://lukesalamone.github.io/posts/what-is-temperature/>.
+- Or fitting a regressor (called a calibrator) that maps the output of the classifier (as given by decision_function or predict_proba) to a calibrated probability in \[0, 1\].
+- Or use a model that is intrinsically calibrated, such as logistic regression that tends to produce well-calibrated probabilities due to its logit-link function and log loss, especially when the model assumptions match the data (like linear decision boundaries) and regularization is properly tuned.
 
 Uncertainty calibration: <https://pair.withgoogle.com/explorables/uncertainty-calibration/>
 
