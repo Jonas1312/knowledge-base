@@ -10,7 +10,7 @@ Why Does Increasing k Decrease Variance in kNN:
 
 - If we take the limit as k approaches the size of the dataset
 - we will get a model that just predicts the class that appears more frequently in the dataset (which is actually the Bayes error).
-- Donc si on ajoute un peu de bruit dans les points (on bouge les points en 2D par exemple) on aura toujours la même prédiction.
+- So if we add some noise to the points (for example by moving the points in 2D) we will still get the same prediction.
 - So if we had some noise in the dataset (e.g. we moved the points in 2D), we would still get the same prediction regardless of the noise.
 - High variance algorithms should change their predictions with such noise, but kNN does not.
 - Hence kNN with high N is a low variance algorithm.
@@ -18,3 +18,5 @@ Why Does Increasing k Decrease Variance in kNN:
 - High bias because it has failed to capture any local information about the model, but 0 variance because it predicts the exact same thing for any new data point.
 
 ![](./K%20Nearest%20Neighbour.jpg)
+
+To choose K, a rule of thumb is $k = \sqrt{N}$.
