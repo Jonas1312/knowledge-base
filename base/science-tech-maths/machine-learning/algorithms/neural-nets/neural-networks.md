@@ -88,3 +88,15 @@ Guidelines For Good Performance On Tensor Cores:
 - <https://old.reddit.com/r/MachineLearning/comments/v8rmtj/r_blazingly_fast_computer_vision_training_with/>
 - <https://pytorch.org/tutorials/intermediate/memory_format_tutorial.html#performance-gains>
 - <https://pytorch.org/blog/how-to-train-state-of-the-art-models-using-torchvision-latest-primitives/>
+
+## Reproducibility
+
+Even with a temperature of 0 and fixed weights, LLM outputs are not 100% reproducible.
+
+This is due to multiple reasons:
+
+- Ties or equal probabilities: If two or more next-token options have (practically) the same highest probability, the model or decoding library might break ties in an arbitrary way. This situation is rare but possible.
+- Randomness in the GPU: some non-determinism in optimized floating point calculations. Deep learning frameworks often prioritize performance, sometimes at the expense of bit-for-bit reproducibility. Unless explicitly using deterministic algorithms, operations like matrix multiplication, convolution, or reduction can have nondeterministic implementations.
+- Sparse MoE: A gating mechanism dynamically routes each input token (or segment of the input) to one or a few of these expert networks. For MoE, tokens are usually routed in groups (batches) and there's a limit on how many tokens each expert can handle at once. Under capacity constraints, all Sparse MoE approaches route tokens in groups of a fixed size and enforce (or encourage) balance within the group. When groups contain tokens from different sequences or inputs, these tokens often compete against each other for available spots in expert buffers. As a consequence, the model is no longer deterministic at the sequence-level, but only at the batch-level, as some input sequences may affect the final prediction for other inputs. Batched inference in sparse MoE models are the root cause of most non-determinism in the GPT-4 API.
+  - <https://www.vincentschmalbach.com/does-temperature-0-guarantee-deterministic-llm-outputs/>
+  - <https://152334h.github.io/blog/non-determinism-in-gpt-4/>
