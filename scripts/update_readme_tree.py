@@ -6,7 +6,7 @@ Only the folders are shown, not the files.
 Source: https://github.com/realpython/rptree
 """
 
-import urllib
+import urllib.parse
 from collections import deque
 from pathlib import Path
 
@@ -43,7 +43,7 @@ def dir_path_to_str(path: Path, linkify: bool) -> str:
         markdown_file_str = markdown_files[0].read_text(encoding="utf-8")
         # Check if all the filenames are in the markdown file.
         if all(
-            (filename in markdown_file_str) or (urllib.parse.quote(filename) in markdown_file_str)  # type: ignore
+            (filename in markdown_file_str) or (urllib.parse.quote(filename) in markdown_file_str)
             for filename in filenames
         ):
             return f"[{path.name}](<{markdown_files[0].as_posix()}>)"
@@ -55,14 +55,14 @@ def dir_path_to_str(path: Path, linkify: bool) -> str:
 class TreeGenerator:
     """TreeGenerator class."""
 
-    def __init__(self, root_dir):
+    def __init__(self, root_dir: str | Path) -> None:
         self._root_dir = Path(root_dir)
-        self.tree = deque()
+        self.tree: deque[str] = deque()
 
         self.tree.append(f"{self._root_dir}<br>")  # tree head
         self._tree_body(self._root_dir)
 
-    def _tree_body(self, directory, prefix=""):
+    def _tree_body(self, directory: Path, prefix: str = "") -> None:
         entries = self._prepare_entries(directory)
         last_index = len(entries) - 1
         for index, entry in enumerate(entries):
@@ -72,11 +72,13 @@ class TreeGenerator:
                     self.tree.append(prefix + PIPE)
                 self._add_directory(entry, index, last_index, prefix, connector)
 
-    def _prepare_entries(self, directory):
+    def _prepare_entries(self, directory: Path) -> list[Path]:
         entries = sorted(directory.iterdir())
         return [entry for entry in entries if entry.is_dir()]
 
-    def _add_directory(self, directory, index, last_index, prefix, connector):
+    def _add_directory(
+        self, directory: Path, index: int, last_index: int, prefix: str, connector: str
+    ) -> None:
         self.tree.append(
             f"{prefix.replace(' ', HTML_SPACE)}{connector.replace(' ', HTML_SPACE)} {dir_path_to_str(directory, linkify=True)}<br>"
         )
