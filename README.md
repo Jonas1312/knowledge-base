@@ -28,6 +28,7 @@ base<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [image-losses](<base/science-tech-maths/image-processing/image-losses/image-losses.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [image-registration](<base/science-tech-maths/image-processing/image-registration/image-registration.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [medical-imaging](<base/science-tech-maths/image-processing/medical-imaging/medical-imaging.md>)<br>
+│&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [object-orientation](<base/science-tech-maths/image-processing/object-orientation/object-orientation.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;├─ [resampling](<base/science-tech-maths/image-processing/resampling/resampling.md>)<br>
 │&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;└─ [transformation-matrices](<base/science-tech-maths/image-processing/transformation-matrices/matrices.md>)<br>
 │&nbsp;&nbsp;&nbsp;├─ [machine-learning](<base/science-tech-maths/machine-learning/machine-learning.md>)<br>
