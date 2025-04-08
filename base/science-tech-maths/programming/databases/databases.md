@@ -46,9 +46,10 @@ UUID as primary key:
 - <https://news.ycombinator.com/item?id=40884878>
 - <https://planetscale.com/blog/the-problem-with-using-a-uuid-primary-key-in-mysql#use-an-ordered-uuid-variant>
 
-### Links
+### More links
 
 - <https://postgres.ai/blog/20230722-10-postgres-tips-for-beginners>
 - <https://postgres.ai/blog/20220525-common-db-schema-change-mistakes>
 - <https://wiki.postgresql.org/wiki/Don%27t_Do_This#Text_storage>
 - <https://wiki.postgresql.org/wiki/Don%27t_Do_This#Don.27t_use_upper_case_table_or_column_names>
+- <https://mccue.dev/pages/3-11-25-life-altering-postgresql-patterns>
