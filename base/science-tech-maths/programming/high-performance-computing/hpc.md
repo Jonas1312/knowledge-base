@@ -30,3 +30,5 @@ All writes to memory go through the data cache3. When a write is made, the cache
 - <https://thechipletter.substack.com/p/demystifying-gpu-compute-architectures>
 - <https://blog.codingconfessions.com/p/gpu-computing>
 - <https://www.pyspur.dev/blog/introduction_cuda_programming>
+- <https://siboehm.com/articles/22/Fast-MMM-on-CPU>
+- <https://siboehm.com/articles/22/CUDA-MMM>
