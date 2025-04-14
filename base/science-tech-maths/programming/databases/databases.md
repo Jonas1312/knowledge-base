@@ -3,6 +3,7 @@
 ## SQL
 
 <https://gvwilson.github.io/sql-tutorial/>
+<https://iaee.substack.com/p/structured-query-language-intuitively>
 
 ## PostgreSQL
 
