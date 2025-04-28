@@ -79,6 +79,11 @@ class MyService:
 The `MyService` class is in the inner circle. The `repository` is in the outer circle.
 The `MyService` class depends on the `repository` class, but the `repository` class does not depend on the `MyService` class.
 
+So to summarize:
+
+- Control flow: User hits an HTTP API → Application Layer → Domain Layer.
+- Dependency direction: Infrastructure and Application layers know about Domain — but Domain knows NOTHING about them.
+
 We don’t want anything in an outer circle to impact the inner circles. We don’t want SQL, or HTML, or the database, or the web, or any other mechanism to impact the inner circles. This allows us to keep those mechanisms at arms length from the business rules.
 
 ![](./dependency-inversion.png)

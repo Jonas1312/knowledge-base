@@ -127,3 +127,7 @@ When you provide a service on 0.0.0.0 that means it binds to all interfaces - so
 When you provide a service on 127.0.0.1 it will only be available to clients running within the same machine it is running on.
 
 In essence, 0.0.0.0 means "anywhere and everywhere", while 127.0.0.1 means "precisely here and nowhere else".
+
+## Error handling
+
+raise/try/catch vs pass error by value: <https://meowbark.dev/Better-error-handling>

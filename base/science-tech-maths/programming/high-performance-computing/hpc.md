@@ -32,3 +32,5 @@ All writes to memory go through the data cache3. When a write is made, the cache
 - <https://www.pyspur.dev/blog/introduction_cuda_programming>
 - <https://siboehm.com/articles/22/Fast-MMM-on-CPU>
 - <https://siboehm.com/articles/22/CUDA-MMM>
+- <https://github.com/ashvardanian/less_slow.cpp>
+- <https://alexarmbr.github.io/2024/08/10/How-To-Write-A-Fast-Matrix-Multiplication-From-Scratch-With-Tensor-Cores.html>
