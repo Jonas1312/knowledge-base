@@ -135,6 +135,7 @@ if: startsWith(github.ref, 'refs/tags/')
 - <https://github-actions-hero.vercel.app/>
 - <https://github.com/rhysd/actionlint>
 - <https://github.com/tj-actions/changed-files>
+- <https://github.com/zizmorcore/zizmor>
 
 ## GitHub README Profile
 
