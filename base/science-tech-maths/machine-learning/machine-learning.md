@@ -283,8 +283,8 @@ where $\hat{y_k}$ is the probability that the sample belongs to the ground truth
 
 We can show that minimizing the cross entropy is equivalent to maximizing the log likelihood.
 
-When training a model, you can have an estime of what's the probability for predicting the right class.
-For example, if you have a cross entropy loss of $4.17$, $H = 4.17 = -\sum_{i=1}^{n}y_ilog(\hat{y_i})$, it means that the probability of predicting the right class is $e^{-4.17} = 0.015 = \frac{1}{65}$. If the number of classes is greather than 65, then the model has learned something.
+When training a model, you can have an estimate of what's the probability for predicting the right class.
+For example, if you have a cross entropy loss of $4.17$, $H = 4.17 = -\sum_{i=1}^{n}y_ilog(\hat{y_i})$, it means that the probability of predicting the right class is $e^{-4.17} = 0.015 = \frac{1}{65}$. If the number of classes is greater than 65, then the model has learned something.
 
 #### Kullback-Leibler
 
@@ -310,6 +310,18 @@ It adds a term to the loss function that penalizes the complexity of the model.
 #### L1 regularization: Lasso
 
 For the L1 regularization, useless weights will be set to zero, thus you reduce the number of weights in your network, that is the hypothesis space.
+
+A loss is a penalty. Every non-zero weight of your model becomes a penalty. You want to reduce the loss, so you want to reduce the penalty.
+
+Whether a weight is 0.1 or 0.9, L1 charges you the same "penalty fee".
+
+Small weights become not worth it: It's better to just throw it away (set weight to zero)!
+
+Big important weights survive: Even though you pay the penalty, it's worth keeping because it's so useful
+
+The result: L1 regularization acts like a strict parent who makes you choose only your most important toys and throw away all the barely-useful ones.
+
+That's why L1 creates "sparse" models - lots of weights become exactly zero, leaving only the truly important ones.
 
 L1-norm is preferable if the sparsity of the model’s parameters is important.
 

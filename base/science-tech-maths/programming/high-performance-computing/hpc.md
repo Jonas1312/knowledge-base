@@ -34,3 +34,4 @@ All writes to memory go through the data cache3. When a write is made, the cache
 - <https://siboehm.com/articles/22/CUDA-MMM>
 - <https://github.com/ashvardanian/less_slow.cpp>
 - <https://alexarmbr.github.io/2024/08/10/How-To-Write-A-Fast-Matrix-Multiplication-From-Scratch-With-Tensor-Cores.html>
+- <https://damek.github.io/random/basic-facts-about-gpus/>
