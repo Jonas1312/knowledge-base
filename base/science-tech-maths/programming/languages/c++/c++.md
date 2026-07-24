@@ -2553,3 +2553,8 @@ auto fut = std::async(std::launch::async, foo, 1.5, 'x', false);  // is a std::f
 auto res = fut.get();  // is an int
 
 -->
+
+
+
+
+https://sjer.red/blog/2022/c-debugging-vscode/

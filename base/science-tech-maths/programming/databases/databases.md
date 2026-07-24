@@ -54,3 +54,5 @@ UUID as primary key:
 - <https://wiki.postgresql.org/wiki/Don%27t_Do_This#Text_storage>
 - <https://wiki.postgresql.org/wiki/Don%27t_Do_This#Don.27t_use_upper_case_table_or_column_names>
 - <https://mccue.dev/pages/3-11-25-life-altering-postgresql-patterns>
+- https://hatchet.run/blog/postgres-survival-guide
+- https://supabase.com/docs/guides/ai-tools/ai-skills#supabase-postgres-best-practices

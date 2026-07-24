@@ -156,7 +156,7 @@ JSON.stringify({willStay: null, willBeGone: undefined}); // {"willStay":null}
 - <https://exercism.org/tracks/typescript>
 - <https://basarat.gitbook.io/typescript/getting-started/why-typescript>
 - <https://github.com/gibbok/typescript-book>
-
+<https://sjer.red/blog/2025/learning-typescript/>
 <https://basarat.gitbook.io/typescript/future-javascript/arrow-functions>
 <https://jsisweird.com/>
 <https://medium.com/@PepsRyuu/use-let-by-default-not-const-58773e53db52>
@@ -165,4 +165,6 @@ JSON.stringify({willStay: null, willBeGone: undefined}); // {"willStay":null}
 <https://www.youtube.com/watch?v=i0YfiQlzv6M&list=PL9wyAJMCdd0mL9Vz-vzwPIp9U0hnCSWwe&index=18>
 <https://github.com/type-challenges/type-challenges/>
 <https://www.julienpradet.fr/tutoriels/typescript-types-avances/>
-https://www.julienpradet.fr/tutoriels/typescript-bonnes-pratiques/
+<https://www.julienpradet.fr/tutoriels/typescript-bonnes-pratiques/>
+<https://github.com/gibbok/typescript-book#installation>
+https://shipthatcode.com/courses/typescript-fundamentals

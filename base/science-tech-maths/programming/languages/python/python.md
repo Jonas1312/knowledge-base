@@ -2611,35 +2611,7 @@ def fake_session_maker() -> Generator[Session, None, None]:
         tf.close()
 ```
 
-## Poetry
 
-When doing `poetry install`, poetry will detect if it's running in a virtual environment.
-If it is, it will install the dependencies in the virtual environment.
-If it's not, it will create a new virtual environment and install the dependencies in the virtual environment.
+## Call C functions from Python
 
-You can decide to disable creating a virtual environment by doing `poetry config virtualenvs.create false`. This will install the dependencies in the global python environment, like `pip install`.
-
-Or decide to create the virtual env in the project directory by doing `poetry config virtualenvs.in-project true`. This can be useful in a CI for caching the virtual environment:
-
-```yaml
-cache:
-  paths:
-    - .venv/
-
-tests:
-  stage: test
-  image: python3.8-slim
-  before_script:
-    - poetry config virtualenvs.in-project true
-    - poetry install
-  script:
-    - poetry run python -m pytest tests
-```
-
-To have the `from PACKAGE_NAME import __version__`, put this in the `__init__.py` root file of the package:
-
-```python
-import importlib.metadata
-
-__version__ = importlib.metadata.version("PACKAGE_NAME")
-```
+- https://labs.quansight.org/blog/python-abi-abi3t
